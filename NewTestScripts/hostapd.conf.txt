@@ -1,0 +1,38 @@
+# SuperMesh hostapd.conf
+# Basic configuration
+
+interface=wlan1					# the interface used by the AP
+ssid=SuperMeshWiFi				# the name of the AP
+
+country_code=NZ					# the country code
+ieee80211d=1					# limit the frequencies used to those allowed in the country
+
+# WPA and WPA2 configuration
+
+macaddr_acl=0
+auth_algs=1						# 1=wpa, 2=wep, 3=both
+wpa=2							# WPA2 only
+wpa_passphrase=spacemesh		# the password of AP
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+
+
+# Hardware configuration
+
+### Switch to another driver if issue starting hostapd service ###
+#driver=rtl871xdrv				# Use this driver for Realtek chip wifi adapters. Enable it if using Edimax 802.11bgn wifi adapter.
+driver=nl80211					# Default drivers shipped with hostpad. Supports latest wifi adapters. Enable it if using Edimax 802.11ac wifi adapter.
+
+### For 802.11bgn WiFi ###
+#ieee80211n=1					# 802.11n support
+#wmm_enabled=1					# QoS support
+#channel=2						# 1,2,3,4,5,6,7,8,9,10,11,12,13
+#hw_mode=g						# g simply means 2.4GHz band
+
+
+### For 802.11ac WiFi ###
+ieee80211ac=1					# 802.11ac support
+wmm_enabled=1					# QoS support
+channel=44						# 36,40,44,48,149,153,157,161
+hw_mode=a						# a simply means 5GHz

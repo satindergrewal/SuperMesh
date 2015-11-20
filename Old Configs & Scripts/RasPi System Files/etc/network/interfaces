@@ -1,0 +1,26 @@
+auto lo
+iface lo inet loopback
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet manual
+
+auto wlan0
+allow-hotplug wlan0
+iface wlan0 inet manual
+wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+auto wlan1
+allow-hotplug wlan1
+iface wlan1 inet static
+address 192.168.12.2
+netmask 255.255.255.0
+gateway 192.168.12.2 metric 1000
+
+iface wlan1 inet6 static
+address fdfc:0000:0000:0000:0000:0000:0000:0001
+netmask 64
+
+pre-up modprobe ipv6
+
+pre-up iptables-restore < /etc/network/iptables.ipv4.nat

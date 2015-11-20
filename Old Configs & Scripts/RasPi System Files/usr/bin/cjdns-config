@@ -1,0 +1,4 @@
+/opt/cjdns/cjdroute --genconf > cjd.conf && sed -i "70i // SuperMesh Peer" cjd.conf && sed -i '/SuperMesh Peer/r /opt/cjdns/peer_info_cjdns' cjd.conf
+sudo mv cjd.conf /etc/cjdroute.conf
+sudo /etc/init.d/cjdns stop
+sudo /etc/init.d/cjdns start
