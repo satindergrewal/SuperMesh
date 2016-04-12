@@ -1,0 +1,255 @@
+                    <!-- eth0 Form -->
+                    <form class="form-horizontal push-10-t push-10" id="FormNetSettings" onsubmit="return false;">
+                    <div class="col-md-6">
+                    <div class="block block-themed">
+                        <div class="block-header bg-primary">
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="network"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">Interface: eth0 <small>(First LAN Interface)</small></h3>
+                        </div>
+
+
+                        <div class="block-content">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="col-xs-6">
+                                                <label class="css-input css-radio css-radio-success push-10-r">
+                                                    <input type="radio" id="eth0_static" name="eth0_dhcp_satic" value="static"><span></span> Static
+                                                </label>
+                                                <label class="css-input css-radio css-radio-default">
+                                                    <input type="radio" id="eth0_dhcp" name="eth0_dhcp_satic" value="dhcp"><span></span> DHCP
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-6" style="text-align: right;">
+                                                <label class="css-input switch switch-sm switch-primary"><input id="eth0_enable_disable" type="checkbox" checked=""><span></span> Enable/Disable</label>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="eth0_addr" name="eth0_addr" placeholder="e.g. 192.168.10.1">
+                                                <label for="eth0_addr">IP Address</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="eth0_netmask" name="eth0_netmask" placeholder="e.g. 255.255.255.0">
+                                                <label for="eth0_netmask">Subnet Mask</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="eth0_gateway" name="eth0_gateway" placeholder="e.g. 192.168.10.1">
+                                                <label for="eth0_gateway">Gateway</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- END eth0 Form -->
+
+
+
+                    <!-- eth1 Form -->
+                    <div class="col-md-6">
+                    <div class="block block-themed">
+                        <div class="block-header bg-info">
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="network"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">Interface: eth1 <small>(First LAN Interface)</small></h3>
+                        </div>
+                        <div class="block-content">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="col-xs-6">
+                                                <label class="css-input css-radio css-radio-success push-10-r">
+                                                    <input type="radio" id="eth1_static" name="eth1_dhcp_satic" value="static"><span></span> Static
+                                                </label>
+                                                <label class="css-input css-radio css-radio-default">
+                                                    <input type="radio" id="eth1_dhcp" name="eth1_dhcp_satic" value="dhcp"><span></span> DHCP
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-6" style="text-align: right;">
+                                                <label class="css-input switch switch-sm switch-info"><input id="eth1_enable_disable" type="checkbox" checked=""><span></span> Enable/Disable</label>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="eth1_addr" name="eth1_addr" placeholder="e.g. 192.168.10.1">
+                                                <label for="eth1_addr">IP Address</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="eth1_netmask" name="eth1_netmask" placeholder="e.g. 255.255.255.0">
+                                                <label for="eth1_netmask">Subnet Mask</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="eth1_gateway" name="eth1_gateway" placeholder="e.g. 192.168.10.1">
+                                                <label for="eth1_gateway">Gateway</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- END eth1 Form -->
+
+
+
+
+                    <!-- wlan0 Form -->
+                    <div class="col-md-6">
+                    <div class="block block-themed">
+                        <div class="block-header bg-success">
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="network"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">Interface: wlan0 <small>(First Wirless Adaptor)</small></h3>
+                        </div>
+                        <div class="block-content">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="col-xs-6">
+                                                <label class="css-input css-radio css-radio-success push-10-r">
+                                                    <input type="radio" id="wlan0_static" name="wlan0_dhcp_satic" value="static"><span></span> Static
+                                                </label>
+                                                <label class="css-input css-radio css-radio-default">
+                                                    <input type="radio" id="wlan0_dhcp" name="wlan0_dhcp_satic" value="dhcp"><span></span> DHCP
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-6" style="text-align: right;">
+                                                <label class="css-input switch switch-sm switch-success"><input id="wlan0_enable_disable" type="checkbox" checked=""><span></span> Enable/Disable</label>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="wlan0_addr" name="wlan0_addr" placeholder="e.g. 192.168.10.1">
+                                                <label for="wlan0_addr">IP Address</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="wlan0_netmask" name="wlan0_netmask" placeholder="e.g. 255.255.255.0">
+                                                <label for="wlan0_netmask">Subnet Mask</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="wlan0_gateway" name="wlan0_gateway" placeholder="e.g. 192.168.10.1">
+                                                <label for="wlan0_gateway">Gateway</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <!--<div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div class="col-xs-12" style="text-align: center;">
+                                    <button class="btn btn-info" type="submit">Update</button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>-->
+                    <!-- END wlan0 Form -->
+
+
+
+
+                    
+                    <!-- wlan1 Form -->
+                    <div class="col-md-6">
+                    <div class="block block-themed">
+                        <div class="block-header bg-warning">
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="network"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">Interface: wlan1 <small>(First Wirless Adaptor)</small></h3>
+                        </div>
+                        <div class="block-content">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="col-xs-6">
+                                                <label class="css-input css-radio css-radio-success push-10-r">
+                                                    <input type="radio" id="wlan1_static" name="wlan1_dhcp_satic" value="static"><span></span> Static
+                                                </label>
+                                                <label class="css-input css-radio css-radio-default">
+                                                    <input type="radio" id="wlan1_dhcp" name="wlan1_dhcp_satic" value="dhcp"><span></span> DHCP
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-6" style="text-align: right;">
+                                                <label class="css-input switch switch-sm switch-warning"><input id="wlan1_enable_disable" type="checkbox" checked=""><span></span> Enable/Disable</label>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="wlan1_addr" name="wlan1_addr" placeholder="e.g. 192.168.10.1">
+                                                <label for="wlan1_addr">IP Address</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="wlan1_netmask" name="wlan1_netmask" placeholder="e.g. 255.255.255.0">
+                                                <label for="wlan1_netmask">Subnet Mask</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="wlan1_gateway" name="wlan1_gateway" placeholder="e.g. 192.168.10.1">
+                                                <label for="wlan1_gateway">Gateway</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div class="col-xs-12" style="text-align: center;">
+                                    <button id="BtnUpdateNetSettings" class="btn btn-info" type="submit">Update</button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- END wlan1 Form -->
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+                    <script src="/js/network.js"></script>

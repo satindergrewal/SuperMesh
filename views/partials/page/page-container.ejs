@@ -1,0 +1,36 @@
+        <!-- Page Container -->
+
+        <div id="page-container" class="sidebar-l side-scroll header-navbar-fixed">
+            
+
+            <!-- Header -->
+            <% include header.ejs %>
+            <!-- END Header -->
+
+            <!-- Main Container -->
+            <main id="main-container">
+                <% include page-header.ejs %>
+
+                <!-- Stats -->
+                <% include network-stats.ejs %>
+                <!-- END Stats -->
+                
+                <!-- Page Content -->
+                <div class="content content-narrow">
+                    <% include home.ejs %>
+
+
+                </div>
+                <!-- END Page Content -->
+
+
+                </div>
+                <!-- END Page Content -->
+            </main>
+            <!-- END Main Container -->
+
+            <!-- Footer -->
+            <% include apps-modal.ejs %>
+            <!-- END Footer -->
+        </div>
+        <!-- END Page Container -->

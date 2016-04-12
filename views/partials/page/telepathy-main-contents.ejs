@@ -1,0 +1,263 @@
+                <!-- Page Content -->
+                <div class="content">
+                    <div class="row">
+                        <div class="col-sm-5 col-lg-3">
+                            <!-- Collapsible Inbox Navigation (using Bootstrap collapse functionality) -->
+                            <button class="btn btn-block btn-primary visible-xs push" data-toggle="collapse" data-target="#inbox-nav" type="button">Navigation</button>
+                            <div class="collapse navbar-collapse remove-padding" id="inbox-nav">
+                                <!-- Inbox Menu -->
+                                <div class="block">
+                                    <div class="block-header bg-gray-lighter">
+                                        <ul class="block-options">
+                                            <li>
+                                                <button data-toggle="modal" data-target="#modal-compose" type="button"><i class="fa fa-pencil"></i> New Message</button>
+                                            </li>
+                                        </ul>
+                                        <h3 class="block-title">Inbox</h3>
+                                    </div>
+                                    <div class="block-content">
+                                        <ul class="nav nav-pills nav-stacked push">
+                                            <li class="active">
+                                                <a href="base_pages_inbox.html">
+                                                    <span class="badge pull-right">3</span><i class="fa fa-fw fa-inbox push-5-r"></i> Inbox
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fa fa-fw fa-send push-5-r"></i> Sent
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="si si-notebook push-5-r"></i> Address Book
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fa fa-fw fa-user-secret"></i> Your Identities
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <span class="badge pull-right">10</span><i class="fa fa-fw fa-trash push-5-r"></i> Trash
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- END Inbox Menu -->
+
+                                <!-- Friends -->
+                                <div class="block">
+                                    <div class="block-header bg-gray-lighter">
+                                        <ul class="block-options">
+                                            <li>
+                                                <button type="button"><i class="si si-settings"></i></button>
+                                            </li>
+                                        </ul>
+                                        <h3 class="block-title">Friends</h3>
+                                    </div>
+                                    <div class="block-content">
+                                        <ul class="nav-users push">
+                                            <li>
+                                                <a href="base_pages_profile.html">
+                                                    <img class="img-avatar" src="/assets/img/avatars/avatar3.jpg" alt="">
+                                                    Amber Walker
+                                                    <div class="font-w400 text-muted"><small>Web Designer</small></div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="base_pages_profile.html">
+                                                    <img class="img-avatar" src="/assets/img/avatars/avatar9.jpg" alt="">
+                                                    Joshua Munoz
+                                                    <div class="font-w400 text-muted"><small>Graphic Designer</small></div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="base_pages_profile.html">
+                                                    <img class="img-avatar" src="/assets/img/avatars/avatar8.jpg" alt="">
+                                                    Megan Dean
+                                                    <div class="font-w400 text-muted"><small>Photographer</small></div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="base_pages_profile.html">
+                                                    <img class="img-avatar" src="/assets/img/avatars/avatar15.jpg" alt="">
+                                                    Roger Hart
+                                                    <div class="font-w400 text-muted"><small>Copywriter</small></div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="base_pages_profile.html">
+                                                    <img class="img-avatar" src="/assets/img/avatars/avatar10.jpg" alt="">
+                                                    Walter Fox
+                                                    <div class="font-w400 text-muted"><small>UI Designer</small></div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- END Friends -->
+
+                            </div>
+                            <!-- END Collapsible Inbox Navigation -->
+                        </div>
+                        <div class="col-sm-7 col-lg-9">
+                            <!-- Message List -->
+                            <div class="block">
+                                <div class="block-header bg-gray-lighter">
+                                    <ul class="block-options">
+                                        <li>
+                                            <button class="js-tooltip" title="Previous 15 Messages" type="button" data-toggle="block-option"><i class="si si-arrow-left"></i></button>
+                                        </li>
+                                        <li>
+                                            <button class="js-tooltip" title="Next 15 Messages" type="button" data-toggle="block-option"><i class="si si-arrow-right"></i></button>
+                                        </li>
+                                        <li>
+                                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                        </li>
+                                        <li>
+                                            <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"></button>
+                                        </li>
+                                    </ul>
+                                    <div class="block-title text-normal">
+                                        <strong>01-07</strong> <span class="font-w400">from</span> <strong>07</strong>
+                                    </div>
+                                </div>
+                                <div class="block-content">
+                                    <!-- Messages Options -->
+                                    <div class="push">
+                                        <button class="btn btn-default pull-right" type="button"><i class="fa fa-times text-danger push-5-l push-5-r"></i> <span class="hidden-xs">Delete</span></button>
+                                        <div class="btn-group">
+                                            <button class="btn btn-default" type="button"><i class="fa fa-archive text-primary push-5-l push-5-r"></i> <span class="hidden-xs">Archive</span></button>
+                                        </div>
+                                    </div>
+                                    <!-- END Messages Options -->
+
+                                    <!-- Messages & Checkable Table (.js-table-checkable class is initialized in App() -> uiHelperTableToolsCheckable()) -->
+                                    <div class="pull-r-l">
+                                        <table class="js-table-checkable table table-hover table-vcenter">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-center" style="width: 70px;">
+                                                        <label class="css-input css-checkbox css-checkbox-primary">
+                                                            <input type="checkbox"><span></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="hidden-xs font-w600" style="width: 140px;">Emma Cooper</td>
+                                                    <td>
+                                                        <a class="font-w600" data-toggle="modal" data-target="#modal-message" href="#">Welcome to our service</a>
+                                                        <div class="text-muted push-5-t">It's a pleasure to have you on our service..</div>
+                                                    </td>
+                                                    
+                                                    <td class="visible-lg text-muted" style="width: 120px;">
+                                                        <em>2 min ago</em>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <label class="css-input css-checkbox css-checkbox-primary">
+                                                            <input type="checkbox"><span></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="hidden-xs font-w600">Roger Hart</td>
+                                                    <td>
+                                                        <a class="font-w600" data-toggle="modal" data-target="#modal-message" href="#">Your subscription was updated</a>
+                                                        <div class="text-muted push-5-t">We are glad you decided to go with a vip..</div>
+                                                    </td>
+                                                    
+                                                    <td class="visible-lg text-muted">
+                                                        <em>10 min ago</em>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <label class="css-input css-checkbox css-checkbox-primary">
+                                                            <input type="checkbox"><span></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="hidden-xs font-w600">Ryan Hall</td>
+                                                    <td>
+                                                        <a class="font-w600" data-toggle="modal" data-target="#modal-message" href="#">Update is available</a>
+                                                        <div class="text-muted push-5-t">An update is under way for your app..</div>
+                                                    </td>
+                                                    
+                                                    <td class="visible-lg text-muted">
+                                                        <em>25 min ago</em>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <label class="css-input css-checkbox css-checkbox-primary">
+                                                            <input type="checkbox"><span></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="hidden-xs font-w600">Jack Greene</td>
+                                                    <td>
+                                                        <a class="font-w600" data-toggle="modal" data-target="#modal-message" href="#">New Sale!</a>
+                                                        <div class="text-muted push-5-t">You had a new sale and earned..</div>
+                                                    </td>
+                                                    
+                                                    <td class="visible-lg text-muted">
+                                                        <em>30 min ago</em>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <label class="css-input css-checkbox css-checkbox-primary">
+                                                            <input type="checkbox"><span></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="hidden-xs font-w600">Craig Stone</td>
+                                                    <td>
+                                                        <a class="font-w600" data-toggle="modal" data-target="#modal-message" href="#">Action Required for your account!</a>
+                                                        <div class="text-muted push-5-t">Your account is inactive for a long time and..</div>
+                                                    </td>
+                                                    
+                                                    <td class="visible-lg text-muted">
+                                                        <em>1 hour ago</em>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <label class="css-input css-checkbox css-checkbox-primary">
+                                                            <input type="checkbox"><span></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="hidden-xs font-w600">Rebecca Reid</td>
+                                                    <td>
+                                                        <a class="font-w600" data-toggle="modal" data-target="#modal-message" href="#">New Photo Pack!</a>
+                                                        <div class="text-muted push-5-t">Our new photo pack is available now! You..</div>
+                                                    </td>
+                                                    
+                                                    <td class="visible-lg text-muted">
+                                                        <em>2 hrs ago</em>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <label class="css-input css-checkbox css-checkbox-primary">
+                                                            <input type="checkbox"><span></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="hidden-xs font-w600">Craig Stone</td>
+                                                    <td>
+                                                        <a class="font-w600" data-toggle="modal" data-target="#modal-message" href="#">Product is released!</a>
+                                                        <div class="text-muted push-5-t">This is a notification about our new product..</div>
+                                                    </td>
+                                                    
+                                                    <td class="visible-lg text-muted">
+                                                        <em>1 day ago</em>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- END Messages -->
+                                </div>
+                            </div>
+                            <!-- END Message List -->
+                        </div>
+                    </div>
+                </div>
+                <!-- END Page Content -->
