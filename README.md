@@ -5,8 +5,6 @@ SuperMesh Dependencies:
  
 To install dependencies: `sudo apt-get -y install git nodejs npm`
 
-To install grunt-cli: `sudo npm install -g grunt-cli`
-
 To clone git repo: `git clone https://github.com/satindergrewal/SuperMesh`
 
 If cloning test branch of SuperMesh (e.g. alpha-0.0.1e):
