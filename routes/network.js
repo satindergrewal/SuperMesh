@@ -49,7 +49,7 @@ router.get('/iwlist', function(req, res, next) {
 	var iwlist = require('wireless-tools/iwlist');
  
 	iwlist.scan('wlan1', function(err, networks) {
-	  res.send(status);
+	  res.send(networks);
 	});
 
 });
