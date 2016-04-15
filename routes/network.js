@@ -4,7 +4,25 @@ var router = express.Router();
 
 var sys = require('sys')
 var exec = require('child_process').exec;
+var Promise = require('bluebird');
 
+function execp(cmd, opts) {
+    opts || (opts = {});
+    return new Promise((resolve, reject) => {
+        const child = exec(cmd, opts,
+            (err, stdout, stderr) => err ? reject(err) : resolve({
+                stdout: stdout,
+                stderr: stderr
+            }));
+
+        if (opts.stdout) {
+            child.stdout.pipe(opts.stdout);
+        }
+        if (opts.stderr) {
+            child.stderr.pipe(opts.stderr);
+        }
+    });
+}
 
 // SuperMesh app functions
 var SuperMesh = require("../private/js/app_functions.js");
@@ -118,23 +136,12 @@ router.post('/update', function(req, res) {
 
 
 			//Execute promissed spanw child process
-			var Promise = require('bluebird');
+			
 
-			var prom = new Promise(function(resolve, reject) {
-			    var spawn = require('child_process').spawn;
-			    var child = spawn('ls', ['-la'], {cwd: './'});
-
-			    spawn.stdout.on('data', resolve);
-			    spawn.stderr.on('data', reject);
-			});
-
-			prom
-			    .then(function(data) {
-			        console.log(data);
-			    })
-			    .catch(function(e) {
-			        console.log('error: ' + e);
-			    });
+			execp('ls ./', {
+			    stdout: process.stdout,
+			    stderr: process.stderr
+			}).then(() => console.log('done!'));
 			
 			//Execute cfengine script to make changes to network settings and restart network service.
 			//function puts(error, stdout, stderr) { sys.puts(stdout) }
