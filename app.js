@@ -11,6 +11,7 @@ var SuperMesh = require("./private/js/app_functions.js");
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var network = require('./routes/network');
+var wifi = require('./routes/wifi');
 var telepathy = require('./routes/telepathy');
 
 var app = express();
@@ -33,6 +34,7 @@ app.locals.apptitle = "SuperMesh Node";
 app.use('/', routes);
 app.use('/users', users);
 app.use('/admin/network', network);
+app.use('/admin/wifi', wifi);
 app.use('/admin/telepathy', telepathy);
 
 // catch 404 and forward to error handler
