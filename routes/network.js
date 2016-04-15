@@ -119,34 +119,37 @@ router.post('/update', function(req, res) {
 
 			//Execute promissed spanw child process
 			var Promise = require('bluebird');
+			var exec = require('child_process').execFile;
 
-var Promise = require('bluebird');
-var exec = require('child_process').execFile;
+			function promiseFromChildProcess(child) {
+			    return new Promise(function (resolve, reject) {
+			        child.addListener("error", reject);
+			        child.addListener("exit", resolve);
+			    });
+			}
 
-function promiseFromChildProcess(child) {
-    return new Promise(function (resolve, reject) {
-        child.addListener("error", reject);
-        child.addListener("exit", resolve);
-    });
-}
+			var child = exec('sudo cf-agent -K private/system_scripts/edit_network_config.cf');
 
-var child = exec('ls');
+			promiseFromChildProcess(child).then(function (result) {
+			    console.log('promise complete: ' + result);
+			    res.send(result);
+			}, function (err) {
+			    console.log('promise rejected: ' + err);
+			    res.send(err);
+			});
 
-promiseFromChildProcess(child).then(function (result) {
-    console.log('promise complete: ' + result);
-}, function (err) {
-    console.log('promise rejected: ' + err);
-});
-
-child.stdout.on('data', function (data) {
-    console.log('stdout: ' + data);
-});
-child.stderr.on('data', function (data) {
-    console.log('stderr: ' + data);
-});
-child.on('close', function (code) {
-    console.log('closing code: ' + code);
-});
+			child.stdout.on('data', function (data) {
+			    console.log('stdout: ' + data);
+			    res.send(data);
+			});
+			child.stderr.on('data', function (data) {
+			    console.log('stderr: ' + data);
+			    res.send(data);
+			});
+			child.on('close', function (code) {
+			    console.log('closing code: ' + code);
+			    res.send(code);
+			});
 			
 			//Execute cfengine script to make changes to network settings and restart network service.
 			//function puts(error, stdout, stderr) { sys.puts(stdout) }
