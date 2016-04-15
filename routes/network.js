@@ -4,8 +4,6 @@ var router = express.Router();
 
 var sys = require('sys')
 var exec = require('child_process').exec;
-var Promise = require('bluebird');
-
 
 
 // SuperMesh app functions
@@ -120,28 +118,35 @@ router.post('/update', function(req, res) {
 
 
 			//Execute promissed spanw child process
-			
-function execp(cmd, opts) {
-    opts || (opts = {});
-    return new Promise((resolve, reject) => {
-        const child = exec(cmd, opts,
-            (err, stdout, stderr) => err ? reject(err) : resolve({
-                stdout: stdout,
-                stderr: stderr
-            }));
+			var Promise = require('bluebird');
 
-        if (opts.stdout) {
-            child.stdout.pipe(opts.stdout);
-        }
-        if (opts.stderr) {
-            child.stderr.pipe(opts.stderr);
-        }
+var Promise = require('bluebird');
+var exec = require('child_process').execFile;
+
+function promiseFromChildProcess(child) {
+    return new Promise(function (resolve, reject) {
+        child.addListener("error", reject);
+        child.addListener("exit", resolve);
     });
 }
-			execp('ls ./', {
-			    stdout: process.stdout,
-			    stderr: process.stderr
-			}).then(() => console.log('done!'));
+
+var child = exec('ls');
+
+promiseFromChildProcess(child).then(function (result) {
+    console.log('promise complete: ' + result);
+}, function (err) {
+    console.log('promise rejected: ' + err);
+});
+
+child.stdout.on('data', function (data) {
+    console.log('stdout: ' + data);
+});
+child.stderr.on('data', function (data) {
+    console.log('stderr: ' + data);
+});
+child.on('close', function (code) {
+    console.log('closing code: ' + code);
+});
 			
 			//Execute cfengine script to make changes to network settings and restart network service.
 			//function puts(error, stdout, stderr) { sys.puts(stdout) }
