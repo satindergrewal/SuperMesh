@@ -44,6 +44,16 @@ router.get('/inetstatus', function(req, res, next) {
 
 });
 
+router.get('/iwlist', function(req, res, next) {
+
+	var iwlist = require('wireless-tools/iwlist');
+ 
+	iwlist.scan('wlan1', function(err, networks) {
+	  res.send(status);
+	});
+
+});
+
 /* POST to Update Network Settings. */
 router.post('/update', function(req, res) {
 	var interfacesFile = 'private/system_scripts/interfaces.data'
@@ -132,7 +142,7 @@ router.post('/update', function(req, res) {
 
 			promiseFromChildProcess(child).then(function (result) {
 			    console.log('promise complete: ' + result);
-			    res.send(result);
+			    res.send('{"msg": "success","result": result}');
 			}, function (err) {
 			    console.log('promise rejected: ' + err);
 			    res.send(err);
