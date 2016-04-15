@@ -40,15 +40,8 @@ router.get('/inetstatus', function(req, res, next) {
  
 	ifconfig.status(function(err, status) {
 		res.send(status);
-	}); 
-	//var ifoutput = SuperMesh.ExecuteProcess('private/system_scripts/read_wlan0.sh','', function(Output) {
-		//console.log(Output);
-		//res.send(Output);
-	//});
-
-	//console.log(SuperMesh.ExecuteProcess('echo','Hello'));
-	//console.log('IfOutput: ' + ifoutput);
-	//res.send('<h1>Ready to get IP Addresses.</h1><pre>' + ifoutput + '</pre>');
+	});
+	
 });
 
 /* POST to Update Network Settings. */
