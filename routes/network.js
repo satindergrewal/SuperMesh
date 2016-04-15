@@ -115,10 +115,31 @@ router.post('/update', function(req, res) {
 			//console.log(JSON.stringify(interfacesData, null, 2))
 			//console.log('writing to ' + interfacesFile)
 			//res.send((err === null) ? { msg: '' } : { msg: err });
+
+
+			//Execute promissed spanw child process
+			var Promise = require('bluebird');
+
+			var prom = new Promise(function(resolve, reject) {
+			    var spawn = require('child_process').spawn;
+			    var child = spawn('ls', ['-la'], {cwd: './'});
+
+			    spawn.stdout.on('data', resolve);
+			    spawn.stderr.on('data', reject);
+			});
+
+			prom
+			    .then(function(data) {
+			        console.log(data);
+			    })
+			    .catch(function(e) {
+			        console.log('error: ' + e);
+			    });
 			
 			//Execute cfengine script to make changes to network settings and restart network service.
-			function puts(error, stdout, stderr) { sys.puts(stdout) }
-			exec("sudo cf-agent -K private/system_scripts/edit_network_config.cf", puts);
+			//function puts(error, stdout, stderr) { sys.puts(stdout) }
+			//exec("sudo cf-agent -K private/system_scripts/edit_network_config.cf", puts);
+			
 			//var ifoutput = SuperMesh.ExecuteProcess('sudo /var/cfengine/bin/cf-agent -K','private/system_scripts/edit_network_config.cf', function(Output) {
 			//console.log(Output);
 			//res.send(Output);
