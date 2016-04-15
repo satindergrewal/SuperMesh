@@ -140,15 +140,15 @@ router.post('/update', function(req, res) {
 
 			child.stdout.on('data', function (data) {
 			    console.log('stdout: ' + data);
-			    res.send(data);
+			    
 			});
 			child.stderr.on('data', function (data) {
 			    console.log('stderr: ' + data);
-			    res.send(data);
+			    
 			});
 			child.on('close', function (code) {
 			    console.log('closing code: ' + code);
-			    res.send(code);
+			    
 			});
 			
 			//Execute cfengine script to make changes to network settings and restart network service.

@@ -26,5 +26,5 @@ processes:
 
 commands:
   restart_networking::
-    "systemctl daemon-reload && /etc/init.d/networking reload";
+    "/etc/init.d/networking reload";
 }
