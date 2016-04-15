@@ -41,7 +41,7 @@ router.get('/inetstatus', function(req, res, next) {
 	ifconfig.status(function(err, status) {
 		res.send(status);
 	});
-	
+
 });
 
 /* POST to Update Network Settings. */
@@ -112,7 +112,7 @@ router.post('/update', function(req, res) {
 	// Write update changes to JSON file interfaces.data
 	fs.writeFile(interfacesFile, JSON.stringify(interfacesData, null, 2), function (err) {
 		if (err) return console.log(err)
-			console.log(JSON.stringify(interfacesData, null, 2))
+			//console.log(JSON.stringify(interfacesData, null, 2))
 			//console.log('writing to ' + interfacesFile)
 			//res.send((err === null) ? { msg: '' } : { msg: err });
 			
