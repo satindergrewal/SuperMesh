@@ -119,37 +119,22 @@ router.post('/update', function(req, res) {
 
 			//Execute promissed spanw child process
 			var Promise = require('bluebird');
-			var exec = require('child_process').execFile;
 
-			function promiseFromChildProcess(child) {
-			    return new Promise(function (resolve, reject) {
-			        child.addListener("error", reject);
-			        child.addListener("exit", resolve);
+			var prom = new Promise(function(resolve, reject) {
+			    var spawn = require('child_process').spawn;
+			    var child = spawn('ls', ['-la'], {cwd: './'});
+
+			    spawn.stdout.on('data', resolve);
+			    spawn.stderr.on('data', reject);
+			});
+
+			prom
+			    .then(function(data) {
+			        console.log(data);
+			    })
+			    .catch(function(e) {
+			        console.log('error: ' + e);
 			    });
-			}
-
-			var child = exec('sudo cf-agent -K private/system_scripts/edit_network_config.cf');
-
-			promiseFromChildProcess(child).then(function (result) {
-			    console.log('promise complete: ' + result);
-			    res.send(result);
-			}, function (err) {
-			    console.log('promise rejected: ' + err);
-			    res.send(err);
-			});
-
-			child.stdout.on('data', function (data) {
-			    console.log('stdout: ' + data);
-			    res.send(data);
-			});
-			child.stderr.on('data', function (data) {
-			    console.log('stderr: ' + data);
-			    res.send(data);
-			});
-			child.on('close', function (code) {
-			    console.log('closing code: ' + code);
-			    res.send(code);
-			});
 			
 			//Execute cfengine script to make changes to network settings and restart network service.
 			//function puts(error, stdout, stderr) { sys.puts(stdout) }
