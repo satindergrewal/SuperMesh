@@ -326,6 +326,7 @@ function UpdateNetSettings(event) {
             url: 'network/update',
             dataType: 'JSON'
         }).done(function( response ) {
+            console.log(response);
 
             // Check for successful (blank) response
             if (response.msg === 'success') {
