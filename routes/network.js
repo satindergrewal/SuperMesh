@@ -128,9 +128,9 @@ router.post('/update', function(req, res) {
 			    });
 			}
 
-			var child = exec('sudo cf-agent -K private/system_scripts/edit_network_config.cf');
+			var edit_network = exec('sudo cf-agent -K private/system_scripts/edit_network_config.cf');
 
-			promiseFromChildProcess(child).then(function (result) {
+			promiseFromChildProcess(edit_network).then(function (result) {
 			    console.log('promise complete: ' + result);
 			    res.send('{"msg": "success","result": result}');
 			}, function (err) {
@@ -138,15 +138,39 @@ router.post('/update', function(req, res) {
 			    res.send(err);
 			});
 
-			child.stdout.on('data', function (data) {
+			edit_network.stdout.on('data', function (data) {
 			    console.log('stdout: ' + data);
 			    
 			});
-			child.stderr.on('data', function (data) {
+			edit_network.stderr.on('data', function (data) {
 			    console.log('stderr: ' + data);
 			    
 			});
-			child.on('close', function (code) {
+			edit_network.on('close', function (code) {
+			    console.log('closing code: ' + code);
+			    
+			});
+
+
+			var restart_network = exec('sudo systemctl restart networking');
+
+			promiseFromChildProcess(restart_network).then(function (result) {
+			    console.log('promise complete: ' + result);
+			    res.send('{"msg": "success","result": result}');
+			}, function (err) {
+			    console.log('promise rejected: ' + err);
+			    res.send(err);
+			});
+
+			restart_network.stdout.on('data', function (data) {
+			    console.log('stdout: ' + data);
+			    
+			});
+			restart_network.stderr.on('data', function (data) {
+			    console.log('stderr: ' + data);
+			    
+			});
+			restart_network.on('close', function (code) {
 			    console.log('closing code: ' + code);
 			    
 			});

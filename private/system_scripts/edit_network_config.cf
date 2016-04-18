@@ -1,6 +1,6 @@
   body common control
 {
-    bundlesequence => { network_config, services_restart };
+    bundlesequence => { network_config };
 }
 
 body edit_defaults network_config
