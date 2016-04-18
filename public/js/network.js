@@ -347,10 +347,10 @@ function UpdateNetSettings(event) {
 
             }
         })
-        .fail(function() {
+        .fail(function(response) {
             console.log('Fail: ' + response);
         })
-        .always(function() {
+        .always(function(response) {
             console.log('Always: ' + response);
         });
     }
