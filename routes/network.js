@@ -158,11 +158,11 @@ router.post('/update', function(req, res) {
 			promiseFromChildProcess(restart_network).then(function (result) {
 			    console.log('promise complete: ' + result);
 			    console.log('=> Network service restarted')
-			    res.send('{"msg": "success","result": result}');
+			    
 			}, function (err) {
 			    console.log('=> Error restarting Network Service.')
 			    console.log('promise rejected: ' + err);
-			    res.send('{"msg": "err","result": err}');
+			    
 			});
 
 			restart_network.stdout.on('data', function (data) {
@@ -177,6 +177,9 @@ router.post('/update', function(req, res) {
 			    console.log('closing code: ' + code);
 			    
 			});
+
+			res.end('{"msg": "success","result": result}');
+
 			
 			//Execute cfengine script to make changes to network settings and restart network service.
 			//function puts(error, stdout, stderr) { sys.puts(stdout) }
