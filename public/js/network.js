@@ -324,8 +324,12 @@ function UpdateNetSettings(event) {
             type: 'POST',
             data: NetworkSettings,
             url: 'network/update',
-            dataType: 'JSON'
-        }).done(function( response ) {
+            dataType: 'JSON',
+            success: function(data) {
+                console.log('Data: ' + data);
+            }
+        })
+        .done(function( response ) {
             console.log(response);
 
             // Check for successful (blank) response
@@ -342,7 +346,13 @@ function UpdateNetSettings(event) {
                 alert('Error: Something went wrong. ' + response.result);
 
             }
-        });
+        })
+        .fail(function() {
+            console.log('Fail: ' + response);
+        })
+        .always() {
+            console.log('Always: ' + response);
+        };
     }
     else {
         // If errorCount is more than 0, error out
