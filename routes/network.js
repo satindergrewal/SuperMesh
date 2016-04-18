@@ -178,9 +178,6 @@ router.post('/update', function(req, res) {
 			    
 			});
 
-			res.end('{"msg": "success","result": result}');
-
-			
 			//Execute cfengine script to make changes to network settings and restart network service.
 			//function puts(error, stdout, stderr) { sys.puts(stdout) }
 			//exec("sudo cf-agent -K private/system_scripts/edit_network_config.cf", puts);
@@ -190,8 +187,7 @@ router.post('/update', function(req, res) {
 			//res.send(Output);
 			//});
 		});
-
-
+	res.end('{"msg": "success","result": result}');
 });
 
 module.exports = router;
