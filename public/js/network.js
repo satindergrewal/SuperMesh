@@ -350,9 +350,9 @@ function UpdateNetSettings(event) {
         .fail(function() {
             console.log('Fail: ' + response);
         })
-        .always() {
+        .always(function() {
             console.log('Always: ' + response);
-        };
+        });
     }
     else {
         // If errorCount is more than 0, error out
