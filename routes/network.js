@@ -44,16 +44,6 @@ router.get('/inetstatus', function(req, res, next) {
 
 });
 
-router.get('/iwlist', function(req, res, next) {
-
-	var iwlist = require('wireless-tools/iwlist');
- 
-	iwlist.scan('wlan1', function(err, networks) {
-	  res.send(networks);
-	});
-
-});
-
 /* POST to Update Network Settings. */
 router.post('/update', function(req, res) {
 	var interfacesFile = 'private/system_scripts/interfaces.data'

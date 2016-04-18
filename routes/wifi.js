@@ -9,4 +9,14 @@ router.get('/', function(req, res, next) {
   res.render('wifi', {title: 'Controle Centre Admin'});
 });
 
+router.get('/iwlist', function(req, res, next) {
+
+	var iwlist = require('wireless-tools/iwlist');
+ 
+	iwlist.scan('wlan1', function(err, networks) {
+	  res.send(networks);
+	});
+
+});
+
 module.exports = router;
