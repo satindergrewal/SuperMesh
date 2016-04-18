@@ -329,7 +329,7 @@ function UpdateNetSettings(event) {
 
             // Check for successful (blank) response
             if (response.msg === 'success') {
-                alert('Success')
+                alert('Success');
 
                 // Populate IP Info
                 populateIPInfo();
