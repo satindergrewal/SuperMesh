@@ -328,7 +328,8 @@ function UpdateNetSettings(event) {
         }).done(function( response ) {
 
             // Check for successful (blank) response
-            if (response.msg === '') {
+            if (response.msg === 'success') {
+                alert('Success')
 
                 // Populate IP Info
                 populateIPInfo();
@@ -337,7 +338,7 @@ function UpdateNetSettings(event) {
             else {
 
                 // If something goes wrong, alert the error message that our service returned
-                alert('Error: ' + response.msg);
+                alert('Error: Something went wrong. ' + response.result);
 
             }
         });

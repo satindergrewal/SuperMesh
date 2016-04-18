@@ -133,10 +133,10 @@ router.post('/update', function(req, res) {
 			promiseFromChildProcess(edit_network).then(function (result) {
 			    console.log('promise complete: ' + result);
 			    console.log('=> Network file edited')
-			    res.send('{"msg": "success","result": result}');
+			    //res.send('{"msg": "success","result": result}');
 			}, function (err) {
 			    console.log('promise rejected: ' + err);
-			    res.send(err);
+			    //res.send(err);
 			});
 
 			edit_network.stdout.on('data', function (data) {
@@ -158,11 +158,11 @@ router.post('/update', function(req, res) {
 			promiseFromChildProcess(restart_network).then(function (result) {
 			    console.log('promise complete: ' + result);
 			    console.log('=> Network service restarted')
-			    //res.send('{"msg": "success","result": result}');
+			    res.send('{"msg": "success","result": result}');
 			}, function (err) {
 			    console.log('=> Error restarting Network Service.')
 			    console.log('promise rejected: ' + err);
-			    //res.send(err);
+			    res.send('{"msg": "err","result": err}');
 			});
 
 			restart_network.stdout.on('data', function (data) {
