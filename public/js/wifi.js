@@ -39,14 +39,22 @@ function populateTable() {
             } else if (this.signal >= '-95' ) {
                 signal_color = '#9a9a9a';
             }
+            //console.log(signal_color);
 
-            console.log(signal_color);
+            var wifi_security = '';
+
+            if (this.security === 'open' ) {
+                wifi_security = '<i class="fa fa-unlock-alt"></i>';
+            } else if (this.security === 'wpa' || this.security === 'wpa2' ) {
+                wifi_security = '<i class="fa fa-lock"></i>';
+            }
+            //console.log(wifi_security);
 
             tableContent += '<tr>';
-                tableContent += '<td class="text-center" style="color: ' + signal_color + ';"><i class="fa fa-wifi"></i></i></td>';
+                tableContent += '<td class="text-center" style="color: ' + signal_color + ';"><i class="fa fa-wifi"></i></td>';
                 tableContent += '<td class="font-w600">' + this.ssid + '</td>';
                 tableContent += '<td class="hidden-xs">' + this.frequency + '</td>';
-                tableContent += '<td class="hidden-xs hidden-sm">' + this.security + '</td>';
+                tableContent += '<td class="hidden-xs hidden-sm">' + wifi_security + ' ' + this.security + '</td>';
                 tableContent += '<td class="text-center">';
                 tableContent += '';
                 tableContent += '</td>';
