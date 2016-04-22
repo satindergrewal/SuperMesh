@@ -28,6 +28,23 @@ function populateTable() {
             console.log(this.frequency);
             console.log(this.security);*/
 
+            var signal_color = '';
+
+            if (this.signal <= '20' ) {
+                signal_color = '#71bd00';
+            }
+            if (this.signal <= '50' ) {
+                signal_color = '#dac300';
+            }
+            if (this.signal >= '51' ) {
+                signal_color = '#92893e';
+            }
+            if (this.signal <= '70' ) {
+                signal_color = '#9a9a9a';
+            }
+
+            console.log(signal_color);
+
             tableContent += '<tr>';
                 tableContent += '<td class="text-center">' + this.signal + '</i></td>';
                 tableContent += '<td class="font-w600">' + this.ssid + '</td>';
