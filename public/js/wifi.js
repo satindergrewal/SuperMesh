@@ -18,7 +18,7 @@ function populateTable() {
     var tableContent = '';
 
     // jQuery AJAX call for JSON
-    $.getJSON( 'iwlist', function( data ) {
+    $.getJSON( 'wifi/iwlist', function( data ) {
 
         // For each item in our JSON, add a table row and cells to the content string
         /*$.each(data, function(){
