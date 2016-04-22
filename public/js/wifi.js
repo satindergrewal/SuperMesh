@@ -35,7 +35,7 @@ function populateTable() {
             tableContent += '</tr>';
 
         // Inject the whole content string into our existing HTML table
-        $('#wifilist table tbody').append(tableContent);
+        $('#wifilist tbody').html(tableContent);
         //console.log(tableContent);
 
         });
