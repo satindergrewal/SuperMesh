@@ -43,7 +43,7 @@ function populateTable() {
             console.log(signal_color);
 
             tableContent += '<tr>';
-                tableContent += '<td class="text-center" style="color: ' + signal_color + ';"><i class="fa fa-signal"></i></i></td>';
+                tableContent += '<td class="text-center" style="color: ' + signal_color + ';"><i class="fa fa-wifi"></i></i></td>';
                 tableContent += '<td class="font-w600">' + this.ssid + '</td>';
                 tableContent += '<td class="hidden-xs">' + this.frequency + '</td>';
                 tableContent += '<td class="hidden-xs hidden-sm">' + this.security + '</td>';
