@@ -53,7 +53,7 @@ function populateTable() {
             tableContent += '</tr>';
 
         // Inject the whole content string into our existing HTML table
-        $('#wifilist table tbody').html(tableContent);
+        $('#wifilist tbody').replaceWith(tableContent);
 
         console.log(tableContent);
 
