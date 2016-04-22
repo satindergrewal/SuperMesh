@@ -70,7 +70,6 @@ function getwlan1status() {
         //console.log(data);
         $( "#wlan1_ipaddr" ).html( data['ipv4_address'] );
         $( "#wlan1_subnet" ).html( data['ipv4_subnet_mask'] );
-        $( "#wlan1_ieee" ).html( data['ieee'] );
     });
 };
 
@@ -78,5 +77,6 @@ function getwlan1iwconfig() {
     $.getJSON( '/admin/wifi/wlan1iwconfig', function( data ) {
         console.log(data);
         $( "#wlan1_ssid" ).html( data['ssid'] );
+        $( "#wlan1_ieee" ).html( data['ieee'] );
     });
 };
