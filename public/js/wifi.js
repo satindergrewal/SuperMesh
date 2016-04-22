@@ -17,7 +17,7 @@ function populateTable() {
     var tableContent = '';
 
     // jQuery AJAX call for JSON
-    $.getJSON( 'wifi/iwlist', function( data ) {
+    $.getJSON( '/admin/wifi/iwlist', function( data ) {
 
         $.each(data, function(){
             /*console.log('--------------------');
