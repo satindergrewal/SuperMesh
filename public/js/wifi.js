@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     // Populate the user table on initial page load
     populateTable();
-    //getwlan1status();
+    getwlan1status();
 
 });
 
@@ -47,10 +47,10 @@ function populateTable() {
     });
 };
 
-/*function getwlan1status() {
+function getwlan1status() {
 
     $.getJSON( '/admin/wifi/wlan1status', function( data ) {
         console.log(data);
-    };
+    });
 
-};*/
+};
