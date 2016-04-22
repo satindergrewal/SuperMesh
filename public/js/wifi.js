@@ -32,11 +32,14 @@ function populateTable() {
 
             if (this.signal <= '-20' ) {
                 signal_color = '#71bd00';
-            }else if (this.signal <= '-50' ) {
+            }
+            if (this.signal <= '-50' ) {
                 signal_color = '#dac300';
-            } else if (this.signal >= '-51' ) {
+            }
+            if (this.signal >= '-51' ) {
                 signal_color = '#92893e';
-            } else if (this.signal <= '-70' ) {
+            }
+            if (this.signal <= '-70' ) {
                 signal_color = '#9a9a9a';
             }
 
