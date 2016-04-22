@@ -24,7 +24,7 @@ router.get('/wlan1status', function(req, res, next) {
 	var wlan1status = require('wireless-tools/ifconfig');
  
 	wlan1status.status('wlan0',function(err, status) {
-	  res.send(networks);
+	  res.send(status);
 	});
 });
 
