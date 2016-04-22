@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 });
 
-window.setInterval(function(){ populateTable(); }, 5000);
+window.setInterval(function(){ populateTable(); }, 15000);
 
 // Functions =============================================================
 
