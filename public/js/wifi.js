@@ -45,7 +45,7 @@ function populateTable() {
                 tableContent += '<td class="hidden-xs">' + this.frequency + '</td>';
                 tableContent += '<td class="hidden-xs hidden-sm">' + this.security + '</td>';
                 tableContent += '<td class="text-center">';
-                tableContent += ;
+                tableContent += '';
                 tableContent += '</td>';
             tableContent += '</tr>';
 
