@@ -63,7 +63,7 @@ function populateTable() {
                 tableContent += '<td class="hidden-xs">' + this.frequency + '</td>';
                 tableContent += '<td class="hidden-xs hidden-sm" style="color: ' + wifi_sec_color + ';">' + wifi_security + ' ' + this.security + '</td>';
                 tableContent += '<td class="text-center">';
-                tableContent += '';
+                tableContent += '<button class="btn btn-sm btn-minw btn-rounded btn-default" type="button">Connect</button>';
                 tableContent += '</td>';
             tableContent += '</tr>';
 
@@ -87,7 +87,7 @@ function getwlan1status() {
 
 function getwlan1iwconfig() {
     $.getJSON( '/admin/wifi/wlan1iwconfig', function( data ) {
-        console.log(data);
+        //console.log(data);
         $( "#wlan1_ssid" ).html( data['ssid'] );
         $( "#wlan1_ieee" ).html( data['ieee'] );
     });
