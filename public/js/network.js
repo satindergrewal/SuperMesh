@@ -171,9 +171,6 @@ $(document).ready(function() {
 // Fill table with data
 function populateIPInfo() {
 
-    // Empty content string
-    var tableContent = '';
-
     // jQuery AJAX call for JSON
     $.getJSON( '/admin/network/getip', function( data ) {
     	//console.log(data[0].wlan0);
