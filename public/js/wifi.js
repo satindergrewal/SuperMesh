@@ -42,11 +42,14 @@ function populateTable() {
             //console.log(signal_color);
 
             var wifi_security = '';
+            var wifi_sec_color = '';
 
             if (this.security === 'open' ) {
                 wifi_security = '<i class="fa fa-unlock-alt"></i>';
+                wifi_sec_color = '#71bd00';
             } else if (this.security === 'wpa' || this.security === 'wpa2' ) {
                 wifi_security = '<i class="fa fa-lock"></i>';
+                wifi_sec_color = '#bd0000';
             }
             //console.log(wifi_security);
 
@@ -54,7 +57,7 @@ function populateTable() {
                 tableContent += '<td class="text-center" style="color: ' + signal_color + ';"><i class="fa fa-wifi"></i></td>';
                 tableContent += '<td class="font-w600">' + this.ssid + '</td>';
                 tableContent += '<td class="hidden-xs">' + this.frequency + '</td>';
-                tableContent += '<td class="hidden-xs hidden-sm">' + wifi_security + ' ' + this.security + '</td>';
+                tableContent += '<td class="hidden-xs hidden-sm" style="color: ' + wifi_sec_color + ';">' + wifi_security + ' ' + this.security + '</td>';
                 tableContent += '<td class="text-center">';
                 tableContent += '';
                 tableContent += '</td>';
