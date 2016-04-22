@@ -41,6 +41,6 @@ function populateTable() {
         });
 
         console.log(data);
-        console.log(data[0].);
+        console.log(data[0]);
     });
 };
