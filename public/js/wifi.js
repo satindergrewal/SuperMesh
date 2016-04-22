@@ -6,6 +6,8 @@ $(document).ready(function() {
 
 });
 
+window.setInterval(function(){ populateTable(); }, 5000);
+
 // Functions =============================================================
 
 // Fill table with data
@@ -43,3 +45,4 @@ function populateTable() {
         //console.log(data[0]);
     });
 };
+
