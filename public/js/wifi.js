@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     // Populate the user table on initial page load
     populateTable();
-    getwlan1status();
+    //getwlan1status();
 
 });
 
