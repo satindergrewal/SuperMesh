@@ -33,9 +33,9 @@ function populateTable() {
             if (this.signal >= '-25' ) {
                 signal_color = '#71bd00';
             } else if (this.signal >= '-55' ) {
-                signal_color = '#dac300';
+                signal_color = '#dad700';
             } else if (this.signal >= '-75' ) {
-                signal_color = '#92893e';
+                signal_color = '#f39f60';
             } else if (this.signal >= '-95' ) {
                 signal_color = '#9a9a9a';
             }
