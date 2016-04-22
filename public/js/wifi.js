@@ -47,10 +47,10 @@ function populateTable() {
     });
 };
 
-function getwlan1status() {
+/*function getwlan1status() {
 
     $.getJSON( '/admin/wifi/wlan1status', function( data ) {
         console.log(data);
     };
 
-};
+};*/
