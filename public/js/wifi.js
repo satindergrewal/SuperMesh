@@ -30,13 +30,13 @@ function populateTable() {
 
             var signal_color = '';
 
-            if (this.signal >= '-20' ) {
+            if (this.signal >= '-25' ) {
                 signal_color = '#71bd00';
-            } else if (this.signal >= '-50' ) {
+            } else if (this.signal >= '-55' ) {
                 signal_color = '#dac300';
-            } else if (this.signal >= '-65' ) {
+            } else if (this.signal >= '-75' ) {
                 signal_color = '#92893e';
-            } else if (this.signal >= '-85' ) {
+            } else if (this.signal >= '-95' ) {
                 signal_color = '#9a9a9a';
             }
 
