@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
   res.render('wifi', {title: 'Controle Centre Admin'});
 });
 
+//Get WiFi list from nearby area
 router.get('/iwlist', function(req, res, next) {
 
 	var iwlist = require('wireless-tools/iwlist');
@@ -17,6 +18,14 @@ router.get('/iwlist', function(req, res, next) {
 	  res.send(networks);
 	});
 
+});
+
+router.get('/wlan1status', function(req, res, next) {
+	var wlan1status = require('wireless-tools/ifconfig');
+ 
+	wlan1status.status('wlan0',function(err, status) {
+	  res.json(networks);
+	});
 });
 
 module.exports = router;
