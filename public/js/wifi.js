@@ -70,7 +70,7 @@ function getwlan1status() {
         //console.log(data);
         $( "#wlan1_ipaddr" ).html( data['ipv4_address'] );
         $( "#wlan1_subnet" ).html( data['ipv4_subnet_mask'] );
-        $( "#wlan1_routeip" ).html( data[''] );
+        $( "#wlan1_ieee" ).html( data['ieee'] );
     });
 };
 
