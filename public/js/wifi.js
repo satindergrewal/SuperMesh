@@ -51,6 +51,7 @@ function populateTable() {
 function getwlan1status() {
     $.getJSON( '/admin/wifi/wlan1status', function( data ) {
         console.log(data);
+        console.log(data['ipv4_address']);
         $( "#wlan1_ipaddr" ).val( data['ipv4_address'] );
         $( "#wlan1_subnet" ).val( data['ipv4_subnet_mask'] );
         $( "#wlan1_routeip" ).val( data['ipv4_address'] );
