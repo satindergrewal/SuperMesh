@@ -25,6 +25,9 @@ router.get('/wlan1status', function(req, res, next) {
  
 	wlan1status.status('wlan1',function(err, status) {
 	  res.send(status);
+	  $( "#wlan1_ipaddr" ).val( data['ipv4_address'] );
+	  $( "#wlan1_subnet" ).val( data['ipv4_subnet_mask'] );
+	  $( "#wlan1_routeip" ).val( data['ipv4_address'] );
 	});
 });
 
@@ -33,6 +36,7 @@ router.get('/wlan1iwconfig', function(req, res, next) {
  
 	wlan1iwconfig.status('wlan1',function(err, iwstatus) {
 	  res.send(iwstatus);
+	  $( "#wlan1_ssid" ).val( data['ssid'] );
 	});
 });
 
