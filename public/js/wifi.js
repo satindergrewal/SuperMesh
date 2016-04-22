@@ -31,6 +31,16 @@ function populateTable() {
 
         // Inject the whole content string into our existing HTML table
         $('#userList table tbody').html(tableContent);*/
+
+        $.each(data, function(){
+            console.log('--------------------');
+            console.log(this.signal);
+            console.log(this.ssid);
+            console.log(this.frequency);
+            console.log(this.security);
+        });
+
         console.log(data);
+        console.log(data[0].);
     });
 };
