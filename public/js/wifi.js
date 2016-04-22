@@ -4,11 +4,15 @@ $(document).ready(function() {
     // Populate the user table on initial page load
     populateTable();
     getwlan1status();
-    getwlan1iwconfig()
+    getwlan1iwconfig();
 
 });
 
-window.setInterval(function(){ populateTable(); }, 15000);
+window.setInterval(function(){ 
+    populateTable();
+    getwlan1status();
+    getwlan1iwconfig();
+}, 15000);
 
 // Functions =============================================================
 
