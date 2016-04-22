@@ -1,6 +1,3 @@
-// wifilist data array for filling in info box
-var wifiListData = [];
-
 // DOM Ready =============================================================
 $(document).ready(function() {
 
@@ -17,23 +14,8 @@ function populateTable() {
     // Empty content string
     var tableContent = '';
 
-
-
-
     // jQuery AJAX call for JSON
     $.getJSON( 'wifi/iwlist', function( data ) {
-
-        // For each item in our JSON, add a table row and cells to the content string
-        /*$.each(data, function(){
-            tableContent += '<tr>';
-            tableContent += '<td><a href="#" class="linkshowuser" rel="' + this.username + '">' + this.username + '</a></td>';
-            tableContent += '<td>' + this.email + '</td>';
-            tableContent += '<td><a href="#" class="linkdeleteuser" rel="' + this._id + '">delete</a></td>';
-            tableContent += '</tr>';
-        });
-
-        // Inject the whole content string into our existing HTML table
-        $('#userList table tbody').html(tableContent);*/
 
         $.each(data, function(){
             /*console.log('--------------------');
@@ -53,14 +35,11 @@ function populateTable() {
             tableContent += '</tr>';
 
         // Inject the whole content string into our existing HTML table
-        $('#wifilist tbody').replaceWith(tableContent);
-
-        console.log(tableContent);
-
+        $('#wifilist table tbody').append(tableContent);
+        //console.log(tableContent);
 
         });
-
-        console.log(data);
-        console.log(data[0]);
+        //console.log(data);
+        //console.log(data[0]);
     });
 };
