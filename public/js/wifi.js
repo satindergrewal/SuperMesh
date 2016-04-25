@@ -56,7 +56,7 @@ function populateTable() {
                 wifi_sec_color = '#bd0000';
             }
             //console.log(wifi_security);
-            tableContent += '<form>';
+
             tableContent += '<tr>';
                 tableContent += '<td class="text-center" style="color: ' + signal_color + ';"><i class="fa fa-wifi"></i></td>';
                 tableContent += '<td class="font-w600">' + this.ssid + '</td>';
@@ -66,7 +66,6 @@ function populateTable() {
                 tableContent += '<button class="btn btn-sm btn-primary" type="button">Connect</button>';
                 tableContent += '</td>';
             tableContent += '</tr>';
-            tableContent += '</form>';
 
         // Inject the whole content string into our existing HTML table
         $('#wifilist tbody').html(tableContent);
