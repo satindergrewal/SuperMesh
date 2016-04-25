@@ -65,7 +65,7 @@ function populateTable() {
                 tableContent += '<td class="hidden-xs">' + this.frequency + '</td>';
                 tableContent += '<td class="hidden-xs hidden-sm" sec_val="' + this.security + '" rel=' + index + ' style="color: ' + wifi_sec_color + ';">' + wifi_security + ' ' + this.security + '</td>';
                 tableContent += '<td class="text-center">';
-                tableContent += '<button class="btn btn-sm btn-primary" type="button" rel=' + index + ' onclick="printvalue(' + index + ')">Connect</button>';
+                tableContent += '<button class="btn btn-sm btn-primary" type="button" rel=' + index + ' onclick="getWiFidetails(' + index + ')">Connect</button>';
                 tableContent += '</td>';
             tableContent += '</tr>';
 
@@ -95,6 +95,8 @@ function getwlan1iwconfig() {
     });
 };
 
-function printvalue(index_value) {
+function getWiFidetails(index_value) {
     console.log(index_value);
+    $('td[rel="' + index_value + '"]').eq(0).text();
+    $('td[rel="' + index_value + '"]').eq(1).text();
 }
