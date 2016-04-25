@@ -25,16 +25,14 @@ function populateTable() {
     // jQuery AJAX call for JSON
     $.getJSON( '/admin/wifi/iwlist', function( data ) {
 
-        $.each(data, function(){
+        $.each(data, function(index){
             /*console.log('--------------------');
             console.log(this.signal);
             console.log(this.ssid);
             console.log(this.frequency);
             console.log(this.security);*/
 
-            for (index = 0; index < this.length; ++index) {
-                console.log(this[index]);
-            }
+            console.log(index);
 
             var signal_color = '';
 
