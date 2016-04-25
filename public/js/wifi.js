@@ -32,7 +32,7 @@ function populateTable() {
             console.log(this.frequency);
             console.log(this.security);*/
 
-            console.log(index);
+            //console.log(index);
 
             var signal_color = '';
 
@@ -61,11 +61,11 @@ function populateTable() {
 
             tableContent += '<tr>';
                 tableContent += '<td class="text-center" style="color: ' + signal_color + ';"><i class="fa fa-wifi"></i></td>';
-                tableContent += '<td class="font-w600">' + this.ssid + '</td>';
+                tableContent += '<td class="font-w600" rel=' + index + '>' + this.ssid + '</td>';
                 tableContent += '<td class="hidden-xs">' + this.frequency + '</td>';
-                tableContent += '<td class="hidden-xs hidden-sm" style="color: ' + wifi_sec_color + ';">' + wifi_security + ' ' + this.security + '</td>';
+                tableContent += '<td class="hidden-xs hidden-sm" rel=' + index + ' style="color: ' + wifi_sec_color + ';">' + wifi_security + ' ' + this.security + '</td>';
                 tableContent += '<td class="text-center">';
-                tableContent += '<button class="btn btn-sm btn-primary" type="button">Connect</button>';
+                tableContent += '<button class="btn btn-sm btn-primary" type="button" rel=' + index + '>Connect</button>';
                 tableContent += '</td>';
             tableContent += '</tr>';
 
