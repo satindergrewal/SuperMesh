@@ -32,6 +32,10 @@ function populateTable() {
             console.log(this.frequency);
             console.log(this.security);*/
 
+            for (index = 0; index < this.length; ++index) {
+                console.log(this[index]);
+            }
+
             var signal_color = '';
 
             if (this.signal >= '-25' ) {
