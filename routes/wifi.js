@@ -20,15 +20,23 @@ router.get('/iwlist', function(req, res, next) {
 
 });
 
-router.get('/wlan1status', function(req, res, next) {
+/*router.get('/wlan1status', function(req, res, next) {
 	var wlan1status = require('wireless-tools/ifconfig');
  
 	wlan1status.status('wlan1',function(err, status) {
 	  res.send(status);
 	});
+});*/
+
+router.get('/iwconfig', function(req, res, next) {
+	var wlan1iwconfig = require('wireless-tools/iwconfig');
+ 
+	wlan1iwconfig.status(function(err, iwstatus) {
+	  res.send(iwstatus);
+	});
 });
 
-router.get('/wlan1iwconfig', function(req, res, next) {
+router.get('/iwconfig/wlan1', function(req, res, next) {
 	var wlan1iwconfig = require('wireless-tools/iwconfig');
  
 	wlan1iwconfig.status('wlan1',function(err, iwstatus) {

@@ -80,7 +80,7 @@ function populateTable() {
 };
 
 function getwlan1status() {
-    $.getJSON( '/admin/wifi/wlan1status', function( data ) {
+    $.getJSON( '/admin/network/ifconfig/wlan1', function( data ) {
         //console.log(data);
         $( "#wlan1_ipaddr" ).html( data['ipv4_address'] );
         $( "#wlan1_subnet" ).html( data['ipv4_subnet_mask'] );
@@ -88,7 +88,7 @@ function getwlan1status() {
 };
 
 function getwlan1iwconfig() {
-    $.getJSON( '/admin/wifi/wlan1iwconfig', function( data ) {
+    $.getJSON( '/admin/wifi/iwconfig/wlan1', function( data ) {
         //console.log(data);
         $( "#wlan1_ssid" ).html( data['ssid'] );
         $( "#wlan1_ieee" ).html( data['ieee'] );

@@ -34,7 +34,7 @@ router.get('/getip', function(req, res, next) {
 });
 
 
-router.get('/inetstatus', function(req, res, next) {
+router.get('/ifconfig', function(req, res, next) {
 
 	var ifconfig = require('wireless-tools/ifconfig');
  
@@ -42,6 +42,14 @@ router.get('/inetstatus', function(req, res, next) {
 		res.send(status);
 	});
 
+});
+
+router.get('/ifconfig/wlan1', function(req, res, next) {
+	var wlan1status = require('wireless-tools/ifconfig');
+ 
+	wlan1status.status('wlan1',function(err, status) {
+	  res.send(status);
+	});
 });
 
 /* POST to Update Network Settings. */
