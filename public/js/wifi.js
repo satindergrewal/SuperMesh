@@ -65,7 +65,7 @@ function populateTable() {
                 tableContent += '<td class="hidden-xs">' + this.frequency + '</td>';
                 tableContent += '<td class="hidden-xs hidden-sm" sec_val="' + this.security + '" rel=' + index + ' style="color: ' + wifi_sec_color + ';">' + wifi_security + ' ' + this.security + '</td>';
                 tableContent += '<td class="text-center">';
-                tableContent += '<button class="btn btn-sm btn-primary" type="button" rel=' + index + ' onclick="printvalue(\'0\')">Connect</button>';
+                tableContent += '<button class="btn btn-sm btn-primary" type="button" rel=' + index + ' onclick="printvalue(' + index + ')">Connect</button>';
                 tableContent += '</td>';
             tableContent += '</tr>';
 
