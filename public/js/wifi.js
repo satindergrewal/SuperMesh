@@ -97,6 +97,6 @@ function getwlan1iwconfig() {
 
 function getWiFidetails(index_value) {
     console.log(index_value);
-    $('td[rel="' + index_value + '"]').eq(0).text();
-    $('td[rel="' + index_value + '"]').eq(1).text();
+    console.log($('td[rel="' + index_value + '"]').eq(0).text());
+    console.log($('td[rel="' + index_value + '"]').eq(1).text());
 }
