@@ -35,12 +35,37 @@ router.get('/getip', function(req, res, next) {
 
 router.get('/ipinfo', function(req, res, next) {
 
-	const http = require('http')
+			//Execute promissed spanw child process
+			var Promise = require('bluebird');
+			var exec = require('child_process').exec;
 
-	http.get('http://ipinfo.io', function(info) {
-	  console.log(info)
-	  res.send(info);
-	});
+			function promiseFromChildProcess(child) {
+			    return new Promise(function (resolve, reject) {
+			        child.addListener("error", reject);
+			        child.addListener("exit", resolve);
+			    });
+			}
+
+			var edit_network = exec('curl http://ipinfo.io');
+
+			promiseFromChildProcess(edit_network).then(function (result) {
+			    console.log('promise complete: ' + result);
+			}, function (err) {
+			    console.log('promise rejected: ' + err);
+			});
+
+			edit_network.stdout.on('data', function (data) {
+			    console.log('stdout: ' + data);
+			    res.send(data);
+			    
+			});
+			edit_network.stderr.on('data', function (data) {
+			    console.log('stderr: ' + data);
+			    
+			});
+			edit_network.on('close', function (code) {
+			    console.log('closing code: ' + code);
+			});
 });
 
 
