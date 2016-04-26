@@ -134,6 +134,8 @@ function UpdateWiFiSettings(index_value) {
             'security': $('td[rel="' + index_value + '"]').eq(1).text()
         }
 
+        console.log(WiFiSettings);
+
         // Use AJAX to post the object to our adduser service
         $.ajax({
             type: 'POST',
