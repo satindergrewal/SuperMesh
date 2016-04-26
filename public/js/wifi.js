@@ -117,6 +117,10 @@ function UpdateWiFiSettings(index_value) {
     console.log($('td[rel="' + index_value + '"]').eq(0).text());
     console.log($('td[rel="' + index_value + '"]').eq(1).text());
 
+    if ( $('td[rel="' + index_value + '"]').eq(1).text() == ' wpa2' ) {
+        alert('it is wpa2.');
+    }
+
     //event.preventDefault();
 
     // Super basic validation - increase errorCount variable if any fields are blank
