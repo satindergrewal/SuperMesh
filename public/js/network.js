@@ -334,7 +334,7 @@ function UpdateNetSettings(event) {
                 //console.log(NetData);
 
                 if (NetData.msg === 'success') {
-                    console.log('Success');
+                    //console.log('Success');
                     swal("Success", "Network Settings Saved.", "success");
 
                     // Populate IP Info
@@ -346,7 +346,7 @@ function UpdateNetSettings(event) {
                 }
             },
             error: function(xhr, textStatus, error) {
-                console.log('failure');
+                //console.log('failure');
                 console.log(xhr.statusText);
                 console.log(textStatus);
                 console.log(error);
