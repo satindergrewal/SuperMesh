@@ -55,7 +55,11 @@ function populateTable() {
                 wifi_sec_color = '#71bd00';
             } else if (this.security === 'wpa' || this.security === 'wpa2' ) {
                 wifi_security = '<i class="fa fa-lock"></i>';
-                wifi_sec_color = '#bd0000';
+                wifi_sec_color = '#337ab7';
+            }
+            else if (this.security === 'wep') {
+                wifi_security = '<i class="fa fa-lock"></i>';
+                wifi_sec_color = '#a48ad4';
             }
             //console.log(wifi_security);
 

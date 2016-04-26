@@ -278,6 +278,13 @@ function populateIPInfo() {
 
 // Update Network Settings
 function UpdateNetSettings(event) {
+
+    /*App.loader('show');
+    setTimeout(function () {
+        App.loader('hide');
+    }, 3000);*/
+
+
     event.preventDefault();
 
     // Super basic validation - increase errorCount variable if any fields are blank
@@ -321,36 +328,30 @@ function UpdateNetSettings(event) {
             type: 'POST',
             data: NetworkSettings,
             url: 'network/update',
-            dataType: 'JSON',
-            success: function(data) {
-                console.log('Data: ' + data);
+            dataType: 'html',
+            success: function(data, textStatus, jqXHR) {
+                var NetData = JSON.parse(data);
+                //console.log(NetData);
+
+                if (NetData.msg === 'success') {
+                    console.log('Success');
+                    swal("Success", "Network Settings Saved.", "success");
+
+                    // Populate IP Info
+                    populateIPInfo();
+                }
+                else {
+                    // If something goes wrong, alert the error message that our service returned
+                    swal("Oops...", "Something went wrong!", "error");
+                }
+            },
+            error: function(xhr, textStatus, error) {
+                console.log('failure');
+                console.log(xhr.statusText);
+                console.log(textStatus);
+                console.log(error);
+                
             }
-        })
-        .done(function( response ) {
-            console.log(response);
-
-            // Check for successful (blank) response
-            if (response.msg === 'success') {
-                alert('Success');
-
-                // Populate IP Info
-                populateIPInfo();
-
-            }
-            else {
-
-                // If something goes wrong, alert the error message that our service returned
-                alert('Error: Something went wrong. ' + response.result);
-
-            }
-        })
-        .fail(function(response) {
-            console.log('Fail: ' + response);
-        })
-        .always(function(response,textStatus, jqXHR) {
-            console.log('Always: ' + response);
-            console.log(textStatus);
-            console.log(jqXHR);
         });
     }
     else {

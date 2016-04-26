@@ -197,7 +197,7 @@ router.post('/update', function(req, res) {
 			//res.send(Output);
 			//});
 		});
-	res.end('{"msg": "success","result": result}');
+	res.end('{"msg": "success","result": "result"}');
 });
 
 module.exports = router;
