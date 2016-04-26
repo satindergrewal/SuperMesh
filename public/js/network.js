@@ -282,7 +282,7 @@ function UpdateNetSettings(event) {
     App.loader('show');
     setTimeout(function () {
         App.loader('hide');
-    }, 25000);
+    }, 35000);
 
 
     event.preventDefault();
