@@ -33,6 +33,16 @@ router.get('/getip', function(req, res, next) {
 	//res.send('<h1>Ready to get IP Addresses.</h1><pre>' + ifoutput + '</pre>');
 });
 
+router.get('/ipinfo', function(req, res, next) {
+
+	const http = require('http')
+
+	http.get('http://ipinfo.io', function(info) {
+	  console.log(info)
+	  res.send(info);
+	});
+});
+
 
 router.get('/ifconfig', function(req, res, next) {
 
