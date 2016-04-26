@@ -142,7 +142,7 @@ function UpdateWiFiSettings(index_value) {
             dataType: 'html',
             success: function(data, textStatus, jqXHR) {
                 var NetData = JSON.parse(data);
-                //console.log(NetData);
+                console.log(NetData);
 
                 if (NetData.msg === 'success') {
                     console.log('Success');
