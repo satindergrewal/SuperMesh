@@ -69,7 +69,7 @@ function populateTable() {
                 tableContent += '<td class="hidden-xs">' + this.frequency + '</td>';
                 tableContent += '<td class="hidden-xs hidden-sm" sec_val="' + this.security + '" rel=' + index + ' style="color: ' + wifi_sec_color + ';">' + wifi_security + ' ' + this.security + '</td>';
                 tableContent += '<td class="text-center">';
-                tableContent += '<button class="btn btn-sm btn-primary" type="button" rel=' + index + ' onclick="getWiFidetails(' + index + ')">Connect</button>';
+                tableContent += '<button class="btn btn-sm btn-primary" type="button" rel=' + index + ' onclick="UpdateWiFiSettings(' + index + ')">Connect</button>';
                 tableContent += '</td>';
             tableContent += '</tr>';
 
@@ -104,3 +104,70 @@ function getWiFidetails(index_value) {
     console.log($('td[rel="' + index_value + '"]').eq(0).text());
     console.log($('td[rel="' + index_value + '"]').eq(1).text());
 }
+
+// Update Network Settings
+function UpdateWiFiSettings(index_value) {
+
+    /*App.loader('show');
+    setTimeout(function () {
+        App.loader('hide');
+    }, 3000);*/
+
+    console.log(index_value);
+    console.log($('td[rel="' + index_value + '"]').eq(0).text());
+    console.log($('td[rel="' + index_value + '"]').eq(1).text());
+
+    //event.preventDefault();
+
+    // Super basic validation - increase errorCount variable if any fields are blank
+    var errorCount = 0;
+    /*$('#FormNetSettings input').each(function(index, val) {
+        if($(this).val() === '') { errorCount++; }
+    });*/
+
+    // Check and make sure errorCount's still at zero
+    if(errorCount === 0) {
+
+        // If it is, compile all user info into one object
+        var WiFiSettings = {
+            'ssid': $('td[rel="' + index_value + '"]').eq(0).text(),
+            'security': $('td[rel="' + index_value + '"]').eq(1).text()
+        }
+
+        // Use AJAX to post the object to our adduser service
+        $.ajax({
+            type: 'POST',
+            data: WiFiSettings,
+            url: '/admin/wifi/wpa_supplicant/setup',
+            dataType: 'html',
+            success: function(data, textStatus, jqXHR) {
+                var NetData = JSON.parse(data);
+                //console.log(NetData);
+
+                if (NetData.msg === 'success') {
+                    console.log('Success');
+                    swal("Success", "WiFi Settings Saved.", "success");
+
+                    // Populate IP Info
+                    //populateIPInfo();
+                }
+                else {
+                    // If something goes wrong, alert the error message that our service returned
+                    swal("Oops...", "Something went wrong!", "error");
+                }
+            },
+            error: function(xhr, textStatus, error) {
+                console.log('failure');
+                console.log(xhr.statusText);
+                console.log(textStatus);
+                console.log(error);
+                
+            }
+        });
+    }
+    else {
+        // If errorCount is more than 0, error out
+        alert('Please fill in all fields');
+        return false;
+    }
+};

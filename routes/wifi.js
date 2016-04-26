@@ -48,4 +48,26 @@ router.get('/iwconfig/wlan1', function(req, res, next) {
 	});
 });
 
+/* POST to Update Network Settings. */
+router.post('/wpa_supplicant/setup', function(req, res) {
+
+	/*fs.readFile(interfacesFile, 'utf8', (err, data) => {
+	  if (err) throw err;
+	  console.log(JSON.stringify(data));
+	});*/	
+
+	console.log('======= req.body =======');
+	console.log(req.body);
+	//console.log('====== req.body.eth0_enable_disable ======');
+	//console.log(req.body.eth0_iface);
+
+	//req.body.eth0_enable_disable = ''
+	//req.body.eth1_enable_disable = ''
+	//req.body.wlan0_enable_disable = ''
+	//req.body.wlan1_enable_disable = ''
+
+	res.end('{"msg": "success","result": "result"}');
+});
+
+
 module.exports = router;
