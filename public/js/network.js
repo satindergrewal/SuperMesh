@@ -279,10 +279,10 @@ function populateIPInfo() {
 // Update Network Settings
 function UpdateNetSettings(event) {
 
-    /*App.loader('show');
+    App.loader('show');
     setTimeout(function () {
         App.loader('hide');
-    }, 3000);*/
+    }, 25000);
 
 
     event.preventDefault();
