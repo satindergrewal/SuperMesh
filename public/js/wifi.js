@@ -114,11 +114,16 @@ function UpdateWiFiSettings(index_value) {
     }, 3000);*/
 
     console.log(index_value);
-    console.log($('td[rel="' + index_value + '"]').eq(0).text());
-    console.log($('td[rel="' + index_value + '"]').eq(1).text());
+    var wifi_ssid_name = $('td[rel="' + index_value + '"]').eq(0).text();
+    var wifi_ssid_security = $('td[rel="' + index_value + '"]').eq(1).text();
+    var wifi_password = '';
+    console.log(wifi_ssid_name);
+    console.log(wifi_ssid_security);
 
-    if ( $('td[rel="' + index_value + '"]').eq(1).text() == ' wpa2' ) {
-        alert('it is wpa2.');
+    if ( wifi_ssid_security == ' wpa2' || wifi_ssid_security == ' wpa' || wifi_ssid_security == ' wep' ) {
+        //alert('it is wpa2.');
+        wifi_password = prompt("Enter " + wifi_ssid_name + " WiFi Password:");
+        console.log(wifi_password);
     }
 
     //event.preventDefault();
@@ -135,7 +140,8 @@ function UpdateWiFiSettings(index_value) {
         // If it is, compile all user info into one object
         var WiFiSettings = {
             'ssid': $('td[rel="' + index_value + '"]').eq(0).text(),
-            'security': $('td[rel="' + index_value + '"]').eq(1).text()
+            'security': $('td[rel="' + index_value + '"]').eq(1).text(),
+            'password': wifi_password
         }
 
         console.log(WiFiSettings);

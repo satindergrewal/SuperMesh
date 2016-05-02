@@ -83,9 +83,9 @@ router.get('/ifconfig/wlan1', function(req, res, next) {
 	var wlan1status = require('wireless-tools/ifconfig');
  
 	wlan1status.status('wlan1',function(err, status) {
-		//var ifconfig_demo_data = '{"interface":"wlan1","link":"ethernet","address":"00:0b:82:15:96:70","ipv4_address":"192.168.10.2","ipv4_broadcast":"192.168.10.255","ipv4_subnet_mask":"255.255.255.0","up":true,"broadcast":true,"multicast":true}';
-		//res.send(ifconfig_demo_data);
-		res.send(status);
+		var ifconfig_demo_data = '{"interface":"wlan1","link":"ethernet","address":"00:0b:82:15:96:70","ipv4_address":"192.168.10.2","ipv4_broadcast":"192.168.10.255","ipv4_subnet_mask":"255.255.255.0","up":true,"broadcast":true,"multicast":true}';
+		res.send(ifconfig_demo_data);
+		//res.send(status);
 	});
 });
 
