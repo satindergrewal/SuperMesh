@@ -1,5 +1,6 @@
 {
   "WiFi_SSID": "",
   "WiFi_Password": "",
-  "WiFi_Security_WPA_Open": ""
+  "WiFi_Security_WPA_Open": "",
+  "psk_enable_disable": ""
 }

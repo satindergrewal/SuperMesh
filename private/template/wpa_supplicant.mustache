@@ -1,16 +1,8 @@
-#### - IMPORTANT INFO - ###
-# This file is created by SuperMesh scripts. Please do not amend these
-# manualy. Use either the SuperMesh shell scripts or the Web User
-# Interface of SuperMesh.
-###########################
-
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-ctrl_interface=/var/run/wpa_supplicant
-ctrl_interface_group=wheel
 update_config=1
 
 network={
         ssid="{{WiFi_SSID}}"
-        psk="{{WiFi_Password}}"
+{{psk_enable_disable}}        psk="{{WiFi_Password}}"
         key_mgmt={{WiFi_Security_WPA_Open}}
 }
