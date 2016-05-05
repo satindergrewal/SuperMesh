@@ -70,7 +70,9 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 	}
 	if (req.body.security === "wpa2" || req.body.security === "wpa" ) {
 		wpaSecurity = "WPA-PSK"
-	} 
+	}
+
+	console.log(wpaSecurity);
 
 	wpaData = {
 	'WiFi_SSID' : req.body.ssid,
