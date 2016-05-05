@@ -53,6 +53,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 	var wpaFile = 'private/system_scripts/wpa_supplicant.data'
 	var wpaData = ''
 	var wpaSecurity = ''
+
 	/*fs.readFile(wpaFile, 'utf8', (err, data) => {
 	  if (err) throw err;
 	  console.log(JSON.stringify(data));
@@ -60,6 +61,9 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 
 	console.log('======= req.body =======');
 	console.log(req.body);
+	console.log(req.body.ssid);
+	console.log(req.body.security);
+	console.log(req.body.password);
 
 	if (req.body.security === "open") {
 		wpaSecurity = "NONE"
@@ -121,7 +125,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			});
 
 
-			var restart_network = exec('sudo systemctl restart networking');
+			/*var restart_network = exec('sudo systemctl restart networking');
 
 			promiseFromChildProcess(restart_network).then(function (result) {
 			    console.log('promise complete: ' + result);
@@ -144,7 +148,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			restart_network.on('close', function (code) {
 			    console.log('closing code: ' + code);
 			    
-			});
+			});*/
 		});
 	
 	res.end('{"msg": "success","result": "result"}');
