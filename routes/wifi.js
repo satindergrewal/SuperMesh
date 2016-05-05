@@ -61,7 +61,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 		if (err) {
 			return console.log(err);
 		}
-		console.log(JSON.stringify(data));
+		console.log(JSON.stringify(data, null, 2));
 	});
 
 	console.log('======= req.body =======');
