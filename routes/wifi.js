@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var sys = require('sys');
+
 // SuperMesh app functions
 var SuperMesh = require("../private/js/app_functions.js");
 
