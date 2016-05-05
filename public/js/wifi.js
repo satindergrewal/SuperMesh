@@ -173,6 +173,7 @@ function UpdateWiFiSettings(index_value) {
                 console.log(xhr.statusText);
                 console.log(textStatus);
                 console.log(error);
+                swal("Oops...", "Something went wrong!", "error");
                 
             }
         });
