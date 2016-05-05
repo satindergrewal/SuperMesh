@@ -54,10 +54,10 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 	var wpaData = ''
 	var wpaSecurity = ''
 
-	/*fs.readFile(wpaFile, 'utf8', (err, data) => {
+	fs.readFile(wpaFile, 'utf8', (err, data) => {
 	  if (err) throw err;
 	  console.log(JSON.stringify(data));
-	});*/	
+	});
 
 	console.log('======= req.body =======');
 	console.log(req.body);
@@ -86,7 +86,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 	console.log(JSON.stringify(wpaData, null, 2))
 
 	// Write update changes to JSON file interfaces.data
-	fs.writeFile(wpaFile, JSON.stringify(wpaData, null, 2), function (err) {
+	/*fs.writeFile(wpaFile, JSON.stringify(wpaData, null, 2), function (err) {
 		if (err) return console.log(err)
 			console.log(JSON.stringify(wpaData, null, 2));
 			console.log('writing to ' + wpaFile);
@@ -102,7 +102,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			    });
 			}
 
-			/*var edit_wpa = exec('sudo cf-agent -K private/system_scripts/wpa_supplicant_config.cf');
+			var edit_wpa = exec('sudo cf-agent -K private/system_scripts/wpa_supplicant_config.cf');
 
 			promiseFromChildProcess(edit_wpa).then(function (result) {
 			    console.log('promise complete: ' + result);
@@ -124,10 +124,10 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			edit_wpa.on('close', function (code) {
 			    console.log('closing code: ' + code);
 			    
-			});*/
+			});
 
 
-			/*var restart_network = exec('sudo systemctl restart networking');
+			var restart_network = exec('sudo systemctl restart networking');
 
 			promiseFromChildProcess(restart_network).then(function (result) {
 			    console.log('promise complete: ' + result);
@@ -150,8 +150,8 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			restart_network.on('close', function (code) {
 			    console.log('closing code: ' + code);
 			    
-			});*/
-		});
+			});
+		});*/
 	
 	res.end('{"msg": "success","result": "result"}');
 });
