@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+var fs = require('fs');
 var sys = require('sys');
 
 // SuperMesh app functions
@@ -56,9 +57,11 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 	var wpaData = ''
 	var wpaSecurity = ''
 
-	fs.readFile(wpaFile, 'utf8', (err, data) => {
-	  if (err) throw err;
-	  console.log(JSON.stringify(data));
+	fs.readFile(wpaFile, 'utf8', function (err,data) {
+		if (err) {
+			return console.log(err);
+		}
+		console.log(JSON.stringify(data));
 	});
 
 	console.log('======= req.body =======');
