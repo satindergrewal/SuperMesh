@@ -65,22 +65,20 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 	console.log(req.body.security);
 	console.log(req.body.password);
 
-	if (req.body.security === "open") {
-		wpaSecurity = 'NONE'
-		console.log(wpaSecurity);
+	if (req.body.security === " open") {
+		wpaSecurity = "NONE"
 	}
-	if (req.body.security === "wpa2" || req.body.security === "wpa" ) {
-		wpaSecurity = 'WPA-PSK'
-		console.log(wpaSecurity);
+	if (req.body.security === " wpa2" || req.body.security === " wpa" ) {
+		wpaSecurity = "WPA-PSK"
 	}
-	console.log('show wpaSecurity value: ')
+
 	console.log(wpaSecurity);
 
 	wpaData = {
 	'WiFi_SSID' : req.body.ssid,
 	'WiFi_Password' : req.body.password,
 	'WiFi_Security_WPA_Open' : wpaSecurity,
-	'psk_enable_disable' : (req.body.security === "open") ? "# " : ""
+	'psk_enable_disable' : (req.body.security === " open") ? "# " : ""
 	}
 
 	console.log('===>> WPA DATA recieved >>')
