@@ -66,12 +66,14 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 	console.log(req.body.password);
 
 	if (req.body.security === "open") {
-		wpaSecurity = "NONE"
+		wpaSecurity = 'NONE'
+		console.log(wpaSecurity);
 	}
 	if (req.body.security === "wpa2" || req.body.security === "wpa" ) {
-		wpaSecurity = "WPA-PSK"
+		wpaSecurity = 'WPA-PSK'
+		console.log(wpaSecurity);
 	}
-
+	console.log('show wpaSecurity value: ')
 	console.log(wpaSecurity);
 
 	wpaData = {
