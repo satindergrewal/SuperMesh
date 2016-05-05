@@ -132,7 +132,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			});
 
 
-			/*var restart_network = exec('sudo systemctl restart networking');
+			var restart_network = exec('sudo systemctl restart networking');
 
 			promiseFromChildProcess(restart_network).then(function (result) {
 			    console.log('promise complete: ' + result);
@@ -155,7 +155,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			restart_network.on('close', function (code) {
 			    console.log('closing code: ' + code);
 			    
-			});*/
+			});
 		});
 	
 	res.end('{"msg": "success","result": "result"}');
