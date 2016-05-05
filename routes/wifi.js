@@ -73,7 +73,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 	} 
 
 	wpaData = {
-	'WiFi_SSID' : (req.body.ssid === "false") ? "# " : "",
+	'WiFi_SSID' : req.body.ssid,
 	'WiFi_Password' : req.body.password,
 	'WiFi_Security_WPA_Open' : wpaSecurity,
 	'psk_enable_disable' : (req.body.security === "open") ? "# " : ""
