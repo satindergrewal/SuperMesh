@@ -57,12 +57,12 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 	var wpaData = ''
 	var wpaSecurity = ''
 
-	fs.readFile(wpaFile, 'utf8', function (err,data) {
+	/*fs.readFile(wpaFile, 'utf8', function (err,data) {
 		if (err) {
 			return console.log(err);
 		}
 		console.log(JSON.stringify(data, null, 2));
-	});
+	});*/
 
 	console.log('======= req.body =======');
 	console.log(req.body);
@@ -83,7 +83,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 	'WiFi_SSID' : req.body.ssid,
 	'WiFi_Password' : req.body.password,
 	'WiFi_Security_WPA_Open' : wpaSecurity,
-	'psk_enable_disable' : (req.body.security === " open") ? "# " : ""
+	'psk_enable_disable' : (req.body.security === " open") ? "#" : ""
 	}
 
 	console.log('===>> WPA DATA recieved >>')
@@ -91,12 +91,12 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 	console.log(JSON.stringify(wpaData, null, 2))
 
 	// Write update changes to JSON file interfaces.data
-	/*fs.writeFile(wpaFile, JSON.stringify(wpaData, null, 2), function (err) {
+	fs.writeFile(wpaFile, JSON.stringify(wpaData, null, 2), function (err) {
 		if (err) return console.log(err)
 			console.log(JSON.stringify(wpaData, null, 2));
 			console.log('writing to ' + wpaFile);
 
-			//Execute promissed spanw child process
+			/*//Execute promissed spanw child process
 			var Promise = require('bluebird');
 			var exec = require('child_process').exec;
 
@@ -155,8 +155,8 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			restart_network.on('close', function (code) {
 			    console.log('closing code: ' + code);
 			    
-			});
-		});*/
+			});*/
+		});
 	
 	res.end('{"msg": "success","result": "result"}');
 });
