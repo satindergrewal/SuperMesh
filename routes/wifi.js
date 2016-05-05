@@ -88,8 +88,8 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 	// Write update changes to JSON file interfaces.data
 	fs.writeFile(wpaFile, JSON.stringify(wpaData, null, 2), function (err) {
 		if (err) return console.log(err)
-			//console.log(JSON.stringify(wpaData, null, 2))
-			console.log('writing to ' + wpaFile)
+			console.log(JSON.stringify(wpaData, null, 2));
+			console.log('writing to ' + wpaFile);
 
 			//Execute promissed spanw child process
 			var Promise = require('bluebird');
