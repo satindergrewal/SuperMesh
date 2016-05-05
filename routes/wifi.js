@@ -102,7 +102,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			    });
 			}
 
-			var edit_wpa = exec('sudo cf-agent -K private/system_scripts/wpa_supplicant_config.cf');
+			/*var edit_wpa = exec('sudo cf-agent -K private/system_scripts/wpa_supplicant_config.cf');
 
 			promiseFromChildProcess(edit_wpa).then(function (result) {
 			    console.log('promise complete: ' + result);
@@ -124,7 +124,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			edit_wpa.on('close', function (code) {
 			    console.log('closing code: ' + code);
 			    
-			});
+			});*/
 
 
 			/*var restart_network = exec('sudo systemctl restart networking');
