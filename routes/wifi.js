@@ -96,7 +96,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			console.log(JSON.stringify(wpaData, null, 2));
 			console.log('writing to ' + wpaFile);
 
-			/*//Execute promissed spanw child process
+			//Execute promissed spanw child process
 			var Promise = require('bluebird');
 			var exec = require('child_process').exec;
 
@@ -132,7 +132,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			});
 
 
-			var restart_network = exec('sudo systemctl restart networking');
+			/*var restart_network = exec('sudo systemctl restart networking');
 
 			promiseFromChildProcess(restart_network).then(function (result) {
 			    console.log('promise complete: ' + result);
