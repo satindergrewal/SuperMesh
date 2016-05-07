@@ -7,6 +7,5 @@
 	"AP_802_11n_Enabled_Disabled": "",
 	"AP_802_11n_Channel": "2",
 	"AP_802_11AC_Enabled_Disabled": "# ",
-	"AP_802_11AC_Channel": "44",
-	"AP_Daemon_Conf": "/etc/hostapd/hostapd.conf"	
+	"AP_802_11AC_Channel": "44"	
 }
