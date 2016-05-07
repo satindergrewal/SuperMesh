@@ -1,0 +1,11 @@
+{
+	"wlan_Interface": "wlan0",
+	"AP_SSID": "TestNetWiFi",
+	"Country_Code": "NZ",
+	"AP_Password": "spacemesh",
+	"AP_Driver": "rtl871xdrv",
+	"AP_802_11n_Enabled_Disabled": "",
+	"AP_802_11n_Channel": "2",
+	"AP_802_11AC_Enabled_Disabled": "# ",
+	"AP_802_11AC_Channel": "44"	
+}

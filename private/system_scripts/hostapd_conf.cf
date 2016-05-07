@@ -1,0 +1,37 @@
+  body common control
+{
+    bundlesequence => { hostapd_conf_config };
+}
+
+body edit_defaults hostapd_conf_config
+{
+  empty_file_before_editing => "true";
+  edit_backup => "false";
+  max_file_size => "9999999999";
+}
+
+body edit_defaults hostapd_default_config
+{
+  empty_file_before_editing => "true";
+  edit_backup => "false";
+  max_file_size => "9999999999";
+}
+
+bundle agent hostapd_conf_config
+{
+  files:
+      "/etc/hostapd/hostapd.conf"
+      create => "true",
+      edit_template => "/opt/SuperMesh/private/template/hostapd_conf.mustache",
+      template_method => "mustache",
+      template_data => readjson("/opt/SuperMesh/private/system_scripts/hostapd_conf.data", 9999999999);
+}
+
+bundle agent hostapd_default_config
+{
+  files:
+      "/etc/default/hostapd"
+      create => "true",
+      edit_template => "/opt/SuperMesh/private/template/hostapd_default.mustache",
+      template_method => "mustache"
+}
