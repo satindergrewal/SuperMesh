@@ -1,6 +1,6 @@
   body common control
 {
-    bundlesequence => { hostapd_conf_config };
+    bundlesequence => { hostapd_conf_config, hostapd_default_config };
 }
 
 body edit_defaults hostapd_conf_config
