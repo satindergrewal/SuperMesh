@@ -1,0 +1,80 @@
+<!-- Page Container -->
+        <div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+            <!-- Side Overlay-->
+            <% include admin-side-overlay.ejs %>
+            <!-- END Side Overlay -->
+
+            <!-- Sidebar -->
+            <% include admin-nav-sidebar.ejs %>
+            <!-- END Sidebar -->
+
+            <!-- Header -->
+            <% include admin-header.ejs %>
+            <!-- END Header -->
+
+            <!-- Main Container -->
+            <main id="main-container">
+                <!-- Page Header -->
+                <div class="content bg-gray-lighter">
+                    <div class="row items-push">
+                        <div class="col-sm-7">
+                            <h1 class="page-heading">
+                                SuperMesh <small>Access Point Settings</small>
+                            </h1>
+                        </div>
+                        <div class="col-sm-5 text-right hidden-xs">
+                            <ol class="breadcrumb push-10-t">
+                                <li>Settings</li>
+                                <li><a class="link-effect" href="">Access Point</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Page Header -->
+
+                <!-- Start Header white border -->
+
+                <div class="content bg-white border-b">
+                    <div class="row items-push text-uppercase">
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="font-w700 text-gray-darker animated fadeIn">AP SSID</div>
+                            
+                            <a class="h4 font-w300 text-primary animated flipInX" id="ap_ssid">Not Connected</a>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="font-w700 text-gray-darker animated fadeIn">AP Password</div>
+                            
+                            <a class="h4 font-w300 text-primary animated flipInX" id="ap_password">AP_PASS</a>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="font-w700 text-gray-darker animated fadeIn">AP Channel</div>
+                            
+                            <a class="h4 font-w300 text-primary animated flipInX" id="ap_channel">##</a>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="font-w700 text-gray-darker animated fadeIn">IEEE</div>
+                            
+                            <a class="h4 font-w300 text-primary animated flipInX" id="ap_ieee">IEEE</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- END Header white border -->
+
+                <!-- Page Content -->
+                <div class="content">
+
+                <!-- Access Point Settings Form -->
+                <% include accesspoint-settings-form.ejs %>
+                <!-- END Access Point Settings Form -->
+
+                </div>
+                <!-- END Page Content -->
+            </main>
+            <!-- END Main Container -->
+
+            <!-- Footer -->
+            <% include admin-footer.ejs %>
+            <!-- END Footer -->
+        </div>
+        <!-- END Page Container -->
