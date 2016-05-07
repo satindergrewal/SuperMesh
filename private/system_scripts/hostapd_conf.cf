@@ -24,7 +24,7 @@ bundle agent hostapd_conf_config
       create => "true",
       edit_template => "/opt/SuperMesh/private/template/hostapd_conf.mustache",
       template_method => "mustache",
-      template_data => readjson("/opt/SuperMesh/private/system_scripts/hostapd_conf.data", 9999999999)
+      template_data => readjson("/opt/SuperMesh/private/system_scripts/hostapd_conf.data", 9999999999);
 }
 
 bundle agent hostapd_default_config
@@ -34,5 +34,5 @@ bundle agent hostapd_default_config
       create => "true",
       edit_template => "/opt/SuperMesh/private/template/hostapd_default.mustache",
       template_method => "mustache",
-      template_data => readjson("/opt/SuperMesh/private/system_scripts/hostapd_conf.data", 9999999999)
+      template_data => readjson("/opt/SuperMesh/private/system_scripts/hostapd_conf.data", 9999999999);
 }
