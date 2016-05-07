@@ -33,5 +33,6 @@ bundle agent hostapd_default_config
       "/etc/default/hostapd"
       create => "true",
       edit_template => "/opt/SuperMesh/private/template/hostapd_default.mustache",
-      template_method => "mustache"
+      template_method => "mustache",
+      template_data => readjson("/opt/SuperMesh/private/system_scripts/hostapd_conf.data", 9999999999);
 }
