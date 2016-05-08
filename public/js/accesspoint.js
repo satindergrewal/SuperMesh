@@ -157,5 +157,6 @@ function populateFields() {
         $( "#ap_ssid" ).val( data.AP_SSID );
         $( "#ap_pass" ).val( data.AP_Password );
         populateCountryCodes( data.Country_Code );
+        $('#ap_driver option[value=' + data.AP_Driver + ']').attr('selected','selected');
     });
 };
