@@ -3,14 +3,14 @@
                     <div class="col-md-12">
                     <div class="block block-themed">
                         <div class="block-header bg-primary">
-                            <ul class="block-options">
+                            <!--<ul class="block-options">
                                 <li>
                                     <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="network"><i class="si si-refresh"></i></button>
                                 </li>
                                 <li>
                                     <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
                                 </li>
-                            </ul>
+                            </ul>-->
                             <h3 class="block-title">AP Interface: wlan0 <small>(First WLAN Interface)</small></h3>
                         </div>
 
@@ -23,7 +23,7 @@
                                                 <label class="css-input css-radio css-radio-success push-10-r">
                                                     <input type="radio" id="ap_bgn" name="ap_bgn_ac" value="bgn"><span></span> 802.11bgn
                                                 </label>
-                                                <label class="css-input css-radio css-radio-default">
+                                                <label class="css-input css-radio css-radio-warning">
                                                     <input type="radio" id="ap_ac" name="ap_bgn_ac" value="ac"><span></span> 802.11ac
                                                 </label>
                                             </div>
@@ -47,7 +47,8 @@
                                         <div class="form-group">
                                             <div class="col-xs-12">
                                                 <div class="form-material">
-                                                <input class="form-control input-lg" type="text" id="ap_channel" name="ap_channel" placeholder="e.g. 1">
+                                                <select class="form-control" id="ap_channel" name="ap_channel" size="1">
+                                                </select>
                                                 <label for="ap_channel">Channel</label>
                                                 </div>
                                             </div>
@@ -84,7 +85,7 @@
                             <div class="form-group">
                                 <div class="col-xs-12" style="text-align: center;">
                                     <button id="BtnUpdateNetSettings" class="btn btn-info" type="submit">Update</button> 
-                                    <button class="btn btn-sm btn-warning" type="button" rel=' + index + ' onclick="UpdateWiFiSettings(' + index + ')">Restart AP Service</button>
+                                    <button class="btn btn-warning" type="button" rel=' + index + ' onclick="UpdateWiFiSettings(' + index + ')">Restart AP Service</button>
                                 </div>
                             </div>
                             </form>

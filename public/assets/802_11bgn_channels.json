@@ -1,15 +1,41 @@
-{
-  "1": 1,
-  "2": 2,
-  "3": 3,
-  "4": 4,
-  "5": 5,
-  "6": 6,
-  "7": 7,
-  "8": 8,
-  "9": 9,
-  "10": 10,
-  "11": 11,
-  "12":12,
-  "13": 13
-}
+[
+  {
+    "bgn_channel": 1
+  },
+  {
+    "bgn_channel": 2
+  },
+  {
+    "bgn_channel": 3
+  },
+  {
+    "bgn_channel": 4
+  },
+  {
+    "bgn_channel": 5
+  },
+  {
+    "bgn_channel": 6
+  },
+  {
+    "bgn_channel": 7
+  },
+  {
+    "bgn_channel": 8
+  },
+  {
+    "bgn_channel": 9
+  },
+  {
+    "bgn_channel": 10
+  },
+  {
+    "bgn_channel": 11
+  },
+  {
+    "bgn_channel": 12
+  },
+  {
+    "bgn_channel": 13
+  }
+]
