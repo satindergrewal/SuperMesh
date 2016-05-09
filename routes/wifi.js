@@ -51,7 +51,7 @@ router.get('/iwconfig/wlan1', function(req, res, next) {
 	});
 });
 
-/* POST to Update Network Settings. */
+/* POST to Update WPA Settings. */
 router.post('/wpa_supplicant/setup', function(req, res) {
 	var wpaFile = 'private/system_scripts/wpa_supplicant.data'
 	var wpaData = ''
@@ -64,11 +64,11 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 		console.log(JSON.stringify(data, null, 2));
 	});*/
 
-	console.log('======= req.body =======');
-	console.log(req.body);
-	console.log(req.body.ssid);
-	console.log(req.body.security);
-	console.log(req.body.password);
+	//console.log('======= req.body =======');
+	//console.log(req.body);
+	//console.log(req.body.ssid);
+	//console.log(req.body.security);
+	//console.log(req.body.password);
 
 	if (req.body.security === " open") {
 		wpaSecurity = "NONE"
@@ -77,7 +77,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 		wpaSecurity = "WPA-PSK"
 	}
 
-	console.log(wpaSecurity);
+	//console.log(wpaSecurity);
 
 	wpaData = {
 	'WiFi_SSID' : req.body.ssid,
@@ -86,9 +86,9 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 	'psk_enable_disable' : (req.body.security === " open") ? "#" : ""
 	}
 
-	console.log('===>> WPA DATA recieved >>')
-	console.log('=========== JSON Stringify ===========');
-	console.log(JSON.stringify(wpaData, null, 2))
+	//console.log('===>> WPA DATA recieved >>')
+	//console.log('=========== JSON Stringify ===========');
+	//console.log(JSON.stringify(wpaData, null, 2))
 
 	// Write update changes to JSON file interfaces.data
 	fs.writeFile(wpaFile, JSON.stringify(wpaData, null, 2), function (err) {

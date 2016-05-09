@@ -105,7 +105,7 @@ function getWiFidetails(index_value) {
     console.log($('td[rel="' + index_value + '"]').eq(1).text());
 }
 
-// Update Network Settings
+// Update WPA Settings
 function UpdateWiFiSettings(index_value) {
 
     /*App.loader('show');

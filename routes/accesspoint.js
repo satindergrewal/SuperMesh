@@ -22,50 +22,64 @@ router.get('/getsettings', function(req, res, next) {
 	});
 });
 
-/* POST to Update Network Settings. */
-router.post('/wpa_supplicant/setup', function(req, res) {
-	var wpaFile = 'private/system_scripts/wpa_supplicant.data'
-	var wpaData = ''
-	var wpaSecurity = ''
+/* POST to Update Access Point Settings. */
+router.post('/update', function(req, res) {
+	var APFile = 'private/system_scripts/hostapd_conf.data'
+	var APData = ''
+	var AP_BgnEnableDisable = '';
+	var AP_AcEnableDisable = '';
+	var AP_BgnChannel = '';
+	var AP_AcChannel = '';
 
-	/*fs.readFile(wpaFile, 'utf8', function (err,data) {
+	/*fs.readFile(APFile, 'utf8', function (err,data) {
 		if (err) {
 			return console.log(err);
 		}
+		console.log('===== File Read Output ======');
 		console.log(JSON.stringify(data, null, 2));
 	});*/
 
-	console.log('======= req.body =======');
-	console.log(req.body);
-	console.log(req.body.ssid);
-	console.log(req.body.security);
-	console.log(req.body.password);
+	//console.log('======= req.body =======');
+	//console.log(req.body.ap_ssid);
+	//console.log(req.body.ap_country);
+	//console.log(req.body.ap_pass);
+	//console.log(req.body.ap_driver);
+	//console.log(req.body.ap_bgn_ac);
+	//console.log(req.body.ap_channel);
 
-	if (req.body.security === " open") {
-		wpaSecurity = "NONE"
-	}
-	if (req.body.security === " wpa2" || req.body.security === " wpa" ) {
-		wpaSecurity = "WPA-PSK"
-	}
-
-	console.log(wpaSecurity);
-
-	wpaData = {
-	'WiFi_SSID' : req.body.ssid,
-	'WiFi_Password' : req.body.password,
-	'WiFi_Security_WPA_Open' : wpaSecurity,
-	'psk_enable_disable' : (req.body.security === " open") ? "#" : ""
+	if (req.body.ap_bgn_ac == 'bgn') {
+		AP_BgnEnableDisable = '';
+		AP_AcEnableDisable = '# ';
+		AP_BgnChannel = req.body.ap_channel;
+		AP_AcChannel = '44';
+	} else if (req.body.ap_bgn_ac == 'ac') {
+		AP_BgnEnableDisable = '# ';
+		AP_AcEnableDisable = '';
+		AP_BgnChannel = '2';
+		AP_AcChannel = req.body.ap_channel;
 	}
 
-	console.log('===>> WPA DATA recieved >>')
+	APData = {
+	"wlan_Interface": "wlan0",
+	"AP_SSID": req.body.ap_ssid,
+	"Country_Code": req.body.ap_country,
+	"AP_Password": req.body.ap_pass,
+	"AP_Driver": req.body.ap_driver,
+	"AP_802_11n_Enabled_Disabled": AP_BgnEnableDisable,
+	"AP_802_11n_Channel": AP_BgnChannel,
+	"AP_802_11AC_Enabled_Disabled": AP_AcEnableDisable,
+	"AP_802_11AC_Channel": AP_AcChannel
+	}
+
+	console.log('===>> Hostapd DATA recieved >>')
 	console.log('=========== JSON Stringify ===========');
-	console.log(JSON.stringify(wpaData, null, 2))
+	console.log(JSON.stringify(APData, null, 2))
 
 	// Write update changes to JSON file interfaces.data
-	fs.writeFile(wpaFile, JSON.stringify(wpaData, null, 2), function (err) {
+	fs.writeFile(APFile, JSON.stringify(APData, null, 2), function (err) {
 		if (err) return console.log(err)
-			console.log(JSON.stringify(wpaData, null, 2));
-			console.log('writing to ' + wpaFile);
+			console.log(JSON.stringify(APData, null, 2));
+			console.log('writing to ' + APFile);
 
 			//Execute promissed spanw child process
 			var Promise = require('bluebird');
@@ -78,11 +92,11 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			    });
 			}
 
-			var edit_wpa = exec('sudo cf-agent -K private/system_scripts/wpa_supplicant_config.cf');
+			var edit_wpa = exec('sudo cf-agent -K private/system_scripts/hostapd_conf.cf');
 
 			promiseFromChildProcess(edit_wpa).then(function (result) {
 			    console.log('promise complete: ' + result);
-			    console.log('=> Network file edited')
+			    console.log('=> hostapd file edited')
 			    //res.send('{"msg": "success","result": result}');
 			}, function (err) {
 			    console.log('promise rejected: ' + err);
@@ -103,7 +117,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			});
 
 
-			var restart_network = exec('sudo systemctl restart networking');
+			/*var restart_network = exec('sudo systemctl restart hostapd');
 
 			promiseFromChildProcess(restart_network).then(function (result) {
 			    console.log('promise complete: ' + result);
@@ -126,10 +140,49 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			restart_network.on('close', function (code) {
 			    console.log('closing code: ' + code);
 			    
-			});
+			});*/
 		});
 	
 	res.end('{"msg": "success","result": "result"}');
+});
+
+
+/* POST to Update Access Point Settings. */
+router.get('/restartap', function(req, res, next) {
+	//Execute promissed spanw child process
+	/*var Promise = require('bluebird');
+	var exec = require('child_process').exec;
+	function promiseFromChildProcess(child) {
+	    return new Promise(function (resolve, reject) {
+	        child.addListener("error", reject);
+	        child.addListener("exit", resolve);
+	    });
+	}
+
+	var restart_network = exec('sudo systemctl restart hostapd');
+	promiseFromChildProcess(restart_network).then(function (result) {
+	    console.log('promise complete: ' + result);
+	    console.log('=> Network service restarted')
+	    
+	}, function (err) {
+	    console.log('=> Error restarting Network Service.')
+	    console.log('promise rejected: ' + err);
+	    
+	});
+	restart_network.stdout.on('data', function (data) {
+	    console.log('stdout: ' + data);
+	    
+	});
+	restart_network.stderr.on('data', function (data) {
+	    console.log('stderr: ' + data);
+	    
+	});
+	restart_network.on('close', function (code) {
+	    console.log('closing code: ' + code);
+	    
+	});*/
+
+	res.send('{"msg": "success","result": "result"}');
 });
 
 module.exports = router;

@@ -8,6 +8,23 @@ $(document).ready(function() {
     //populateCountryCodes('US');
     //populateACChannels('36');
     //populateBgnChannels('5');
+    
+    // Udate AP Settings button click
+    $('#BtnUpdateAPSettings').on('click', UpdateAPSettings);
+    // Restart AP Service button click
+    $('#BtnRestartAP').on('click', RestartAP);
+
+    //Update AP input values on 802.11bgn/802.11ac options selection change
+    $('input[type=radio][name=ap_bgn_ac]').change(function() {
+        if (this.value == 'bgn') {
+            $('#ap_driver option[value="rtl871xdrv"]').attr('selected','selected');
+            populateBgnChannels('5');
+        }
+        else if (this.value == 'ac') {
+            $('#ap_driver option[value="nl80211"]').attr('selected','selected');
+            populateACChannels('44');
+        }
+    });
 
 });
 
@@ -158,5 +175,91 @@ function populateFields() {
         $( "#ap_pass" ).val( data.AP_Password );
         populateCountryCodes( data.Country_Code );
         $('#ap_driver option[value=' + data.AP_Driver + ']').attr('selected','selected');
+    });
+};
+
+
+// Update WPA Settings
+function UpdateAPSettings() {
+
+    /*App.loader('show');
+    setTimeout(function () {
+        App.loader('hide');
+    }, 3000);*/
+
+    //console.log($('#ap_ssid').val());
+    //console.log($('#ap_country').val());
+    //console.log($('#ap_pass').val());
+    //console.log($('#ap_driver').val());
+    //console.log($('input[name=ap_bgn_ac]:checked').val());
+    //console.log($('#ap_channel').val());
+
+    //event.preventDefault();
+
+    // Super basic validation - increase errorCount variable if any fields are blank
+    var errorCount = 0;
+    /*$('#FormNetSettings input').each(function(index, val) {
+        if($(this).val() === '') { errorCount++; }
+    });*/
+
+    // Check and make sure errorCount's still at zero
+    if(errorCount === 0) {
+
+        // If it is, compile all user info into one object
+        var APSettings = {
+            'ap_ssid': $('#ap_ssid').val(),
+            'ap_country': $('#ap_country').val(),
+            'ap_pass': $('#ap_pass').val(),
+            'ap_driver': $('#ap_driver').val(),
+            'ap_bgn_ac': $('input[name=ap_bgn_ac]:checked').val(),
+            'ap_channel': $('#ap_channel').val()
+        }
+
+        console.log(APSettings);
+
+        // Use AJAX to post the object to our adduser service
+        $.ajax({
+            type: 'POST',
+            data: APSettings,
+            url: '/admin/accesspoint/update',
+            dataType: 'html',
+            success: function(data, textStatus, jqXHR) {
+                var APData = JSON.parse(data);
+                console.log(APData);
+
+                if (APData.msg === 'success') {
+                    console.log('Success');
+                    swal("Success", "Access Point Settings Saved.", "success");
+
+                    // Populate IP Info
+                    //populateIPInfo();
+                }
+                else {
+                    // If something goes wrong, alert the error message that our service returned
+                    swal("Oops...", "Something went wrong!", "error");
+                }
+            },
+            error: function(xhr, textStatus, error) {
+                console.log('failure');
+                console.log(xhr.statusText);
+                console.log(textStatus);
+                console.log(error);
+                swal("Oops...", "Something went wrong!", "error");
+                
+            }
+        });
+    }
+    else {
+        // If errorCount is more than 0, error out
+        alert('Please fill in all fields');
+        return false;
+    }
+};
+
+
+//  Restart Access Point Service
+function RestartAP() {
+    $.getJSON( '/admin/accesspoint/restartap', function( data ) {
+        console.log(data);
     });
 };
