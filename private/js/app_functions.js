@@ -57,7 +57,7 @@ module.exports = {
     });
     restart_hostapd.on('close', function (code) {
         console.log('closing code: ' + code);
-        
+        callback(code);
     });
   }
 
