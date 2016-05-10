@@ -8,7 +8,7 @@ module.exports = {
   },
 
   PwdCwd: function() {
-    console.log(`Current directory: ${process.cwd()}`);
+    console.log('Current directory: ' + ${process.cwd()});
   },
 
   //Start Process by passing executable and its attribute.
