@@ -181,9 +181,9 @@ router.get('/restartap', function(req, res, next) {
 	restart_hostapd.on('close', function (code) {
 	    console.log('closing code: ' + code);
 	    
-	});
+	});*/
 
 	res.send('{"msg": "success","result": "result"}');
-});*/
+});
 
 module.exports = router;
