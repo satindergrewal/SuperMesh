@@ -169,4 +169,12 @@ router.post('/update', function(req, res) {
 	res.end('{"msg": "success","result": "result"}');
 });
 
+
+// POST to Update Access Point Settings.
+router.get('/restartnetwork', function(req, res, next) {
+	SuperMesh.RunCmd('sudo systemctl daemon-reload');
+	SuperMesh.RunCmd('sudo systemctl restart networking');
+	res.send('{"msg": "success","result": "result"}');
+});
+
 module.exports = router;

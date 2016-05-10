@@ -14,6 +14,7 @@ $(document).ready(function() {
 
     // Udate Network Settings button click
     $('#BtnUpdateNetSettings').on('click', UpdateNetSettings);
+    $('#BtnRestartNetSettings').on('click', UpdateNetSettings);
 
     //Update LAN0 input values on DHCP/Static options selection change
     $('input[type=radio][name=eth0_dhcp_satic]').change(function() {
@@ -327,7 +328,7 @@ function UpdateNetSettings(event) {
         $.ajax({
             type: 'POST',
             data: NetworkSettings,
-            url: 'network/update',
+            url: '/admin/network/update',
             dataType: 'html',
             success: function(data, textStatus, jqXHR) {
                 var NetData = JSON.parse(data);
@@ -359,4 +360,11 @@ function UpdateNetSettings(event) {
         alert('Please fill in all fields');
         return false;
     }
+};
+
+//  Restart Access Point Service
+function RestartAP() {
+    $.getJSON( '/admin/network/restartnetwork', function( data ) {
+        console.log(data);
+    });
 };

@@ -91,7 +91,7 @@ router.post('/update', function(req, res) {
 });
 
 
-/* POST to Update Access Point Settings. */
+// POST to Update Access Point Settings.
 router.get('/restartap', function(req, res, next) {
 	SuperMesh.RunCmd('sudo systemctl daemon-reload');
 	SuperMesh.RunCmd('sudo systemctl restart hostapd');
