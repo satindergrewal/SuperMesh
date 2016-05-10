@@ -92,7 +92,7 @@ router.post('/update', function(req, res) {
 			    });
 			}
 
-			var edit_wpa = exec('sudo cf-agent -K private/system_scripts/hostapd_conf.cf');
+			/*var edit_wpa = exec('sudo cf-agent -K private/system_scripts/hostapd_conf.cf');
 
 			promiseFromChildProcess(edit_wpa).then(function (result) {
 			    console.log('promise complete: ' + result);
@@ -114,9 +114,9 @@ router.post('/update', function(req, res) {
 			edit_wpa.on('close', function (code) {
 			    console.log('closing code: ' + code);
 			    
-			});
+			});*/
 
-			//SuperMesh.PwdCwd();
+			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/hostapd_conf.cf');
 			SuperMesh.RestartHostapd();
 		});
 	
@@ -127,7 +127,7 @@ router.post('/update', function(req, res) {
 /* POST to Update Access Point Settings. */
 router.get('/restartap', function(req, res, next) {
 	SuperMesh.RestartHostapd();
-	SuperMesh.RunCmd('who am i');
+	SuperMesh.PwdCwd();
 	res.send('{"msg": "success","result": "result"}');
 });
 
