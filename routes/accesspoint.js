@@ -71,9 +71,9 @@ router.post('/update', function(req, res) {
 	"AP_802_11AC_Channel": AP_AcChannel
 	}
 
-	console.log('===>> Hostapd DATA recieved >>')
-	console.log('=========== JSON Stringify ===========');
-	console.log(JSON.stringify(APData, null, 2))
+	//console.log('===>> Hostapd DATA recieved >>')
+	//console.log('=========== JSON Stringify ===========');
+	//console.log(JSON.stringify(APData, null, 2))
 
 	// Write update changes to JSON file interfaces.data
 	fs.writeFile(APFile, JSON.stringify(APData, null, 2), function (err) {
@@ -116,7 +116,7 @@ router.post('/update', function(req, res) {
 			    
 			});
 
-
+			SuperMesh.PwdCwd();
 			SuperMesh.RestartHostapd();
 		});
 	

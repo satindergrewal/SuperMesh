@@ -7,6 +7,10 @@ module.exports = {
     console.log('HELLO');
   },
 
+  PwdCwd: function() {
+    console.log(`Current directory: ${process.cwd()}`);
+  },
+
   //Start Process by passing executable and its attribute.
   ExecuteProcess: function(prcs,atrbs,callback) {
     var spawn = require('child_process').spawn,
