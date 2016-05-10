@@ -28,10 +28,10 @@ module.exports = {
   },
 
 
-  var Promise = require('bluebird');
+  var Prms = require('bluebird');
   var exec = require('child_process').exec;
-  function promiseFromChildProcess(child) {
-      return new Promise(function (resolve, reject) {
+  function PrmsFromChildProcess(child) {
+      return new Prms(function (resolve, reject) {
           child.addListener("error", reject);
           child.addListener("exit", resolve);
       });
@@ -39,7 +39,7 @@ module.exports = {
 
   RestartHostapd: function(prcs,atrbs,callback) {
     var restart_hostapd = exec('sudo systemctl restart hostapd');
-    promiseFromChildProcess(restart_hostapd).then(function (result) {
+    PrmsFromChildProcess(restart_hostapd).then(function (result) {
         console.log('promise complete: ' + result);
         console.log('=> Hostapd service restarted')
     }, function (err) {
