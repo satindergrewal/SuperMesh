@@ -1,0 +1,38 @@
+  body common control
+{
+    bundlesequence => { dhcpd_conf_config, dhcpd_default_config };
+}
+
+body edit_defaults dhcpd_conf_config
+{
+  empty_file_before_editing => "true";
+  edit_backup => "false";
+  max_file_size => "9999999999";
+}
+
+body edit_defaults dhcpd_default_config
+{
+  empty_file_before_editing => "true";
+  edit_backup => "false";
+  max_file_size => "9999999999";
+}
+
+bundle agent dhcpd_conf_config
+{
+  files:
+      "/etc/dhcp/dhcpd.conf"
+      create => "true",
+      edit_template => "/opt/SuperMesh/private/template/dhcpd_conf.mustache",
+      template_method => "mustache",
+      template_data => readjson("/opt/SuperMesh/private/system_scripts/dhcpd_conf.data", 9999999999);
+}
+
+bundle agent dhcpd_default_config
+{
+  files:
+      "/etc/default/isc-dhcp-server"
+      create => "true",
+      edit_template => "/opt/SuperMesh/private/template/dhcpd_default.mustache",
+      template_method => "mustache",
+      template_data => readjson("/opt/SuperMesh/private/system_scripts/dhcpd_conf.data", 9999999999);
+}
