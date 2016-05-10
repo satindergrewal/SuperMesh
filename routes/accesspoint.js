@@ -149,8 +149,9 @@ router.post('/update', function(req, res) {
 
 /* POST to Update Access Point Settings. */
 router.get('/restartap', function(req, res, next) {
+	SuperMesh.RestartHostapd();
 	//Execute promissed spanw child process
-	var Promise = require('bluebird');
+	/*var Promise = require('bluebird');
 	var exec = require('child_process').exec;
 	function promiseFromChildProcess(child) {
 	    return new Promise(function (resolve, reject) {
@@ -183,6 +184,6 @@ router.get('/restartap', function(req, res, next) {
 	});
 
 	res.send('{"msg": "success","result": "result"}');
-});
+});*/
 
 module.exports = router;
