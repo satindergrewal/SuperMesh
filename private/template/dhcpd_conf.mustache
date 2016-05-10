@@ -109,6 +109,6 @@ log-facility local7;
 
 # SuperMesh Subnet
 subnet {{Subnet}} netmask {{Netmask}} {
-		{{#Range}}{{start}} {{end}}{{/Range}}
-        option routers {{#Routers}}{{router1}}, {{router2}}{{/Routers}};
+		range {{#Range}}{{start}} {{end}}{{/Range}}
+		option routers {{#Routers}}{{router1}}, {{router2}}{{/Routers}};
 }
