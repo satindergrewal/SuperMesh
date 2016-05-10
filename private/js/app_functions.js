@@ -1,4 +1,5 @@
-
+var fs = require('fs');
+var sys = require('sys');
 
 module.exports = {
   
