@@ -25,10 +25,10 @@ module.exports = {
       //console.log('child process exited with code ' + code);
       callback(result);
     });
-  }
+  },
 
 
-  RestartHostapd: function(callback) {
+  RestartHostapd: function(prcs,atrbs,callback) {
     var Promise = require('bluebird');
     var exec = require('child_process').exec;
     function promiseFromChildProcess(child) {
