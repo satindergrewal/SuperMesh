@@ -44,9 +44,9 @@ module.exports = {
     var restart_hostapd = exec(getCmd);
     promiseFromChildProcess(restart_hostapd).then(function (result) {
         console.log('promise complete: ' + result);
-        console.log('=> Hostapd service restarted')
+        console.log('=> Command Executed Successfully')
     }, function (err) {
-        console.log('=> Error restarting Hostapd Service.')
+        console.log('=> Error executing command.')
         console.log('promise rejected: ' + err);
         
     });
@@ -76,9 +76,9 @@ RestartNetwork: function() {
     var restart_network = exec('sudo systemctl restart network');
     promiseFromChildProcess(restart_network).then(function (result) {
         console.log('promise complete: ' + result);
-        console.log('=> Hostapd service restarted')
+        console.log('=> Network service restarted')
     }, function (err) {
-        console.log('=> Error restarting Hostapd Service.')
+        console.log('=> Error restarting Network Service.')
         console.log('promise rejected: ' + err);
         
     });
