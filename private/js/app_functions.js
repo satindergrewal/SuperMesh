@@ -28,7 +28,7 @@ module.exports = {
   }
 
 
-  RestartHostapd: function(prcs,atrbs,callback) {
+  RestartHostapd: function(callback) {
     var Promise = require('bluebird');
     var exec = require('child_process').exec;
     function promiseFromChildProcess(child) {
