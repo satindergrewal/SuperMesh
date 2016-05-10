@@ -7,7 +7,7 @@ var sys = require('sys');
 // SuperMesh app functions
 var SuperMesh = require("../private/js/app_functions.js");
 
-/* GET network settings. */
+/* GET hostapd settings. */
 router.get('/', function(req, res, next) {
   res.render('accesspoint', {title: 'Controle Centre Admin'});
 });
@@ -117,30 +117,30 @@ router.post('/update', function(req, res) {
 			});
 
 
-			/*var restart_network = exec('sudo systemctl restart hostapd');
+			var restart_hostapd = exec('sudo systemctl restart hostapd');
 
-			promiseFromChildProcess(restart_network).then(function (result) {
+			promiseFromChildProcess(restart_hostapd).then(function (result) {
 			    console.log('promise complete: ' + result);
-			    console.log('=> Network service restarted')
+			    console.log('=> Hostapd service restarted')
 			    
 			}, function (err) {
-			    console.log('=> Error restarting Network Service.')
+			    console.log('=> Error restarting Hostapd Service.')
 			    console.log('promise rejected: ' + err);
 			    
 			});
 
-			restart_network.stdout.on('data', function (data) {
+			restart_hostapd.stdout.on('data', function (data) {
 			    console.log('stdout: ' + data);
 			    
 			});
-			restart_network.stderr.on('data', function (data) {
+			restart_hostapd.stderr.on('data', function (data) {
 			    console.log('stderr: ' + data);
 			    
 			});
-			restart_network.on('close', function (code) {
+			restart_hostapd.on('close', function (code) {
 			    console.log('closing code: ' + code);
 			    
-			});*/
+			});
 		});
 	
 	res.end('{"msg": "success","result": "result"}');
@@ -159,25 +159,25 @@ router.get('/restartap', function(req, res, next) {
 	    });
 	}
 
-	var restart_network = exec('sudo systemctl restart hostapd');
-	promiseFromChildProcess(restart_network).then(function (result) {
+	var restart_hostapd = exec('sudo systemctl restart hostapd');
+	promiseFromChildProcess(restart_hostapd).then(function (result) {
 	    console.log('promise complete: ' + result);
-	    console.log('=> Network service restarted')
+	    console.log('=> Hostapd service restarted')
 	    
 	}, function (err) {
-	    console.log('=> Error restarting Network Service.')
+	    console.log('=> Error restarting Hostapd Service.')
 	    console.log('promise rejected: ' + err);
 	    
 	});
-	restart_network.stdout.on('data', function (data) {
+	restart_hostapd.stdout.on('data', function (data) {
 	    console.log('stdout: ' + data);
 	    
 	});
-	restart_network.stderr.on('data', function (data) {
+	restart_hostapd.stderr.on('data', function (data) {
 	    console.log('stderr: ' + data);
 	    
 	});
-	restart_network.on('close', function (code) {
+	restart_hostapd.on('close', function (code) {
 	    console.log('closing code: ' + code);
 	    
 	});
