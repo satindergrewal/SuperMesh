@@ -116,7 +116,7 @@ router.post('/update', function(req, res) {
 			    
 			});
 
-			SuperMesh.PwdCwd();
+			//SuperMesh.PwdCwd();
 			SuperMesh.RestartHostapd();
 		});
 	
@@ -127,6 +127,7 @@ router.post('/update', function(req, res) {
 /* POST to Update Access Point Settings. */
 router.get('/restartap', function(req, res, next) {
 	SuperMesh.RestartHostapd();
+	SuperMesh.RunCmd('who am i');
 	res.send('{"msg": "success","result": "result"}');
 });
 
