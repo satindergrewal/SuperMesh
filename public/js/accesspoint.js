@@ -18,10 +18,12 @@ $(document).ready(function() {
     $('input[type=radio][name=ap_bgn_ac]').change(function() {
         if (this.value == 'bgn') {
             $('#ap_driver option[value="rtl871xdrv"]').attr('selected','selected');
+            $('#ap_driver option[value="nl80211"]').removeAttr('selected');
             populateBgnChannels('5');
         }
         else if (this.value == 'ac') {
             $('#ap_driver option[value="nl80211"]').attr('selected','selected');
+            $('#ap_driver option[value="rtl871xdrv"]').removeAttr('selected');
             populateACChannels('44');
         }
     });
