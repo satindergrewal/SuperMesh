@@ -159,78 +159,12 @@ router.post('/update', function(req, res) {
 		if (err) return console.log(err)
 			//console.log(JSON.stringify(interfacesData, null, 2))
 			//console.log('writing to ' + interfacesFile)
-			//res.send((err === null) ? { msg: '' } : { msg: err });
-
 
 			//Execute promissed spanw child process
-			var Promise = require('bluebird');
-			var exec = require('child_process').exec;
+			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/edit_network_config.cf');
+			SuperMesh.RunCmd('sudo systemctl daemon-reload');
+			SuperMesh.RunCmd('sudo systemctl restart networking');
 
-			function promiseFromChildProcess(child) {
-			    return new Promise(function (resolve, reject) {
-			        child.addListener("error", reject);
-			        child.addListener("exit", resolve);
-			    });
-			}
-
-			var edit_network = exec('sudo cf-agent -K private/system_scripts/edit_network_config.cf');
-
-			promiseFromChildProcess(edit_network).then(function (result) {
-			    console.log('promise complete: ' + result);
-			    console.log('=> Network file edited')
-			    //res.send('{"msg": "success","result": result}');
-			}, function (err) {
-			    console.log('promise rejected: ' + err);
-			    //res.send(err);
-			});
-
-			edit_network.stdout.on('data', function (data) {
-			    console.log('stdout: ' + data);
-			    
-			});
-			edit_network.stderr.on('data', function (data) {
-			    console.log('stderr: ' + data);
-			    
-			});
-			edit_network.on('close', function (code) {
-			    console.log('closing code: ' + code);
-			    
-			});
-
-
-			var restart_network = exec('sudo systemctl restart networking');
-
-			promiseFromChildProcess(restart_network).then(function (result) {
-			    console.log('promise complete: ' + result);
-			    console.log('=> Network service restarted')
-			    
-			}, function (err) {
-			    console.log('=> Error restarting Network Service.')
-			    console.log('promise rejected: ' + err);
-			    
-			});
-
-			restart_network.stdout.on('data', function (data) {
-			    console.log('stdout: ' + data);
-			    
-			});
-			restart_network.stderr.on('data', function (data) {
-			    console.log('stderr: ' + data);
-			    
-			});
-			restart_network.on('close', function (code) {
-			    console.log('closing code: ' + code);
-			    
-			});
-
-			//Execute cfengine script to make changes to network settings and restart network service.
-			//function puts(error, stdout, stderr) { sys.puts(stdout) }
-			//exec("sudo cf-agent -K private/system_scripts/edit_network_config.cf", puts);
-			
-			//var ifoutput = SuperMesh.ExecuteProcess('sudo /var/cfengine/bin/cf-agent -K','private/system_scripts/edit_network_config.cf', function(Output) {
-			//console.log(Output);
-			//res.send(Output);
-			//});
 		});
 	res.end('{"msg": "success","result": "result"}');
 });

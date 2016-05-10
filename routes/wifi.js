@@ -97,65 +97,9 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			console.log('writing to ' + wpaFile);
 
 			//Execute promissed spanw child process
-			var Promise = require('bluebird');
-			var exec = require('child_process').exec;
-
-			function promiseFromChildProcess(child) {
-			    return new Promise(function (resolve, reject) {
-			        child.addListener("error", reject);
-			        child.addListener("exit", resolve);
-			    });
-			}
-
-			var edit_wpa = exec('sudo cf-agent -K private/system_scripts/wpa_supplicant_config.cf');
-
-			promiseFromChildProcess(edit_wpa).then(function (result) {
-			    console.log('promise complete: ' + result);
-			    console.log('=> Network file edited')
-			    //res.send('{"msg": "success","result": result}');
-			}, function (err) {
-			    console.log('promise rejected: ' + err);
-			    //res.send(err);
-			});
-
-			edit_wpa.stdout.on('data', function (data) {
-			    console.log('stdout: ' + data);
-			    
-			});
-			edit_wpa.stderr.on('data', function (data) {
-			    console.log('stderr: ' + data);
-			    
-			});
-			edit_wpa.on('close', function (code) {
-			    console.log('closing code: ' + code);
-			    
-			});
-
-
-			var restart_network = exec('sudo systemctl restart networking');
-
-			promiseFromChildProcess(restart_network).then(function (result) {
-			    console.log('promise complete: ' + result);
-			    console.log('=> Network service restarted')
-			    
-			}, function (err) {
-			    console.log('=> Error restarting Network Service.')
-			    console.log('promise rejected: ' + err);
-			    
-			});
-
-			restart_network.stdout.on('data', function (data) {
-			    console.log('stdout: ' + data);
-			    
-			});
-			restart_network.stderr.on('data', function (data) {
-			    console.log('stderr: ' + data);
-			    
-			});
-			restart_network.on('close', function (code) {
-			    console.log('closing code: ' + code);
-			    
-			});
+			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/wpa_supplicant_config.cf');
+			SuperMesh.RunCmd('sudo systemctl daemon-reload');
+			SuperMesh.RunCmd('sudo systemctl restart networking');
 		});
 	
 	res.end('{"msg": "success","result": "result"}');

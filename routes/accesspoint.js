@@ -82,42 +82,9 @@ router.post('/update', function(req, res) {
 			console.log('writing to ' + APFile);
 
 			//Execute promissed spanw child process
-			var Promise = require('bluebird');
-			var exec = require('child_process').exec;
-
-			function promiseFromChildProcess(child) {
-			    return new Promise(function (resolve, reject) {
-			        child.addListener("error", reject);
-			        child.addListener("exit", resolve);
-			    });
-			}
-
-			/*var edit_wpa = exec('sudo cf-agent -K private/system_scripts/hostapd_conf.cf');
-
-			promiseFromChildProcess(edit_wpa).then(function (result) {
-			    console.log('promise complete: ' + result);
-			    console.log('=> hostapd file edited')
-			    //res.send('{"msg": "success","result": result}');
-			}, function (err) {
-			    console.log('promise rejected: ' + err);
-			    //res.send(err);
-			});
-
-			edit_wpa.stdout.on('data', function (data) {
-			    console.log('stdout: ' + data);
-			    
-			});
-			edit_wpa.stderr.on('data', function (data) {
-			    console.log('stderr: ' + data);
-			    
-			});
-			edit_wpa.on('close', function (code) {
-			    console.log('closing code: ' + code);
-			    
-			});*/
-
 			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/hostapd_conf.cf');
-			SuperMesh.RestartHostapd();
+			SuperMesh.RunCmd('sudo systemctl daemon-reload');
+			SuperMesh.RunCmd('sudo systemctl restart hostapd');
 		});
 	
 	res.end('{"msg": "success","result": "result"}');
@@ -126,8 +93,8 @@ router.post('/update', function(req, res) {
 
 /* POST to Update Access Point Settings. */
 router.get('/restartap', function(req, res, next) {
-	SuperMesh.RestartHostapd();
-	SuperMesh.PwdCwd();
+	SuperMesh.RunCmd('sudo systemctl daemon-reload');
+	SuperMesh.RunCmd('sudo systemctl restart hostapd');
 	res.send('{"msg": "success","result": "result"}');
 });
 
