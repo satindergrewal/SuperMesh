@@ -55,7 +55,7 @@ router.post('/update', function(req, res) {
 	} else if (req.body.ap_bgn_ac == 'ac') {
 		AP_BgnEnableDisable = '# ';
 		AP_AcEnableDisable = '';
-		AP_BgnChannel = '2';
+		AP_BgnChannel = '1';
 		AP_AcChannel = req.body.ap_channel;
 	}
 
