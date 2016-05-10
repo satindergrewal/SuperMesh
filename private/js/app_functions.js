@@ -2,7 +2,7 @@ var fs = require('fs');
 var sys = require('sys');
 
 module.exports = {
-  
+
   sayHelloInEnglish: function() {
     console.log('HELLO');
   },
@@ -28,16 +28,16 @@ module.exports = {
   },
 
 
-  RestartHostapd: function(prcs,atrbs,callback) {
-    var Promise = require('bluebird');
-    var exec = require('child_process').exec;
-    function promiseFromChildProcess(child) {
-        return new Promise(function (resolve, reject) {
-            child.addListener("error", reject);
-            child.addListener("exit", resolve);
-        });
-    }
+  var Promise = require('bluebird');
+  var exec = require('child_process').exec;
+  function promiseFromChildProcess(child) {
+      return new Promise(function (resolve, reject) {
+          child.addListener("error", reject);
+          child.addListener("exit", resolve);
+      });
+  }
 
+  RestartHostapd: function(prcs,atrbs,callback) {
     var restart_hostapd = exec('sudo systemctl restart hostapd');
     promiseFromChildProcess(restart_hostapd).then(function (result) {
         console.log('promise complete: ' + result);
