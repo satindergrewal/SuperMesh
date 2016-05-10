@@ -1,0 +1,25 @@
+{
+  "domain-name-servers": [
+    {
+      "dns1": "192.168.10.1",
+      "dns2": "192.168.10.2"
+    }
+  ],
+  "default-lease-time": "600",
+  "max-lease-time": "7200",
+  "subnet": "192.168.10.0",
+  "netmask": "255.255.255.0",
+  "range": [
+    {
+      "start": "192.168.10.10",
+      "end": "192.168.10.100"
+    }
+  ],
+  "routers": "192.168.10.2",
+  "INTERFACES": [
+    {
+      "iface1": "wlan1",
+      "iface2": "eth1"
+    }
+  ]
+}
