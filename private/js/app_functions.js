@@ -42,7 +42,6 @@ module.exports = {
     promiseFromChildProcess(restart_hostapd).then(function (result) {
         console.log('promise complete: ' + result);
         console.log('=> Hostapd service restarted')
-        callback(result);
     }, function (err) {
         console.log('=> Error restarting Hostapd Service.')
         console.log('promise rejected: ' + err);
