@@ -22,12 +22,12 @@ $(document).ready(function() {
 function populateFields() {
     // jQuery AJAX call for JSON
     $.getJSON( '/admin/dhcpd/getsettings', function( data ) {
-        console.log('---------DHCPD Settings-----------');
-        console.log(data.DNS[0].dns1);
+        //console.log('---------DHCPD Settings-----------');
+        //console.log(data.DNS[0].dns1);
         //console.log(data.AP_Password);
         //console.log(data.AP_Driver);
         //console.log(data.Country_Code);
-        console.log(data);
+        //console.log(data);
 
         //Dashboard values update from JSON file
         $( "#dhcpd_primary_dns" ).val( data.DNS[0].dns1 );
@@ -80,7 +80,7 @@ function UpdateDHCPDSettings() {
             'dhcpd_secondary_router': $('#dhcpd_secondary_router').val()
         }
 
-        console.log(DHCPDSettings);
+        //console.log(DHCPDSettings);
 
         // Use AJAX to post the object to our adduser service
         $.ajax({
