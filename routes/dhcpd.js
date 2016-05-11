@@ -9,13 +9,13 @@ var SuperMesh = require("../private/js/app_functions.js");
 
 /* GET network settings. */
 router.get('/', function(req, res, next) {
-  res.render('accesspoint', {title: 'Controle Centre Admin'});
+  res.render('dhcpd', {title: 'Controle Centre Admin'});
 });
 
 router.get('/getsettings', function(req, res, next) {
 
 	var ifoutput;
-	fs.readFile('private/system_scripts/hostapd_conf.data', 'utf8', function (err, data) {
+	fs.readFile('private/system_scripts/dhcpd_conf.data', 'utf8', function (err, data) {
 	  if (err) throw err;
 	  ifoutput = JSON.parse(data);
 	  res.send(ifoutput);
@@ -24,14 +24,10 @@ router.get('/getsettings', function(req, res, next) {
 
 /* POST to Update Access Point Settings. */
 router.post('/update', function(req, res) {
-	var APFile = 'private/system_scripts/hostapd_conf.data'
-	var APData = ''
-	var AP_BgnEnableDisable = '';
-	var AP_AcEnableDisable = '';
-	var AP_BgnChannel = '';
-	var AP_AcChannel = '';
+	var DHCPDFile = 'private/system_scripts/dhcpd_conf.data'
+	var DHCPDData = ''
 
-	/*fs.readFile(APFile, 'utf8', function (err,data) {
+	/*fs.readFile(DHCPDFile, 'utf8', function (err,data) {
 		if (err) {
 			return console.log(err);
 		}
@@ -40,148 +36,71 @@ router.post('/update', function(req, res) {
 	});*/
 
 	//console.log('======= req.body =======');
-	//console.log(req.body.ap_ssid);
-	//console.log(req.body.ap_country);
-	//console.log(req.body.ap_pass);
-	//console.log(req.body.ap_driver);
-	//console.log(req.body.ap_bgn_ac);
-	//console.log(req.body.ap_channel);
+	//console.log(req.body.dhcpd_primary_dns);
+	//console.log(req.body.dhcpd_secondary_dns);
+	//console.log(req.body.dhcpd_subnet);
+	//console.log(req.body.dhcpd_netmask);
+	//console.log(req.body.dhcpd_range_start);
+	//console.log(req.body.dhcpd_range_end);
+	//console.log(req.body.dhcpd_primary_router);
+	//console.log(req.body.dhcpd_secondary_router);
 
-	if (req.body.ap_bgn_ac == 'bgn') {
-		AP_BgnEnableDisable = '';
-		AP_AcEnableDisable = '# ';
-		AP_BgnChannel = req.body.ap_channel;
-		AP_AcChannel = '44';
-	} else if (req.body.ap_bgn_ac == 'ac') {
-		AP_BgnEnableDisable = '# ';
-		AP_AcEnableDisable = '';
-		AP_BgnChannel = '2';
-		AP_AcChannel = req.body.ap_channel;
+	DHCPDData = {
+	  "DNS": [
+	    {
+	      "dns1": req.body.dhcpd_primary_dns,
+	      "dns2": req.body.dhcpd_secondary_dns
+	    }
+	  ],
+	  "DefaultLeaseTime": "600",
+	  "MaxLeaseTime": "7200",
+	  "Subnet": req.body.dhcpd_subnet,
+	  "Netmask": req.body.dhcpd_netmask,
+	  "Range": [
+	    {
+	      "start": req.body.dhcpd_range_start,
+	      "end": req.body.dhcpd_range_end
+	    }
+	  ],
+	  "Routers": [
+	    {
+	      "router1": req.body.dhcpd_primary_router,
+	      "router2": req.body.dhcpd_secondary_router
+	    }
+	  ],
+	  "INTERFACES": [
+	    {
+	      "iface1": "wlan1",
+	      "iface2": "eth1"
+	    }
+	  ]
 	}
 
-	APData = {
-	"wlan_Interface": "wlan0",
-	"AP_SSID": req.body.ap_ssid,
-	"Country_Code": req.body.ap_country,
-	"AP_Password": req.body.ap_pass,
-	"AP_Driver": req.body.ap_driver,
-	"AP_802_11n_Enabled_Disabled": AP_BgnEnableDisable,
-	"AP_802_11n_Channel": AP_BgnChannel,
-	"AP_802_11AC_Enabled_Disabled": AP_AcEnableDisable,
-	"AP_802_11AC_Channel": AP_AcChannel
-	}
-
-	console.log('===>> Hostapd DATA recieved >>')
+	console.log('===>> DHCPD DATA recieved >>')
 	console.log('=========== JSON Stringify ===========');
-	console.log(JSON.stringify(APData, null, 2))
+	console.log(JSON.stringify(DHCPDData, null, 2))
 
 	// Write update changes to JSON file interfaces.data
-	fs.writeFile(APFile, JSON.stringify(APData, null, 2), function (err) {
+	fs.writeFile(DHCPDFile, JSON.stringify(DHCPDData, null, 2), function (err) {
 		if (err) return console.log(err)
-			console.log(JSON.stringify(APData, null, 2));
-			console.log('writing to ' + APFile);
+			console.log(JSON.stringify(DHCPDData, null, 2));
+			console.log('writing to ' + DHCPDFile);
 
 			//Execute promissed spanw child process
-			var Promise = require('bluebird');
-			var exec = require('child_process').exec;
-
-			function promiseFromChildProcess(child) {
-			    return new Promise(function (resolve, reject) {
-			        child.addListener("error", reject);
-			        child.addListener("exit", resolve);
-			    });
-			}
-
-			var edit_wpa = exec('sudo cf-agent -K private/system_scripts/hostapd_conf.cf');
-
-			promiseFromChildProcess(edit_wpa).then(function (result) {
-			    console.log('promise complete: ' + result);
-			    console.log('=> hostapd file edited')
-			    //res.send('{"msg": "success","result": result}');
-			}, function (err) {
-			    console.log('promise rejected: ' + err);
-			    //res.send(err);
-			});
-
-			edit_wpa.stdout.on('data', function (data) {
-			    console.log('stdout: ' + data);
-			    
-			});
-			edit_wpa.stderr.on('data', function (data) {
-			    console.log('stderr: ' + data);
-			    
-			});
-			edit_wpa.on('close', function (code) {
-			    console.log('closing code: ' + code);
-			    
-			});
-
-
-			/*var restart_network = exec('sudo systemctl restart hostapd');
-
-			promiseFromChildProcess(restart_network).then(function (result) {
-			    console.log('promise complete: ' + result);
-			    console.log('=> Network service restarted')
-			    
-			}, function (err) {
-			    console.log('=> Error restarting Network Service.')
-			    console.log('promise rejected: ' + err);
-			    
-			});
-
-			restart_network.stdout.on('data', function (data) {
-			    console.log('stdout: ' + data);
-			    
-			});
-			restart_network.stderr.on('data', function (data) {
-			    console.log('stderr: ' + data);
-			    
-			});
-			restart_network.on('close', function (code) {
-			    console.log('closing code: ' + code);
-			    
-			});*/
+			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/dhcpd_conf.cf');
+			SuperMesh.RunCmd('sudo systemctl daemon-reload');
+			SuperMesh.RunCmd('sudo systemctl restart isc-dhcp-server');
 		});
 	
 	res.end('{"msg": "success","result": "result"}');
 });
 
 
-/* POST to Update Access Point Settings. */
-router.get('/restartap', function(req, res, next) {
+// Restart DHCP Service.
+router.get('/restartdhcpd', function(req, res, next) {
 	//Execute promissed spanw child process
-	/*var Promise = require('bluebird');
-	var exec = require('child_process').exec;
-	function promiseFromChildProcess(child) {
-	    return new Promise(function (resolve, reject) {
-	        child.addListener("error", reject);
-	        child.addListener("exit", resolve);
-	    });
-	}
-
-	var restart_network = exec('sudo systemctl restart hostapd');
-	promiseFromChildProcess(restart_network).then(function (result) {
-	    console.log('promise complete: ' + result);
-	    console.log('=> Network service restarted')
-	    
-	}, function (err) {
-	    console.log('=> Error restarting Network Service.')
-	    console.log('promise rejected: ' + err);
-	    
-	});
-	restart_network.stdout.on('data', function (data) {
-	    console.log('stdout: ' + data);
-	    
-	});
-	restart_network.stderr.on('data', function (data) {
-	    console.log('stderr: ' + data);
-	    
-	});
-	restart_network.on('close', function (code) {
-	    console.log('closing code: ' + code);
-	    
-	});*/
-
+	SuperMesh.RunCmd('sudo systemctl daemon-reload');
+	SuperMesh.RunCmd('sudo systemctl restart isc-dhcp-server');
 	res.send('{"msg": "success","result": "result"}');
 });
 
