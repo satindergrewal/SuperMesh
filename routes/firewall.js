@@ -21,12 +21,14 @@ router.get('/getsettings', function(req, res, next) {
 	  if (err) throw err;
 	  //ifoutput = JSON.parse(data);
 	  getipv4fwd = data;
+	  console.log(data);
 	  //res.send(ifoutput);
 	});
 	fs.readFile('/proc/sys/net/ipv6/conf/all/forwarding', 'utf8', function (err, data) {
 	  if (err) throw err;
 	  //ifoutput = JSON.parse(data);
 	  getipv6fwd = data;
+	  console.log(data);
 	  //res.send(ifoutput);
 	});
 
