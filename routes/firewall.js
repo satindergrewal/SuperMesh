@@ -13,15 +13,14 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/getsettings', function(req, res, next) {
-	var getipv4fwd = '';
-	var getipv6fwd = '';
+	var getipv4fwd = fs.readFileSync('/proc/sys/net/ipv4/ip_forward').toString();
+	var getipv6fwd = fs.readFileSync('/proc/sys/net/ipv6/conf/all/forwarding').toString();
 
-	//var ifoutput;
+	/*//var ifoutput;
 	fs.readFile('/proc/sys/net/ipv4/ip_forward', 'utf8', function (err, data) {
 	  if (err) throw err;
 	  //ifoutput = JSON.parse(data);
 	  getipv4fwd = data;
-	  console.log(data);
 	  console.log(getipv4fwd);
 	  //res.send(ifoutput);
 	});
@@ -29,10 +28,9 @@ router.get('/getsettings', function(req, res, next) {
 	  if (err) throw err;
 	  //ifoutput = JSON.parse(data);
 	  getipv6fwd = data;
-	  console.log(data);
 	  console.log(getipv6fwd);
 	  //res.send(ifoutput);
-	});
+	});*/
 
 	IPtablesSettingsData = {
 		"ipv4fwd": getipv4fwd,
