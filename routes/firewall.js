@@ -22,6 +22,7 @@ router.get('/getsettings', function(req, res, next) {
 	  //ifoutput = JSON.parse(data);
 	  getipv4fwd = data;
 	  console.log(data);
+	  console.log(getipv4fwd);
 	  //res.send(ifoutput);
 	});
 	fs.readFile('/proc/sys/net/ipv6/conf/all/forwarding', 'utf8', function (err, data) {
@@ -29,6 +30,7 @@ router.get('/getsettings', function(req, res, next) {
 	  //ifoutput = JSON.parse(data);
 	  getipv6fwd = data;
 	  console.log(data);
+	  console.log(getipv6fwd);
 	  //res.send(ifoutput);
 	});
 
