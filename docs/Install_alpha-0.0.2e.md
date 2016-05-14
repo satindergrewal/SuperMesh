@@ -47,9 +47,25 @@ sudo systemctl enable supermesh
 `sudo apt-get install isc-dhcp-server hostapd`
 
 
+#### Configuring Raspberry Pi settings using SuperMesh's default system scripts
 ```shell
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/edit_network_config.cf 
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/hostapd_conf.cf
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/dhcpd_conf.cf
+```
 
+```shell
+## In case you are using
+## N150 Wi-Fi Nano USB Adapter, EW-7811Un or any WiFi Adaptor with RTL8188CUS chipset
+## Execute these commands to install compatible hostapd binaries
+
+# Backup existing original hostapd
+sudo mv /usr/sbin/hostapd /usr/sbin/hostapd_original
+
+# Install hostapd binary from SuperMesh
+sudo cp -av /opt/SuperMesh/private/system_scripts/drivers/hostapd_edimax_bgn /usr/sbin/hostapd
+sudo chmod +x /usr/sbin/hostapd
+
+# Restart hostapd service
+sudo systemctl restart hostapd
 ```

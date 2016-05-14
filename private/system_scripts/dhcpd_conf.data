@@ -23,7 +23,7 @@
   ],
   "INTERFACES": [
     {
-      "iface1": "wlan1",
+      "iface1": "wlan0",
       "iface2": "eth1"
     }
   ]
