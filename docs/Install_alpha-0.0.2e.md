@@ -45,3 +45,11 @@ sudo systemctl enable supermesh
 
 #### Installing more required system packages
 `sudo apt-get install isc-dhcp-server hostapd`
+
+
+```shell
+sudo cf-agent -K /opt/SuperMesh/private/system_scripts/edit_network_config.cf 
+sudo cf-agent -K /opt/SuperMesh/private/system_scripts/hostapd_conf.cf
+sudo cf-agent -K /opt/SuperMesh/private/system_scripts/dhcpd_conf.cf
+
+```
