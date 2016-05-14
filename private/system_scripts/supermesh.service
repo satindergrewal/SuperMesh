@@ -2,7 +2,7 @@
 Description=SuperMesh v0.0.2e
 
 [Service]
-ExecStart=/usr/local/bin/node ./bin/www
+ExecStart=/usr/bin/nodejs ./bin/www
 Restart=always
 RestartSec=10                       # Restart service after 10 seconds if node service crashes
 StandardOutput=syslog               # Output to syslog
