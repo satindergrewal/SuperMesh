@@ -1,4 +1,5 @@
 SuperMesh Dependencies:
+ - cfengine
  - nodejs version 0.10+
  - npm
  - git
