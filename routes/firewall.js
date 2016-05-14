@@ -46,27 +46,6 @@ router.get('/getsettings', function(req, res, next) {
 
 // Update iptabels 4 forwarding
 router.get('/enableipv4fwd', function(req, res) {
-	enableipv4fwd();
-	
-	res.end('{"msg": "success","result": "result"}');
-});
-
-// Update iptabels 4 forwarding
-router.get('/disableipv4fwd', function(req, res) {
-	disableipv4fwd();
-	
-	res.end('{"msg": "success","result": "result"}');
-});
-
-
-// Restart IPtabls4 service
-router.get('/restartiptables', function(req, res, next) {
-	SuperMesh.RunCmd('sudo systemctl daemon-reload');
-	SuperMesh.RunCmd('sudo systemctl restart iptables');
-	res.send('{"msg": "success","result": "result"}');
-});
-
-function enableip4fwd() {
 	//Enable IPv4 forwarding
 	SuperMesh.RunCmd('sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"');
 	//Enable Masquerading on eth0 interface, the Internet Interneface
@@ -100,9 +79,12 @@ function enableip4fwd() {
 	
 	//Save updated iptables rules to ipv4 file
 	SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-}
+	
+	res.end('{"msg": "success","result": "result"}');
+});
 
-function disableip4fwd() {
+// Update iptabels 4 forwarding
+router.get('/disableipv4fwd', function(req, res) {
 	//Enable IPv4 forwarding
 	SuperMesh.RunCmd('sudo sh -c "echo 0 > /proc/sys/net/ipv4/ip_forward"');
 	//Enable Masquerading on eth0 interface, the Internet Interneface
@@ -136,6 +118,16 @@ function disableip4fwd() {
 	
 	//Save updated iptables rules to ipv4 file
 	SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-}
+	
+	res.end('{"msg": "success","result": "result"}');
+});
+
+
+// Restart IPtabls4 service
+router.get('/restartiptables', function(req, res, next) {
+	SuperMesh.RunCmd('sudo systemctl daemon-reload');
+	SuperMesh.RunCmd('sudo systemctl restart iptables');
+	res.send('{"msg": "success","result": "result"}');
+});
 
 module.exports = router;
