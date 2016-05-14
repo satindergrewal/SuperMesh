@@ -90,6 +90,7 @@ router.post('/update', function(req, res) {
 			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/dhcpd_conf.cf');
 			SuperMesh.RunCmd('sudo systemctl daemon-reload');
 			SuperMesh.RunCmd('sudo systemctl restart isc-dhcp-server');
+			SuperMesh.RunCmd('sudo systemctl restart hostapd');
 		});
 	
 	res.end('{"msg": "success","result": "result"}');
@@ -101,6 +102,7 @@ router.get('/restartdhcpd', function(req, res, next) {
 	//Execute promissed spanw child process
 	SuperMesh.RunCmd('sudo systemctl daemon-reload');
 	SuperMesh.RunCmd('sudo systemctl restart isc-dhcp-server');
+	SuperMesh.RunCmd('sudo systemctl restart hostapd');
 	res.send('{"msg": "success","result": "result"}');
 });
 
