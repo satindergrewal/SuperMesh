@@ -10,7 +10,8 @@
 #### Updating and intalling cfengine
 ```shell
 sudo apt-get update
-sudo apt-get install cfengine3```
+sudo apt-get install cfengine3
+```
 
 #### Installing dependencies
 `sudo apt-get -y install git nodejs npm`
@@ -35,7 +36,8 @@ sudo apt-get install cfengine3```
 #### Copying SuperMesh as a system service and enabling it to start at system boot
 ```shell
 sudo cp -av /opt/SuperMesh/private/system_scripts/supermesh.service /etc/systemd/system/
-sudo systemctl enable supermesh```
+sudo systemctl enable supermesh
+```
 
 #### Starting SuperMesh sytstem service
 `sudo systemctl start supermesh`
