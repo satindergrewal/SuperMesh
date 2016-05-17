@@ -52,6 +52,8 @@ sudo systemctl enable supermesh
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/edit_network_config.cf 
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/hostapd_conf.cf
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/dhcpd_conf.cf
+curl -O http://localhost:3000/admin/firewall/enableipv4fwd
+
 ```
 
 ```shell

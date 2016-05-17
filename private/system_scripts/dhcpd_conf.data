@@ -2,23 +2,33 @@
   "DNS": [
     {
       "dns1": "192.168.10.1",
-      "dns2": "192.168.10.2"
+      "dns2": "172.20.10.1"
     }
   ],
-  "DefaultLeaseTime": "600",
-  "MaxLeaseTime": "7200",
-  "Subnet": "192.168.10.0",
-  "Netmask": "255.255.255.0",
-  "Range": [
+  "wlan0_DefaultLeaseTime": "600",
+  "wlan0_MaxLeaseTime": "7200",
+  "wlan0_Subnet": "192.168.10.0",
+  "wlan0_Netmask": "255.255.255.0",
+  "wlan0_Range": [
     {
       "start": "192.168.10.10",
       "end": "192.168.10.100"
     }
   ],
+  "eth1_DefaultLeaseTime": "600",
+  "eth1_MaxLeaseTime": "7200",
+  "eth1_Subnet": "172.20.10.0",
+  "eth1_Netmask": "255.255.255.0",
+  "eth1_Range": [
+    {
+      "start": "172.20.10.10",
+      "end": "172.20.10.100"
+    }
+  ],
   "Routers": [
     {
       "router1": "192.168.10.1",
-      "router2": "192.168.10.2"
+      "router2": "172.20.10.1"
     }
   ],
   "INTERFACES": [

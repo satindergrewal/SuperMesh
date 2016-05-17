@@ -30,14 +30,13 @@ function populateFields() {
         //console.log(data);
 
         //Dashboard values update from JSON file
-        $( "#dhcpd_primary_dns" ).val( data.DNS[0].dns1 );
-        $( "#dhcpd_secondary_dns" ).val( data.DNS[0].dns2 );
-        $( "#dhcpd_subnet" ).val( data.Subnet );
-        $( "#dhcpd_netmask" ).val( data.Netmask );
-        $( "#dhcpd_range_start" ).val( data.Range[0].start );
-        $( "#dhcpd_range_end" ).val( data.Range[0].end );
-        $( "#dhcpd_primary_router" ).val( data.Routers[0].router1 );
-        $( "#dhcpd_secondary_router" ).val( data.Routers[0].router2 );        
+        $( "#wlan0_dhcpd_primary_dns" ).val( data.DNS[0].dns1 );
+        $( "#wlan0_dhcpd_subnet" ).val( data.Subnet );
+        $( "#wlan0_dhcpd_netmask" ).val( data.Netmask );
+        $( "#wlan0_dhcpd_range_start" ).val( data.Range[0].start );
+        $( "#wlan0_dhcpd_range_end" ).val( data.Range[0].end );
+        $( "#wlan0_dhcpd_primary_router" ).val( data.Routers[0].router1 );
+        $( "#wlan0_dhcpd_secondary_router" ).val( data.Routers[0].router2 );        
     });
 };
 

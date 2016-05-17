@@ -1,8 +1,8 @@
                     <!-- eth0 Form -->
                     <form class="form-horizontal push-10-t push-10" id="FormNetSettings" onsubmit="return false;">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                     <div class="block block-themed">
-                        <div class="block-header bg-primary">
+                        <div class="block-header bg-success">
                             <!--<ul class="block-options">
                                 <li>
                                     <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="network"><i class="si si-refresh"></i></button>
@@ -11,7 +11,7 @@
                                     <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
                                 </li>
                             </ul>-->
-                            <h3 class="block-title">DHCPD: wlan0 and eth0 <small></small></h3>
+                            <h3 class="block-title">DHCPD Settings: wlan0<small></small></h3>
                         </div>
 
 
@@ -19,60 +19,132 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="wlan0_dhcpd_primary_dns" name="wlan0_dhcpd_primary_dns" placeholder="e.g. 192.168.10.1">
+                                                <label for="wlan0_dhcpd_primary_dns">Secondary DNS</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <div class="col-xs-6">
                                                 <div class="form-material">
-                                                <input class="form-control input-lg" type="text" id="dhcpd_primary_dns" name="dhcpd_primary_dns" placeholder="e.g. example.org">
-                                                <label for="dhcpd_primary_dns">Primary DNS</label>
+                                                <input class="form-control input-lg" type="text" id="wlan0_dhcpd_subnet" name="wlan0_dhcpd_subnet" placeholder="e.g. 192.168.10.0">
+                                                <label for="wlan0_dhcpd_subnet">Subnet</label>
                                                 </div>
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="form-material">
-                                                <input class="form-control input-lg" type="text" id="dhcpd_secondary_dns" name="dhcpd_secondary_dns" placeholder="e.g. 192.168.10.1">
-                                                <label for="dhcpd_secondary_dns">Secondary DNS</label>
+                                                <input class="form-control input-lg" type="text" id="wlan0_dhcpd_broadcast_addr" name="wlan0_dhcpd_broadcast_addr" placeholder="e.g. 192.168.0.255">
+                                                <label for="wlan0_dhcpd_broadcast_addr">Broadcast-Address</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-xs-12">
                                                 <div class="form-material">
-                                                <input class="form-control input-lg" type="text" id="dhcpd_subnet" name="dhcpd_subnet" placeholder="e.g. 192.168.10.0">
-                                                <label for="dhcpd_subnet">Subnet</label>
+                                                <input class="form-control input-lg" type="text" id="wlan0_dhcpd_netmask" name="wlan0_dhcpd_netmask" placeholder="e.g. 255.255.255.0">
+                                                <label for="wlan0_dhcpd_netmask">Netmask</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-6">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="wlan0_dhcpd_range_start" name="wlan0_dhcpd_range_start" placeholder="e.g. 192.168.10.10">
+                                                <label for="wlan0_dhcpd_range_start">Range Start</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="wlan0_dhcpd_range_end" name="wlan0_dhcpd_range_end" placeholder="e.g. 192.168.10.100">
+                                                <label for="wlan0_dhcpd_range_end">Range End</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-xs-12">
                                                 <div class="form-material">
-                                                <input class="form-control input-lg" type="text" id="dhcpd_netmask" name="dhcpd_netmask" placeholder="e.g. 255.255.255.0">
-                                                <label for="dhcpd_netmask">Netmask</label>
+                                                <input class="form-control input-lg" type="text" id="wlan0_dhcpd_primary_router" name="wlan0_dhcpd_primary_router" placeholder="e.g. 192.168.10.1">
+                                                <label for="wlan0_dhcpd_primary_router">Primary Gateway</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    </div>
+
+
+
+                    <div class="col-md-6">
+                    <div class="block block-themed">
+                        <div class="block-header bg-info">
+                            <!--<ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="network"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
+                                </li>
+                            </ul>-->
+                            <h3 class="block-title">DHCPD Settings: eth1<small></small></h3>
+                        </div>
+
+
+                        <div class="block-content">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="eth1_dhcpd_primary_dns" name="eth1_dhcpd_primary_dns" placeholder="e.g. 172.20.10.1">
+                                                <label for="eth1_dhcpd_primary_dns">Secondary DNS</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-xs-6">
                                                 <div class="form-material">
-                                                <input class="form-control input-lg" type="text" id="dhcpd_range_start" name="dhcpd_range_start" placeholder="e.g. 192.168.10.10">
-                                                <label for="dhcpd_range_start">Range Start</label>
+                                                <input class="form-control input-lg" type="text" id="eth1_dhcpd_subnet" name="eth1_dhcpd_subnet" placeholder="e.g. 172.20.10.0">
+                                                <label for="eth1_dhcpd_subnet">Subnet</label>
                                                 </div>
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="form-material">
-                                                <input class="form-control input-lg" type="text" id="dhcpd_range_end" name="dhcpd_range_end" placeholder="e.g. 192.168.10.100">
-                                                <label for="dhcpd_range_end">Range End</label>
+                                                <input class="form-control input-lg" type="text" id="eth1_dhcpd_broadcast_addr" name="eth1_dhcpd_broadcast_addr" placeholder="e.g. 172.20.0.255">
+                                                <label for="eth1_dhcpd_broadcast_addr">Broadcast-Address</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="eth1_dhcpd_netmask" name="eth1_dhcpd_netmask" placeholder="e.g. 255.255.255.0">
+                                                <label for="eth1_dhcpd_netmask">Netmask</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-xs-6">
                                                 <div class="form-material">
-                                                <input class="form-control input-lg" type="text" id="dhcpd_primary_router" name="dhcpd_primary_router" placeholder="e.g. 192.168.10.1">
-                                                <label for="dhcpd_primary_router">Primary Gateway</label>
+                                                <input class="form-control input-lg" type="text" id="eth1_dhcpd_range_start" name="eth1_dhcpd_range_start" placeholder="e.g. 172.20.10.10">
+                                                <label for="eth1_dhcpd_range_start">Range Start</label>
                                                 </div>
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="form-material">
-                                                <input class="form-control input-lg" type="text" id="dhcpd_secondary_router" name="dhcpd_secondary_router" placeholder="e.g. 192.168.10.2">
-                                                <label for="dhcpd_secondary_router">Secondary Gateway</label>
+                                                <input class="form-control input-lg" type="text" id="eth1_dhcpd_range_end" name="eth1_dhcpd_range_end" placeholder="e.g. 172.20.10.100">
+                                                <label for="eth1_dhcpd_range_end">Range End</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="eth1_dhcpd_primary_router" name="eth1_dhcpd_primary_router" placeholder="e.g. 172.20.10.1">
+                                                <label for="eth1_dhcpd_primary_router">Primary Gateway</label>
                                                 </div>
                                             </div>
                                         </div>

@@ -48,29 +48,39 @@ router.post('/update', function(req, res) {
 	DHCPDData = {
 	  "DNS": [
 	    {
-	      "dns1": req.body.dhcpd_primary_dns,
-	      "dns2": req.body.dhcpd_secondary_dns
+	      "dns1": req.body.wlan0_dhcpd_primary_dns,
+	      "dns2": req.body.eth1_dhcpd_primary_dns
 	    }
 	  ],
-	  "DefaultLeaseTime": "600",
-	  "MaxLeaseTime": "7200",
-	  "Subnet": req.body.dhcpd_subnet,
-	  "Netmask": req.body.dhcpd_netmask,
-	  "Range": [
+	  "wlan0_DefaultLeaseTime": "600",
+	  "wlan0_MaxLeaseTime": "7200",
+	  "wlan0_Subnet": req.body.wlan0_dhcpd_subnet,
+	  "wlan0_Netmask": req.body.wlan0_dhcpd_netmask,
+	  "wlan0_Range": [
 	    {
-	      "start": req.body.dhcpd_range_start,
-	      "end": req.body.dhcpd_range_end
+	      "start": req.body.wlan0_dhcpd_range_start,
+	      "end": req.body.wlan0_dhcpd_range_end
+	    }
+	  ],
+	  "eth1_DefaultLeaseTime": "600",
+	  "eth1_MaxLeaseTime": "7200",
+	  "eth1_Subnet": req.body.eth1_dhcpd_subnet,
+	  "eth1_Netmask": req.body.eth1_dhcpd_netmask,
+	  "eth1_Range": [
+	    {
+	      "start": req.body.eth1_dhcpd_range_start,
+	      "end": req.body.eth1_dhcpd_range_end
 	    }
 	  ],
 	  "Routers": [
 	    {
-	      "router1": req.body.dhcpd_primary_router,
-	      "router2": req.body.dhcpd_secondary_router
+	      "router1": req.body.wlan0_dhcpd_primary_router,
+	      "router2": req.body.eth1_dhcpd_primary_router
 	    }
 	  ],
 	  "INTERFACES": [
 	    {
-	      "iface1": "wlan1",
+	      "iface1": "wlan0",
 	      "iface2": "eth1"
 	    }
 	  ]
