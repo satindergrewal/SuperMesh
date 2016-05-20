@@ -16,6 +16,10 @@ router.get('/getsettings', function(req, res, next) {
 	var getipv4fwd = fs.readFileSync('/proc/sys/net/ipv4/ip_forward').toString();
 	var getipv6fwd = fs.readFileSync('/proc/sys/net/ipv6/conf/all/forwarding').toString();
 
+	//Demo values
+	//var getipv4fwd = '1'
+	//var getipv6fwd = '0'
+
 	/*//var ifoutput;
 	fs.readFile('/proc/sys/net/ipv4/ip_forward', 'utf8', function (err, data) {
 	  if (err) throw err;
@@ -43,6 +47,20 @@ router.get('/getsettings', function(req, res, next) {
 
 	res.send(IPtablesSettingsData);
 });
+
+
+/* POST to Update IPTables Settings. */
+router.post('/update', function(req, res) {
+
+	console.log('======= req.body =======');
+	console.log(req.body);
+
+	//Execute promissed spanw child process
+	//SuperMesh.RunCmd('sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"');
+	
+	res.end('{"msg": "success","result": "result"}');
+});
+
 
 // Update iptabels 4 forwarding
 router.get('/enableipv4fwd', function(req, res) {

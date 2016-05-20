@@ -5,9 +5,7 @@ $(document).ready(function() {
     populateFields();
     
     // Update IPtabels Settings button click
-    $('#BtnUpdatefirewallSettings').on('click', UpdatefirewallSettings);
-    // Restart AP Service button click
-    $('#BtnRestartfirewall').on('click', Restartfirewall);
+    $('#BtnUpdateFirewallSettings').on('click', UpdatefirewallSettings);
 
 });
 
@@ -18,11 +16,21 @@ function populateFields() {
     // jQuery AJAX call for JSON
     $.getJSON( '/admin/firewall/getsettings', function( data ) {
         //console.log('---------firewall Settings-----------');
-        //console.log(data);
+        console.log(data);
 
-        //Dashboard values update from JSON file
-        $( "#firewall_primary_dns" ).val( data.DNS[0].dns1 );
-        $( "#firewall_secondary_dns" ).val( data.DNS[0].dns2 );      
+        //Set IPv4 Forwarding settings
+        if ( data.ipv4fwd === '0' ) {
+            $( "#iptables4_enable_disable" ).prop( "checked", false );
+        } else if ( data.ipv4fwd === '1' ) {
+            $( "#iptables4_enable_disable" ).prop( "checked", true );
+        }
+
+        //Set IPv6 Forwarding settings
+        if ( data.ipv6fwd === '0' ) {
+            $( "#iptables6_enable_disable" ).prop( "checked", false );
+        } else if ( data.ipv6fwd === '1' ) {
+            $( "#iptables6_enable_disable" ).prop( "checked", true );
+        }
     });
 };
 
@@ -35,11 +43,17 @@ function UpdatefirewallSettings() {
         App.loader('hide');
     }, 3000);*/
 
+    var firewallSettings = {
+            'iptables4_enable_disable': $('#iptables4_enable_disable').is(':checked'),
+            'iptables6_enable_disable': $('#iptables6_enable_disable').is(':checked')
+        }
+
+
     // Use AJAX to post the object to our adduser service
     $.ajax({
         type: 'POST',
         data: firewallSettings,
-        url: '/admin/firewall/enableipv4fwd',
+        url: '/admin/firewall/update',
         dataType: 'html',
         success: function(data, textStatus, jqXHR) {
             var APData = JSON.parse(data);
@@ -67,12 +81,4 @@ function UpdatefirewallSettings() {
         }
     });
     
-};
-
-
-//  Restart Access Point Service
-function Restartfirewall() {
-    $.getJSON( '/admin/firewall/restartfirewall', function( data ) {
-        console.log(data);
-    });
 };
