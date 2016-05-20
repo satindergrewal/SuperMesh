@@ -27,16 +27,26 @@ function populateFields() {
         //console.log(data.AP_Password);
         //console.log(data.AP_Driver);
         //console.log(data.Country_Code);
-        //console.log(data);
+        console.log(data);
 
-        //Dashboard values update from JSON file
+        //Get wlan0 JSON data and populate form fields
         $( "#wlan0_dhcpd_primary_dns" ).val( data.DNS[0].dns1 );
-        $( "#wlan0_dhcpd_subnet" ).val( data.Subnet );
-        $( "#wlan0_dhcpd_netmask" ).val( data.Netmask );
-        $( "#wlan0_dhcpd_range_start" ).val( data.Range[0].start );
-        $( "#wlan0_dhcpd_range_end" ).val( data.Range[0].end );
+        $( "#wlan0_dhcpd_subnet" ).val( data.wlan0_Subnet );
+        $( "#wlan0_dhcpd_broadcast_addr" ).val( data.wlan0_BroadcastAddr );
+        $( "#wlan0_dhcpd_netmask" ).val( data.wlan0_Netmask );
+        $( "#wlan0_dhcpd_range_start" ).val( data.wlan0_Range[0].start );
+        $( "#wlan0_dhcpd_range_end" ).val( data.wlan0_Range[0].end );
         $( "#wlan0_dhcpd_primary_router" ).val( data.Routers[0].router1 );
-        $( "#wlan0_dhcpd_secondary_router" ).val( data.Routers[0].router2 );        
+
+        //Get eth1 JSON data and populate form fields
+        $( "#eth1_dhcpd_primary_dns" ).val( data.DNS[0].dns2 );
+        $( "#eth1_dhcpd_subnet" ).val( data.eth1_Subnet );
+        $( "#eth1_dhcpd_broadcast_addr" ).val( data.eth1_BroadcastAddr );
+        $( "#eth1_dhcpd_netmask" ).val( data.eth1_Netmask );
+        $( "#eth1_dhcpd_range_start" ).val( data.eth1_Range[0].start );
+        $( "#eth1_dhcpd_range_end" ).val( data.eth1_Range[0].end );
+        $( "#eth1_dhcpd_primary_router" ).val( data.Routers[0].router2 );
+        
     });
 };
 
@@ -69,14 +79,20 @@ function UpdateDHCPDSettings() {
 
         // If it is, compile all user info into one object
         var DHCPDSettings = {
-            'dhcpd_primary_dns': $('#dhcpd_primary_dns').val(),
-            'dhcpd_secondary_dns': $('#dhcpd_secondary_dns').val(),
-            'dhcpd_subnet': $('#dhcpd_subnet').val(),
-            'dhcpd_netmask': $('#dhcpd_netmask').val(),
-            'dhcpd_range_start': $('#dhcpd_range_start').val(),
-            'dhcpd_range_end': $('#dhcpd_range_end').val(),
-            'dhcpd_primary_router': $('#dhcpd_primary_router').val(),
-            'dhcpd_secondary_router': $('#dhcpd_secondary_router').val()
+            'wlan0_dhcpd_primary_dns': $('#wlan0_dhcpd_primary_dns').val(),
+            'wlan0_dhcpd_subnet': $('#wlan0_dhcpd_subnet').val(),
+            'wlan0_dhcpd_broadcast_addr': $('#wlan0_dhcpd_broadcast_addr').val(),
+            'wlan0_dhcpd_netmask': $('#wlan0_dhcpd_netmask').val(),
+            'wlan0_dhcpd_range_start': $('#wlan0_dhcpd_range_start').val(),
+            'wlan0_dhcpd_range_end': $('#wlan0_dhcpd_range_end').val(),
+            'wlan0_dhcpd_primary_router': $('#wlan0_dhcpd_primary_router').val(),
+            'eth1_dhcpd_primary_dns': $('#eth1_dhcpd_primary_dns').val(),
+            'eth1_dhcpd_subnet': $('#eth1_dhcpd_subnet').val(),
+            'eth1_dhcpd_broadcast_addr': $('#eth1_dhcpd_broadcast_addr').val(),
+            'eth1_dhcpd_netmask': $('#eth1_dhcpd_netmask').val(),
+            'eth1_dhcpd_range_start': $('#eth1_dhcpd_range_start').val(),
+            'eth1_dhcpd_range_end': $('#eth1_dhcpd_range_end').val(),
+            'eth1_dhcpd_primary_router': $('#eth1_dhcpd_primary_router').val()
         }
 
         //console.log(DHCPDSettings);

@@ -8,6 +8,7 @@
   "wlan0_DefaultLeaseTime": "600",
   "wlan0_MaxLeaseTime": "7200",
   "wlan0_Subnet": "192.168.10.0",
+  "wlan0_BroadcastAddr": "192.168.10.255",
   "wlan0_Netmask": "255.255.255.0",
   "wlan0_Range": [
     {
@@ -18,6 +19,7 @@
   "eth1_DefaultLeaseTime": "600",
   "eth1_MaxLeaseTime": "7200",
   "eth1_Subnet": "172.20.10.0",
+  "eth1_BroadcastAddr": "172.16.10.255",
   "eth1_Netmask": "255.255.255.0",
   "eth1_Range": [
     {
