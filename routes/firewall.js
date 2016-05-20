@@ -69,7 +69,7 @@ router.get('/enableipv4fwd', function(req, res) {
 	//Enable Masquerading on eth0 interface, the Internet Interneface
 	SuperMesh.RunCmd('sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE');
 	//Enable Masquerading on eth0 interface, the Internet Interneface
-	SuperMesh.RunCmd('sudo iptables -t nat -D POSTROUTING -o wlan1 -j MASQUERADE');
+	SuperMesh.RunCmd('sudo iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE');
 	
 	// Between eth0 (Internet) <-> wlan0 (Local LAN)
 	//Forward any packet coming from eth0 (Internet) interface to wlan0 (Access Point) interface

@@ -1,0 +1,21 @@
+  body common control
+{
+    bundlesequence => { sysctl_conf_config };
+}
+
+body edit_defaults sysctl_conf_config
+{
+  empty_file_before_editing => "true";
+  edit_backup => "false";
+  max_file_size => "9999999999";
+}
+
+bundle agent sysctl_conf_config
+{
+  files:
+      "/etc/sysctl.conf"
+      create => "true",
+      edit_template => "/opt/SuperMesh/private/template/sysctl_conf.mustache",
+      template_method => "mustache",
+      template_data => readjson("/opt/SuperMesh/private/system_scripts/sysctl_conf.data", 9999999999);
+}
