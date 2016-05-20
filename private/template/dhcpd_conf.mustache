@@ -4,29 +4,22 @@ authoritative;
 log-facility local7;
 
 
-subnet {{Subnet}} netmask {{Netmask}} {
+subnet {{wlan0_Subnet}} netmask {{wlan0_Netmask}} {
  option routers {{#Routers}}{{router1}}{{/Routers}};
- option subnet-mask {{Netmask}};
- option broadcast-address {{BroadcastAddr}};
+ option subnet-mask {{wlan0_Netmask}};
+ option broadcast-address {{wlan0_BroadcastAddr}};
  option domain-name-servers {{#DNS}}{{dns1}}, 8.8.8.8{{/DNS}};
  default-lease-time 600;
  max-lease-time 7200;
- range {{#Range}}{{start}} {{end}}{{/Range}};
+ range {{#wlan0_Range}}{{start}} {{end}}{{/wlan0_Range}};
 }
 
-subnet 172.16.10.0 netmask 255.255.255.0 {
- option routers 172.16.10.1;
- option subnet-mask 255.255.255.0;
- option broadcast-address 172.16.10.255;
- option domain-name-servers 172.16.10.1;
- option domain-name "eth2.lan";
+subnet {{eth1_Subnet}} netmask {{eth1_Netmask}} {
+ option routers {{#Routers}}{{router2}}{{/Routers}};
+ option subnet-mask {{eth1_Netmask}};
+ option broadcast-address {{eth1_BroadcastAddr}};
+ option domain-name-servers {{#DNS}}{{dns2}}, 8.8.8.8{{/DNS}};
  default-lease-time 600;
  max-lease-time 7200;
- range 172.16.10.10 172.16.10.100;
-}
-
-# SuperMesh Subnet
-subnet {{Subnet}} netmask {{Netmask}} {
-	range {{#Range}}{{start}} {{end}}{{/Range}};
-	option routers {{#Routers}}{{router1}}, {{router2}}{{/Routers}};
+ range {{#eth1_Range}}{{start}} {{end}}{{/eth1_Range}};
 }
