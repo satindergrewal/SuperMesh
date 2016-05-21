@@ -43,6 +43,24 @@ sudo cp -av /opt/SuperMesh/private/system_scripts/supermesh.service /etc/systemd
 sudo systemctl enable supermesh
 ```
 
+
+#### Copyting configuration data from SuperMesh Sample Data to system
+```shell
+cp -av /opt/SuperMesh/private/system_scripts/sample_data /opt/SuperMeshData
+```
+
+
+#### Setting up hostapd drivers
+```shell
+# Copying hostapd drviers to system for Edimax 802.11bgn wifi adapter & Edimax 802.11ac wifi adapter
+cp -av /opt/SuperMesh/private/system_scripts/drivers/hostapd* /usr/sbin/
+
+# Renaming original hostapd and creating a symlink to it
+sudo mv /usr/sbin/hostapd /usr/sbin/hostapd_original
+sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd
+```
+
+
 #### Starting SuperMesh sytstem service
 `sudo systemctl start supermesh`
 
