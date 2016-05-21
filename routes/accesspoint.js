@@ -6,6 +6,7 @@ var sys = require('sys');
 
 // SuperMesh app functions
 var SuperMesh = require("../private/js/app_functions.js");
+var lshw = require("../private/js/lshw.js");
 
 /* GET hostapd settings. */
 router.get('/', function(req, res, next) {
@@ -19,6 +20,13 @@ router.get('/getsettings', function(req, res, next) {
 	  if (err) throw err;
 	  ifoutput = JSON.parse(data);
 	  res.send(ifoutput);
+	});
+});
+
+router.get('/lshwnetwork', function(req, res, next) {
+	lshw.status(function(err, status) {
+		res.send(status);
+		console.log(status);
 	});
 });
 

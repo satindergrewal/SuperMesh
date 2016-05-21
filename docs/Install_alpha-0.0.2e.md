@@ -14,7 +14,7 @@ sudo apt-get install cfengine3
 ```
 
 #### Installing dependencies
-`sudo apt-get -y install git nodejs npm`
+`sudo apt-get -y install git nodejs npm lshw`
 
 
 #### Make node binary symlink
