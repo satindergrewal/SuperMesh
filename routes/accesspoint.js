@@ -67,7 +67,7 @@ router.post('/update', function(req, res) {
 		AP_AcChannel = req.body.ap_channel;
 	}
 
-	var APDriver;
+/*	var APDriver;
 
 	lshw.status(function(err, status) {
 		//console.log(status);
@@ -84,7 +84,7 @@ router.post('/update', function(req, res) {
 				}
 			}
 		}
-	});
+	});*/
 	
 
 	APData = {
@@ -111,6 +111,8 @@ router.post('/update', function(req, res) {
 
 			//Execute promissed spanw child process
 			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/hostapd_conf.cf');
+			SuperMesh.RunCmd('sudo rm /etc/hostapd/hostapd.conf.cf-before-edit');
+			SuperMesh.RunCmd('sudo rm /etc/default/hostapd.cf-before-edit');
 			SuperMesh.RunCmd('sudo systemctl daemon-reload');
 			SuperMesh.RunCmd('sudo systemctl restart hostapd');
 		});

@@ -98,6 +98,7 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 
 			//Execute promissed spanw child process
 			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/wpa_supplicant_config.cf');
+			SuperMesh.RunCmd('sudo rm /etc/wpa_supplicant/wpa_supplicant.conf.cf-before-edit');
 			SuperMesh.RunCmd('sudo systemctl daemon-reload');
 			SuperMesh.RunCmd('sudo systemctl restart networking');
 		});
