@@ -53,7 +53,7 @@ cp -av /opt/SuperMesh/private/system_scripts/sample_data /opt/SuperMeshData
 #### Setting up hostapd drivers
 ```shell
 # Copying hostapd drviers to system for Edimax 802.11bgn wifi adapter & Edimax 802.11ac wifi adapter
-cp -av /opt/SuperMesh/private/system_scripts/drivers/hostapd* /usr/sbin/
+sudo cp -av /opt/SuperMesh/private/system_scripts/drivers/hostapd* /usr/sbin/
 
 # Renaming original hostapd and creating a symlink to it
 sudo mv /usr/sbin/hostapd /usr/sbin/hostapd_original

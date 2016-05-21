@@ -67,24 +67,7 @@ router.post('/update', function(req, res) {
 		AP_AcChannel = req.body.ap_channel;
 	}
 
-/*	var APDriver;
 
-	lshw.status(function(err, status) {
-		//console.log(status);
-		for (i = 0; i < status.length; i++) {
-			//console.log(status[i]);
-			if ( status[i].network === 'wlan0' ) {
-				if ( status[i].driver === 'brcmfmac' ) {
-					//console.log(status[i].driver);
-					APDriver = 'nl80211'
-				} else if ( status[i].driver === 'rtl8192cu' ) {
-					APDriver = 'rtl871xdrv'
-				} else {
-					APDriver = req.body.ap_driver
-				}
-			}
-		}
-	});*/
 	
 
 	APData = {
@@ -114,7 +97,23 @@ router.post('/update', function(req, res) {
 			SuperMesh.RunCmd('sudo rm /etc/hostapd/hostapd.conf.cf-before-edit');
 			SuperMesh.RunCmd('sudo rm /etc/default/hostapd.cf-before-edit');
 			SuperMesh.RunCmd('sudo systemctl daemon-reload');
-			SuperMesh.RunCmd('sudo systemctl restart hostapd');
+
+			lshw.status(function(err, status) {
+				//console.log(status);
+				for (i = 0; i < status.length; i++) {
+					//console.log(status[i]);
+					if ( status[i].network === 'wlan0' ) {
+						if ( status[i].driver === 'brcmfmac' ) {
+							//console.log(status[i].driver);
+							SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd; sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd; sudo systemctl restart hostapd');
+						} else if ( status[i].driver === 'rtl8192cu' ) {
+							SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd; sudo ln -s /usr/sbin/hostapd_edimax_bgn /usr/sbin/hostapd; sudo systemctl restart hostapd');
+						} else {
+							SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd; sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd; sudo systemctl restart hostapd');
+						}
+					}
+				}
+			});
 		});
 	
 	res.end('{"msg": "success","result": "result"}');
