@@ -67,12 +67,32 @@ router.post('/update', function(req, res) {
 		AP_AcChannel = req.body.ap_channel;
 	}
 
+	var APDriver;
+
+	lshw.status(function(err, status) {
+		console.log(status);
+		for (i = 0; i < status.length; i++) {
+			//console.log(status[i]);
+			if ( status[i].network === 'wlan0' ) {
+				if ( status[i].driver === 'brcmfmac' ) {
+					//console.log(status[i].driver);
+					APDriver = 'nl80211'
+				} else if ( status[i].driver === 'rtl8192cu' ) {
+					APDriver = 'rtl871xdrv'
+				} else {
+					APDriver = req.body.ap_driver
+				}
+			}
+		}
+	});
+	if 
+
 	APData = {
 	"wlan_Interface": "wlan0",
 	"AP_SSID": req.body.ap_ssid,
 	"Country_Code": req.body.ap_country,
 	"AP_Password": req.body.ap_pass,
-	"AP_Driver": req.body.ap_driver,
+	"AP_Driver": APDriver,
 	"AP_802_11n_Enabled_Disabled": AP_BgnEnableDisable,
 	"AP_802_11n_Channel": AP_BgnChannel,
 	"AP_802_11AC_Enabled_Disabled": AP_AcEnableDisable,
