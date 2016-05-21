@@ -92,7 +92,7 @@ router.post('/update', function(req, res) {
 	"AP_SSID": req.body.ap_ssid,
 	"Country_Code": req.body.ap_country,
 	"AP_Password": req.body.ap_pass,
-	"AP_Driver": APDriver,
+	"AP_Driver": req.body.ap_driver,
 	"AP_802_11n_Enabled_Disabled": AP_BgnEnableDisable,
 	"AP_802_11n_Channel": AP_BgnChannel,
 	"AP_802_11AC_Enabled_Disabled": AP_AcEnableDisable,
