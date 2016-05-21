@@ -17,6 +17,10 @@ sudo apt-get install cfengine3
 `sudo apt-get -y install git nodejs npm`
 
 
+#### Make node binary symlink
+`sudo ln -s /usr/bin/nodejs /usr/bin/node`
+
+
 #### Clone SuperMesh's test build to system
 `git clone -b alpha-0.0.2e https://github.com/satindergrewal/SuperMesh`
 
