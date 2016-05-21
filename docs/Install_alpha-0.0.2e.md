@@ -58,6 +58,9 @@ cp -av /opt/SuperMesh/private/system_scripts/drivers/hostapd* /usr/sbin/
 # Renaming original hostapd and creating a symlink to it
 sudo mv /usr/sbin/hostapd /usr/sbin/hostapd_original
 sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd
+
+# Making sure hostapd files are executable
+sudo chmod +x /usr/sbin/hostapd*
 ```
 
 
