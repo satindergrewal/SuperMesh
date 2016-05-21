@@ -178,6 +178,12 @@ function populateFields() {
         populateCountryCodes( data.Country_Code );
         $('#ap_driver option[value=' + data.AP_Driver + ']').attr('selected','selected');
     });
+
+    $.getJSON( '/admin/accesspoint/lshwnetwork', function( data ) {
+        //console.log('---------wlan0 Settings-----------');
+        //console.log(data);
+        console.log(data);
+    });
 };
 
 
