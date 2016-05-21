@@ -70,7 +70,7 @@ router.post('/update', function(req, res) {
 	var APDriver;
 
 	lshw.status(function(err, status) {
-		console.log(status);
+		//console.log(status);
 		for (i = 0; i < status.length; i++) {
 			//console.log(status[i]);
 			if ( status[i].network === 'wlan0' ) {
