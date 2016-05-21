@@ -24,7 +24,7 @@ bundle agent dhcpd_conf_config
       create => "true",
       edit_template => "/opt/SuperMesh/private/template/dhcpd_conf.mustache",
       template_method => "mustache",
-      template_data => readjson("/opt/SuperMesh/private/system_scripts/dhcpd_conf.data", 9999999999);
+      template_data => readjson("/opt/SuperMeshData/dhcpd_conf.data", 9999999999);
 }
 
 bundle agent dhcpd_default_config
@@ -34,5 +34,5 @@ bundle agent dhcpd_default_config
       create => "true",
       edit_template => "/opt/SuperMesh/private/template/dhcpd_default.mustache",
       template_method => "mustache",
-      template_data => readjson("/opt/SuperMesh/private/system_scripts/dhcpd_conf.data", 9999999999);
+      template_data => readjson("/opt/SuperMeshData/dhcpd_conf.data", 9999999999);
 }

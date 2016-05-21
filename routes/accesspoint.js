@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 router.get('/getsettings', function(req, res, next) {
 
 	var ifoutput;
-	fs.readFile('private/system_scripts/hostapd_conf.data', 'utf8', function (err, data) {
+	fs.readFile('/opt/SuperMeshData/hostapd_conf.data', 'utf8', function (err, data) {
 	  if (err) throw err;
 	  ifoutput = JSON.parse(data);
 	  res.send(ifoutput);
@@ -32,7 +32,7 @@ router.get('/lshwnetwork', function(req, res, next) {
 
 /* POST to Update Access Point Settings. */
 router.post('/update', function(req, res) {
-	var APFile = 'private/system_scripts/hostapd_conf.data'
+	var APFile = '/opt/SuperMeshData/hostapd_conf.data'
 	var APData = ''
 	var AP_BgnEnableDisable = '';
 	var AP_AcEnableDisable = '';

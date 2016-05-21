@@ -17,7 +17,7 @@ bundle agent wpa_supplicant_config
       create => "true",
       edit_template => "/opt/SuperMesh/private/template/wpa_supplicant.mustache",
       template_method => "mustache",
-      template_data => readjson("/opt/SuperMesh/private/system_scripts/wpa_supplicant.data", 9999999999);
+      template_data => readjson("/opt/SuperMeshData/wpa_supplicant.data", 9999999999);
 }
 
 bundle agent services_restart {

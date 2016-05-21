@@ -17,7 +17,7 @@ bundle agent network_config
       create => "true",
       edit_template => "/opt/SuperMesh/private/template/interfaces.mustache",
       template_method => "mustache",
-      template_data => readjson("/opt/SuperMesh/private/system_scripts/interfaces.data", 9999999999);
+      template_data => readjson("/opt/SuperMeshData/interfaces.data", 9999999999);
 }
 
 bundle agent services_restart {

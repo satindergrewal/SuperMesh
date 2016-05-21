@@ -35,7 +35,7 @@ router.get('/getsettings', function(req, res, next) {
 
 /* POST to Update IPTables Settings. */
 router.post('/update', function(req, res) {
-	var sysctlFile = 'private/system_scripts/sysctl_conf.data'
+	var sysctlFile = '/opt/SuperMeshData/sysctl_conf.data'
 	var sysctlData = ''
 
 	console.log('======= req.body =======');

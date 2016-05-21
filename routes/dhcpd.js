@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 router.get('/getsettings', function(req, res, next) {
 
 	var ifoutput;
-	fs.readFile('private/system_scripts/dhcpd_conf.data', 'utf8', function (err, data) {
+	fs.readFile('/opt/SuperMeshData/dhcpd_conf.data', 'utf8', function (err, data) {
 	  if (err) throw err;
 	  ifoutput = JSON.parse(data);
 	  res.send(ifoutput);
@@ -24,7 +24,7 @@ router.get('/getsettings', function(req, res, next) {
 
 /* POST to Update Access Point Settings. */
 router.post('/update', function(req, res) {
-	var DHCPDFile = 'private/system_scripts/dhcpd_conf.data'
+	var DHCPDFile = '/opt/SuperMeshData/dhcpd_conf.data'
 	var DHCPDData = ''
 
 	/*fs.readFile(DHCPDFile, 'utf8', function (err,data) {

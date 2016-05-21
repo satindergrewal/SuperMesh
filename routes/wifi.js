@@ -53,7 +53,7 @@ router.get('/iwconfig/wlan1', function(req, res, next) {
 
 /* POST to Update WPA Settings. */
 router.post('/wpa_supplicant/setup', function(req, res) {
-	var wpaFile = 'private/system_scripts/wpa_supplicant.data'
+	var wpaFile = '/opt/SuperMeshData/wpa_supplicant.data'
 	var wpaData = ''
 	var wpaSecurity = ''
 

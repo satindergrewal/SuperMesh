@@ -17,5 +17,5 @@ bundle agent sysctl_conf_config
       create => "true",
       edit_template => "/opt/SuperMesh/private/template/sysctl_conf.mustache",
       template_method => "mustache",
-      template_data => readjson("/opt/SuperMesh/private/system_scripts/sysctl_conf.data", 9999999999);
+      template_data => readjson("/opt/SuperMeshData/sysctl_conf.data", 9999999999);
 }

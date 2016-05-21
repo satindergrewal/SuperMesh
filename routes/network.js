@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 router.get('/getip', function(req, res, next) {
 
 	var ifoutput;
-	fs.readFile('private/system_scripts/interfaces.data', 'utf8', function (err, data) {
+	fs.readFile('/opt/SuperMeshData/interfaces.data', 'utf8', function (err, data) {
 	  if (err) throw err;
 	  ifoutput = JSON.parse(data);
 	  res.send(ifoutput);
@@ -91,7 +91,7 @@ router.get('/ifconfig/wlan1', function(req, res, next) {
 
 /* POST to Update Network Settings. */
 router.post('/update', function(req, res) {
-	var interfacesFile = 'private/system_scripts/interfaces.data'
+	var interfacesFile = '/opt/SuperMeshData/interfaces.data'
 	var interfacesData = ''
 
 	/*fs.readFile(interfacesFile, 'utf8', (err, data) => {
