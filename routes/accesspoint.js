@@ -85,7 +85,7 @@ router.post('/update', function(req, res) {
 			}
 		}
 	});
-	if 
+	
 
 	APData = {
 	"wlan_Interface": "wlan0",
