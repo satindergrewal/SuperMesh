@@ -7,7 +7,7 @@
   "eth0_gateway": "192.168.10.1",
   "eth1_enable_disable": "",
   "eth1_iface": "static",
-  "eth1_enable_disable_dhcp": "# ",
+  "eth1_enable_disable_dhcp": "",
   "eth1_addr": "172.20.10.1",
   "eth1_netmask": "255.255.255.0",
   "eth1_gateway": "172.20.10.1",
