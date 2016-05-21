@@ -185,7 +185,7 @@ function populateFields() {
 
         for (i = 0; i < data.length; i++) {
             console.log(data[i]);
-            if ( data[i].interface == 'wlan0' ) {
+            if ( data[i].network == 'wlan0' ) {
                 if ( data.[i].driver == 'brcmfmac' ) {
                     $('#ap_driver option[value="nl80211"]').attr('selected','selected');
                     $('#ap_driver option[value="rtl871xdrv"]').removeAttr('selected');
