@@ -181,8 +181,20 @@ function populateFields() {
 
     $.getJSON( '/admin/accesspoint/lshwnetwork', function( data ) {
         //console.log('---------wlan0 Settings-----------');
-        //console.log(data);
         console.log(data);
+
+        for (i = 0; i < data.length; i++) {
+            console.log(data[i]);
+            if ( data[i].interface == 'wlan0' ) {
+                if ( data.[i].driver == 'brcmfmac' ) {
+                    $('#ap_driver option[value="nl80211"]').attr('selected','selected');
+                    $('#ap_driver option[value="rtl871xdrv"]').removeAttr('selected');
+                } else if ( data.[i].driver == 'rtl8192cu' ) {
+                    $('#ap_driver option[value="rtl871xdrv"]').attr('selected','selected');
+                    $('#ap_driver option[value="nl80211"]').removeAttr('selected');
+                }
+            }
+        }
     });
 };
 
