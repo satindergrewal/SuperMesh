@@ -45,3 +45,5 @@ iface lo inet loopback
 {{wlan0_enable_disable_dhcp}}gateway {{wlan0_gateway}} metric {{wlan0_gate_metric}}
 # 'metric' is used to set this gateway as secondary on system.
 # Primary should be the one from primary network interaces.
+
+pre-up iptables-restore < /etc/network/iptables.ipv4.nat
