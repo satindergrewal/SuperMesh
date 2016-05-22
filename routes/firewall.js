@@ -41,9 +41,21 @@ router.post('/update', function(req, res) {
 	console.log('======= req.body =======');
 	console.log(req.body);
 
+	if ( req.body.iptables4_enable_disable === 'true' ) {
+		var ipv4fwd_value = '1'
+	} else if ( req.body.iptables4_enable_disable === 'false' ) {
+		var ipv4fwd_value = '0'
+	}
+
+	if ( req.body.iptables6_enable_disable === 'true' ) {
+		var ipv6fwd_value = '1'
+	} else if ( req.body.iptables6_enable_disable === 'false' ) {
+		var ipv6fwd_value = '0'
+	}
+
 	sysctlData = {
-		"ipv4fwd_enable_disable": req.body.iptables4_enable_disable,
-		"ipv6fwd_enable_disable": req.body.iptables6_enable_disable
+		"ipv4fwd_enable_disable": ipv4fwd_value,
+		"ipv6fwd_enable_disable": ipv6fwd_value
 	}
 
 	console.log('=========== JSON Stringify ===========');
@@ -61,7 +73,7 @@ router.post('/update', function(req, res) {
 		});
 
 
-	if ( req.body.iptables4_enable_disable === '1' ) {
+	if ( req.body.iptables4_enable_disable === 'true' ) {
 		//Enable IPv4 forwarding
 		SuperMesh.RunCmd('sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"');
 		//Enable Masquerading on eth0 interface, the Internet Interneface
@@ -95,7 +107,7 @@ router.post('/update', function(req, res) {
 		
 		//Save updated iptables rules to ipv4 file
 		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-	} else if ( req.body.iptables4_enable_disable === '0' ) {
+	} else if ( req.body.iptables4_enable_disable === 'false' ) {
 		//Enable IPv4 forwarding
 		SuperMesh.RunCmd('sudo sh -c "echo 0 > /proc/sys/net/ipv4/ip_forward"');
 		//Enable Masquerading on eth0 interface, the Internet Interneface
