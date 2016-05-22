@@ -19,14 +19,14 @@ function populateFields() {
         console.log(data);
 
         //Set IPv4 Forwarding settings
-        if ( data.ipv4fwd === '0' ) {
+        if ( data.ipv4fwd === '0\n' ) {
             $( "#iptables4_enable_disable" ).prop( "checked", false );
         } else if ( data.ipv4fwd === '1' ) {
             $( "#iptables4_enable_disable" ).prop( "checked", true );
         }
 
         //Set IPv6 Forwarding settings
-        if ( data.ipv6fwd === '0' ) {
+        if ( data.ipv6fwd === '0\n' ) {
             $( "#iptables6_enable_disable" ).prop( "checked", false );
         } else if ( data.ipv6fwd === '1' ) {
             $( "#iptables6_enable_disable" ).prop( "checked", true );
