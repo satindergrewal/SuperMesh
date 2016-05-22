@@ -41,21 +41,9 @@ router.post('/update', function(req, res) {
 	console.log('======= req.body =======');
 	console.log(req.body);
 
-	if ( req.body.iptables4_enable_disable === 'true' ) {
-		var ipv4fwd_value = '1'
-	} else if ( req.body.iptables4_enable_disable === 'false' ) {
-		var ipv4fwd_value = '0'
-	}
-
-	if ( req.body.iptables6_enable_disable === 'true' ) {
-		var ipv6fwd_value = '1'
-	} else if ( req.body.iptables6_enable_disable === 'false' ) {
-		var ipv6fwd_value = '0'
-	}
-
 	sysctlData = {
-		"ipv4fwd_enable_disable": ipv4fwd_value,
-		"ipv6fwd_enable_disable": ipv6fwd_value
+		"ipv4fwd_enable_disable": (req.body.iptables4_enable_disable === "false") ? "0" : "1",
+		"ipv6fwd_enable_disable": (req.body.iptables6_enable_disable === "false") ? "0" : "1"
 	}
 
 	console.log('=========== JSON Stringify ===========');
