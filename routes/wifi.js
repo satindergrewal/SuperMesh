@@ -97,7 +97,13 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			console.log('writing to ' + wpaFile);
 
 			//Execute promissed spanw child process
-			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/wpa_supplicant_config.cf; sudo rm /etc/wpa_supplicant/wpa_supplicant.conf.cf-before-edit; sudo systemctl daemon-reload; sudo systemctl restart networking; sudo systemctl restart isc-dhcp-server; sudo systemctl restart hostapd');
+			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/wpa_supplicant_config.cf');
+			SuperMesh.RunCmd('sudo rm /etc/wpa_supplicant/wpa_supplicant.conf.cf-before-edit');
+			SuperMesh.RunCmd('sudo systemctl daemon-reload');
+			SuperMesh.RunCmd('sudo systemctl restart networking');
+			SuperMesh.RunCmd('sudo systemctl restart isc-dhcp-server');
+			SuperMesh.RunCmd('sudo systemctl restart hostapd');
+
 		});
 	
 	res.end('{"msg": "success","result": "result"}');
