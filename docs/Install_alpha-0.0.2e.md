@@ -49,6 +49,8 @@ sudo systemctl enable supermesh
 sudo cp -av /opt/SuperMesh/private/system_scripts/sample_data /opt/SuperMeshData
 ```
 
+#### Installing more required system packages
+`sudo apt-get install isc-dhcp-server hostapd`
 
 #### Setting up hostapd drivers
 ```shell
@@ -66,10 +68,6 @@ sudo chmod +x /usr/sbin/hostapd*
 
 #### Starting SuperMesh sytstem service
 `sudo systemctl start supermesh`
-
-
-#### Installing more required system packages
-`sudo apt-get install isc-dhcp-server hostapd`
 
 
 #### Configuring Raspberry Pi settings using SuperMesh's default system scripts
