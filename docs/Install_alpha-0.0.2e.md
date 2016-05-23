@@ -7,7 +7,7 @@ If Raspberry Pi 3
  - 1 USB to LAN Adapter
 
 If Raspberry Pi 2
- - 2 USB WiFI Adaper
+ - 2 USB WiFi Adaper
  - 1 USB to LAN Adapter
 
 
