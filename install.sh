@@ -56,6 +56,8 @@ sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd
 # Making sure hostapd files are executable
 sudo chmod +x /usr/sbin/hostapd*
 
+# Setting up hostapd
+node private/js/install_helper.js
 
 #### Starting SuperMesh sytstem service
 sudo systemctl start supermesh
