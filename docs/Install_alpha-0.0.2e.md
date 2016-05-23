@@ -40,7 +40,7 @@ You can install using this command on fresh installation of Raspbian Jesse Lite
 
 `curl -L https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.2e/install.sh | bash -`
 
-Or just use these commands to download the installer shell script and then execute the start installation:
+Or just use these commands to download the installer shell script and then execute to start installation:
 ```shell
 curl -O https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.2e/install.sh
 chmod +x install.sh
@@ -100,7 +100,7 @@ sudo systemctl enable supermesh
 ```
 
 
-#### Copyting configuration data from SuperMesh Sample Data to system
+#### Copying configuration data from SuperMesh Sample Data to system
 ```shell
 sudo cp -av /opt/SuperMesh/private/system_scripts/sample_data /opt/SuperMeshData
 ```
@@ -135,7 +135,7 @@ sudo cf-agent -K /opt/SuperMesh/private/system_scripts/edit_network_config.cf
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/hostapd_conf.cf
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/dhcpd_conf.cf
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/sysctl_conf.cf
-curl -O http://localhost:3000/admin/firewall/enableipv4fwd
+curl -L http://localhost:3000/admin/firewall/enableipv4fwd
 
 ```
 
