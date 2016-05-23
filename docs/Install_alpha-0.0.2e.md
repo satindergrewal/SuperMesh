@@ -1,15 +1,39 @@
-# Requirements
- - Raspberry Pi 2 or Raspberry Pi 3
+## Supported IoT Devices
+ - [Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
+ - [Raspberry Pi 3 Model B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/)
+
+## Requirements
  - [Raspbian Jessie Lite](https://www.raspberrypi.org/downloads/raspbian/)
 
-If Raspberry Pi 3
+If Raspberry Pi 3 Model B
  - 1 USB WiFi Adapter
  - 1 USB to LAN Adapter
 
-If Raspberry Pi 2
+If Raspberry Pi 2 Model B
  - 2 USB WiFi Adaper
  - 1 USB to LAN Adapter
 
+
+## What this SuperMesh Alpha 0.0.2e build does so far
+This is the most basic and the base requirement build of SuperMesh. It only targets on setting up network and routing part on supported IoT devices. After installing following features are available:
+ - Default Access Point named **TestNetWiFi** with default password **spacemesh**
+ - Access to internet through different hardware availablity, i.e.
+  - Internet LAN Cable in onboard LAN Port, Internet LAN cable from USBtoLAN port to PC/Laptop/Router
+  - Internet LAN Cable in onboard LAN Port, Internet access from first Wifi Adapter
+  - Internet from second Wifi Adapter by connecting to other WiFi around, passing internet to first WiFi Adapter and let users connect to it as it works as Access Point with SSID **TestNetWiFi** by default.
+ - SuperMesh Web UI accessible at http://Raspberry_Pi_IP:3000
+  - If connected to TestNetWiFi default address would be http://192.168.10.1:3000
+  - If conected through USBtoLAN LAN port default address would be http://172.20.10.1:3000
+ - SuperMesh Control Centre Admin pages allows setting up following system settings via web interface:
+  - Network Settings: Changing interfaces settings
+  - WiFi Settings: Connecting to existing WiFi networks around. Example, in library, coffee shop etc.
+  - Access Point Settings: Lets user change WiFi SSID, Password and other settings as per their USB WiFi Adapter.
+  - DHCPD Settings: Lets user setup DHCP settings for network users connecting to SuperMesh device. It's very Basic for now.
+  - Firewall Settings: Only allows enableing disableing IPv4 and IPv6 forwarding setup and some basic iptables rules setup.
+
+ All these settings are basic, and will advance as SuperMesh development advances.
+
+ 
 
 ### Install using installer script
 You can install using this command on fresh installation of Raspbian Jesse Lite
