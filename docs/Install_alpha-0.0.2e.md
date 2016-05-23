@@ -1,3 +1,15 @@
+# Requirements
+ - Raspberry Pi 2 or Raspberry Pi 3
+ - [Raspbian Jessie Lite](https://www.raspberrypi.org/downloads/raspbian/)
+
+If Raspberry Pi 3
+ - 1 USB WiFi Adapter
+ - 1 USB to LAN Adapter
+
+If Raspberry Pi 2
+ - 2 USB WiFI Adaper
+ - 1 USB to LAN Adapter
+
 
 ### Install using installer script
 You can install using this command on fresh installation of Raspbian Jesse Lite
