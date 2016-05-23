@@ -109,6 +109,16 @@ sudo cp -av /opt/SuperMesh/private/system_scripts/sample_data /opt/SuperMeshData
 `sudo apt-get install isc-dhcp-server hostapd`
 
 
+#### Starting SuperMesh sytstem service
+`sudo systemctl start supermesh`
+
+
+#### Setting up IP forwarding
+```shell
+sudo cf-agent -K /opt/SuperMesh/private/system_scripts/sysctl_conf.cf
+curl -L http://localhost:3000/admin/firewall/enableipv4fwd
+```
+
 #### Configuring Raspberry Pi settings using SuperMesh's default system scripts
 ```shell
 # Setting up and restarting network settings
@@ -143,16 +153,6 @@ sudo systemctl daemon-reload
 sudo systemctl restart hostapd
 ```
 
-
-#### Starting SuperMesh sytstem service
-`sudo systemctl start supermesh`
-
-
-#### Setting up IP forwarding
-```shell
-sudo cf-agent -K /opt/SuperMesh/private/system_scripts/sysctl_conf.cf
-curl -L http://localhost:3000/admin/firewall/enableipv4fwd
-```
 
 #### Remove any unwanted files which generated during install
 ```shell
