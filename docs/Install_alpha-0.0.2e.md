@@ -33,12 +33,12 @@ This is the most basic and the base requirement build of SuperMesh. It only targ
 
  All these settings are basic, and will advance as SuperMesh development advances.
 
- 
+
 
 ### Install using installer script
 You can install using this command on fresh installation of Raspbian Jesse Lite
 
-`curl -L https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.2e/install.sh | bash`
+`curl -L https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.2e/install.sh | bash -`
 
 Or just use these commands to download the installer shell script and then execute the start installation:
 ```shell
