@@ -10,8 +10,12 @@ sudo bash -c "echo 'deb http://cfengineers.net/repo raspjessie main' >> /etc/apt
 sudo apt-get update
 sudo apt-get -y install cfengine3
 
+#### Install nodejs and npm
+sudo bash -c "curl -sL https://deb.nodesource.com/setup_0.12 | bash -"
+sudo apt-get install -y nodejs
+
 #### Installing dependencies
-sudo apt-get -y install git nodejs npm lshw
+sudo apt-get -y install git lshw
 
 
 #### Make node binary symlink
