@@ -93,10 +93,7 @@ router.post('/update', function(req, res) {
 			console.log('writing to ' + APFile);
 
 			//Execute promissed spanw child process
-			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/hostapd_conf.cf');
-			SuperMesh.RunCmd('sudo rm /etc/hostapd/hostapd.conf.cf-before-edit');
-			SuperMesh.RunCmd('sudo rm /etc/default/hostapd.cf-before-edit');
-			SuperMesh.RunCmd('sudo systemctl daemon-reload');
+			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/hostapd_conf.cf; sudo rm /etc/hostapd/hostapd.conf.cf-before-edit; sudo rm /etc/default/hostapd.cf-before-edit; sudo systemctl daemon-reload');
 
 			lshw.status(function(err, status) {
 				//console.log(status);
@@ -122,8 +119,7 @@ router.post('/update', function(req, res) {
 
 // POST to Update Access Point Settings.
 router.get('/restartap', function(req, res, next) {
-	SuperMesh.RunCmd('sudo systemctl daemon-reload');
-	SuperMesh.RunCmd('sudo systemctl restart hostapd');
+	SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl restart hostapd');
 	res.send('{"msg": "success","result": "result"}');
 });
 
