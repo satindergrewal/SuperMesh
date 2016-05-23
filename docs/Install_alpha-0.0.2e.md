@@ -1,7 +1,15 @@
 
 ### Install using installer script
 You can install using this command on fresh installation of Raspbian Jesse Lite
+
 `curl -L https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.2e/install.sh | bash`
+
+Or just use these commands to download the installer shell script and then execute the start installation:
+```shell
+curl -O https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.2e/install.sh
+chmod +x install.sh
+./install.sh
+```
 
 It will download the shell script from following link and start executing all step-by-step commands to install and reboot SuperMesh
 
