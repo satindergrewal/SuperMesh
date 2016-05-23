@@ -8,13 +8,13 @@ lshw.status(function(err, status) {
 		if ( status[i].network === 'wlan0' ) {
 			if ( status[i].driver === 'brcmfmac' ) {
 				console.log(status[i].driver);
-				SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd; sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd; sudo systemctl restart isc-dhcp-server; su$
+				SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd; sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd; sudo systemctl restart isc-dhcp-server; sudo systemctl restart hostapd');
 			} else if ( status[i].driver === 'rtl8192cu' ) {
 				console.log(status[i].driver);
-				SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd; sudo ln -s /usr/sbin/hostapd_edimax_bgn /usr/sbin/hostapd; sudo systemctl restart isc-dhcp-server; su$
+				SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd; sudo ln -s /usr/sbin/hostapd_edimax_bgn /usr/sbin/hostapd; sudo systemctl restart isc-dhcp-server; sudo systemctl restart hostapd');
 			} else {
 				console.log(status[i].driver);
-				SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd; sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd; sudo systemctl restart isc-dhcp-server; su$
+				SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd; sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd; sudo systemctl restart isc-dhcp-server; sudo systemctl restart hostapd');
 			}
 		}
 	}
