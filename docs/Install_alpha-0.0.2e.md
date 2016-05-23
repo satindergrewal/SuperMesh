@@ -24,7 +24,7 @@ https://github.com/satindergrewal/SuperMesh/blob/alpha-0.0.2e/install.sh
 
 
 #### Adding cfengine repository for Raspbian Jesse
-`sudo bash -c "echo 'deb http://cfengineers.net/repo raspjessie main' >> /etc/apt/sources.list"`
+`sudo bash -c "echo 'deb http://cfengineers.net/repo raspjessie main' >> /etc/apt/sources.list.d/cfengineers.list"`
 
 
 #### Updating and intalling cfengine
