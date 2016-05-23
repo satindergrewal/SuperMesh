@@ -46,7 +46,7 @@ sudo systemctl enable supermesh
 
 #### Copyting configuration data from SuperMesh Sample Data to system
 ```shell
-cp -av /opt/SuperMesh/private/system_scripts/sample_data /opt/SuperMeshData
+sudo cp -av /opt/SuperMesh/private/system_scripts/sample_data /opt/SuperMeshData
 ```
 
 
