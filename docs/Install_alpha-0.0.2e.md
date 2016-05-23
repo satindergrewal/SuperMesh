@@ -120,12 +120,6 @@ sudo systemctl restart networking
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/dhcpd_conf.cf
 sudo systemctl daemon-reload
 sudo systemctl restart isc-dhcp-server
-
-
-
-sudo cf-agent -K /opt/SuperMesh/private/system_scripts/sysctl_conf.cf
-curl -L http://localhost:3000/admin/firewall/enableipv4fwd
-
 ```
 
 #### Setting up hostapd drivers
