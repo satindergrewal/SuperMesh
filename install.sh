@@ -68,7 +68,7 @@ sudo cf-agent -K /opt/SuperMesh/private/system_scripts/edit_network_config.cf
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/hostapd_conf.cf
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/dhcpd_conf.cf
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/sysctl_conf.cf
-curl -O http://localhost:3000/admin/firewall/enableipv4fwd
+curl -L http://localhost:3000/admin/firewall/enableipv4fwd
 
 
 #### Remove any unwanted files which generated during install
