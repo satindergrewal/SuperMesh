@@ -1,4 +1,16 @@
 
+### Install using installer script
+You can install using this command on fresh installation of Raspbian Jesse Lite
+`curl -L https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.2e/install.sh | bash`
+
+It will download the shell script from following link and start executing all step-by-step commands to install and reboot SuperMesh
+
+https://github.com/satindergrewal/SuperMesh/blob/alpha-0.0.2e/install.sh
+
+
+
+### Install using step-by-step instructions
+
 #### Importing cfengine repo gpg key
 `sudo wget http://cfengineers.net/repo/autobuilder.gpg -O /etc/apt/trusted.gpg.d/cfengineers-repo.gpg`
 
