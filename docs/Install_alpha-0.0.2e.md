@@ -75,6 +75,24 @@ sudo chmod +x /usr/sbin/hostapd*
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/edit_network_config.cf 
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/hostapd_conf.cf
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/dhcpd_conf.cf
+sudo cf-agent -K /opt/SuperMesh/private/system_scripts/sysctl_conf.cf
 curl -O http://localhost:3000/admin/firewall/enableipv4fwd
 
 ```
+
+#### Remove any unwanted files which generated during install
+```shell
+sudo rm /etc/network/interfaces.cf-before-edit
+sudo rm /etc/dhcp/dhcpd.conf.cf-before-edit
+sudo rm /etc/hostapd/hostapd.conf.cf-before-edit
+sudo rm /etc/default/isc-dhcp-server.cf-before-edit
+sudo rm /etc/default/hostapd.cf-before-edit
+sudo rm /etc/sysctl.conf.cf-before-edit
+```
+
+#### Reboot the system
+```shell
+sudo reboot
+```
+
+
