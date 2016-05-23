@@ -45,6 +45,17 @@ sudo cp -av /opt/SuperMesh/private/system_scripts/sample_data /opt/SuperMeshData
 #### Installing more required system packages
 sudo apt-get -y install isc-dhcp-server hostapd
 
+#### Configuring Raspberry Pi settings using SuperMesh's default system scripts
+# Setting up and restarting network settings
+sudo cf-agent -K /opt/SuperMesh/private/system_scripts/edit_network_config.cf
+sudo systemctl daemon-reload
+sudo systemctl restart networking
+
+# Setting up DHCPD settings & restarting service
+sudo cf-agent -K /opt/SuperMesh/private/system_scripts/dhcpd_conf.cf
+sudo systemctl daemon-reload
+sudo systemctl restart isc-dhcp-server
+
 #### Setting up hostapd drivers
 # Copying hostapd drviers to system for Edimax 802.11bgn wifi adapter & Edimax 802.11ac wifi adapter
 sudo cp -av /opt/SuperMesh/private/system_scripts/drivers/hostapd* /usr/sbin/
@@ -59,17 +70,17 @@ sudo chmod +x /usr/sbin/hostapd*
 # Setting up hostapd
 node /opt/SuperMesh/private/js/install_helper.js
 
+# Setting up Access Point settings & restarting service
+sudo cf-agent -K /opt/SuperMesh/private/system_scripts/hostapd_conf.cf
+sudo systemctl daemon-reload
+sudo systemctl restart hostapd
+
 #### Starting SuperMesh sytstem service
 sudo systemctl start supermesh
 
-
-#### Configuring Raspberry Pi settings using SuperMesh's default system scripts
-sudo cf-agent -K /opt/SuperMesh/private/system_scripts/edit_network_config.cf 
-sudo cf-agent -K /opt/SuperMesh/private/system_scripts/hostapd_conf.cf
-sudo cf-agent -K /opt/SuperMesh/private/system_scripts/dhcpd_conf.cf
+# Setting up IP forwarding
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/sysctl_conf.cf
 curl -L http://localhost:3000/admin/firewall/enableipv4fwd
-
 
 #### Remove any unwanted files which generated during install
 sudo rm /etc/network/interfaces.cf-before-edit
