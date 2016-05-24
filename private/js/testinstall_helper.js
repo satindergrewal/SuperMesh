@@ -11,22 +11,22 @@ lshw.status(function(err, status) {
 	var APFile = '/opt/SuperMeshData/hostapd_conf.data'
 	var APData = ''
 	var tempData = JSON.parse(fs.readFileSync(APFile, 'utf8'));
-	console.log(tempData);
+	//console.log(tempData);
 	var APDriver = ''
 
 	for (i = 0; i < status.length; i++) {
 		//console.log(status[i]);
 		if ( status[i].network === 'wlan0' ) {
 			if ( status[i].driver === 'brcmfmac' ) {
-				console.log(status[i].driver);
+				//console.log(status[i].driver);
 				APDriver = 'nl80211'
 				//console.log(APDriver);
 			} else if ( status[i].driver === 'rtl8192cu' ) {
-				console.log(status[i].driver);
+				//console.log(status[i].driver);
 				APDriver = 'rtl871xdrv'
 				//console.log(APDriver);
 			} else {
-				console.log(status[i].driver);
+				//console.log(status[i].driver);
 				APDriver = 'nl80211'
 				//console.log(APDriver);
 			}
@@ -55,7 +55,7 @@ lshw.status(function(err, status) {
 			console.log('writing to ' + APFile);
 
 			//Execute promissed spanw child process
-			//SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/hostapd_conf.cf && sudo rm /etc/hostapd/hostapd.conf.cf-before-edit && sudo rm /etc/default/hostapd.cf-before-edit && sudo systemctl daemon-reload');
+			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/hostapd_conf.cf && sudo rm /etc/hostapd/hostapd.conf.cf-before-edit && sudo rm /etc/default/hostapd.cf-before-edit && sudo systemctl daemon-reload');
 
 			
 			lshw.status(function(err, status) {
@@ -64,14 +64,14 @@ lshw.status(function(err, status) {
 					//console.log(status[i]);
 					if ( status[i].network === 'wlan0' ) {
 						if ( status[i].driver === 'brcmfmac' ) {
-							console.log(status[i].driver);
-							//SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd && sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd && sudo systemctl restart isc-dhcp-server && sudo systemctl restart hostapd');
+							//console.log(status[i].driver);
+							SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd && sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd && sudo systemctl restart isc-dhcp-server && sudo systemctl restart hostapd');
 						} else if ( status[i].driver === 'rtl8192cu' ) {
-							console.log(status[i].driver);
-							//SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd && sudo ln -s /usr/sbin/hostapd_edimax_bgn /usr/sbin/hostapd && sudo systemctl restart isc-dhcp-server && sudo systemctl restart hostapd');
+							//console.log(status[i].driver);
+							SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd && sudo ln -s /usr/sbin/hostapd_edimax_bgn /usr/sbin/hostapd && sudo systemctl restart isc-dhcp-server && sudo systemctl restart hostapd');
 						} else {
-							console.log(status[i].driver);
-							//SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd && sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd && sudo systemctl restart isc-dhcp-server && sudo systemctl restart hostapd');
+							//console.log(status[i].driver);
+							SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd && sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd && sudo systemctl restart isc-dhcp-server && sudo systemctl restart hostapd');
 						}
 					}
 				}
