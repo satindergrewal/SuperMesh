@@ -1,15 +1,6 @@
-var fs = require('fs');
 var SuperMesh = require("./app_functions.js");
 var lshw = require("./lshw.js");
 
-	var APFile = '/opt/SuperMeshData/hostapd_conf.data'
-	var APData = ''
-
-var obj = JSON.parse(fs.readFileSync(APFile, 'utf8'));
-
-console.log(obj.wlan_Interface);
-
-/*
 lshw.status(function(err, status) {
 	//console.log(status);
 	for (i = 0; i < status.length; i++) {
@@ -28,4 +19,3 @@ lshw.status(function(err, status) {
 		}
 	}
 });
-*/
