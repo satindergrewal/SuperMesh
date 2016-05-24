@@ -20,15 +20,15 @@ lshw.status(function(err, status) {
 			if ( status[i].driver === 'brcmfmac' ) {
 				console.log(status[i].driver);
 				APDriver = 'nl80211'
-				console.log(APDriver);
+				//console.log(APDriver);
 			} else if ( status[i].driver === 'rtl8192cu' ) {
 				console.log(status[i].driver);
 				APDriver = 'rtl871xdrv'
-				console.log(APDriver);
+				//console.log(APDriver);
 			} else {
 				console.log(status[i].driver);
 				APDriver = 'nl80211'
-				console.log(APDriver);
+				//console.log(APDriver);
 			}
 		}
 	}
@@ -45,8 +45,36 @@ lshw.status(function(err, status) {
 	  "AP_802_11AC_Channel": tempData.AP_802_11AC_Channel
 	}
 
-	console.log(APData);
+	//console.log(APData);
 
+
+	// Write update changes to JSON file interfaces.data
+	fs.writeFile(APFile, JSON.stringify(APData, null, 2), function (err) {
+		if (err) return console.log(err)
+			console.log(JSON.stringify(APData, null, 2));
+			console.log('writing to ' + APFile);
+
+			//Execute promissed spanw child process
+			//SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/hostapd_conf.cf && sudo rm /etc/hostapd/hostapd.conf.cf-before-edit && sudo rm /etc/default/hostapd.cf-before-edit && sudo systemctl daemon-reload');
+
+			/*
+			lshw.status(function(err, status) {
+				//console.log(status);
+				for (i = 0; i < status.length; i++) {
+					//console.log(status[i]);
+					if ( status[i].network === 'wlan0' ) {
+						if ( status[i].driver === 'brcmfmac' ) {
+							//console.log(status[i].driver);
+							SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd && sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd && sudo systemctl restart isc-dhcp-server && sudo systemctl restart hostapd');
+						} else if ( status[i].driver === 'rtl8192cu' ) {
+							SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd && sudo ln -s /usr/sbin/hostapd_edimax_bgn /usr/sbin/hostapd && sudo systemctl restart isc-dhcp-server && sudo systemctl restart hostapd');
+						} else {
+							SuperMesh.RunCmd('sudo rm -f /usr/sbin/hostapd && sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd && sudo systemctl restart isc-dhcp-server && sudo systemctl restart hostapd');
+						}
+					}
+				}
+			});*/
+		});
 
 	
 });
