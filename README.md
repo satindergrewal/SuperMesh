@@ -1,3 +1,10 @@
+
+NOTE: The alpha build of SuperMesh version 0.0.2e is in testing. If you are after testing it, please refer to the following link:
+
+https://github.com/satindergrewal/SuperMesh/blob/alpha-0.0.2e/docs/Install_alpha-0.0.2e.md
+
+
+
 SuperMesh Dependencies:
  - cfengine
  - nodejs version 0.10+
