@@ -34,6 +34,18 @@ This is the most basic and the base requirement build of SuperMesh. It only targ
  All these settings are basic, and will advance as SuperMesh development advances.
 
 
+### Did you face any problem setting up this alpha build?
+If you face any problem setting up this alpha build, please feel free to create an issue here:
+https://github.com/satindergrewal/SuperMesh/issues
+
+Or you can live chat with me on SuperNet slack in #spacemesh channel. To join SuperNet Slack please follow this link:
+http://slackinvite.supernet.org
+
+There will be other mediums of contact as well in future including IRC Channels, official website, forum, etc. But for now I'm busy developing SuperMesh and full time job and I don't have much help managing community. And it doesn't feel like the right time to have one, as the software isn't yet at that stage, but very soon will be.
+
+Please feel free to contact me on twitter @satindergrewal
+
+
 
 ### Install using installer script
 You can install using this command on fresh installation of Raspbian Jesse Lite
