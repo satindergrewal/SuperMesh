@@ -7,7 +7,7 @@ var lshw = require("./lshw.js");
 
 var obj = JSON.parse(fs.readFileSync(APFile, 'utf8'));
 
-console.log(obj);
+console.log(obj.wlan_Interface);
 
 /*
 lshw.status(function(err, status) {
