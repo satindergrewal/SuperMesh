@@ -5,13 +5,9 @@ var lshw = require("./lshw.js");
 	var APFile = '/opt/SuperMeshData/hostapd_conf.data'
 	var APData = ''
 
-	fs.readFile(APFile, 'utf8', function (err,data) {
-		if (err) {
-			return console.log(err);
-		}
-		console.log('===== File Read Output ======');
-		console.log(JSON.stringify(data, null, 2));
-	});
+var obj = JSON.parse(fs.readFileSync(APFile, 'utf8'));
+
+console.log(obj);
 
 /*
 lshw.status(function(err, status) {
