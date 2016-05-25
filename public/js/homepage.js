@@ -5,6 +5,10 @@ $(document).ready(function() {
     populateIPInfo();
 });
 
+window.setInterval(function(){ 
+    populateIPInfo();
+}, 15000);
+
 // Functions =============================================================
 
 // Fill table with data
