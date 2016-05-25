@@ -13,7 +13,6 @@ window.setInterval(function(){
 
 // Fill table with data
 function populateIPInfo() {
-    console.log('Populating...')
 
     // Get public IP
     $.getJSON( '/admin/network/ipinfo', function( data ) {
