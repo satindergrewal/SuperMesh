@@ -11,7 +11,7 @@ sudo apt-get update
 sudo apt-get -y install cfengine3
 
 #### Installing dependencies
-sudo apt-get -y install git nodejs npm lshw
+sudo apt-get -y install git nodejs npm lshw wireless-tools
 
 
 #### Make node binary symlink
@@ -61,6 +61,7 @@ sudo systemctl restart networking
 # Setting up DHCPD settings & restarting service
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/dhcpd_conf.cf
 sudo systemctl daemon-reload
+sudo systemctl enable isc-dhcp-server
 sudo systemctl restart isc-dhcp-server
 
 #### Setting up hostapd drivers
@@ -80,6 +81,7 @@ node /opt/SuperMesh/private/js/install_helper.js
 # Setting up Access Point settings & restarting service
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/hostapd_conf.cf
 sudo systemctl daemon-reload
+sudo systemctl enable hostapd
 sudo systemctl restart hostapd
 
 

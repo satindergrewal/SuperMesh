@@ -1,9 +1,11 @@
 ## Supported IoT Devices
  - [Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
  - [Raspberry Pi 3 Model B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/)
+ - [Odroid-XU4](http://www.hardkernel.com/main/products/prdt_info.php?g_code=G143452239825)
 
 ## Requirements
  - [Raspbian Jessie Lite](https://www.raspberrypi.org/downloads/raspbian/)
+ - [Ubuntu 15.04 Robotics Edition: XU3/XU4 (ROS+OpenCV+PCL)](http://forum.odroid.com/viewtopic.php?f=95&t=16149)
 
 If Raspberry Pi 3 Model B
  - 1 USB WiFi Adapter
@@ -11,6 +13,10 @@ If Raspberry Pi 3 Model B
 
 If Raspberry Pi 2 Model B
  - 2 USB WiFi Adaper
+ - 1 USB to LAN Adapter
+
+If Odroid-XU4
+ - 2 USB WiFi Adapter
  - 1 USB to LAN Adapter
 
 
@@ -82,7 +88,7 @@ sudo apt-get install cfengine3
 ```
 
 #### Installing dependencies
-`sudo apt-get -y install git nodejs npm lshw`
+`sudo apt-get -y install git nodejs npm lshw wireless-tools`
 
 
 #### Make node binary symlink
@@ -141,6 +147,7 @@ sudo systemctl restart networking
 # Setting up DHCPD settings & restarting service
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/dhcpd_conf.cf
 sudo systemctl daemon-reload
+sudo systemctl enable isc-dhcp-server
 sudo systemctl restart isc-dhcp-server
 ```
 
@@ -162,6 +169,7 @@ node /opt/SuperMesh/private/js/install_helper.js
 # Setting up Access Point settings & restarting service
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/hostapd_conf.cf
 sudo systemctl daemon-reload
+sudo systemctl enable hostapd
 sudo systemctl restart hostapd
 ```
 
