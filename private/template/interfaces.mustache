@@ -17,6 +17,7 @@ iface lo inet loopback
 {{eth0_enable_disable_dhcp}}address {{eth0_addr}}
 {{eth0_enable_disable_dhcp}}netmask {{eth0_netmask}}
 {{eth0_enable_disable_dhcp}}gateway {{eth0_gateway}}
+dns-nameservers 127.0.0.1 8.8.8.8
 
 # USB Ethernet. Connect this Ethernet Wire to your Laptop or to router.
 {{eth1_enable_disable}}auto eth1
@@ -35,6 +36,7 @@ iface lo inet loopback
 {{wlan1_enable_disable_dhcp}}netmask {{wlan1_netmask}}
 {{wlan1_enable_disable_dhcp}}gateway {{wlan1_gateway}}
 {{wlan1_enable_disable}}wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+dns-nameservers 127.0.0.1 8.8.8.8
 
 # Wireless network interface used for Access Point
 {{wlan0_enable_disable}}auto wlan0
