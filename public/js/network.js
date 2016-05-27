@@ -167,7 +167,22 @@ $(document).ready(function() {
 
 });
 
+window.setInterval(function(){ 
+    populateDashboardInfo();
+}, 15000);
+
 // Functions =============================================================
+
+
+// Fill dashboard with data
+function populateDashboardInfo() {
+
+    // jQuery AJAX call for JSON
+    $.getJSON( '/admin/network/ifconfig', function( data ) {
+        console.log(data[0].wlan0);
+
+    });
+};
 
 // Fill table with data
 function populateIPInfo() {
