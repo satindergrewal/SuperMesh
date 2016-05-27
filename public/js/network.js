@@ -3,14 +3,8 @@ $(document).ready(function() {
 
     // Populate the user table on initial page load
     populateIPInfo();
+    populateDashboardInfo();
 
-/*
-    // Username link click
-    $('#userList table tbody').on('click', 'td a.linkshowuser', showUserInfo);
-
-    // Delete User link click
-    $('#userList table tbody').on('click', 'td a.linkdeleteuser', deleteUser);
-*/
 
     // Udate Network Settings button click
     $('#BtnUpdateNetSettings').on('click', UpdateNetSettings);
@@ -179,8 +173,30 @@ function populateDashboardInfo() {
 
     // jQuery AJAX call for JSON
     $.getJSON( '/admin/network/ifconfig', function( data ) {
-        console.log(data[0].wlan0);
-
+        console.log(data[0]);
+        for (i = 0; i < data.length; i++) {
+            //console.log(data[i]);
+            if ( data[i].interface === 'eth0' ) {
+                $( "#eth0_ip4" ).text( data[i].ipv4_address );
+                $( "#eth0_ip6" ).text( data[i].ipv6_address );
+                $( "#eth0_subnet" ).text( data[i].ipv4_subnet_mask );
+            }
+            if ( data[i].interface === 'eth1' ) {
+                $( "#eth1_ip4" ).text( data[i].ipv4_address );
+                $( "#eth1_ip6" ).text( data[i].ipv6_address );
+                $( "#eth1_subnet" ).text( data[i].ipv4_subnet_mask );
+            }
+            if ( data[i].interface === 'wlan0' ) {
+                $( "#wlan0_ip4" ).text( data[i].ipv4_address );
+                $( "#wlan0_ip6" ).text( data[i].ipv6_address );
+                $( "#wlan0_subnet" ).text( data[i].ipv4_subnet_mask );
+            }
+            if ( data[i].interface === 'wlan1' ) {
+                $( "#wlan1_ip4" ).text( data[i].ipv4_address );
+                $( "#wlan1_ip6" ).text( data[i].ipv6_address );
+                $( "#wlan1_subnet" ).text( data[i].ipv4_subnet_mask );
+            }
+        }
     });
 };
 
