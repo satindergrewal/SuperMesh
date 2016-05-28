@@ -10,7 +10,7 @@
                                     <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
                                 </li>
                             </ul>-->
-                            <h3 class="block-title">AP Interface: wlan0 <small>(First WLAN Interface)</small></h3>
+                            <h3 class="block-title" style="text-transform: none;">PowerDns Recursor <small>(DNS Cache &amp; Query forwarder)</small></h3>
                         </div>
 
 
@@ -19,14 +19,28 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <div class="col-xs-12">
-                                                <label class="css-input switch switch-sm switch-primary"><input id="iptables4_enable_disable" type="checkbox" checked=""><span></span> Enable IPv4 Forwarding</label>
+                                                <label class="css-input switch switch-sm switch-primary"><input id="onion_enable_disable" type="checkbox" checked=""><span></span> Resolve <strong>.onion</strong> domains</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <div class="col-xs-12">
-                                                <label class="css-input switch switch-sm switch-primary"><input id="iptables6_enable_disable" type="checkbox" checked=""><span></span> Enable IPv6 Forwarding</label>
+                                                <label class="css-input switch switch-sm switch-primary"><input id="bit_enable_disable" type="checkbox" checked=""><span></span> Resolve <strong>.bit</strong> domains</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <label class="css-input switch switch-sm switch-primary"><input id="eth_enable_disable" type="checkbox" checked=""><span></span> Resolve <strong>.eth</strong> domains</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <label class="css-input switch switch-sm switch-primary"><input id="p2p_enable_disable" type="checkbox" checked=""><span></span> Resolve <strong>.p2p</strong> domains</label>
                                             </div>
                                         </div>
                                     </div>
