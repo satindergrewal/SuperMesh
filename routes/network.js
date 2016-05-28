@@ -22,15 +22,6 @@ router.get('/getip', function(req, res, next) {
 	  ifoutput = JSON.parse(data);
 	  res.send(ifoutput);
 	});
-
-	//var ifoutput = SuperMesh.ExecuteProcess('private/system_scripts/read_wlan0.sh','', function(Output) {
-		//console.log(Output);
-		//res.send(Output);
-	//});
-
-	//console.log(SuperMesh.ExecuteProcess('echo','Hello'));
-	//console.log('IfOutput: ' + ifoutput);
-	//res.send('<h1>Ready to get IP Addresses.</h1><pre>' + ifoutput + '</pre>');
 });
 
 router.get('/ipinfo', function(req, res, next) {
@@ -74,6 +65,17 @@ router.get('/ifconfig', function(req, res, next) {
 	var ifconfig = require('wireless-tools/ifconfig');
  
 	ifconfig.status(function(err, status) {
+		res.send(status);
+	});
+
+});
+
+
+router.get('/ifstate', function(req, res, next) {
+
+	var ifState = require("../private/js/ifstate.js");
+ 
+	ifState.status(function(err, status) {
 		res.send(status);
 	});
 
