@@ -57,28 +57,30 @@ function UpdatefirewallSettings() {
         App.loader('hide');
     }, 3000);*/
 
-    var firewallSettings = {
-            'iptables4_enable_disable': $('#iptables4_enable_disable').is(':checked'),
-            'iptables6_enable_disable': $('#iptables6_enable_disable').is(':checked')
+    var pdnsSettings = {
+            'onion_enable_disable': $('#onion_enable_disable').is(':checked'),
+            'bit_enable_disable': $('#bit_enable_disable').is(':checked'),
+            'eth_enable_disable': $('#eth_enable_disable').is(':checked'),
+            'p2p_enable_disable': $('#p2p_enable_disable').is(':checked')
         }
 
 
     // Use AJAX to post the object to our adduser service
     $.ajax({
         type: 'POST',
-        data: firewallSettings,
-        url: '/admin/firewall/update',
+        data: pdnsSettings,
+        url: '/admin/dnsserver/update',
         dataType: 'html',
         success: function(data, textStatus, jqXHR) {
-            var APData = JSON.parse(data);
-            console.log(APData);
+            var pdnsData = JSON.parse(data);
+            console.log(pdnsData);
 
-            if (APData.msg === 'success') {
+            if (pdnsData.msg === 'success') {
                 console.log('Success');
-                swal("Success", "firewall Settings Saved.", "success");
+                swal("Success", "PowerDNS Recursor Settings Saved.", "success");
 
-                // Populate IP Info
-                //populateIPInfo();
+                // Populate field data
+                populateFields();
             }
             else {
                 // If something goes wrong, alert the error message that our service returned
