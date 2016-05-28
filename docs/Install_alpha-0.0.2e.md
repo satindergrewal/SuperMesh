@@ -180,8 +180,9 @@ sudo systemctl restart hostapd
 
 #### Setting up DNS Service & restarting service
 ```shell
-sudo cf-agent -K /opt/SuperMesh/private/system_scripts/recursor_config.cf
+sudo cf-agent -K /opt/SuperMesh/private/system_scripts/recursor_conf.cf
 sudo systemctl daemon-reload
+sudo systemctl enable pdns-recursor
 sudo systemctl restart pdns-recursor
 ```
 
