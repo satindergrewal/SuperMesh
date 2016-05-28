@@ -43,7 +43,7 @@ sudo systemctl enable supermesh
 sudo cp -av /opt/SuperMesh/private/system_scripts/sample_data /opt/SuperMeshData
 
 #### Installing more required system packages
-sudo apt-get -y install isc-dhcp-server hostapd
+sudo apt-get -y install isc-dhcp-server hostapd pdns-recursor
 
 #### Starting SuperMesh sytstem service
 sudo systemctl start supermesh
@@ -84,6 +84,10 @@ sudo systemctl daemon-reload
 sudo systemctl enable hostapd
 sudo systemctl restart hostapd
 
+# Setting up DNS Service & restarting service
+sudo cf-agent -K /opt/SuperMesh/private/system_scripts/recursor_config.cf
+sudo systemctl daemon-reload
+sudo systemctl restart pdns-recursor
 
 #### Remove any unwanted files which generated during install
 sudo rm /etc/network/interfaces.cf-before-edit
@@ -92,6 +96,7 @@ sudo rm /etc/hostapd/hostapd.conf.cf-before-edit
 sudo rm /etc/default/isc-dhcp-server.cf-before-edit
 sudo rm /etc/default/hostapd.cf-before-edit
 sudo rm /etc/sysctl.conf.cf-before-edit
+sudo rm /etc/powerdns/recursor.conf.cf-before-edit 
 
 #### Reboot the system
 sudo reboot
