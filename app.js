@@ -15,6 +15,7 @@ var wifi = require('./routes/wifi');
 var accesspoint = require('./routes/accesspoint');
 var dhcpd = require('./routes/dhcpd');
 var firewall = require('./routes/firewall');
+var dnsserver = require('./routes/dnsserver');
 var telepathy = require('./routes/telepathy');
 
 var app = express();
@@ -41,6 +42,7 @@ app.use('/admin/wifi', wifi);
 app.use('/admin/accesspoint', accesspoint);
 app.use('/admin/dhcpd', dhcpd);
 app.use('/admin/firewall', firewall);
+app.use('/admin/dnsserver', dnsserver);
 app.use('/admin/telepathy', telepathy);
 
 // catch 404 and forward to error handler

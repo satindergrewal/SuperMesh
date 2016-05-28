@@ -172,6 +172,59 @@ window.setInterval(function(){
 function populateDashboardInfo() {
 
     // jQuery AJAX call for JSON
+    $.getJSON( '/admin/network/ifstate', function( data ) {
+        console.log(data[0]);
+        for (i = 0; i < data.length; i++) {
+            //console.log(data[i]);
+            if ( data[i].interface === 'eth0' ) {
+                $( "#eth0_ip_status" ).text( data[i].state );
+                if ( data[i].state === 'UP' ) {
+                    $( "#eth0_ip_div" ).removeClass( "text-danger" ).addClass( "text-success" );
+                    $( "#eth0_ip_icon" ).removeClass( "fa fa-times-circle" ).addClass( "fa fa-check-circle" );
+                }
+                if ( data[i].state !== 'UP' ) {
+                    $( "#eth0_ip_div" ).removeClass( "text-success" ).addClass( "text-danger" );
+                    $( "#eth0_ip_icon" ).removeClass( "fa fa-check-circle" ).addClass( "fa fa-times-circle" );
+                }
+            }
+            if ( data[i].interface === 'eth1' ) {
+                $( "#eth1_ip_status" ).text( data[i].state );
+                if ( data[i].state === 'UP' ) {
+                    $( "#eth1_ip_div" ).removeClass( "text-danger" ).addClass( "text-success" );
+                    $( "#eth1_ip_icon" ).removeClass( "fa fa-times-circle" ).addClass( "fa fa-check-circle" );
+                }
+                if ( data[i].state !== 'UP' ) {
+                    $( "#eth1_ip_div" ).removeClass( "text-success" ).addClass( "text-danger" );
+                    $( "#eth1_ip_icon" ).removeClass( "fa fa-check-circle" ).addClass( "fa fa-times-circle" );
+                }
+
+            }
+            if ( data[i].interface === 'wlan0' ) {
+                $( "#wlan0_ip_status" ).text( data[i].state );
+                if ( data[i].state === 'UP' ) {
+                    $( "#wlan0_ip_div" ).removeClass( "text-danger" ).addClass( "text-success" );
+                    $( "#wlan0_ip_icon" ).removeClass( "fa fa-times-circle" ).addClass( "fa fa-check-circle" );
+                }
+                if ( data[i].state !== 'UP' ) {
+                    $( "#wlan0_ip_div" ).removeClass( "text-success" ).addClass( "text-danger" );
+                    $( "#wlan0_ip_icon" ).removeClass( "fa fa-check-circle" ).addClass( "fa fa-times-circle" );
+                }
+            }
+            if ( data[i].interface === 'wlan1' ) {
+                $( "#wlan1_ip_status" ).text( data[i].state );
+                if ( data[i].state === 'UP' ) {
+                    $( "#wlan1_ip_div" ).removeClass( "text-danger" ).addClass( "text-success" );
+                    $( "#wlan1_ip_icon" ).removeClass( "fa fa-times-circle" ).addClass( "fa fa-check-circle" );
+                }
+                if ( data[i].state !== 'UP' ) {
+                    $( "#wlan1_ip_div" ).removeClass( "text-success" ).addClass( "text-danger" );
+                    $( "#wlan1_ip_icon" ).removeClass( "fa fa-check-circle" ).addClass( "fa fa-times-circle" );
+                }
+            }
+        }
+    });
+
+    // jQuery AJAX call for JSON
     $.getJSON( '/admin/network/ifconfig', function( data ) {
         console.log(data[0]);
         for (i = 0; i < data.length; i++) {
