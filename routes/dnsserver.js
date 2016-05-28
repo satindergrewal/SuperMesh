@@ -13,203 +13,42 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/getsettings', function(req, res, next) {
-	var getipv4fwd = fs.readFileSync('/proc/sys/net/ipv4/ip_forward').toString();
-	var getipv6fwd = fs.readFileSync('/proc/sys/net/ipv6/conf/all/forwarding').toString();
 
-	//Demo values
-	//var getipv4fwd = '1'
-	//var getipv6fwd = '0'
-
-	IPtablesSettingsData = {
-		"ipv4fwd": getipv4fwd,
-		"ipv6fwd": getipv6fwd
-	}
-
-	console.log('===>> IPtablesSettings DATA recieved >>');
-	console.log('=========== JSON Stringify ===========');
-	console.log(JSON.stringify(IPtablesSettingsData, null, 2));
-
-	res.send(IPtablesSettingsData);
+	var ifoutput;
+	fs.readFile('/opt/SuperMeshData/recursor_conf.data', 'utf8', function (err, data) {
+	  if (err) throw err;
+	  ifoutput = JSON.parse(data);
+	  res.send(ifoutput);
+	});
 });
 
 
 /* POST to Update IPTables Settings. */
 router.post('/update', function(req, res) {
-	var sysctlFile = '/opt/SuperMeshData/sysctl_conf.data'
-	var sysctlData = ''
+	var PDNSRFile = '/opt/SuperMeshData/recursor_conf.data'
+	var PDNSRData = ''
 
 	console.log('======= req.body =======');
 	console.log(req.body);
 
-	sysctlData = {
+	PDNSRData = {
 		"ipv4fwd_enable_disable": (req.body.iptables4_enable_disable === "false") ? "0" : "1",
 		"ipv6fwd_enable_disable": (req.body.iptables6_enable_disable === "false") ? "0" : "1"
 	}
 
 	console.log('=========== JSON Stringify ===========');
-	console.log(JSON.stringify(sysctlData, null, 2))
+	console.log(JSON.stringify(PDNSRData, null, 2))
 
 	// Write update changes to JSON file interfaces.data
-	fs.writeFile(sysctlFile, JSON.stringify(sysctlData, null, 2), function (err) {
+	fs.writeFile(PDNSRFile, JSON.stringify(PDNSRData, null, 2), function (err) {
 		if (err) return console.log(err)
-			//console.log(JSON.stringify(sysctlData, null, 2))
-			//console.log('writing to ' + sysctlFile)
+			//console.log(JSON.stringify(PDNSRData, null, 2))
+			//console.log('writing to ' + PDNSRFile)
 
 			//Execute promissed spanw child process
-			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/sysctl_conf.cf');
-			SuperMesh.RunCmd('sudo rm /etc/sysctl.conf.cf-before-edit');
+			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/recursor_config.cf; sudo rm /etc/powerdns/recursor.conf.cf-before-edit');
 		});
 
-
-	if ( req.body.iptables4_enable_disable === 'true' ) {
-		//Enable IPv4 forwarding
-		SuperMesh.RunCmd('sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"');
-		//Enable Masquerading on eth0 interface, the Internet Interneface
-		SuperMesh.RunCmd('sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE');
-		//Enable Masquerading on eth0 interface, the Internet Interneface
-		SuperMesh.RunCmd('sudo iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE');
-		
-		// Between eth0 (Internet) <-> wlan0 (Local LAN)
-		//Forward any packet coming from eth0 (Internet) interface to wlan0 (Access Point) interface
-		SuperMesh.RunCmd('sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-		//Forward any packet coming from wlan0 (Access Point) interface to eth0 (Internet) interface
-		SuperMesh.RunCmd('sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT');
-
-		// Between eth0 (Internet) <-> eth1 (Local LAN)
-		//Forward any packet coming from eth0 (Internet) interface to eth1 (Access Point) interface
-		SuperMesh.RunCmd('sudo iptables -A FORWARD -i eth0 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-		//Forward any packet coming from eth1 (Access Point) interface to eth0 (Internet) interface
-		SuperMesh.RunCmd('sudo iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT');
-		
-		// Between wlan1 (Internet) <-> wlan0 (Local LAN)
-		//Forward any packet coming from wlan1 (Internet) interface to wlan0 (Access Point) interface
-		SuperMesh.RunCmd('sudo iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-		//Forward any packet coming from wlan0 (Access Point) interface to wlan1 (Internet) interface
-		SuperMesh.RunCmd('sudo iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT');
-
-		// Between wlan1 (Internet) <-> eth1 (Local LAN)
-		//Forward any packet coming from wlan1 (Internet) interface to eth1 (Access Point) interface
-		SuperMesh.RunCmd('sudo iptables -A FORWARD -i wlan1 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-		//Forward any packet coming from eth1 (Access Point) interface to wlan1 (Internet) interface
-		SuperMesh.RunCmd('sudo iptables -A FORWARD -i eth1 -o wlan1 -j ACCEPT');
-		
-		//Save updated iptables rules to ipv4 file
-		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-	} else if ( req.body.iptables4_enable_disable === 'false' ) {
-		//Enable IPv4 forwarding
-		SuperMesh.RunCmd('sudo sh -c "echo 0 > /proc/sys/net/ipv4/ip_forward"');
-		//Enable Masquerading on eth0 interface, the Internet Interneface
-		SuperMesh.RunCmd('sudo iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE');
-		//Enable Masquerading on eth0 interface, the Internet Interneface
-		SuperMesh.RunCmd('sudo iptables -t nat -D POSTROUTING -o wlan1 -j MASQUERADE');
-
-		// Between eth0 (Internet) <-> wlan0 (Local LAN)
-		//Forward any packet coming from eth0 (Internet) interface to wlan0 (Access Point) interface
-		SuperMesh.RunCmd('sudo iptables -D FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-		//Forward any packet coming from wlan0 (Access Point) interface to eth0 (Internet) interface
-		SuperMesh.RunCmd('sudo iptables -D FORWARD -i wlan0 -o eth0 -j ACCEPT');
-
-		// Between eth0 (Internet) <-> eth1 (Local LAN)
-		//Forward any packet coming from eth0 (Internet) interface to eth1 (Access Point) interface
-		SuperMesh.RunCmd('sudo iptables -D FORWARD -i eth0 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-		//Forward any packet coming from eth1 (Access Point) interface to eth0 (Internet) interface
-		SuperMesh.RunCmd('sudo iptables -D FORWARD -i eth1 -o eth0 -j ACCEPT');
-		
-		// Between wlan1 (Internet) <-> wlan0 (Local LAN)
-		//Forward any packet coming from wlan1 (Internet) interface to wlan0 (Access Point) interface
-		SuperMesh.RunCmd('sudo iptables -D FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-		//Forward any packet coming from wlan0 (Access Point) interface to wlan1 (Internet) interface
-		SuperMesh.RunCmd('sudo iptables -D FORWARD -i wlan0 -o wlan1 -j ACCEPT');
-
-		// Between wlan1 (Internet) <-> eth1 (Local LAN)
-		//Forward any packet coming from wlan1 (Internet) interface to eth1 (Access Point) interface
-		SuperMesh.RunCmd('sudo iptables -D FORWARD -i wlan1 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-		//Forward any packet coming from eth1 (Access Point) interface to wlan1 (Internet) interface
-		SuperMesh.RunCmd('sudo iptables -D FORWARD -i eth1 -o wlan1 -j ACCEPT');
-		
-		//Save updated iptables rules to ipv4 file
-		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-	}
-	
-	res.end('{"msg": "success","result": "result"}');
-});
-
-
-// Update iptabels 4 forwarding
-router.get('/enableipv4fwd', function(req, res) {
-	//Enable IPv4 forwarding
-	SuperMesh.RunCmd('sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"');
-	//Enable Masquerading on eth0 interface, the Internet Interneface
-	SuperMesh.RunCmd('sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE');
-	//Enable Masquerading on eth0 interface, the Internet Interneface
-	SuperMesh.RunCmd('sudo iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE');
-	
-	// Between eth0 (Internet) <-> wlan0 (Local LAN)
-	//Forward any packet coming from eth0 (Internet) interface to wlan0 (Access Point) interface
-	SuperMesh.RunCmd('sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-	//Forward any packet coming from wlan0 (Access Point) interface to eth0 (Internet) interface
-	SuperMesh.RunCmd('sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT');
-
-	// Between eth0 (Internet) <-> eth1 (Local LAN)
-	//Forward any packet coming from eth0 (Internet) interface to eth1 (Access Point) interface
-	SuperMesh.RunCmd('sudo iptables -A FORWARD -i eth0 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-	//Forward any packet coming from eth1 (Access Point) interface to eth0 (Internet) interface
-	SuperMesh.RunCmd('sudo iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT');
-	
-	// Between wlan1 (Internet) <-> wlan0 (Local LAN)
-	//Forward any packet coming from wlan1 (Internet) interface to wlan0 (Access Point) interface
-	SuperMesh.RunCmd('sudo iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-	//Forward any packet coming from wlan0 (Access Point) interface to wlan1 (Internet) interface
-	SuperMesh.RunCmd('sudo iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT');
-
-	// Between wlan1 (Internet) <-> eth1 (Local LAN)
-	//Forward any packet coming from wlan1 (Internet) interface to eth1 (Access Point) interface
-	SuperMesh.RunCmd('sudo iptables -A FORWARD -i wlan1 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-	//Forward any packet coming from eth1 (Access Point) interface to wlan1 (Internet) interface
-	SuperMesh.RunCmd('sudo iptables -A FORWARD -i eth1 -o wlan1 -j ACCEPT');
-	
-	//Save updated iptables rules to ipv4 file
-	SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-	
-	res.end('{"msg": "success","result": "result"}');
-});
-
-// Update iptabels 4 forwarding
-router.get('/disableipv4fwd', function(req, res) {
-	//Enable IPv4 forwarding
-	SuperMesh.RunCmd('sudo sh -c "echo 0 > /proc/sys/net/ipv4/ip_forward"');
-	//Enable Masquerading on eth0 interface, the Internet Interneface
-	SuperMesh.RunCmd('sudo iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE');
-	//Enable Masquerading on eth0 interface, the Internet Interneface
-	SuperMesh.RunCmd('sudo iptables -t nat -D POSTROUTING -o wlan1 -j MASQUERADE');
-
-	// Between eth0 (Internet) <-> wlan0 (Local LAN)
-	//Forward any packet coming from eth0 (Internet) interface to wlan0 (Access Point) interface
-	SuperMesh.RunCmd('sudo iptables -D FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-	//Forward any packet coming from wlan0 (Access Point) interface to eth0 (Internet) interface
-	SuperMesh.RunCmd('sudo iptables -D FORWARD -i wlan0 -o eth0 -j ACCEPT');
-
-	// Between eth0 (Internet) <-> eth1 (Local LAN)
-	//Forward any packet coming from eth0 (Internet) interface to eth1 (Access Point) interface
-	SuperMesh.RunCmd('sudo iptables -D FORWARD -i eth0 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-	//Forward any packet coming from eth1 (Access Point) interface to eth0 (Internet) interface
-	SuperMesh.RunCmd('sudo iptables -D FORWARD -i eth1 -o eth0 -j ACCEPT');
-	
-	// Between wlan1 (Internet) <-> wlan0 (Local LAN)
-	//Forward any packet coming from wlan1 (Internet) interface to wlan0 (Access Point) interface
-	SuperMesh.RunCmd('sudo iptables -D FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-	//Forward any packet coming from wlan0 (Access Point) interface to wlan1 (Internet) interface
-	SuperMesh.RunCmd('sudo iptables -D FORWARD -i wlan0 -o wlan1 -j ACCEPT');
-
-	// Between wlan1 (Internet) <-> eth1 (Local LAN)
-	//Forward any packet coming from wlan1 (Internet) interface to eth1 (Access Point) interface
-	SuperMesh.RunCmd('sudo iptables -D FORWARD -i wlan1 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT');
-	//Forward any packet coming from eth1 (Access Point) interface to wlan1 (Internet) interface
-	SuperMesh.RunCmd('sudo iptables -D FORWARD -i eth1 -o wlan1 -j ACCEPT');
-	
-	//Save updated iptables rules to ipv4 file
-	SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-	
 	res.end('{"msg": "success","result": "result"}');
 });
 
