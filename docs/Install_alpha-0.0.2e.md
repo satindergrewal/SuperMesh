@@ -104,7 +104,12 @@ sudo apt-get install cfengine3
 
 
 #### Change directory to SuperMesh
-`cd /opt/SuperMesh/`
+```shell
+cd /opt/SuperMesh/
+
+# Fix permissions of supermesh files
+chmod 644 /opt/SuperMesh/private/system_scripts/*.cf
+```
 
 
 #### Installing SuperMesh

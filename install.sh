@@ -25,6 +25,8 @@ git clone -b alpha-0.0.2e https://github.com/satindergrewal/SuperMesh
 #### Move SuperMesh to /opt directory
 sudo mv SuperMesh /opt/
 
+# Fix permissions of supermesh files
+chmod 644 /opt/SuperMesh/private/system_scripts/*.cf
 
 #### Change directory to SuperMesh
 cd /opt/SuperMesh/
