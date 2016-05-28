@@ -15,34 +15,34 @@ $(document).ready(function() {
 function populateFields() {
     // jQuery AJAX call for JSON
     $.getJSON( '/admin/dnsserver/getsettings', function( data ) {
-        console.log('---------PowerDNS Recursor Settings-----------');
-        console.log(data);
+        //console.log('---------PowerDNS Recursor Settings-----------');
+        //console.log(data);
 
         //Set .onion dns settings
-        if ( data.onion_enable_disable === 'true' ) {
+        if ( data.onion_enable_disable === true ) {
             $( "#onion_enable_disable" ).prop( "checked", true );
-        } else if ( data.onion_enable_disable === 'false' ) {
+        } else if ( data.onion_enable_disable === false ) {
             $( "#onion_enable_disable" ).prop( "checked", false );
         }
 
         //Set .bit dns settings
-        if ( data.bit_enable_disable === 'true' ) {
+        if ( data.bit_enable_disable === true ) {
             $( "#bit_enable_disable" ).prop( "checked", true );
-        } else if ( data.bit_enable_disable === 'false' ) {
+        } else if ( data.bit_enable_disable === false ) {
             $( "#bit_enable_disable" ).prop( "checked", false );
         }
 
         //Set .eth dns settings
-        if ( data.eth_enable_disable === 'true' ) {
+        if ( data.eth_enable_disable === true ) {
             $( "#eth_enable_disable" ).prop( "checked", true );
-        } else if ( data.eth_enable_disable === 'false' ) {
+        } else if ( data.eth_enable_disable === false ) {
             $( "#eth_enable_disable" ).prop( "checked", false );
         }
 
         //Set .p2p dns settings
-        if ( data.p2p_enable_disable === 'true' ) {
+        if ( data.p2p_enable_disable === true ) {
             $( "#p2p_enable_disable" ).prop( "checked", true );
-        } else if ( data.p2p_enable_disable === 'false' ) {
+        } else if ( data.p2p_enable_disable === false ) {
             $( "#p2p_enable_disable" ).prop( "checked", false );
         }
     });
