@@ -58,6 +58,7 @@ router.post('/update', function(req, res) {
 
 			//Execute promissed spanw child process
 			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/recursor_conf.cf');
+			SuperMesh.RunCmd('sudo rm /etc/powerdns/recursor.conf.cf-before-edit');
 		});
 		
 
