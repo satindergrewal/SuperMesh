@@ -37,7 +37,7 @@ router.post('/update', function(req, res) {
 	//console.log('p2p: '+req.body.p2p_enable_disable);
 
 	PDNSRData = {
-		  "onion": (req.body.onion_enable_disable === 'true' ) ? ",onion.=127.0.0.1:5334" : "",,
+		  "onion": (req.body.onion_enable_disable === 'true' ) ? ",onion.=127.0.0.1:5334" : "",
 		  "onion_enable_disable": (req.body.onion_enable_disable === 'true' ) ? true : false,
 		  "bit": (req.body.bit_enable_disable === 'true' ) ? ",bit.=127.0.0.1:5333" : "",
 		  "bit_enable_disable": (req.body.bit_enable_disable === 'true' ) ? true : false,
