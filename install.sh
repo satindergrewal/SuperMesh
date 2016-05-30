@@ -19,7 +19,7 @@ sudo ln -s /usr/bin/nodejs /usr/bin/node
 
 
 #### Clone SuperMesh's test build to system
-git clone -b alpha-0.0.2e https://github.com/satindergrewal/SuperMesh
+git clone -b alpha-0.0.3 https://github.com/satindergrewal/SuperMesh
 
 
 #### Move SuperMesh to /opt directory
