@@ -1,0 +1,181 @@
+<!-- Apps Modal -->
+        <!-- Opens from the button in the header -->
+        <div class="modal fade" id="apps-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-sm modal-dialog modal-dialog-top">
+                <div class="modal-content">
+                    <!-- Apps Block -->
+                    <div class="block block-themed block-transparent">
+                        <div class="block-header bg-primary-dark">
+                            <ul class="block-options">
+                                <li>
+                                    <button data-dismiss="modal" type="button"><i class="si si-close"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">Apps</h3>
+                        </div>
+                        <div class="block-content">
+                            <div class="row text-center">
+                                <div class="col-xs-6">
+                                    <a class="block block-rounded" href="index.html">
+                                        <div class="block-content text-white bg-default">
+                                            <i class="si si-speedometer fa-2x"></i>
+                                            <div class="font-w600 push-15-t push-15">Backend</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a class="block block-rounded" href="frontend_home.html">
+                                        <div class="block-content text-white bg-modern">
+                                            <i class="si si-rocket fa-2x"></i>
+                                            <div class="font-w600 push-15-t push-15">Frontend</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Apps Block -->
+                </div>
+            </div>
+        </div>
+        <!-- END Apps Modal -->
+
+        <!-- Compose Modal -->
+        <div class="modal fade" id="modal-compose" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-top">
+                <div class="modal-content">
+                    <div class="block block-themed block-transparent remove-margin-b">
+                        <div class="block-header bg-success">
+                            <ul class="block-options">
+                                <li>
+                                    <button data-dismiss="modal" type="button"><i class="si si-close"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title"><i class="fa fa-pencil"></i> New Message</h3>
+                        </div>
+                        <div class="block-content">
+                            <form class="form-horizontal push-10-t push-10" action="base_pages_inbox.html" method="post" onsubmit="return false;">
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <div class="form-material form-material-success floating input-group">
+                                            <select class="form-control" id="tm-from-address" name="tm-from-address" size="1">
+                                                    <option value="1">TM-NBjPw8m560hZrJUvfeAjd81AADnfp5S3</option>
+                                                    <option value="2">TM-m56kd81ANBjPw8ADnfp5S3JhZr7rhjjh</option>
+                                            </select>
+                                            <label for="message-email">From</label>
+                                            <span class="input-group-addon"><i class="fa fa-fw fa-user-secret"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <div class="form-material form-material-success floating input-group">
+                                            <input class="form-control" type="email" id="message-email" name="message-email">
+                                            <label for="message-email">Telepathy Address</label>
+                                            <span class="input-group-addon"><i class="si si-envelope-open"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <div class="form-material form-material-success floating input-group">
+                                            <input class="form-control" type="text" id="message-subject" name="message-subject">
+                                            <label for="message-subject">Subject</label>
+                                            <span class="input-group-addon"><i class="si si-book-open"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <div class="form-material form-material-success floating">
+                                            <textarea class="form-control" id="message-msg" name="message-msg" rows="6"></textarea>
+                                            <label for="message-msg">Message</label>
+                                        </div>
+                                        <div class="help-block text-right">Feel free to use common tags: &lt;blockquote&gt;, &lt;strong&gt;, &lt;em&gt;</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-sm btn-success" type="submit"><i class="fa fa-send push-5-r"></i> Send Message</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Compose Modal -->
+
+        <!-- Message Modal -->
+        <div class="modal fade" id="modal-message" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-popout">
+                <div class="modal-content">
+                    <div class="block block-themed block-transparent remove-margin-b">
+                        <div class="block-header bg-primary-dark">
+                            <ul class="block-options">
+                                <li>
+                                    <button data-toggle="tooltip" data-placement="left" title="Reply" type="button"><i class="si si-action-undo"></i></button>
+                                </li>
+                                <li>
+                                    <button data-dismiss="modal" type="button"><i class="si si-close"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">Welcome to our service</h3>
+                        </div>
+                        <div class="block-content block-content-full bg-image text-center" style="background-image: url('/assets/img/photos/photo7.jpg');">
+                            <img class="img-avatar img-avatar96 img-avatar-thumb" src="/assets/img/avatars/avatar4.jpg" alt="">
+                        </div>
+                        <div class="block-content block-content-full block-content-mini bg-gray-lighter">
+                            <span class="font-s13 text-muted pull-right"><em>2 min ago</em></span>
+                            <a class="font-s13" href="javascript:void(0)">service@example.com</a>
+                        </div>
+                        <div class="block-content">
+                            <p>Dear John,</p>
+                            <p>Dolor posuere proin blandit accumsan senectus netus nullam curae, ornare laoreet adipiscing luctus mauris adipiscing pretium eget fermentum, tristique lobortis est ut metus lobortis tortor tincidunt himenaeos habitant quis dictumst proin odio sagittis purus mi, nec taciti vestibulum quis in sit varius lorem sit metus mi.</p>
+                            <p>Dolor posuere proin blandit accumsan senectus netus nullam curae, ornare laoreet adipiscing luctus mauris adipiscing pretium eget fermentum, tristique lobortis est ut metus lobortis tortor tincidunt himenaeos habitant quis dictumst proin odio sagittis purus mi, nec taciti vestibulum quis in sit varius lorem sit metus mi.</p>
+                            <p>Best Regards,</p>
+                            <p>Linda Moore</p>
+                        </div>
+                        <div class="block-content bg-gray-lighter">
+                            <div class="row items-push">
+                                <div class="col-sm-4">
+                                    <div class="img-container fx-img-zoom-in">
+                                        <img class="img-responsive" src="/assets/img/photos/photo1.jpg" alt="">
+                                        <div class="img-options">
+                                            <div class="img-options-content">
+                                                <a class="btn btn-sm btn-default" href="javascript:void(0)"><i class="fa fa-download"></i> Download</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="font-s13 text-muted push-5-t">01.jpg</div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="img-container fx-img-zoom-in">
+                                        <img class="img-responsive" src="/assets/img/photos/photo2.jpg" alt="">
+                                        <div class="img-options">
+                                            <div class="img-options-content">
+                                                <a class="btn btn-sm btn-default" href="javascript:void(0)"><i class="fa fa-download"></i> Download</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="font-s13 text-muted push-5-t">02.jpg</div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="img-container fx-img-zoom-in">
+                                        <img class="img-responsive" src="/assets/img/photos/photo3.jpg" alt="">
+                                        <div class="img-options">
+                                            <div class="img-options-content">
+                                                <a class="btn btn-sm btn-default" href="javascript:void(0)"><i class="fa fa-download"></i> Download</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="font-s13 text-muted push-5-t">03.jpg</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Message Modal -->

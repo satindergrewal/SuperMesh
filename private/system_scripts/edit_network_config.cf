@@ -1,0 +1,31 @@
+  body common control
+{
+    bundlesequence => { network_config };
+}
+
+body edit_defaults network_config
+{
+  empty_file_before_editing => "true";
+  edit_backup => "false";
+  max_file_size => "9999999999";
+}
+
+bundle agent network_config
+{
+  files:
+      "/etc/network/interfaces"
+      create => "true",
+      edit_template => "/opt/SuperMesh/private/template/interfaces.mustache",
+      template_method => "mustache",
+      template_data => readjson("/opt/SuperMeshData/interfaces.data", 9999999999);
+}
+
+bundle agent services_restart {
+processes:
+  "^networking" restart_class => "restart_networking";
+
+commands:
+  restart_networking::
+    "sudo /bin/systemctl daemon-reload";
+    "sudo /bin/systemctl restart networking";
+}

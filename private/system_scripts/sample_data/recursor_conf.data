@@ -1,0 +1,10 @@
+{
+  "onion": ",onion.=127.0.0.1:5334",
+  "onion_enable_disable": true,
+  "bit": ",bit.=127.0.0.1:5333",
+  "bit_enable_disable": true,
+  "eth": ",eth.=127.0.0.1:5333",
+  "eth_enable_disable": true,
+  "p2p": ",p2p.=127.0.0.1:5333",
+  "p2p_enable_disable": true
+}

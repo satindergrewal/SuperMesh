@@ -1,0 +1,96 @@
+                    <!-- eth0 Form -->
+                    <form class="form-horizontal push-10-t push-10" id="FormNetSettings" onsubmit="return false;">
+                    <div class="col-md-12">
+                    <div class="block block-themed">
+                        <div class="block-header bg-primary">
+                            <!--<ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="network"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="content_toggle"></button>
+                                </li>
+                            </ul>-->
+                            <h3 class="block-title">AP Interface: wlan0 <small>(First WLAN Interface)</small></h3>
+                        </div>
+
+
+                        <div class="block-content">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <label class="css-input css-radio css-radio-success push-10-r">
+                                                    <input type="radio" id="ap_bgn" name="ap_bgn_ac" value="bgn"><span></span> 802.11bgn
+                                                </label>
+                                                <label class="css-input css-radio css-radio-warning">
+                                                    <input type="radio" id="ap_ac" name="ap_bgn_ac" value="ac"><span></span> 802.11ac
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="ap_ssid" name="ap_ssid" placeholder="e.g. MyHomeWiFi">
+                                                <label for="ap_ssid">AP SSID</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <input class="form-control input-lg" type="text" id="ap_pass" name="ap_pass" placeholder="">
+                                                <label for="ap_pass">AP Password</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <select class="form-control" id="ap_channel" name="ap_channel" size="1">
+                                                </select>
+                                                <label for="ap_channel">Channel</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <select class="form-control" id="ap_driver" name="ap_driver" size="1">
+                                                    <option value="rtl871xdrv">rtl871xdrv</option>
+                                                    <option value="nl80211">nl80211</option>
+                                                </select>
+                                                <label for="ap_driver">Driver</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <div class="form-material">
+                                                <select class="form-control" id="ap_country" name="ap_country" size="1">
+                                                </select>
+                                                <label for="ap_country">Country Code</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- END eth0 Form -->
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div class="col-xs-12" style="text-align: center;">
+                                    <button id="BtnUpdateAPSettings" class="btn btn-info" type="submit">Update</button> 
+                                    <button id="BtnRestartAP" class="btn btn-warning" type="submit">Restart AP Service</button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- END wlan1 Form -->
+                    <script src="/js/jquery.min.js"></script>
+                    <script src="/js/accesspoint.js"></script>

@@ -1,0 +1,21 @@
+  body common control
+{
+    bundlesequence => { torrc_config };
+}
+
+body edit_defaults torrc_config
+{
+  empty_file_before_editing => "true";
+  edit_backup => "false";
+  max_file_size => "9999999999";
+}
+
+bundle agent torrc_config
+{
+  files:
+      "/etc/tor/torrc"
+      create => "true",
+      edit_template => "/opt/SuperMesh/private/template/torrc.mustache",
+      template_method => "mustache",
+      template_data => readjson("/opt/SuperMeshData/interfaces.data", 9999999999);
+}

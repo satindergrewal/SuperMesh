@@ -1,0 +1,106 @@
+<!-- Page Container -->
+        <!--
+            Available Classes:
+
+            'enable-cookies'             Remembers active color theme between pages (when set through color theme list)
+
+            'sidebar-l'                  Left Sidebar and right Side Overlay
+            'sidebar-r'                  Right Sidebar and left Side Overlay
+            'sidebar-mini'               Mini hoverable Sidebar (> 991px)
+            'sidebar-o'                  Visible Sidebar by default (> 991px)
+            'sidebar-o-xs'               Visible Sidebar by default (< 992px)
+
+            'side-overlay-hover'         Hoverable Side Overlay (> 991px)
+            'side-overlay-o'             Visible Side Overlay by default (> 991px)
+
+            'side-scroll'                Enables custom scrolling on Sidebar and Side Overlay instead of native scrolling (> 991px)
+
+            'header-navbar-fixed'        Enables fixed header
+        -->
+        <div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+            <!-- Side Overlay-->
+            <% include admin-side-overlay.ejs %>
+            <!-- END Side Overlay -->
+
+            <!-- Sidebar -->
+            <% include admin-nav-sidebar.ejs %>
+            <!-- END Sidebar -->
+
+            <!-- Header -->
+            <% include admin-header.ejs %>
+            <!-- END Header -->
+
+            <!-- Main Container -->
+            <main id="main-container">
+                <!-- Page Header -->
+                <div class="content bg-gray-lighter">
+                    <div class="row items-push">
+                        <div class="col-sm-7">
+                            <h1 class="page-heading">
+                                SuperMesh <small>Network Settings</small>
+                            </h1>
+                        </div>
+                        <div class="col-sm-5 text-right hidden-xs">
+                            <ol class="breadcrumb push-10-t">
+                                <li>Settings</li>
+                                <li><a class="link-effect" href="">Network</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Page Header -->
+
+                <!-- Start Header white border -->
+
+                <div class="content bg-white border-b">
+                    <div class="row items-push text-uppercase">
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="font-w700 text-gray-darker animated fadeIn">eth0</div>
+                            <div class="text-danger" id="eth0_ip_div"><small><i class="fa fa-times-circle" id="eth0_ip_icon"></i> <span id="eth0_ip_status">Offline</span></small></div>
+                            <div class="h6 font-w300 text-primary"><strong>IPv4 Addr:</strong> <span id="eth0_ip4" style="text-transform: lowercase;"> -- </span></div>
+                            <div class="h6 font-w300 text-primary"><strong>IPv6 Addr:</strong> <span id="eth0_ip6" style="text-transform: lowercase;"> -- </span></div>
+                            <div class="h6 font-w300 text-primary"><strong>Subnet:</strong> <span id="eth0_subnet" style="text-transform: lowercase;"> -- </span></div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="font-w700 text-gray-darker animated fadeIn">eth1</div>
+                            <div class="text-danger" id="eth1_ip_div"><small><i class="fa fa-times-circle" id="eth1_ip_icon"></i> <span id="eth1_ip_status">Offline</span></small></div>
+                            <div class="h6 font-w300 text-primary"><strong>IPv4 Addr:</strong> <span id="eth1_ip4" style="text-transform: lowercase;"> -- </span></div>
+                            <div class="h6 font-w300 text-primary"><strong>IPv6 Addr:</strong> <span id="eth1_ip6" style="text-transform: lowercase;"> -- </span></div>
+                            <div class="h6 font-w300 text-primary"><strong>Subnet:</strong> <span id="eth1_subnet" style="text-transform: lowercase;"> -- </span></div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="font-w700 text-gray-darker animated fadeIn">wlan0</div>
+                            <div class="text-danger" id="wlan0_ip_div"><small><i class="fa fa-times-circle" id="wlan0_ip_icon"></i> <span id="wlan0_ip_status">Offline</span></small></div>
+                            <div class="h6 font-w300 text-primary"><strong>IPv4 Addr:</strong> <span id="wlan0_ip4" style="text-transform: lowercase;"> -- </span></div>
+                            <div class="h6 font-w300 text-primary"><strong>IPv6 Addr:</strong> <span id="wlan0_ip6" style="text-transform: lowercase;"> -- </span></div>
+                            <div class="h6 font-w300 text-primary"><strong>Subnet:</strong> <span id="wlan0_subnet" style="text-transform: lowercase;"> -- </span></div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="font-w700 text-gray-darker animated fadeIn">wlan1</div>
+                            <div class="text-danger" id="wlan1_ip_div"><small><i class="fa fa-times-circle" id="wlan1_ip_icon"></i> <span id="wlan1_ip_status">Offline</span></small></div>
+                            <div class="h6 font-w300 text-primary"><strong>IPv4 Addr:</strong> <span id="wlan1_ip4" style="text-transform: lowercase;"> -- </span></div>
+                            <div class="h6 font-w300 text-primary"><strong>IPv6 Addr:</strong> <span id="wlan1_ip6" style="text-transform: lowercase;"> -- </span></div>
+                            <div class="h6 font-w300 text-primary"><strong>Subnet:</strong> <span id="wlan1_subnet" style="text-transform: lowercase;"> -- </span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- END Header white border -->
+
+                <!-- Page Content -->
+                <div class="content">
+
+                <!-- Network Settings Form -->
+                <% include network-settings-form.ejs %>
+                <!-- END Network Settings Form -->
+
+                </div>
+                <!-- END Page Content -->
+            </main>
+            <!-- END Main Container -->
+
+            <!-- Footer -->
+            <% include admin-footer.ejs %>
+            <!-- END Footer -->
+        </div>
+        <!-- END Page Container -->

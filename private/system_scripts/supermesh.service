@@ -1,0 +1,17 @@
+[Unit]
+Description=SuperMesh v0.0.2e
+
+[Service]
+ExecStart=/usr/bin/node ./bin/www
+Restart=always
+RestartSec=10                       # Restart service after 10 seconds if node service crashes
+StandardOutput=syslog               # Output to syslog
+StandardError=syslog                # Output to syslog
+SyslogIdentifier=SuperMESH
+#User=root
+#Group=root
+Environment=NODE_ENV=production PORT=3000
+WorkingDirectory=/opt/SuperMesh
+
+[Install]
+WantedBy=multi-user.target

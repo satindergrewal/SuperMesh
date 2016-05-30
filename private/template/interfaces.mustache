@@ -1,0 +1,51 @@
+#### - IMPORTANT INFO - ###
+# This file is created by SuperMesh scripts. Please do not amend these
+# manualy. Use either the SuperMesh shell scripts or the Web User
+# Interface of SuperMesh.
+###########################
+
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# Raspberry Pi’s Ethernet Port, which connects to Internet.
+{{eth0_enable_disable}}auto eth0
+{{eth0_enable_disable}}iface eth0 inet {{eth0_iface}}
+{{eth0_enable_disable_dhcp}}address {{eth0_addr}}
+{{eth0_enable_disable_dhcp}}netmask {{eth0_netmask}}
+{{eth0_enable_disable_dhcp}}gateway {{eth0_gateway}}
+dns-nameservers 127.0.0.1 8.8.8.8
+
+# USB Ethernet. Connect this Ethernet Wire to your Laptop or to router.
+{{eth1_enable_disable}}auto eth1
+{{eth1_enable_disable}}allow-hotplug eth1
+{{eth1_enable_disable}}iface eth1 inet {{eth1_iface}}
+{{eth1_enable_disable_dhcp}}address {{eth1_addr}}
+{{eth1_enable_disable_dhcp}}netmask {{eth1_netmask}}
+{{eth1_enable_disable_dhcp}}gateway {{eth1_gateway}} metric {{eth1_gate_metric}}
+# added metric to gateway so it always is secondary route on system. default route should be the interface which connects to internet.
+
+# The primary wireless network interface
+{{wlan1_enable_disable}}auto wlan1
+{{wlan1_enable_disable}}allow-hotplug wlan1
+{{wlan1_enable_disable}}iface wlan1 inet {{wlan1_iface}}
+{{wlan1_enable_disable_dhcp}}address {{wlan1_addr}}
+{{wlan1_enable_disable_dhcp}}netmask {{wlan1_netmask}}
+{{wlan1_enable_disable_dhcp}}gateway {{wlan1_gateway}}
+{{wlan1_enable_disable}}wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+dns-nameservers 127.0.0.1 8.8.8.8
+
+# Wireless network interface used for Access Point
+{{wlan0_enable_disable}}auto wlan0
+{{wlan0_enable_disable}}allow-hotplug wlan0
+{{wlan0_enable_disable}}iface wlan0 inet {{wlan0_iface}}
+{{wlan0_enable_disable_dhcp}}address {{wlan0_addr}}
+{{wlan0_enable_disable_dhcp}}netmask {{wlan0_netmask}}
+{{wlan0_enable_disable_dhcp}}gateway {{wlan0_gateway}} metric {{wlan0_gate_metric}}
+# 'metric' is used to set this gateway as secondary on system.
+# Primary should be the one from primary network interaces.
+
+pre-up iptables-restore < /etc/network/iptables.ipv4.nat

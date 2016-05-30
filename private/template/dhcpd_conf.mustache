@@ -1,0 +1,25 @@
+## SuperMesh hostapd.conf
+ddns-update-style none;
+authoritative;
+log-facility local7;
+
+
+subnet {{wlan0_Subnet}} netmask {{wlan0_Netmask}} {
+ option routers {{#Routers}}{{router1}}{{/Routers}};
+ option subnet-mask {{wlan0_Netmask}};
+ option broadcast-address {{wlan0_BroadcastAddr}};
+ option domain-name-servers {{#DNS}}{{dns1}}, 8.8.8.8{{/DNS}};
+ default-lease-time 600;
+ max-lease-time 7200;
+ range {{#wlan0_Range}}{{start}} {{end}}{{/wlan0_Range}};
+}
+
+subnet {{eth1_Subnet}} netmask {{eth1_Netmask}} {
+ option routers {{#Routers}}{{router2}}{{/Routers}};
+ option subnet-mask {{eth1_Netmask}};
+ option broadcast-address {{eth1_BroadcastAddr}};
+ option domain-name-servers {{#DNS}}{{dns2}}, 8.8.8.8{{/DNS}};
+ default-lease-time 600;
+ max-lease-time 7200;
+ range {{#eth1_Range}}{{start}} {{end}}{{/eth1_Range}};
+}

@@ -1,0 +1,57 @@
+# SuperMesh hostapd.conf
+# Basic configuration
+
+# the interface used by the AP
+interface={{wlan_Interface}}
+# the name of the AP
+ssid={{AP_SSID}}
+
+# the country code (NZ, US etc.)
+country_code={{Country_Code}}
+# limit the frequencies used to those allowed in the country
+# ieee80211d=1
+
+# WPA and WPA2 configuration
+macaddr_acl=0
+# 1=wpa, 2=wep, 3=both
+auth_algs=1
+# WPA2 only
+wpa=2
+# the password of AP
+wpa_passphrase={{AP_Password}}
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+
+# Hardware configuration
+
+### Switch to another driver if issue starting hostapd service ###
+# Use this driver for Realtek chip wifi adapters. Enable it if using Edimax 802.11bgn wifi adapter.
+# driver=rtl871xdrv
+
+# Default drivers shipped with hostpad. Supports latest wifi adapters. Enable it if using Edimax 802.11ac wifi adapter.
+# driver=nl80211
+
+driver={{AP_Driver}}
+
+### For 802.11bgn WiFi ###
+### For Edimax EW-7811Un 802.11n Wireless Adapter [Realtek RTL8188CUS] ###
+# 802.11n support
+{{AP_802_11n_Enabled_Disabled}}ieee80211n=1
+# QoS support
+{{AP_802_11n_Enabled_Disabled}}wmm_enabled=1
+# 1,2,3,4,5,6,7,8,9,10,11,12,13
+{{AP_802_11n_Enabled_Disabled}}channel={{AP_802_11n_Channel}}
+# g simply means 2.4GHz band
+{{AP_802_11n_Enabled_Disabled}}hw_mode=g
+
+### For 802.11ac WiFi ###
+###
+# 802.11ac support
+{{AP_802_11AC_Enabled_Disabled}}ieee80211ac=1
+# QoS support
+{{AP_802_11AC_Enabled_Disabled}}wmm_enabled=1
+# 36,40,44,48,149,153,157,161
+{{AP_802_11AC_Enabled_Disabled}}channel={{AP_802_11AC_Channel}}
+# a simply means 5GHz
+{{AP_802_11AC_Enabled_Disabled}}hw_mode=a

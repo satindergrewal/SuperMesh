@@ -1,0 +1,8 @@
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+        ssid="{{WiFi_SSID}}"
+{{psk_enable_disable}}        psk="{{WiFi_Password}}"
+        key_mgmt={{WiFi_Security_WPA_Open}}
+}

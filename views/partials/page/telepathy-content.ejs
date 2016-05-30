@@ -1,0 +1,62 @@
+<!-- Page Container -->
+        <!--
+            Available Classes:
+
+            'enable-cookies'             Remembers active color theme between pages (when set through color theme list)
+
+            'sidebar-l'                  Left Sidebar and right Side Overlay
+            'sidebar-r'                  Right Sidebar and left Side Overlay
+            'sidebar-mini'               Mini hoverable Sidebar (> 991px)
+            'sidebar-o'                  Visible Sidebar by default (> 991px)
+            'sidebar-o-xs'               Visible Sidebar by default (< 992px)
+
+            'side-overlay-hover'         Hoverable Side Overlay (> 991px)
+            'side-overlay-o'             Visible Side Overlay by default (> 991px)
+
+            'side-scroll'                Enables custom scrolling on Sidebar and Side Overlay instead of native scrolling (> 991px)
+
+            'header-navbar-fixed'        Enables fixed header
+        -->
+        <div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+            <!-- Side Overlay-->
+            <% include admin-side-overlay.ejs %>
+            <!-- END Side Overlay -->
+
+            <!-- Sidebar -->
+            <% include admin-nav-sidebar.ejs %>
+            <!-- END Sidebar -->
+
+            <!-- Header -->
+            <% include admin-header.ejs %>
+            <!-- END Header -->
+
+            <!-- Main Container -->
+            <main id="main-container">
+                <!-- Page Header -->
+                <div class="content bg-gray-lighter">
+                    <div class="row items-push">
+                        <div class="col-sm-7">
+                            <h1 class="page-heading">
+                                SuperMesh <small>Telepathy<small>
+                            </h1>
+                        </div>
+                        <div class="col-sm-5 text-right hidden-xs">
+                            <ol class="breadcrumb push-10-t">
+                                <li>Applications</li>
+                                <li><a class="link-effect" href="">Telepathy</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Page Header -->
+                <style> .small, small {font-size: 100%;} </style>
+                <% include telepathy-main-contents.ejs %>
+
+            </main>
+            <!-- END Main Container -->
+
+            <!-- Footer -->
+            <% include admin-footer.ejs %>
+            <!-- END Footer -->
+        </div>
+        <!-- END Page Container -->
