@@ -1,3 +1,17 @@
+#### What new features are coming to SuperMesh alpha-0.0.3
+
+<!-- This extra line is necessary for table to render properly. -->
+|                      |    Status      |      Description     |
+|--------------------------------------------------------------|--------------------|-----------------------------------------------|
+| __TOR Gateway__      | :clock3:       | In Progress          |
+| __TOR Proxy__        | :clock3:       | In Progress          |
+| __DNSChain__         | :white_circle: | Not Started Yet      |
+| __Namecoin Support__ | :white_circle: | Not Started Yet      |
+| __I2P Gateway__      | :white_circle: | Not Started Yet      |
+| __I2P Proxy__        | :white_circle: | Not Started Yet      |
+| __cjdns__            | :white_circle: | Not Started Yet      |
+
+
 ## Supported IoT Devices
  - [Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
  - [Raspberry Pi 3 Model B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/)
@@ -20,7 +34,7 @@ If Odroid-XU4
  - 1 USB to LAN Adapter
 
 
-## What this SuperMesh Alpha 0.0.2e build does so far
+## What this SuperMesh Alpha 0.0.3 build does so far
 This is the most basic and the base requirement build of SuperMesh. It only targets on setting up network and routing part on supported IoT devices. After installing following features are available:
  - Default Access Point named **TestNetWiFi** with default password **spacemesh**
  - Access to internet through different hardware availablity, i.e.
