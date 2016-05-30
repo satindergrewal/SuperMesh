@@ -20,7 +20,7 @@ And Decentralized blockchain and applications like:
 
 ![supermesh laptop view](https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.1e/supermesh_images/laptop.jpg)
 
-**NOTE:** SuperMesh alpha-0.0.3 is in currenty in development under branch `alpha-0.0.3`
+**NOTE:** SuperMesh alpha-0.0.3 is currenty in development under branch `alpha-0.0.3`
 
 #### What new features are coming to SuperMesh alpha-0.0.3
 
