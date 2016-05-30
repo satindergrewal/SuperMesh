@@ -1,3 +1,25 @@
+#### What is SuperMesh?
+SuperMesh brings many Decentralized technologies with ease to your home.
+
+This includes different networks like:
+- TOR,
+- I2P, 
+- cjdns,
+- IPFS
+- decentralized domains like .bit
+
+And Decentralized blockchain and applications like:
+- Bitcoin,
+- OpenBazaar,
+- BitcoinDark,
+- FreeMarket,
+- Decentralized Currency Exchange like InstantDEX,
+- Ethereum Exchange EtherEx
+- Blockchain technlogy based anonymous instant messaging application 'Telepathy'
+- and many more!
+
+![supermesh laptop view](https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.1e/supermesh_images/laptop.jpg)
+
 #### What new features are coming to SuperMesh alpha-0.0.3
 
 <!-- This extra line is necessary for table to render properly. -->
@@ -10,6 +32,7 @@
 | __I2P Gateway__      | :white_circle: | Not Started Yet      |
 | __I2P Proxy__        | :white_circle: | Not Started Yet      |
 | __cjdns__            | :white_circle: | Not Started Yet      |
+| __IPFS__             | :white_circle: | Not Started Yet      |
 
 
 ## Supported IoT Devices
