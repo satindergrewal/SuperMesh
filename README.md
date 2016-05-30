@@ -1,3 +1,43 @@
+#### What is SuperMesh?
+SuperMesh brings many Decentralized technologies with ease to your home.
+
+This includes different networks like:
+- TOR,
+- I2P, 
+- cjdns,
+- IPFS
+- decentralized domains like .bit
+
+And Decentralized blockchain and applications like:
+- Bitcoin,
+- OpenBazaar,
+- BitcoinDark,
+- FreeMarket,
+- Decentralized Currency Exchange like InstantDEX,
+- Ethereum Exchange EtherEx
+- Blockchain technlogy based anonymous instant messaging application 'Telepathy'
+- and many more!
+
+![supermesh laptop view](https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.1e/supermesh_images/laptop.jpg)
+
+**NOTE:** SuperMesh alpha-0.0.3 is in currenty in development under branch `alpha-0.0.3`
+
+#### What new features are coming to SuperMesh alpha-0.0.3
+
+<!-- This extra line is necessary for table to render properly. -->
+|                      |    Status      |      Description     |
+|--------------------------------------------------------------|--------------------|-----------------------------------------------|
+| __TOR Gateway__      | :clock3:       | In Progress          |
+| __TOR Proxy__        | :clock3:       | In Progress          |
+| __DNSChain__         | :white_circle: | Not Started Yet      |
+| __Namecoin Support__ | :white_circle: | Not Started Yet      |
+| __I2P Gateway__      | :white_circle: | Not Started Yet      |
+| __I2P Proxy__        | :white_circle: | Not Started Yet      |
+| __cjdns__            | :white_circle: | Not Started Yet      |
+| __IPFS__             | :white_circle: | Not Started Yet      |
+
+
+
 ## Supported IoT Devices
  - [Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
  - [Raspberry Pi 3 Model B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/)
