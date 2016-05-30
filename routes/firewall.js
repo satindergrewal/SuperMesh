@@ -92,6 +92,19 @@ router.post('/update', function(req, res) {
 		SuperMesh.RunCmd('sudo iptables -A FORWARD -i wlan1 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT');
 		//Forward any packet coming from eth1 (Access Point) interface to wlan1 (Internet) interface
 		SuperMesh.RunCmd('sudo iptables -A FORWARD -i eth1 -o wlan1 -j ACCEPT');
+
+		//Mre NAT rules
+		//Add firewall rule to allow access to SSH through internal network from where the home users connect to. Both LAN (eth1) and wireless (wlan0)
+		SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 22 -j REDIRECT --to-ports 22');
+		SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 22 -j REDIRECT --to-ports 22');
+
+		//Add firewall rule to allow internal users to do DNS queries
+		SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p udp --dport 53 -j REDIRECT --to-ports 53');
+		SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p udp --dport 53 -j REDIRECT --to-ports 53');
+
+		//Make sure SuperMesh web interface is ALWAYS accessible to internal users
+		SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
+		SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
 		
 		//Save updated iptables rules to ipv4 file
 		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
@@ -126,6 +139,19 @@ router.post('/update', function(req, res) {
 		SuperMesh.RunCmd('sudo iptables -D FORWARD -i wlan1 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT');
 		//Forward any packet coming from eth1 (Access Point) interface to wlan1 (Internet) interface
 		SuperMesh.RunCmd('sudo iptables -D FORWARD -i eth1 -o wlan1 -j ACCEPT');
+
+		//Mre NAT rules
+		//Add firewall rule to allow access to SSH through internal network from where the home users connect to. Both LAN (eth1) and wireless (wlan0)
+		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --dport 22 -j REDIRECT --to-ports 22');
+		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p tcp --dport 22 -j REDIRECT --to-ports 22');
+
+		//Add firewall rule to allow internal users to do DNS queries
+		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p udp --dport 53 -j REDIRECT --to-ports 53');
+		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p udp --dport 53 -j REDIRECT --to-ports 53');
+
+		//Make sure SuperMesh web interface is ALWAYS accessible to internal users
+		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
+		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
 		
 		//Save updated iptables rules to ipv4 file
 		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
@@ -167,6 +193,19 @@ router.get('/enableipv4fwd', function(req, res) {
 	SuperMesh.RunCmd('sudo iptables -A FORWARD -i wlan1 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT');
 	//Forward any packet coming from eth1 (Access Point) interface to wlan1 (Internet) interface
 	SuperMesh.RunCmd('sudo iptables -A FORWARD -i eth1 -o wlan1 -j ACCEPT');
+
+	//Mre NAT rules
+	//Add firewall rule to allow access to SSH through internal network from where the home users connect to. Both LAN (eth1) and wireless (wlan0)
+	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 22 -j REDIRECT --to-ports 22');
+	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 22 -j REDIRECT --to-ports 22');
+
+	//Add firewall rule to allow internal users to do DNS queries
+	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p udp --dport 53 -j REDIRECT --to-ports 53');
+	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p udp --dport 53 -j REDIRECT --to-ports 53');
+
+	//Make sure SuperMesh web interface is ALWAYS accessible to internal users
+	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
+	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
 	
 	//Save updated iptables rules to ipv4 file
 	SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
@@ -207,6 +246,19 @@ router.get('/disableipv4fwd', function(req, res) {
 	//Forward any packet coming from eth1 (Access Point) interface to wlan1 (Internet) interface
 	SuperMesh.RunCmd('sudo iptables -D FORWARD -i eth1 -o wlan1 -j ACCEPT');
 	
+	//Mre NAT rules
+	//Add firewall rule to allow access to SSH through internal network from where the home users connect to. Both LAN (eth1) and wireless (wlan0)
+	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --dport 22 -j REDIRECT --to-ports 22');
+	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p tcp --dport 22 -j REDIRECT --to-ports 22');
+
+	//Add firewall rule to allow internal users to do DNS queries
+	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p udp --dport 53 -j REDIRECT --to-ports 53');
+	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p udp --dport 53 -j REDIRECT --to-ports 53');
+
+	//Make sure SuperMesh web interface is ALWAYS accessible to internal users
+	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
+	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
+
 	//Save updated iptables rules to ipv4 file
 	SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
 	
