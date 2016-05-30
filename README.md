@@ -96,18 +96,18 @@ Please feel free to contact me on twitter @satindergrewal
 ### Install using installer script
 You can install using this command on fresh installation of Raspbian Jesse Lite
 
-`curl -L https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.2e/install.sh | bash -`
+`curl -L https://raw.githubusercontent.com/satindergrewal/SuperMesh/install.sh | bash -`
 
 Or just use these commands to download the installer shell script and then execute to start installation:
 ```shell
-curl -O https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.2e/install.sh
+curl -O https://raw.githubusercontent.com/satindergrewal/SuperMesh/install.sh
 chmod +x install.sh
 ./install.sh
 ```
 
 It will download the shell script from following link and start executing all step-by-step commands to install and reboot SuperMesh
 
-https://github.com/satindergrewal/SuperMesh/blob/alpha-0.0.2e/install.sh
+https://github.com/satindergrewal/SuperMesh/blob/install.sh
 
 
 
@@ -136,7 +136,7 @@ sudo apt-get install cfengine3
 
 
 #### Clone SuperMesh's test build to system
-`git clone -b alpha-0.0.2e https://github.com/satindergrewal/SuperMesh`
+`git clone https://github.com/satindergrewal/SuperMesh`
 
 
 #### Move SuperMesh to /opt directory
