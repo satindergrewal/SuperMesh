@@ -17,8 +17,8 @@
 ## as a relay, and not make any local application connections yourself.
 #SocksPort 9050 # Default: Bind to localhost:9050 for local connections.
 #SocksPort 192.168.0.1:9100 # Bind to this address:port too.
-SocksPort {{eth1_addr}}:9050
-SocksPort {{wlan0_addr}}:9050
+{{EnableEth1}}SocksPort {{Eth1Addr}}:9050
+{{EnableWlan0}}SocksPort {{Wlan0Addr}}:9050
 
 ## Entry policies to allow/deny SOCKS requests based on IP address.
 ## First entry that matches wins. If no SocksPolicy is set, we accept
@@ -196,11 +196,11 @@ Log notice file /var/log/tor/notices.log
 VirtualAddrNetwork 10.192.0.0/10
 AutomapHostsSuffixes .onion,.exit
 AutomapHostsOnResolve 1
-TransPort 9040
-TransListenAddress 127.0.0.1
-TransListenAddress {{eth1_addr}}
-TransListenAddress {{wlan0_addr}}
+{{EnableTorGateway}}TransPort 9040
+{{EnableTorGateway}}TransListenAddress 127.0.0.1
+{{EnableTorGateway}}{{EnableEth1}}TransListenAddress {{Eth1Addr}}
+{{EnableTorGateway}}{{EnableWlan0}}TransListenAddress {{Wlan0Addr}}
 DNSPort 5334
 DNSListenAddress 127.0.0.1
-DNSListenAddress {{eth1_addr}}
-DNSListenAddress {{wlan0_addr}}
+{{EnableEth1}}DNSListenAddress {{Eth1Addr}}
+{{EnableWlan0}}DNSListenAddress {{Wlan0Addr}}

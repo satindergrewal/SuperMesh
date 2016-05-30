@@ -17,5 +17,5 @@ bundle agent torrc_config
       create => "true",
       edit_template => "/opt/SuperMesh/private/template/torrc.mustache",
       template_method => "mustache",
-      template_data => readjson("/opt/SuperMeshData/interfaces.data", 9999999999);
+      template_data => readjson("/opt/SuperMeshData/torrc.data", 9999999999);
 }

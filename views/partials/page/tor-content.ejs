@@ -1,0 +1,70 @@
+<!-- Page Container -->
+        <div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+            <!-- Side Overlay-->
+            <% include admin-side-overlay.ejs %>
+            <!-- END Side Overlay -->
+
+            <!-- Sidebar -->
+            <% include admin-nav-sidebar.ejs %>
+            <!-- END Sidebar -->
+
+            <!-- Header -->
+            <% include admin-header.ejs %>
+            <!-- END Header -->
+
+            <!-- Main Container -->
+            <main id="main-container">
+                <!-- Page Header -->
+                <div class="content bg-gray-lighter">
+                    <div class="row items-push">
+                        <div class="col-sm-7">
+                            <h1 class="page-heading">
+                                SuperMesh <small>TOR Settings</small>
+                            </h1>
+                        </div>
+                        <div class="col-sm-5 text-right hidden-xs">
+                            <ol class="breadcrumb push-10-t">
+                                <li>Settings</li>
+                                <li><a class="link-effect" href="">TOR</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Page Header -->
+
+                <!-- Start Header white border -->
+                <!--<div class="content bg-white border-b">
+                    <div class="row items-push text-uppercase">
+                        <div class="col-xs-6 col-sm-6">
+                            <div class="font-w700 text-gray-darker animated fadeIn">iptables Service</div>
+                            
+                            <div class="text-muted animated fadeIn"><small><i class="fa fa-circle"></i> NO_STATUS</small></div>
+                            <a class="h4 font-w300 text-primary animated flipInX" id="ap_ssid_dash" style="text-transform: none;">NO_STATUS</a>
+                        </div>
+                        <div class="col-xs-6 col-sm-6">
+                            <div class="font-w700 text-gray-darker animated fadeIn">ip6tabels Service</div>
+                            <div class="text-muted animated fadeIn"><small><i class="fa fa-circle"></i> NO_STATUS</small></div>
+                            <a class="h4 font-w300 text-primary animated flipInX" id="ap_password_dash" style="text-transform: none;">NO_STATUS</a>
+                        </div>
+                    </div>
+                </div>-->
+
+                <!-- END Header white border -->
+
+                <!-- Page Content -->
+                <div class="content">
+
+                <!-- Access Point Settings Form -->
+                <% include tor-settings-form.ejs %>
+                <!-- END Access Point Settings Form -->
+
+                </div>
+                <!-- END Page Content -->
+            </main>
+            <!-- END Main Container -->
+
+            <!-- Footer -->
+            <% include admin-footer.ejs %>
+            <!-- END Footer -->
+        </div>
+        <!-- END Page Container -->
