@@ -15,7 +15,7 @@ And Decentralized blockchain and applications like:
 - FreeMarket,
 - Decentralized Currency Exchange like InstantDEX,
 - Ethereum Exchange EtherEx
-- Blockchain technlogy based anonymous instant messaging application 'Telepathy'
+- Blockchain technlogy based anonymous instant messaging application [Telepathy](http://wiki.supernet.org/wiki/Telepathy)
 - and many more!
 
 ![supermesh laptop view](https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.1e/supermesh_images/laptop.jpg)
