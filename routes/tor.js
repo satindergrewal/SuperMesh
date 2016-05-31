@@ -63,8 +63,12 @@ router.post('/update', function(req, res) {
 		//console.log('eth1 variable value: ' + enable_eth1);
 		//console.log('wlan0 variable value: ' + enable_wlan0);
 
-		SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/torrc.cf');
-		SuperMesh.RunCmd('sudo rm /etc/tor/torrc.cf-before-edit');
+		fs.writeFile(torrcFile, JSON.stringify(torrcData, null, 2), function (err) {
+		if (err) return console.log(err)
+			console.log(JSON.stringify(torrcData, null, 2))
+			console.log('======= Setting values for interfaces =======')
+			console.log('writing to ' + torrcFile)
+		});
 
 	});
 
@@ -94,15 +98,15 @@ router.post('/update', function(req, res) {
 	console.log(JSON.stringify(torrc_Data, null, 2))
 
 	// Write update changes to JSON file interfaces.data
-	/*fs.writeFile(torrc_File, JSON.stringify(torrc_Data, null, 2), function (err) {
+	fs.writeFile(torrc_File, JSON.stringify(torrc_Data, null, 2), function (err) {
 		if (err) return console.log(err)
 			//console.log(JSON.stringify(torrc_Data, null, 2))
 			//console.log('writing to ' + torrc_File)
 
 			//Execute promissed spanw child process
-			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/sysctl_conf.cf');
-			SuperMesh.RunCmd('sudo rm /etc/sysctl.conf.cf-before-edit');
-		});*/
+			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/torrc.cf');
+			SuperMesh.RunCmd('sudo rm /etc/tor/torrc.cf-before-edit');
+		});
 
 
 	/*if ( req.body.enable_tor_gateway === 'true' ) {
