@@ -82,11 +82,12 @@ router.post('/update', function(req, res) {
 
 	var torrcfs_Read = fs.readFileSync(torrc_File, 'utf8').toString();
 	var settings_data = JSON.parse(torrcfs_Read);
+	console.log(JSON.stringify(settings_data.EnableTorGateway, null, 2));
 
 	console.log('======= req.body =======');
 	console.log(req.body);
 
-	torrc_Data = {
+	/*torrc_Data = {
 		"Eth1Addr": torrcfs_Read.Eth1Addr,
 		"EnableEth1": torrcfs_Read.EnableEth1,
 		"Wlan0Addr": torrcfs_Read.Wlan0Addr,
@@ -107,7 +108,7 @@ router.post('/update', function(req, res) {
 			//Execute promissed spanw child process
 			//SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/torrc.cf');
 			//SuperMesh.RunCmd('sudo rm /etc/tor/torrc.cf-before-edit');
-		});
+		});*/
 
 
 	/*if ( req.body.enable_tor_gateway === 'true' ) {
