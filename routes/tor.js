@@ -28,8 +28,8 @@ router.get('/getsettings', function(req, res, next) {
 
 /* POST to Update IPTables Settings. */
 router.post('/update', function(req, res) {
-	var enable_eth1 = '#'
-	var enable_wlan0 = '#'
+	var enable_eth1 = '# '
+	var enable_wlan0 = '# '
 
 	ifstate.status(function(err, status) {
 		var torrcFile = '/opt/SuperMeshData/torrc.data'
@@ -37,7 +37,7 @@ router.post('/update', function(req, res) {
 
 		var torrcfsRead = fs.readFileSync(torrcFile, 'utf8').toString();
 		var settingsdata = JSON.parse(torrcfsRead);
-		//console.log(JSON.stringify(settingsdata.Eth1Addr, null, 2));
+		console.log(JSON.stringify(settingsdata.Eth1Addr, null, 2));
 		//console.log(status);
 
 		for (i = 0; i < status.length; i++) {
@@ -77,7 +77,7 @@ router.post('/update', function(req, res) {
 
 
 
-	var torrc_File = '/opt/SuperMeshData/torrc.data'
+	/*var torrc_File = '/opt/SuperMeshData/torrc.data'
 	var torrc_Data = ''
 
 	var torrcfs_Read = fs.readFileSync(torrc_File, 'utf8').toString();
@@ -91,7 +91,7 @@ router.post('/update', function(req, res) {
 		"EnableEth1": torrcfs_Read.EnableEth1,
 		"Wlan0Addr": torrcfs_Read.Wlan0Addr,
 		"EnableWlan0": torrcfs_Read.EnableWlan0,
-		"EnableTorGateway": req.body.enable_tor_gateway
+		"EnableTorGateway": (req.body.enable_tor_gateway === "false") ? "# " : ""
 	}
 
 	console.log('=========== JSON Stringify ===========');
@@ -106,7 +106,7 @@ router.post('/update', function(req, res) {
 			//Execute promissed spanw child process
 			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/torrc.cf');
 			SuperMesh.RunCmd('sudo rm /etc/tor/torrc.cf-before-edit');
-		});
+		});*/
 
 
 	/*if ( req.body.enable_tor_gateway === 'true' ) {

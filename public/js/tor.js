@@ -21,7 +21,7 @@ function populateFields() {
         //Set TOR Gateway settings
         if ( data.EnableTorGateway === '' ) {
             $( "#enable_tor_gateway" ).prop( "checked", true );
-        } else if ( data.ipv4fwd === '# ' ) {
+        } else if ( data.EnableTorGateway === '# ' ) {
             $( "#enable_tor_gateway" ).prop( "checked", false );
         }
     });
