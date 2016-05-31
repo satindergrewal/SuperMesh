@@ -6,6 +6,7 @@ var sys = require('sys');
 
 // SuperMesh app functions
 var SuperMesh = require("../private/js/app_functions.js");
+var ifstate = require("../private/js/ifstate.js");
 
 /* GET hostapd settings. */
 router.get('/', function(req, res, next) {
@@ -17,7 +18,7 @@ router.get('/getsettings', function(req, res, next) {
 	var torrcfsRead = fs.readFileSync(torrcFile, 'utf8').toString();
 	var settingsdata = JSON.parse(torrcfsRead);
 
-	console.log('===>> IPtablesSettings DATA recieved >>');
+	console.log('===>> TorSettings DATA recieved >>');
 	console.log('=========== JSON Stringify ===========');
 	console.log(JSON.stringify(settingsdata, null, 2));
 
