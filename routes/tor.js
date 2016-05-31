@@ -37,7 +37,7 @@ router.post('/update', function(req, res) {
 
 		var torrcfsRead = fs.readFileSync(torrcFile, 'utf8').toString();
 		var settingsdata = JSON.parse(torrcfsRead);
-		console.log(JSON.stringify(settingsdata.Eth1Addr, null, 2));
+		//console.log(JSON.stringify(settingsdata.Eth1Addr, null, 2));
 		//console.log(status);
 
 		for (i = 0; i < status.length; i++) {
@@ -59,15 +59,15 @@ router.post('/update', function(req, res) {
 			"EnableTorGateway": settingsdata.EnableTorGateway
 		}
 
-		console.log(torrcData);
+		//console.log(torrcData);
 		//console.log('eth1 variable value: ' + enable_eth1);
 		//console.log('wlan0 variable value: ' + enable_wlan0);
 
 		fs.writeFile(torrcFile, JSON.stringify(torrcData, null, 2), function (err) {
 		if (err) return console.log(err)
-			console.log(JSON.stringify(torrcData, null, 2))
 			console.log('======= Setting values for interfaces =======')
 			console.log('writing to ' + torrcFile)
+			console.log(JSON.stringify(torrcData, null, 2))
 		});
 
 	});
@@ -77,7 +77,7 @@ router.post('/update', function(req, res) {
 
 
 
-	/*var torrc_File = '/opt/SuperMeshData/torrc.data'
+	var torrc_File = '/opt/SuperMeshData/torrc.data'
 	var torrc_Data = ''
 
 	var torrcfs_Read = fs.readFileSync(torrc_File, 'utf8').toString();
@@ -100,13 +100,14 @@ router.post('/update', function(req, res) {
 	// Write update changes to JSON file interfaces.data
 	fs.writeFile(torrc_File, JSON.stringify(torrc_Data, null, 2), function (err) {
 		if (err) return console.log(err)
-			//console.log(JSON.stringify(torrc_Data, null, 2))
-			//console.log('writing to ' + torrc_File)
+			console.log('======= Setting values from Admin Panel =======')
+			console.log('writing to ' + torrc_File)
+			console.log(JSON.stringify(torrc_Data, null, 2))
 
 			//Execute promissed spanw child process
-			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/torrc.cf');
-			SuperMesh.RunCmd('sudo rm /etc/tor/torrc.cf-before-edit');
-		});*/
+			//SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/torrc.cf');
+			//SuperMesh.RunCmd('sudo rm /etc/tor/torrc.cf-before-edit');
+		});
 
 
 	/*if ( req.body.enable_tor_gateway === 'true' ) {
