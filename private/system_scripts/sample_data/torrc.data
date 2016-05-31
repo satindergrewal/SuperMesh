@@ -1,6 +1,6 @@
 {
 	"Eth1Addr": "172.20.10.1",
-	"EnableEth1": "# ",
+	"EnableEth1": "",
 	"Wlan0Addr": "192.168.10.1",
 	"EnableWlan0": "",
 	"EnableTorGateway": ""
