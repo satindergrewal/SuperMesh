@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/getsettings', function(req, res, next) {
+	var torrcFile = '/opt/SuperMeshData/torrc.data'
 	var torrcfsRead = fs.readFileSync(torrcFile, 'utf8').toString();
 	var settingsdata = JSON.parse(torrcfsRead);
 
