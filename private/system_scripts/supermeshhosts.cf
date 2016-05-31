@@ -1,0 +1,21 @@
+  body common control
+{
+    bundlesequence => { supermeshhosts };
+}
+
+body edit_defaults supermeshhosts
+{
+  empty_file_before_editing => "true";
+  edit_backup => "false";
+  max_file_size => "9999999999";
+}
+
+bundle agent supermeshhosts
+{
+  files:
+      "/etc/supermeshhosts"
+      create => "true",
+      edit_template => "/opt/SuperMesh/private/template/supermeshhosts.mustache",
+      template_method => "mustache",
+      template_data => readjson("/opt/SuperMeshData/interfaces.data", 9999999999);
+}

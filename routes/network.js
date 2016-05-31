@@ -165,6 +165,8 @@ router.post('/update', function(req, res) {
 			//Execute promissed spanw child process
 			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/edit_network_config.cf');
 			SuperMesh.RunCmd('sudo rm /etc/network/interfaces.cf-before-edit');
+			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/supermeshhosts.cf');
+			SuperMesh.RunCmd('sudo rm /etc/supermeshhosts.cf-before-edit');
 			SuperMesh.RunCmd('sudo systemctl daemon-reload');
 			SuperMesh.RunCmd('sudo systemctl restart networking');
 			SuperMesh.RunCmd('sudo systemctl restart isc-dhcp-server');

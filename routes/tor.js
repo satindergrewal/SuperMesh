@@ -35,29 +35,76 @@ router.get('/getsettings', function(req, res, next) {
 
 /* POST to Update IPTables Settings. */
 router.post('/update', function(req, res) {
-	var torrcFile = '/opt/SuperMeshData/torrc.data'
-	var torrcData = ''
+	var enable_eth1 = '#'
+	var enable_wlan0 = '#'
+
+	ifstate.status(function(err, status) {
+		var torrcFile = '/opt/SuperMeshData/torrc.data'
+		var torrcData = ''
+
+		var torrcfsRead = fs.readFileSync(torrcFile, 'utf8').toString();
+		var settingsdata = JSON.parse(torrcfsRead);
+		//console.log(JSON.stringify(settingsdata.Eth1Addr, null, 2));
+		//console.log(status);
+
+		for (i = 0; i < status.length; i++) {
+			if ( status[i].interface == 'eth1' && status[i].state == 'UP' ) {
+				console.log(status[i]);
+				enable_eth1 = ''
+			}
+			if ( status[i].interface == 'wlan0' && status[i].state == 'UP' ) {
+				console.log(status[i]);
+				enable_wlan0 = ''
+			}
+		}
+
+		torrcData = {
+			"Eth1Addr": settingsdata.Eth1Addr,
+			"EnableEth1": enable_eth1,
+			"Wlan0Addr": settingsdata.Wlan0Addr,
+			"EnableWlan0": enable_wlan0,
+			"EnableTorGateway": settingsdata.EnableTorGateway
+		}
+
+		console.log(torrcData);
+		//console.log('eth1 variable value: ' + enable_eth1);
+		//console.log('wlan0 variable value: ' + enable_wlan0);
+
+		SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/torrc.cf');
+		SuperMesh.RunCmd('sudo rm /etc/tor/torrc.cf-before-edit');
+
+	});
+
+
+
+
+
+
+	var torrc_File = '/opt/SuperMeshData/torrc.data'
+	var torrc_Data = ''
+
+	var torrcfs_Read = fs.readFileSync(torrc_File, 'utf8').toString();
+	var settings_data = JSON.parse(torrcfs_Read);
 
 	console.log('======= req.body =======');
 	console.log(req.body);
 
-	torrcData = {
-		"EnableEth1": true,
-		"EnableWlan0": true,
-		"EnableTorGateway" true
-	}{
-		"ipv4fwd_enable_disable": (req.body.iptables4_enable_disable === "false") ? "0" : "1",
-		"ipv6fwd_enable_disable": (req.body.iptables6_enable_disable === "false") ? "0" : "1"
+	torrc_Data = {
+		"Eth1Addr": torrcfs_Read,
+		"EnableEth1": torrcfs_Read,
+		"Wlan0Addr": torrcfs_Read,
+		"EnableWlan0": torrcfs_Read,
+		"EnableTorGateway": req.body
 	}
 
 	console.log('=========== JSON Stringify ===========');
-	console.log(JSON.stringify(torrcData, null, 2))
+	console.log(JSON.stringify(torrc_Data, null, 2))
 
 	// Write update changes to JSON file interfaces.data
-	/*fs.writeFile(torrcFile, JSON.stringify(torrcData, null, 2), function (err) {
+	/*fs.writeFile(torrc_File, JSON.stringify(torrc_Data, null, 2), function (err) {
 		if (err) return console.log(err)
-			//console.log(JSON.stringify(torrcData, null, 2))
-			//console.log('writing to ' + torrcFile)
+			//console.log(JSON.stringify(torrc_Data, null, 2))
+			//console.log('writing to ' + torrc_File)
 
 			//Execute promissed spanw child process
 			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/sysctl_conf.cf');
@@ -65,7 +112,7 @@ router.post('/update', function(req, res) {
 		});*/
 
 
-	if ( req.body.iptables4_enable_disable === 'true' ) {
+	/*if ( req.body.enable_tor_gateway === 'true' ) {
 		// Enable TOR Proxy and Gateway
 		// TOR Service Rules
 		// Add these rules to allow TOR Transparent Proxy
@@ -78,7 +125,10 @@ router.post('/update', function(req, res) {
 		
 		//Save updated iptables rules to ipv4 file
 		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-	} else if ( req.body.iptables4_enable_disable === 'false' ) {
+		SuperMesh.RunCmd('sudo systemctl enable tor')
+		SuperMesh.RunCmd('sudo systemctl start tor')
+
+	} else if ( req.body.enable_tor_gateway === 'false' ) {
 		// Enable TOR Proxy and Gateway
 		// TOR Service Rules
 		// Add these rules to allow TOR Transparent Proxy
@@ -91,7 +141,10 @@ router.post('/update', function(req, res) {
 		
 		//Save updated iptables rules to ipv4 file
 		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-	}
+		SuperMesh.RunCmd('sudo systemctl disable tor')
+		SuperMesh.RunCmd('sudo systemctl stop tor')
+		
+	}*/
 	
 	res.end('{"msg": "success","result": "result"}');
 });
@@ -111,6 +164,8 @@ router.get('/enabletor', function(req, res) {
 	
 	//Save updated iptables rules to ipv4 file
 	SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
+	SuperMesh.RunCmd('sudo systemctl enable tor')
+	SuperMesh.RunCmd('sudo systemctl start tor')
 	
 	res.end('{"msg": "success","result": "result"}');
 });
@@ -129,6 +184,8 @@ router.get('/disabletor', function(req, res) {
 
 	//Save updated iptables rules to ipv4 file
 	SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
+	SuperMesh.RunCmd('sudo systemctl disable tor')
+	SuperMesh.RunCmd('sudo systemctl stop tor')
 	
 	res.end('{"msg": "success","result": "result"}');
 });

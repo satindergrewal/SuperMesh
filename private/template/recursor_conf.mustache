@@ -301,7 +301,8 @@ setuid=pdns
 
 
 forward-zones=dns.=127.0.0.1:5333{{onion}}{{bit}}{{eth}}{{p2p}}
-export-etc-hosts=off
+export-etc-hosts=on
+etc-hosts-file=/etc/supermeshhosts
 allow-from=0.0.0.0/0
 local-address=0.0.0.0
 local-port=53
