@@ -83,10 +83,10 @@ router.post('/update', function(req, res) {
 	console.log(req.body);
 
 	torrc_Data = {
-		"Eth1Addr": torrcfs_Read,
-		"EnableEth1": torrcfs_Read,
-		"Wlan0Addr": torrcfs_Read,
-		"EnableWlan0": torrcfs_Read,
+		"Eth1Addr": torrcfs_Read.Eth1Addr,
+		"EnableEth1": torrcfs_Read.EnableEth1,
+		"Wlan0Addr": torrcfs_Read.Wlan0Addr,
+		"EnableWlan0": torrcfs_Read.EnableWlan0,
 		"EnableTorGateway": req.body.enable_tor_gateway
 	}
 
