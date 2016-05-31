@@ -5,7 +5,7 @@ $(document).ready(function() {
     populateFields();
     
     // Update IPtabels Settings button click
-    $('#BtnUpdateFirewallSettings').on('click', UpdatefirewallSettings);
+    $('#BtnUpdateTorSettings').on('click', UpdateTorSettings);
 
 });
 
@@ -14,57 +14,48 @@ $(document).ready(function() {
 // Fill table with data
 function populateFields() {
     // jQuery AJAX call for JSON
-    $.getJSON( '/admin/firewall/getsettings', function( data ) {
+    $.getJSON( '/admin/tor/getsettings', function( data ) {
         //console.log('---------firewall Settings-----------');
         console.log(data);
 
-        //Set IPv4 Forwarding settings
-        if ( data.ipv4fwd === '0\n' ) {
-            $( "#iptables4_enable_disable" ).prop( "checked", false );
-        } else if ( data.ipv4fwd === '1' ) {
-            $( "#iptables4_enable_disable" ).prop( "checked", true );
-        }
-
-        //Set IPv6 Forwarding settings
-        if ( data.ipv6fwd === '0\n' ) {
-            $( "#iptables6_enable_disable" ).prop( "checked", false );
-        } else if ( data.ipv6fwd === '1' ) {
-            $( "#iptables6_enable_disable" ).prop( "checked", true );
+        //Set TOR Gateway settings
+        if ( data.EnableTorGateway === '' ) {
+            $( "#enable_tor_gateway" ).prop( "checked", true );
+        } else if ( data.ipv4fwd === '# ' ) {
+            $( "#enable_tor_gateway" ).prop( "checked", false );
         }
     });
 };
 
 
 // Update WPA Settings
-function UpdatefirewallSettings() {
+function UpdateTorSettings() {
 
     /*App.loader('show');
     setTimeout(function () {
         App.loader('hide');
     }, 3000);*/
 
-    var firewallSettings = {
-            'iptables4_enable_disable': $('#iptables4_enable_disable').is(':checked'),
-            'iptables6_enable_disable': $('#iptables6_enable_disable').is(':checked')
+    var TorSettings = {
+            'enable_tor_gateway': $('#enable_tor_gateway').is(':checked')
         }
 
 
     // Use AJAX to post the object to our adduser service
     $.ajax({
         type: 'POST',
-        data: firewallSettings,
-        url: '/admin/firewall/update',
+        data: TorSettings,
+        url: '/admin/tor/update',
         dataType: 'html',
         success: function(data, textStatus, jqXHR) {
-            var APData = JSON.parse(data);
-            console.log(APData);
+            var TorData = JSON.parse(data);
+            console.log(TorData);
 
-            if (APData.msg === 'success') {
+            if (TorData.msg === 'success') {
                 console.log('Success');
-                swal("Success", "firewall Settings Saved.", "success");
+                swal("Success", "Tor Settings Saved.", "success");
 
-                // Populate IP Info
-                //populateIPInfo();
+                populateFields();
             }
             else {
                 // If something goes wrong, alert the error message that our service returned

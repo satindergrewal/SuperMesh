@@ -13,23 +13,14 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/getsettings', function(req, res, next) {
-	var getipv4fwd = fs.readFileSync('/proc/sys/net/ipv4/ip_forward').toString();
-	var getipv6fwd = fs.readFileSync('/proc/sys/net/ipv6/conf/all/forwarding').toString();
-
-	//Demo values
-	//var getipv4fwd = '1'
-	//var getipv6fwd = '0'
-
-	IPtablesSettingsData = {
-		"ipv4fwd": getipv4fwd,
-		"ipv6fwd": getipv6fwd
-	}
+	var torrcfsRead = fs.readFileSync(torrcFile, 'utf8').toString();
+	var settingsdata = JSON.parse(torrcfsRead);
 
 	console.log('===>> IPtablesSettings DATA recieved >>');
 	console.log('=========== JSON Stringify ===========');
-	console.log(JSON.stringify(IPtablesSettingsData, null, 2));
+	console.log(JSON.stringify(settingsdata, null, 2));
 
-	res.send(IPtablesSettingsData);
+	res.send(settingsdata);
 });
 
 
@@ -94,7 +85,7 @@ router.post('/update', function(req, res) {
 		"EnableEth1": torrcfs_Read,
 		"Wlan0Addr": torrcfs_Read,
 		"EnableWlan0": torrcfs_Read,
-		"EnableTorGateway": req.body
+		"EnableTorGateway": req.body.enable_tor_gateway
 	}
 
 	console.log('=========== JSON Stringify ===========');
