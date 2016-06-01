@@ -11,7 +11,7 @@ sudo apt-get update
 sudo apt-get -y install cfengine3
 
 #### Installing dependencies
-sudo apt-get -y install git nodejs npm lshw wireless-tools
+sudo apt-get -y install git nodejs npm lshw wireless-tools tor
 
 
 #### Make node binary symlink
