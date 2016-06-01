@@ -92,6 +92,12 @@ sudo systemctl daemon-reload
 sudo systemctl enable pdns-recursor
 sudo systemctl restart pdns-recursor
 
+#### Setting up Tor Service & restarting service
+sudo cf-agent -K /opt/SuperMesh/private/system_scripts/torrc.cf
+sudo systemctl daemon-reload
+sudo systemctl enable tor
+sudo systemctl restart tor
+
 #### Remove any unwanted files which generated during install
 sudo rm /etc/network/interfaces.cf-before-edit
 sudo rm /etc/dhcp/dhcpd.conf.cf-before-edit
