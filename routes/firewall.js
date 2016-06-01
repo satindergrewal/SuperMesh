@@ -105,6 +105,9 @@ router.post('/update', function(req, res) {
 		//Make sure SuperMesh web interface is ALWAYS accessible to internal users
 		SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
 		SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
+
+		SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
+		SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
 		
 		//Save updated iptables rules to ipv4 file
 		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
@@ -152,6 +155,9 @@ router.post('/update', function(req, res) {
 		//Make sure SuperMesh web interface is ALWAYS accessible to internal users
 		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
 		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
+
+		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
+		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
 		
 		//Save updated iptables rules to ipv4 file
 		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
@@ -206,6 +212,10 @@ router.get('/enableipv4fwd', function(req, res) {
 	//Make sure SuperMesh web interface is ALWAYS accessible to internal users
 	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
 	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
+
+	//Enable Tor Proxy port
+	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
+	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
 	
 	//Save updated iptables rules to ipv4 file
 	SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
@@ -258,6 +268,10 @@ router.get('/disableipv4fwd', function(req, res) {
 	//Make sure SuperMesh web interface is ALWAYS accessible to internal users
 	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
 	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p tcp --dport 3000 -j REDIRECT --to-ports 3000');
+
+	//Disable Tor Proxy port
+	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
+	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
 
 	//Save updated iptables rules to ipv4 file
 	SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
