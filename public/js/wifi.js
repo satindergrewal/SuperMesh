@@ -6,6 +6,9 @@ $(document).ready(function() {
     getwlan1status();
     getwlan1iwconfig();
 
+    // Restart AP Service button click
+    $('#BtnRestartWiFi').on('click', RestartWiFi);
+
 });
 
 window.setInterval(function(){ 
@@ -183,4 +186,11 @@ function UpdateWiFiSettings(index_value) {
         alert('Please fill in all fields');
         return false;
     }
+};
+
+//  Restart Access Point Service
+function RestartWiFi() {
+    $.getJSON( '/admin/accesspoint/restartwifi', function( data ) {
+        console.log(data);
+    });
 };
