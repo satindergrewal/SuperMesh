@@ -100,13 +100,20 @@ router.post('/wpa_supplicant/setup', function(req, res) {
 			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/wpa_supplicant_config.cf');
 			SuperMesh.RunCmd('sudo rm /etc/wpa_supplicant/wpa_supplicant.conf.cf-before-edit');
 			SuperMesh.RunCmd('sudo systemctl daemon-reload');
-			SuperMesh.RunCmd('sudo systemctl restart networking');
-			SuperMesh.RunCmd('sudo systemctl restart isc-dhcp-server');
-			SuperMesh.RunCmd('sudo systemctl restart hostapd');
+			SuperMesh.RunCmd('sudo ifdown wlan1 && sudo ifup wlan1');
+			//SuperMesh.RunCmd('sudo systemctl restart networking');
+			//SuperMesh.RunCmd('sudo systemctl restart isc-dhcp-server');
+			//SuperMesh.RunCmd('sudo systemctl restart hostapd');
 
 		});
 	
 	res.end('{"msg": "success","result": "result"}');
+});
+
+// POST to Update Access Point Settings.
+router.get('/restartwifi', function(req, res, next) {
+	SuperMesh.RunCmd('sudo ifdown wlan1 && sudo ifup wlan1');
+	res.send('{"msg": "success","result": "result"}');
 });
 
 module.exports = router;
