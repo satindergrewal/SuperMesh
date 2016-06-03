@@ -55,7 +55,7 @@ function UpdateTorSettings() {
                 console.log('Success');
                 swal("Success", "Tor Settings Saved.", "success");
 
-                //populateFields();
+                populateFields();
             }
             else {
                 // If something goes wrong, alert the error message that our service returned

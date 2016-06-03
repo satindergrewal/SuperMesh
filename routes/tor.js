@@ -36,7 +36,39 @@ router.post('/update', function(req, res) {
 	var Promise = require('bluebird');
 
 	// Promise returning functions to execute
-	function getNetworkIPs() {
+	function UpdateGatewaySettings() {
+		var torrc_File = '/opt/SuperMeshData/torrc.data'
+		var torrc_Data = ''
+
+		var torrcfs_Read = fs.readFileSync(torrc_File, 'utf8').toString();
+		var settings_data = JSON.parse(torrcfs_Read);
+		//console.log(JSON.stringify(settings_data.EnableTorGateway, null, 2));
+
+		console.log('======= req.body =======');
+		console.log(req.body);
+
+		torrc_Data = {
+			"Eth1Addr": settings_data.Eth1Addr,
+			"EnableEth1": settings_data.EnableEth1,
+			"Wlan0Addr": settings_data.Wlan0Addr,
+			"EnableWlan0": settings_data.EnableWlan0,
+			"EnableTorGateway": (req.body.enable_tor_gateway === "false") ? "# " : ""
+		}
+
+		console.log('=========== JSON Stringify ===========');
+		console.log(JSON.stringify(torrc_Data, null, 2))
+
+		// Write update changes to JSON file interfaces.data
+		fs.writeFile(torrc_File, JSON.stringify(torrc_Data, null, 2), function (err) {
+			if (err) return console.log(err)
+				console.log('======= Setting values from Admin Panel =======')
+				console.log('writing to ' + torrc_File)
+				console.log(JSON.stringify(torrc_Data, null, 2))
+			});
+		console.log('>>>>>> Runing 1st')
+		return Promise.resolve(1);
+	}
+	function CheckInterfaceUp(res) {
 		var enable_eth1 = '# '
 		var enable_wlan0 = '# '
 
@@ -80,84 +112,19 @@ router.post('/update', function(req, res) {
 			});
 
 		});
-		return Promise.resolve(1);
-	}
-	function CheckInterfaceUp(res) {
-		var torrc_File = '/opt/SuperMeshData/torrc.data'
-		var torrc_Data = ''
-
-		var torrcfs_Read = fs.readFileSync(torrc_File, 'utf8').toString();
-		var settings_data = JSON.parse(torrcfs_Read);
-		//console.log(JSON.stringify(settings_data.EnableTorGateway, null, 2));
-
-		console.log('======= req.body =======');
-		console.log(req.body);
-
-		torrc_Data = {
-			"Eth1Addr": settings_data.Eth1Addr,
-			"EnableEth1": settings_data.EnableEth1,
-			"Wlan0Addr": settings_data.Wlan0Addr,
-			"EnableWlan0": settings_data.EnableWlan0,
-			"EnableTorGateway": (req.body.enable_tor_gateway === "false") ? "# " : ""
-		}
-
-		console.log('=========== JSON Stringify ===========');
-		console.log(JSON.stringify(torrc_Data, null, 2))
-
-		// Write update changes to JSON file interfaces.data
-		/*fs.writeFile(torrc_File, JSON.stringify(torrc_Data, null, 2), function (err) {
-			if (err) return console.log(err)
-				console.log('======= Setting values from Admin Panel =======')
-				console.log('writing to ' + torrc_File)
-				console.log(JSON.stringify(torrc_Data, null, 2))
-
-				//Execute promissed spanw child process
-				//SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/torrc.cf');
-				//SuperMesh.RunCmd('sudo rm /etc/tor/torrc.cf-before-edit');
-			});*/
-
-
-		/*if ( req.body.enable_tor_gateway === 'true' ) {
-			// Enable TOR Proxy and Gateway
-			// TOR Service Rules
-			// Add these rules to allow TOR Transparent Proxy
-			SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
-			SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
-
-			// Add these rules turn SuperMesh device to act as TOR Gateway
-			SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040');
-			SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040');
-			
-			//Save updated iptables rules to ipv4 file
-			SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-			SuperMesh.RunCmd('sudo systemctl enable tor')
-			SuperMesh.RunCmd('sudo systemctl start tor')
-
-		} else if ( req.body.enable_tor_gateway === 'false' ) {
-			// Enable TOR Proxy and Gateway
-			// TOR Service Rules
-			// Add these rules to allow TOR Transparent Proxy
-			SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
-			SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
-
-			// Add these rules turn SuperMesh device to act as TOR Gateway
-			SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040');
-			SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040');
-			
-			//Save updated iptables rules to ipv4 file
-			SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-			SuperMesh.RunCmd('sudo systemctl disable tor')
-			SuperMesh.RunCmd('sudo systemctl stop tor')
-			
-		}*/
+		console.log('>>>>>> Runing 2nd')
 		return Promise.resolve(res + 1);
 	}  
-	function UpdateGatewaySettings(res){
+	function getNetworkIPs(res){
+		console.log('Getting Network IP...')
+
+		console.log('>>>>>> Runing 3rd')
 		console.log("result:", res);
-		res.end('{"msg": "success","result": "result"}');
+		//Execute promissed spanw child process
+		SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/torrc.cf && sudo rm /etc/tor/torrc.cf-before-edit');
 	}
 
-	var UpdateSteps = [ getNetworkIPs, CheckInterfaceUp, UpdateGatewaySettings];
+	var UpdateSteps = [ UpdateGatewaySettings, CheckInterfaceUp, getNetworkIPs ];
 
 	// Execute a list of Promise return functions in series
 	function UpdateProcess(list) {  
@@ -170,7 +137,41 @@ router.post('/update', function(req, res) {
 	UpdateProcess(UpdateSteps);  
 	// result: 4
 
+	if ( req.body.enable_tor_gateway === 'true' ) {
+		// Enable TOR Proxy and Gateway
+		// TOR Service Rules
+		// Add these rules to allow TOR Transparent Proxy
+		//SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
+		//SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
 
+		// Add these rules turn SuperMesh device to act as TOR Gateway
+		SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040');
+		SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040');
+		
+		//Save updated iptables rules to ipv4 file
+		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
+		SuperMesh.RunCmd('sudo systemctl enable tor')
+		SuperMesh.RunCmd('sudo systemctl start tor')
+
+	} else if ( req.body.enable_tor_gateway === 'false' ) {
+		// Enable TOR Proxy and Gateway
+		// TOR Service Rules
+		// Add these rules to allow TOR Transparent Proxy
+		//SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
+		//SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
+
+		// Add these rules turn SuperMesh device to act as TOR Gateway
+		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040');
+		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040');
+		
+		//Save updated iptables rules to ipv4 file
+		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
+		SuperMesh.RunCmd('sudo systemctl disable tor')
+		SuperMesh.RunCmd('sudo systemctl stop tor')
+		
+	}
+
+	res.end('{"msg": "success","result": "result"}');
 	
 });
 
@@ -180,8 +181,8 @@ router.get('/enabletor', function(req, res) {
 	// Enable TOR Proxy and Gateway
 	// TOR Service Rules
 	// Add these rules to allow TOR Transparent Proxy
-	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
-	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
+	//SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
+	//SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
 
 	// Add these rules turn SuperMesh device to act as TOR Gateway
 	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040');
@@ -200,8 +201,8 @@ router.get('/disabletor', function(req, res) {
 	// Disable TOR Proxy and Gateway
 	// TOR Service Rules
 	// Add these rules to allow TOR Transparent Proxy
-	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
-	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
+	//SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
+	//SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
 
 	// Add these rules turn SuperMesh device to act as TOR Gateway
 	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040');
