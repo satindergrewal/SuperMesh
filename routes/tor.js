@@ -150,7 +150,7 @@ router.post('/update', function(req, res) {
 		
 		//Save updated iptables rules to ipv4 file
 		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-		SuperMesh.RunCmd('sudo systemctl enable tor')
+		//SuperMesh.RunCmd('sudo systemctl enable tor')
 		SuperMesh.RunCmd('sudo systemctl restart tor')
 
 	} else if ( req.body.enable_tor_gateway === 'false' ) {
@@ -166,8 +166,8 @@ router.post('/update', function(req, res) {
 		
 		//Save updated iptables rules to ipv4 file
 		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-		SuperMesh.RunCmd('sudo systemctl disable tor')
-		SuperMesh.RunCmd('sudo systemctl stop tor')
+		//SuperMesh.RunCmd('sudo systemctl disable tor')
+		SuperMesh.RunCmd('sudo systemctl restart tor')
 		
 	}
 
