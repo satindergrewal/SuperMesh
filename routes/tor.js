@@ -28,11 +28,6 @@ router.get('/getsettings', function(req, res, next) {
 
 /* POST to Update IPTables Settings. */
 router.post('/update', function(req, res) {
-
-
-
-
-
 	var Promise = require('bluebird');
 
 	// Promise returning functions to execute
@@ -44,8 +39,8 @@ router.post('/update', function(req, res) {
 		var settings_data = JSON.parse(torrcfs_Read);
 		//console.log(JSON.stringify(settings_data.EnableTorGateway, null, 2));
 
-		console.log('======= req.body =======');
-		console.log(req.body);
+		//console.log('======= req.body =======');
+		//console.log(req.body);
 
 		torrc_Data = {
 			"Eth1Addr": settings_data.Eth1Addr,
@@ -55,17 +50,17 @@ router.post('/update', function(req, res) {
 			"EnableTorGateway": (req.body.enable_tor_gateway === "false") ? "# " : ""
 		}
 
-		console.log('=========== JSON Stringify ===========');
-		console.log(JSON.stringify(torrc_Data, null, 2))
+		//console.log('=========== JSON Stringify ===========');
+		//console.log(JSON.stringify(torrc_Data, null, 2))
 
 		// Write update changes to JSON file interfaces.data
 		fs.writeFile(torrc_File, JSON.stringify(torrc_Data, null, 2), function (err) {
 			if (err) return console.log(err)
-				console.log('======= Setting values from Admin Panel =======')
-				console.log('writing to ' + torrc_File)
-				console.log(JSON.stringify(torrc_Data, null, 2))
+				//console.log('======= Setting values from Admin Panel =======')
+				//console.log('writing to ' + torrc_File)
+				//console.log(JSON.stringify(torrc_Data, null, 2))
 			});
-		console.log('>>>>>> Runing 1st')
+		//console.log('>>>>>> Runing 1st')
 		return Promise.resolve(1);
 	}
 	function CheckInterfaceUp(res) {
@@ -106,20 +101,58 @@ router.post('/update', function(req, res) {
 
 			fs.writeFile(torrcFile, JSON.stringify(torrcData, null, 2), function (err) {
 			if (err) return console.log(err)
-				console.log('======= Setting values for interfaces =======')
-				console.log('writing to ' + torrcFile)
-				console.log(JSON.stringify(torrcData, null, 2))
+				//console.log('======= Setting values for interfaces =======')
+				//console.log('writing to ' + torrcFile)
+				//console.log(JSON.stringify(torrcData, null, 2))
 			});
 
 		});
-		console.log('>>>>>> Runing 2nd')
+		//console.log('>>>>>> Runing 2nd')
 		return Promise.resolve(res + 1);
 	}  
 	function getNetworkIPs(res){
+		var torrcFileIP = '/opt/SuperMeshData/torrc.data'
+		var torrcDataIP = ''
+
+		var torrcfsReadIP = fs.readFileSync(torrcFileIP, 'utf8').toString();
+		var settingsdataIP = JSON.parse(torrcfsReadIP);
+		//console.log(JSON.stringify(settingsdataIP.Eth1Addr, null, 2));
 		console.log('Getting Network IP...')
 
-		console.log('>>>>>> Runing 3rd')
-		console.log("result:", res);
+		var ifconfig = require('wireless-tools/ifconfig');
+		ifconfig.status(function(err, status) {
+			for (i = 0; i < status.length; i++) {
+				//console.log(status[i]);
+				if ( status[i].interface === 'eth1' ) {
+					var ifc_eth1_ipv4 = status[i].ipv4_address;
+				}
+				if ( status[i].interface === 'wlan0' ) {
+					var ifc_wlan0_ipv4 = status[i].wlan0_address;
+				}
+			}
+
+			torrcDataIP = {
+				"Eth1Addr": ifc_eth1_ipv4,
+				"EnableEth1": enable_eth1,
+				"Wlan0Addr": ifc_wlan0_ipv4,
+				"EnableWlan0": enable_wlan0,
+				"EnableTorGateway": settingsdataIP.EnableTorGateway
+			}
+
+			fs.writeFile(torrcFileIP, JSON.stringify(torrcDataIP, null, 2), function (err) {
+				if (err) return console.log(err)
+				//console.log('======= Setting values for interfaces =======')
+				//console.log('writing to ' + torrcFileIP)
+				//console.log(JSON.stringify(torrcDataIP, null, 2))
+			});
+
+		});
+
+		
+
+
+		//console.log('>>>>>> Runing 3rd')
+		//console.log("result:", res);
 		//Execute promissed spanw child process
 		SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/torrc.cf && sudo rm /etc/tor/torrc.cf-before-edit');
 	}
@@ -134,8 +167,7 @@ router.post('/update', function(req, res) {
 	  }, p);
 	}
 
-	UpdateProcess(UpdateSteps);  
-	// result: 4
+	UpdateProcess(UpdateSteps);
 
 	if ( req.body.enable_tor_gateway === 'true' ) {
 		// Enable TOR Proxy and Gateway
@@ -150,7 +182,7 @@ router.post('/update', function(req, res) {
 		
 		//Save updated iptables rules to ipv4 file
 		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-		//SuperMesh.RunCmd('sudo systemctl enable tor')
+		SuperMesh.RunCmd('sudo systemctl enable tor')
 		SuperMesh.RunCmd('sudo systemctl restart tor')
 
 	} else if ( req.body.enable_tor_gateway === 'false' ) {
@@ -166,7 +198,7 @@ router.post('/update', function(req, res) {
 		
 		//Save updated iptables rules to ipv4 file
 		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-		//SuperMesh.RunCmd('sudo systemctl disable tor')
+		SuperMesh.RunCmd('sudo systemctl disable tor')
 		SuperMesh.RunCmd('sudo systemctl restart tor')
 		
 	}
