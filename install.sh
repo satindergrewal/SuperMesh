@@ -57,6 +57,8 @@ sleep 30; curl -L http://localhost:3000/admin/firewall/enableipv4fwd
 #### Configuring Raspberry Pi settings using SuperMesh's default system scripts
 # Setting up and restarting network settings
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/edit_network_config.cf
+sudo cf-agent -K private/system_scripts/supermeshhosts.cf
+sudo rm /etc/supermeshhosts.cf-before-edit
 sudo systemctl daemon-reload
 sudo systemctl restart networking
 
