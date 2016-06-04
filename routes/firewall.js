@@ -130,7 +130,8 @@ router.post('/update', function(req, res) {
 		function SaveIPTables(res){
 			//Save updated iptables rules to ipv4 file
 			SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-			//console.log("result:", res); }
+			//console.log("result:", res);
+		}
 
 		var FirwallActionList = [ enableIPForwarding, BetweenEth0Wlan0, BetweenEth0Eth1, BetweenWlan1Wlan0, BetweenWlan1Eth1, OpenPort22, OpenPort53, OpenPort3000, OpenPort9050, SaveIPTables];
 
@@ -144,6 +145,7 @@ router.post('/update', function(req, res) {
 
 		pseries(FirwallActionList);  
 		// result: 4
+
 	} else if ( req.body.iptables4_enable_disable === 'false' ) {
 		//Enable IPv4 forwarding
 		//Enable Masquerading on eth0 interface, the Internet Interneface
