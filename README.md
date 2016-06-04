@@ -226,6 +226,7 @@ sudo systemctl restart pdns-recursor
 #### Setting up Tor Service & restarting service
 ```shell
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/torrc.cf
+curl -L http://localhost:3000/admin/tor/enabletor
 sudo systemctl daemon-reload
 sudo systemctl enable tor
 sudo systemctl restart tor
