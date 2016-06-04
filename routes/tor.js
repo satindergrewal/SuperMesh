@@ -111,50 +111,12 @@ router.post('/update', function(req, res) {
 		return Promise.resolve(res + 1);
 	}  
 	function getNetworkIPs(res){
-		var torrcFileIP = '/opt/SuperMeshData/torrc.data'
-		var torrcDataIP = ''
-
-		var torrcfsReadIP = fs.readFileSync(torrcFileIP, 'utf8').toString();
-		var settingsdataIP = JSON.parse(torrcfsReadIP);
-		//console.log(JSON.stringify(settingsdataIP.Eth1Addr, null, 2));
 		console.log('Getting Network IP...')
-
-		var ifconfig = require('wireless-tools/ifconfig');
-		ifconfig.status(function(err, status) {
-			for (i = 0; i < status.length; i++) {
-				//console.log(status[i]);
-				if ( status[i].interface === 'eth1' ) {
-					var ifc_eth1_ipv4 = status[i].ipv4_address;
-				}
-				if ( status[i].interface === 'wlan0' ) {
-					var ifc_wlan0_ipv4 = status[i].wlan0_address;
-				}
-			}
-
-			torrcDataIP = {
-				"Eth1Addr": ifc_eth1_ipv4,
-				"EnableEth1": enable_eth1,
-				"Wlan0Addr": ifc_wlan0_ipv4,
-				"EnableWlan0": enable_wlan0,
-				"EnableTorGateway": settingsdataIP.EnableTorGateway
-			}
-
-			fs.writeFile(torrcFileIP, JSON.stringify(torrcDataIP, null, 2), function (err) {
-				if (err) return console.log(err)
-				//console.log('======= Setting values for interfaces =======')
-				//console.log('writing to ' + torrcFileIP)
-				//console.log(JSON.stringify(torrcDataIP, null, 2))
-			});
-
-		});
-
-		
-
 
 		//console.log('>>>>>> Runing 3rd')
 		//console.log("result:", res);
 		//Execute promissed spanw child process
-		SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/torrc.cf && sudo rm /etc/tor/torrc.cf-before-edit');
+		SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/torrc.cf; sudo rm /etc/tor/torrc.cf-before-edit');
 	}
 
 	var UpdateSteps = [ UpdateGatewaySettings, CheckInterfaceUp, getNetworkIPs ];
@@ -177,13 +139,7 @@ router.post('/update', function(req, res) {
 		//SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
 
 		// Add these rules turn SuperMesh device to act as TOR Gateway
-		SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040');
-		SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040');
-		
-		//Save updated iptables rules to ipv4 file
-		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-		SuperMesh.RunCmd('sudo systemctl enable tor')
-		SuperMesh.RunCmd('sudo systemctl restart tor')
+		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040; sudo iptables -t nat -D PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040; sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040; sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040; sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"; sudo systemctl enable tor; sudo systemctl restart tor');
 
 	} else if ( req.body.enable_tor_gateway === 'false' ) {
 		// Enable TOR Proxy and Gateway
@@ -193,14 +149,8 @@ router.post('/update', function(req, res) {
 		//SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
 
 		// Add these rules turn SuperMesh device to act as TOR Gateway
-		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040');
-		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040');
-		
-		//Save updated iptables rules to ipv4 file
-		SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-		SuperMesh.RunCmd('sudo systemctl disable tor')
-		SuperMesh.RunCmd('sudo systemctl restart tor')
-		
+		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040; sudo iptables -t nat -D PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040; sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"; sudo systemctl disable tor; sudo systemctl restart tor');
+				
 	}
 
 	res.end('{"msg": "success","result": "result"}');
@@ -217,13 +167,7 @@ router.get('/enabletor', function(req, res) {
 	//SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
 
 	// Add these rules turn SuperMesh device to act as TOR Gateway
-	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040');
-	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040');
-	
-	//Save updated iptables rules to ipv4 file
-	SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-	SuperMesh.RunCmd('sudo systemctl enable tor')
-	SuperMesh.RunCmd('sudo systemctl start tor')
+	SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040; sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040; sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"; sudo systemctl enable tor; sudo systemctl start tor');
 	
 	res.end('{"msg": "success","result": "result"}');
 });
@@ -237,13 +181,7 @@ router.get('/disabletor', function(req, res) {
 	//SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
 
 	// Add these rules turn SuperMesh device to act as TOR Gateway
-	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040');
-	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040');
-
-	//Save updated iptables rules to ipv4 file
-	SuperMesh.RunCmd('sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"')
-	SuperMesh.RunCmd('sudo systemctl disable tor')
-	SuperMesh.RunCmd('sudo systemctl stop tor')
+	SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040; sudo iptables -t nat -D PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040; sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"; sudo systemctl disable tor; sudo systemctl stop tor');
 	
 	res.end('{"msg": "success","result": "result"}');
 });
