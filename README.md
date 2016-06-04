@@ -25,10 +25,10 @@ And Decentralized blockchain and applications like:
 <!-- This extra line is necessary for table to render properly. -->
 |                      |    Status      |      Description     |
 |--------------------------------------------------------------|--------------------|-----------------------------------------------|
-| __TOR Gateway__      | :clock3:       | In Progress          |
-| __TOR Proxy__        | :clock3:       | In Progress          |
-| __DNSChain__         | :white_circle: | Not Started Yet      |
-| __Namecoin Support__ | :white_circle: | Not Started Yet      |
+| __TOR Gateway__      | :white_check_mark:       | Done          |
+| __TOR Proxy__        | :white_check_mark:       | Done          |
+| __DNSChain__         | :clock3: | In Progress      |
+| __Namecoin Support__ | :clock3: | In Progress      |
 | __I2P Gateway__      | :white_circle: | Not Started Yet      |
 | __I2P Proxy__        | :white_circle: | Not Started Yet      |
 | __cjdns__            | :white_circle: | Not Started Yet      |
