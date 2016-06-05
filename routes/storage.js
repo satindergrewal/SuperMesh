@@ -3,6 +3,7 @@ var router = express.Router();
 
 var fs = require('fs');
 var sys = require('sys');
+var df = require('node-df');
 
 // SuperMesh app functions
 var SuperMesh = require("../private/js/app_functions.js");
@@ -13,16 +14,19 @@ router.get('/', function(req, res, next) {
   res.render('storage', {title: 'Controle Centre Admin'});
 });
 
-router.get('/getsettings', function(req, res, next) {
-	var torrcFile = '/opt/SuperMeshData/torrc.data'
-	var torrcfsRead = fs.readFileSync(torrcFile, 'utf8').toString();
-	var settingsdata = JSON.parse(torrcfsRead);
+router.get('/df', function(req, res, next) {
+	var	options = {
+		file: '/',
+		prefixMultiplier: 'GB',
+		isDisplayPrefixMultiplier: true,
+		precision: 2
+	};
 
-	console.log('===>> TorSettings DATA recieved >>');
-	console.log('=========== JSON Stringify ===========');
-	console.log(JSON.stringify(settingsdata, null, 2));
-
-	res.send(settingsdata);
+	df(options, function (error, response) {
+	if (error) { throw error; }
+		var dfoutput = JSON.stringify(response, null, 2)
+		res.send(dfoutput);
+	});
 });
 
 
