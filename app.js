@@ -19,6 +19,7 @@ var accesspoint = require('./routes/accesspoint');
 var dhcpd = require('./routes/dhcpd');
 var firewall = require('./routes/firewall');
 var dnsserver = require('./routes/dnsserver');
+var storage = require('./routes/storage');
 
 //Third party services
 var tor = require('./routes/tor');
@@ -51,6 +52,7 @@ app.use('/admin/accesspoint', accesspoint);
 app.use('/admin/dhcpd', dhcpd);
 app.use('/admin/firewall', firewall);
 app.use('/admin/dnsserver', dnsserver);
+app.use('/admin/storage', storage);
 app.use('/admin/tor', tor);
 app.use('/admin/telepathy', telepathy);
 
