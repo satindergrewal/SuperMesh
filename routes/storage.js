@@ -16,7 +16,6 @@ router.get('/', function(req, res, next) {
 
 router.get('/df', function(req, res, next) {
 	var	options = {
-		file: '/',
 		prefixMultiplier: 'GB',
 		isDisplayPrefixMultiplier: true,
 		precision: 2
