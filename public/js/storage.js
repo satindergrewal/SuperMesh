@@ -5,7 +5,7 @@ $(document).ready(function() {
     populateTable();
 
     // Restart AP Service button click
-    //$('#BtnRestartWiFi').on('click', RestartWiFi);
+    $('#RefreshUSBStorage').on('click', populateTable);
 
 });
 
