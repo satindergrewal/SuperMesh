@@ -67,7 +67,6 @@ function populateTable() {
             tableContent += '<tr>';
                 tableContent += '<td class="text-center">' + this.vendor + ' ' + this.product + '</td>';
                 tableContent += '<td class="font-w600" logc_nm="' + this.logical_name + '" rel=' + index + '>' + this.logical_name + '</td>';
-                tableContent += '<td class="hidden-xs">' + this.frequency + '</td>';
                 tableContent += '<td class="hidden-xs hidden-sm" rel=' + index + '>' + this.size + '</td>';
                 tableContent += '<td class="text-center">';
                 tableContent += '<button class="btn btn-sm btn-primary" type="button" rel=' + index + ' onclick="UpdateWiFiSettings(' + index + ')">Connect</button>';
