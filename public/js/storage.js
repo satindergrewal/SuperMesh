@@ -33,7 +33,8 @@ function populateTable() {
                 tableContent += '<td class="font-w600" logc_nm="' + this.logical_name + '" rel=' + index + '>' + this.logical_name + '</td>';
                 tableContent += '<td class="hidden-xs hidden-sm" rel=' + index + '>' + this.size + '</td>';
                 tableContent += '<td class="text-center">';
-                tableContent += '<button class="btn btn-sm btn-primary" type="button" rel=' + index + ' onclick="EraseAndConnect(' + index + ')">Erase & Connect</button>';
+                tableContent += '<button class="btn btn-sm btn-primary" type="button" rel=' + index + ' onclick="EraseAndConnect(' + index + ')">Erase & Connect</button> ';
+                tableContent += '<button class="btn btn-sm btn-success" type="button" rel=' + index + ' onclick="ConnectUSB(' + index + ')">Connect</button>';
                 tableContent += '</td>';
             tableContent += '</tr>';
 
@@ -61,7 +62,7 @@ function EraseAndConnect(index_value) {
 
     swal({
         title: "Are you sure?",
-        text: "All Data will be DELETED from select drive! You will not be able to recover it back.",
+        text: "All Data will be DELETED from " + usb_storage_vendor + " drive! You will not be able to recover it back.",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
@@ -137,4 +138,21 @@ function EraseAndConnect(index_value) {
         alert('Please fill in all fields');
         return false;
     }*/
+};
+
+
+// Erase and Connect the selected USB Device
+function ConnectUSB(index_value) {
+
+    /*App.loader('show');
+    setTimeout(function () {
+        App.loader('hide');
+    }, 3000);*/
+
+    console.log(index_value);
+    var usb_storage_logic_name = $('td[rel="' + index_value + '"]').eq(0).text();
+    console.log(usb_storage_logic_name);
+
+    swal("Success", "Successfully connected " + usb_storage_logic_name + ".", "success");
+    //event.preventDefault();
 };
