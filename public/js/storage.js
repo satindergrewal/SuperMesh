@@ -11,8 +11,6 @@ $(document).ready(function() {
 
 //window.setInterval(function(){ 
     //populateTable();
-    //getwlan1status();
-    //getwlan1iwconfig();
 //}, 15000);
 
 // Functions =============================================================
@@ -28,48 +26,14 @@ function populateTable() {
 
         $.each(data, function(index){
             /*console.log('--------------------');
-            console.log(this.signal);
-            console.log(this.ssid);
-            console.log(this.frequency);
-            console.log(this.security);*/
-
-            //console.log(index);
-
-            /*var signal_color = '';
-
-            if (this.signal >= '-25' ) {
-                signal_color = '#71bd00';
-            } else if (this.signal >= '-55' ) {
-                signal_color = '#dad700';
-            } else if (this.signal >= '-75' ) {
-                signal_color = '#f39f60';
-            } else if (this.signal >= '-95' ) {
-                signal_color = '#9a9a9a';
-            }
-            //console.log(signal_color);
-
-            var wifi_security = '';
-            var wifi_sec_color = '';
-
-            if (this.security === 'open' ) {
-                wifi_security = '<i class="fa fa-unlock-alt"></i>';
-                wifi_sec_color = '#71bd00';
-            } else if (this.security === 'wpa' || this.security === 'wpa2' ) {
-                wifi_security = '<i class="fa fa-lock"></i>';
-                wifi_sec_color = '#337ab7';
-            }
-            else if (this.security === 'wep') {
-                wifi_security = '<i class="fa fa-lock"></i>';
-                wifi_sec_color = '#a48ad4';
-            }*/
-            //console.log(wifi_security);
+            console.log(this.logical_name);*/
 
             tableContent += '<tr>';
                 tableContent += '<td class="text-center">' + this.vendor + ' ' + this.product + '</td>';
                 tableContent += '<td class="font-w600" logc_nm="' + this.logical_name + '" rel=' + index + '>' + this.logical_name + '</td>';
                 tableContent += '<td class="hidden-xs hidden-sm" rel=' + index + '>' + this.size + '</td>';
                 tableContent += '<td class="text-center">';
-                tableContent += '<button class="btn btn-sm btn-primary" type="button" rel=' + index + ' onclick="UpdateWiFiSettings(' + index + ')">Connect</button>';
+                tableContent += '<button class="btn btn-sm btn-primary" type="button" rel=' + index + ' onclick="EraseAndConnect(' + index + ')">Erase & Connect</button>';
                 tableContent += '</td>';
             tableContent += '</tr>';
 
@@ -83,30 +47,8 @@ function populateTable() {
     });
 };
 
-function getwlan1status() {
-    $.getJSON( '/admin/network/ifconfig/wlan1', function( data ) {
-        //console.log(data);
-        $( "#wlan1_ipaddr" ).html( data['ipv4_address'] );
-        $( "#wlan1_subnet" ).html( data['ipv4_subnet_mask'] );
-    });
-};
-
-function getwlan1iwconfig() {
-    $.getJSON( '/admin/wifi/iwconfig/wlan1', function( data ) {
-        //console.log(data);
-        $( "#wlan1_ssid" ).html( data['ssid'] );
-        $( "#wlan1_ieee" ).html( data['ieee'] );
-    });
-};
-
-function getWiFidetails(index_value) {
-    console.log(index_value);
-    console.log($('td[rel="' + index_value + '"]').eq(0).text());
-    console.log($('td[rel="' + index_value + '"]').eq(1).text());
-}
-
-// Update WPA Settings
-function UpdateWiFiSettings(index_value) {
+// Erase and Connect the selected USB Device
+function EraseAndConnect(index_value) {
 
     /*App.loader('show');
     setTimeout(function () {
@@ -114,17 +56,29 @@ function UpdateWiFiSettings(index_value) {
     }, 3000);*/
 
     console.log(index_value);
-    var wifi_ssid_name = $('td[rel="' + index_value + '"]').eq(0).text();
-    var wifi_ssid_security = $('td[rel="' + index_value + '"]').eq(1).text();
-    var wifi_password = '';
-    console.log(wifi_ssid_name);
-    console.log(wifi_ssid_security);
+    var usb_storage_logic_name = $('td[rel="' + index_value + '"]').eq(0).text();
+    console.log(usb_storage_logic_name);
 
-    if ( wifi_ssid_security == ' wpa2' || wifi_ssid_security == ' wpa' || wifi_ssid_security == ' wep' ) {
-        //alert('it is wpa2.');
-        wifi_password = prompt("Enter " + wifi_ssid_name + " WiFi Password:");
-        console.log(wifi_password);
-    }
+    swal({
+        title: "Are you sure?",
+        text: "All Data will be DELETED from select drive! You will not be able to recover it back.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, Erase & Connect!",
+        cancelButtonText: "No, cancel plz!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    },
+    function(isConfirm){
+        if (isConfirm) {
+            swal("Erased & Connected!", "All Data from select USB Device has been deleted and it's now connected to System.", "success");
+            console.log('Deleted successfully!');
+        } else {
+            swal("Cancelled", "All your data on selected USB Device is safe :)", "error");
+            console.log('Cancelled Delete Action!');
+        }
+    });
 
     //event.preventDefault();
 
@@ -135,7 +89,7 @@ function UpdateWiFiSettings(index_value) {
     });*/
 
     // Check and make sure errorCount's still at zero
-    if(errorCount === 0) {
+    /*if(errorCount === 0) {
 
         // If it is, compile all user info into one object
         var WiFiSettings = {
@@ -182,12 +136,5 @@ function UpdateWiFiSettings(index_value) {
         // If errorCount is more than 0, error out
         alert('Please fill in all fields');
         return false;
-    }
-};
-
-//  Restart Access Point Service
-function RestartWiFi() {
-    $.getJSON( '/admin/accesspoint/restartwifi', function( data ) {
-        console.log(data);
-    });
+    }*/
 };
