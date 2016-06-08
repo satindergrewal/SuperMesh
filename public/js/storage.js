@@ -62,7 +62,7 @@ function EraseAndConnect(index_value) {
 
     swal({
         title: "Are you sure?",
-        text: "All Data will be DELETED from " + usb_storage_vendor + " drive! You will not be able to recover it back.",
+        text: "All Data will be DELETED from " + usb_storage_logic_name + " drive! You will not be able to recover it back.",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
@@ -75,6 +75,44 @@ function EraseAndConnect(index_value) {
         if (isConfirm) {
             swal("Erased & Connected!", "All Data from select USB Device has been deleted and it's now connected to System.", "success");
             console.log('Deleted successfully!');
+
+            var StorageSettings = {
+                'USBLogicName': $('td[rel="' + index_value + '"]').eq(0).text()
+            }
+
+            console.log(StorageSettings);
+
+            // Use AJAX to post the object to our adduser service
+            $.ajax({
+                type: 'POST',
+                data: StorageSettings,
+                url: '/admin/storage/eraseconnect',
+                dataType: 'html',
+                success: function(data, textStatus, jqXHR) {
+                    var NetData = JSON.parse(data);
+                    console.log(NetData);
+
+                    if (NetData.msg === 'success') {
+                        console.log('Success');
+                        swal("Success", "Storage Settings Saved.", "success");
+
+                        // Populate IP Info
+                        //populateIPInfo();
+                    }
+                    else {
+                        // If something goes wrong, alert the error message that our service returned
+                        swal("Oops...", "Something went wrong!", "error");
+                    }
+                },
+                error: function(xhr, textStatus, error) {
+                    console.log('failure');
+                    console.log(xhr.statusText);
+                    console.log(textStatus);
+                    console.log(error);
+                    swal("Oops...", "Something went wrong!", "error");
+                    
+                }
+            });
         } else {
             swal("Cancelled", "All your data on selected USB Device is safe :)", "error");
             console.log('Cancelled Delete Action!');
@@ -84,54 +122,16 @@ function EraseAndConnect(index_value) {
     //event.preventDefault();
 
     // Super basic validation - increase errorCount variable if any fields are blank
-    var errorCount = 0;
+    /*var errorCount = 0;
     /*$('#FormNetSettings input').each(function(index, val) {
         if($(this).val() === '') { errorCount++; }
-    });*/
+    });
 
     // Check and make sure errorCount's still at zero
-    /*if(errorCount === 0) {
+    if(errorCount === 0) {
 
         // If it is, compile all user info into one object
-        var WiFiSettings = {
-            'ssid': $('td[rel="' + index_value + '"]').eq(0).text(),
-            'security': $('td[rel="' + index_value + '"]').eq(1).text(),
-            'password': wifi_password
-        }
-
-        console.log(WiFiSettings);
-
-        // Use AJAX to post the object to our adduser service
-        $.ajax({
-            type: 'POST',
-            data: WiFiSettings,
-            url: '/admin/wifi/wpa_supplicant/setup',
-            dataType: 'html',
-            success: function(data, textStatus, jqXHR) {
-                var NetData = JSON.parse(data);
-                console.log(NetData);
-
-                if (NetData.msg === 'success') {
-                    console.log('Success');
-                    swal("Success", "WiFi Settings Saved.", "success");
-
-                    // Populate IP Info
-                    //populateIPInfo();
-                }
-                else {
-                    // If something goes wrong, alert the error message that our service returned
-                    swal("Oops...", "Something went wrong!", "error");
-                }
-            },
-            error: function(xhr, textStatus, error) {
-                console.log('failure');
-                console.log(xhr.statusText);
-                console.log(textStatus);
-                console.log(error);
-                swal("Oops...", "Something went wrong!", "error");
-                
-            }
-        });
+        
     }
     else {
         // If errorCount is more than 0, error out
