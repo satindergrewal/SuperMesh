@@ -33,7 +33,7 @@ function populateTable() {
                 tableContent += '<td class="font-w600" logc_nm="' + this.logical_name + '" rel=' + index + '>' + this.logical_name + '</td>';
                 tableContent += '<td class="hidden-xs hidden-sm" rel=' + index + '>' + this.size + '</td>';
                 tableContent += '<td class="text-center">';
-                tableContent += '<button class="btn btn-sm btn-primary" type="button" rel=' + index + ' onclick="EraseAndConnect(' + index + ')">Erase & Connect</button> ';
+                tableContent += '<button class="btn btn-sm btn-danger" type="button" rel=' + index + ' onclick="EraseAndConnect(' + index + ')">Erase & Connect</button> ';
                 tableContent += '<button class="btn btn-sm btn-success" type="button" rel=' + index + ' onclick="ConnectUSB(' + index + ')">Connect</button>';
                 tableContent += '</td>';
             tableContent += '</tr>';

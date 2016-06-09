@@ -126,7 +126,7 @@ sudo apt-get install cfengine3
 ```
 
 #### Installing dependencies
-`sudo apt-get -y install git nodejs npm lshw wireless-tools tor`
+`sudo apt-get -y install git nodejs npm lshw wireless-tools tor usbmount`
 
 
 #### Make node binary symlink
