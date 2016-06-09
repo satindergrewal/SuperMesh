@@ -20,15 +20,16 @@ function populateTable() {
 
     // Empty content string
     var tableContent = '';
+    var StorageBlockBase = '';
 
     // jQuery AJAX call for JSON
     $.getJSON( '/admin/storage/usbstorageinfo', function( data ) {
 
-        $.each(data, function(index){
-            /*console.log('--------------------');
-            console.log(this.logical_name);*/
+        $.each(data.usbinfo, function(index){
+            //console.log('---------- Data USB INFO ----------');
+            //console.log(this);
 
-            tableContent += '<tr>';
+            /*tableContent += '<tr>';
                 tableContent += '<td class="text-center">' + this.vendor + ' ' + this.product + '</td>';
                 tableContent += '<td class="font-w600" logc_nm="' + this.logical_name + '" rel=' + index + '>' + this.logical_name + '</td>';
                 tableContent += '<td class="hidden-xs hidden-sm" rel=' + index + '>' + this.size + '</td>';
@@ -38,13 +39,67 @@ function populateTable() {
                 tableContent += '</td>';
             tableContent += '</tr>';
 
-        // Inject the whole content string into our existing HTML table
-        $('#usbstoragelist tbody').html(tableContent);
-        //console.log(tableContent);
+            // Inject the whole content string into our existing HTML table
+            $('#usbstoragelist tbody').html(tableContent);
+            //console.log(tableContent);*/
+
+            var LogicalName = this.logical_name;
+            var tmpIndex = index;
+
+            StorageBlockBase += '<div class="col-lg-4">';
+            StorageBlockBase += '<div class="block block-bordered">';
+            StorageBlockBase += '<div class="block-header">';
+            StorageBlockBase += '<h3 class="block-title" style="text-transform: none;">' + this.vendor + ' ' + this.product + ' <small>' + this.size + '</small></h3>';
+            StorageBlockBase += '</div>';
+            StorageBlockBase += '<div class="block-content"><div class="pull-r-l pull-t push">';
+            StorageBlockBase += '<table class="block-table text-center bg-gray-lighter border-b"><tbody>';
+            StorageBlockBase += '<tr><td class="border-r" style="width: 50%;"><div class="h2 font-w700" id="' + index + 'free">FREE</div><div class="h5 text-muted text-uppercase push-5-t" style="text-transform: none;">Available</div></td>';
+            StorageBlockBase += '<td><div class="push-10 push-10-t"><div class="btn-group-vertical" data-toggle="buttons">';
+            StorageBlockBase += '<button class="btn btn-success" type="button" onclick="ConnectUSB(' + index + ')><i class="fa fa-link"></i> Connect</button>';
+            StorageBlockBase += '<button class="btn btn-default" type="button" onclick="DisConnectUSB(' + index + ')><i class="fa fa-expand"></i> Disconnect</button>';
+            StorageBlockBase += '<button class="btn btn-danger" type="button" onclick="EraseAndConnect(' + index + ')"><i class="fa fa-trash"></i> Erase &amp; Connect</button>';
+            StorageBlockBase += '</div></div></td>';
+            StorageBlockBase += '</tr></tbody></table></div>';
+            StorageBlockBase += '<table class="table table-borderless table-striped table-condensed">';
+            StorageBlockBase += '<tbody><tr><td><strong>Logical Name:</strong></td><td><span id="' + index + 'logicname">' + this.logical_name + '</span></td></tr>';
+            StorageBlockBase += '<tr><td><strong>Partition:</strong></td><td><span id="' + index + 'partition">/dev/sda1</span></td></tr>';
+            StorageBlockBase += '<tr><td><strong>Mount Point:</strong></td><td><span id="' + index + 'mount">/dev/sda1</span></td></tr>';
+            StorageBlockBase += '<tr><td><strong>Total Size:</strong></td><td><span id="' + index + 'totalsize"></span></td></tr>';
+            StorageBlockBase += '<tr><td><strong>Available:</strong></td><td><span id="' + index + 'avail"></span></td></tr>';
+            StorageBlockBase += '<tr><td><strong>Used:</strong></td><td><span id="' + index + 'used"></span></td></tr></tbody></table>';
+            StorageBlockBase += '</div></div></div>';
+
+            $('#storage-blocks').html(StorageBlockBase);
+
+            $.each(data.df, function(index){
+                //console.log('---------- Data DF ----------');
+                //console.log(this);
+
+                var LogicalName_Number = LogicalName+'1';
+
+                if ( this.filesystem === LogicalName_Number ) {
+                    console.log(LogicalName_Number);
+                    console.log(this.filesystem);
+                    console.log(this.available );
+                    $( "#" + tmpIndex + "partition" ).html( this.filesystem );
+                    $( "#" + tmpIndex + "mount" ).html( this.mount );
+                    $( "#" + tmpIndex + "total" ).html( this.size );
+                    $( "#" + tmpIndex + "totalsize" ).html( this.size );
+                    $( "#" + tmpIndex + "free" ).html( this.available );
+                    $( "#" + tmpIndex + "avail" ).html( this.available );
+                    $( "#" + tmpIndex + "used" ).html( this.used );
+                }
+                if ( LogicalName_Number == '' ) {
+                    console.log('File System Blank: ' + this.size);
+                    $( "#" + tmpIndex + "free" ).html( 'not' );
+                    $( "#" + tmpIndex + "total" ).html( 'Connected' );
+                }
+            });
 
         });
         //console.log(data);
         //console.log(data[0]);
+
     });
 };
 
@@ -57,7 +112,8 @@ function EraseAndConnect(index_value) {
     }, 3000);*/
 
     console.log(index_value);
-    var usb_storage_logic_name = $('td[rel="' + index_value + '"]').eq(0).text();
+    //var usb_storage_logic_name = $('td[rel="' + index_value + '"]').eq(0).text();
+    var usb_storage_logic_name = $('#' + index_value + 'logicname').text();
     console.log(usb_storage_logic_name);
 
     swal({
@@ -77,7 +133,7 @@ function EraseAndConnect(index_value) {
             console.log('Deleted successfully!');
 
             var StorageSettings = {
-                'USBLogicName': $('td[rel="' + index_value + '"]').eq(0).text()
+                'USBLogicName': $('#' + index_value + 'logicname').text()
             }
 
             console.log(StorageSettings);
@@ -149,8 +205,8 @@ function ConnectUSB(index_value) {
         App.loader('hide');
     }, 3000);*/
 
-    console.log(index_value);
-    var usb_storage_logic_name = $('td[rel="' + index_value + '"]').eq(0).text();
+    //console.log(index_value);
+    var usb_storage_logic_name = $('#' + index_value + 'logicname').text();
     console.log(usb_storage_logic_name);
 
     swal("Success", "Successfully connected " + usb_storage_logic_name + ".", "success");

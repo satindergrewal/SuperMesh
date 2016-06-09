@@ -30,7 +30,23 @@ router.get('/df', function(req, res, next) {
 
 router.get('/usbstorageinfo', function(req, res, next) {
 	lshw_disk.status(function(err, disk_status) {
-		res.send(disk_status);
+		var	options = {
+			prefixMultiplier: 'GB',
+			isDisplayPrefixMultiplier: true,
+			precision: 2
+		};
+
+		df(options, function (error, response) {
+		if (error) { throw error; }
+			var dfoutput = JSON.stringify(response, null, 2)
+			var diskJSON = {
+				"df": response,
+				"usbinfo": disk_status
+			}
+			res.send(diskJSON);
+			//res.send(dfoutput);
+		});
+		//res.send(disk_status);
 	});
 });
 
@@ -38,6 +54,9 @@ router.get('/usbstorageinfo', function(req, res, next) {
 router.post('/eraseconnect', function(req, res) {
 	console.log('======= req.body =======');
 	console.log(req.body);
+	console.log(req.body.USBLogicName);
+
+	SuperMesh.RunCmd('sudo parted -s '+ req.body.USBLogicName + ' mklabel msdos; sudo parted -s '+ req.body.USBLogicName + ' mkpart primary 0% 100%; sudo mkfs.ext4 '+ req.body.USBLogicName + '1');
 
 	res.end('{"msg": "success","result": "result"}');
 	
