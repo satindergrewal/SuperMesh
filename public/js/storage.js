@@ -57,8 +57,8 @@ function populateTable() {
             StorageBlockBase += '<table class="block-table text-center bg-gray-lighter border-b"><tbody>';
             StorageBlockBase += '<tr><td class="border-r" style="width: 50%;"><div class="h2 font-w700" rel="' + index + '" id="free">FREE</div><div class="h5 text-muted text-uppercase push-5-t" rel="' + index + '" id="diskstatus" style="text-transform: none;">Available</div></td>';
             StorageBlockBase += '<td><div class="push-10 push-10-t"><div class="btn-group-vertical" data-toggle="buttons">';
-            StorageBlockBase += '<button class="btn btn-success" type="button" onclick="ConnectUSB(' + index + ')><i class="fa fa-link"></i> Connect</button>';
-            StorageBlockBase += '<button class="btn btn-default" type="button" onclick="DisConnectUSB(' + index + ')><i class="fa fa-expand"></i> Disconnect</button>';
+            StorageBlockBase += '<button class="btn btn-success" type="button" onclick="ConnectUSB(' + index + ')"><i class="fa fa-link"></i> Connect</button>';
+            StorageBlockBase += '<button class="btn btn-default" type="button" onclick="DisConnectUSB(' + index + ')"><i class="fa fa-expand"></i> Disconnect</button>';
             StorageBlockBase += '<button class="btn btn-danger" type="button" onclick="EraseAndConnect(' + index + ')"><i class="fa fa-trash"></i> Erase &amp; Connect</button>';
             StorageBlockBase += '</div></div></td>';
             StorageBlockBase += '</tr></tbody></table></div>';
