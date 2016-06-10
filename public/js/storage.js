@@ -49,8 +49,8 @@ function populateUSBInfo() {
             tmpIndex = index;
 
             StorageBlockBase += '<div class="col-lg-4">';
-            StorageBlockBase += '<div class="block block-bordered">';
-            StorageBlockBase += '<div class="block-header">';
+            StorageBlockBase += '<div id="headthem" class="block block-bordered">';
+            StorageBlockBase += '<div id="headcolr" class="block-header">';
             StorageBlockBase += '<h3 class="block-title" style="text-transform: none;">' + this.vendor + ' ' + this.product + ' <small>' + this.size + '</small></h3>';
             StorageBlockBase += '</div>';
             StorageBlockBase += '<div class="block-content"><div class="pull-r-l pull-t push">';
@@ -91,8 +91,9 @@ function populateUSBInfo() {
                     $('span[rel="' + i + '"]').eq(5).html( data.df[j].used ); //Used Space
                     $('div[rel="' + i + '"]').eq(0).html( data.df[j].available ); //Available Bold
                     $('div[rel="' + i + '"]').eq(1).html( '/'+data.df[j].size ); //Total Size
-                    if ( data.df[j].available === '' ) {
-                        $('div[id="diskstatus"]').eq(i).html('Not Mount');
+                    if ( data.df[j].mount === '/media/usb0' ) {
+                        $('div[id="headthem"]').eq(i).removeClass( "block block-bordered" ).addClass( "block block-bordered block-themed" );
+                        $('div[id="headcolr"]').eq(i).removeClass( "block-header" ).addClass( "block-header bg-amethyst" );
                     }
                 }
             }
