@@ -50,13 +50,25 @@ router.get('/usbstorageinfo', function(req, res, next) {
 	});
 });
 
-/* POST to Update IPTables Settings. */
+/* POST to Erase select USB Device. */
 router.post('/eraseconnect', function(req, res) {
 	console.log('======= req.body =======');
 	console.log(req.body);
 	console.log(req.body.USBLogicName);
 
-	SuperMesh.RunCmd('sudo parted -s '+ req.body.USBLogicName + ' mklabel msdos; sudo parted -s '+ req.body.USBLogicName + ' mkpart primary 0% 100%; sudo mkfs.ext4 '+ req.body.USBLogicName + '1');
+	SuperMesh.RunCmd('sudo umount '+ req.body.USBLogicName + '?; sudo parted -s '+ req.body.USBLogicName + ' mklabel msdos; sudo parted -s '+ req.body.USBLogicName + ' mkpart primary 0% 100%; sudo mkfs.ext4 '+ req.body.USBLogicName + '1');
+
+	res.end('{"msg": "success","result": "result"}');
+	
+});
+
+/* POST to Disconnect select USB Device. */
+router.post('/disconnect', function(req, res) {
+	console.log('======= req.body =======');
+	console.log(req.body);
+	console.log(req.body.USBLogicName);
+
+	SuperMesh.RunCmd('sudo umount '+ req.body.USBLogicName + '?');
 
 	res.end('{"msg": "success","result": "result"}');
 	

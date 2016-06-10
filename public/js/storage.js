@@ -142,10 +142,10 @@ function EraseAndConnect(index_value) {
                 url: '/admin/storage/eraseconnect',
                 dataType: 'html',
                 success: function(data, textStatus, jqXHR) {
-                    var NetData = JSON.parse(data);
-                    console.log(NetData);
+                    var StorageData = JSON.parse(data);
+                    console.log(StorageData);
 
-                    if (NetData.msg === 'success') {
+                    if (StorageData.msg === 'success') {
                         console.log('Success');
                         swal("Success", "Storage Settings Saved.", "success");
 
@@ -194,7 +194,7 @@ function EraseAndConnect(index_value) {
 };
 
 
-// Erase and Connect the selected USB Device
+// Connect the selected USB Device
 function ConnectUSB(index_value) {
 
     /*App.loader('show');
@@ -203,9 +203,63 @@ function ConnectUSB(index_value) {
     }, 3000);*/
 
     //console.log(index_value);
-    var usb_storage_logic_name = $('#' + index_value + 'logicname').text();
+    var usb_storage_logic_name = $('span[id="logicname"]').eq(index_value).html();
     console.log(usb_storage_logic_name);
 
     swal("Success", "Successfully connected " + usb_storage_logic_name + ".", "success");
+    //event.preventDefault();
+};
+
+// Disconnect the selected USB Device
+function DisConnectUSB(index_value) {
+
+    /*App.loader('show');
+    setTimeout(function () {
+        App.loader('hide');
+    }, 3000);*/
+
+    //console.log(index_value);
+    var usb_storage_logic_name = $('span[id="logicname"]').eq(index_value).html();
+    console.log(usb_storage_logic_name);
+
+    var StorageSettings = {
+        'USBLogicName': $('span[id="logicname"]').eq(index_value).html()
+    }
+
+    console.log(StorageSettings);
+
+    // Use AJAX to post the object to our adduser service
+            $.ajax({
+                type: 'POST',
+                data: StorageSettings,
+                url: '/admin/storage/disconnect',
+                dataType: 'html',
+                success: function(data, textStatus, jqXHR) {
+                    var StorageData = JSON.parse(data);
+                    console.log(StorageData);
+
+                    if (StorageData.msg === 'success') {
+                        console.log('Success');
+                        swal("Success", "Successfully disconnected " + usb_storage_logic_name + ".", "success");
+
+                        // Populate IP Info
+                        //populateIPInfo();
+                    }
+                    else {
+                        // If something goes wrong, alert the error message that our service returned
+                        swal("Oops...", "Something went wrong!", "error");
+                    }
+                },
+                error: function(xhr, textStatus, error) {
+                    console.log('failure');
+                    console.log(xhr.statusText);
+                    console.log(textStatus);
+                    console.log(error);
+                    swal("Oops...", "Something went wrong!", "error");
+                    
+                }
+            });
+
+    //swal("Success", "Successfully disconnected " + usb_storage_logic_name + ".", "success");
     //event.preventDefault();
 };
