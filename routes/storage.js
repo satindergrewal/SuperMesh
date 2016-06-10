@@ -68,7 +68,7 @@ router.post('/connect', function(req, res) {
 	console.log(req.body);
 	console.log(req.body.USBLogicName);
 
-	SuperMesh.RunCmd('ls -lh private/system_scripts/');
+	SuperMesh.RunCmd('sudo private/system_scripts/mount_usb.sh '+req.body.USBLogicName);
 
 	res.end('{"msg": "success","result": "result"}');
 	
