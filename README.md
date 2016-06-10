@@ -27,7 +27,7 @@ And Decentralized blockchain and applications like:
 |--------------------------------------------------------------|--------------------|-----------------------------------------------|
 | __TOR Gateway__      | :white_check_mark:       | Done          |
 | __TOR Proxy__        | :white_check_mark:       | Done          |
-| __External Storage (USB) Management__         | :white_check_mark: | In Progress      |
+| __External Storage (USB) Management__         | :white_check_mark: | Done      |
 | __DNSChain__         | :clock3: | In Progress      |
 | __Namecoin Support__ | :clock3: | In Progress      |
 | __I2P Gateway__      | :white_circle: | Not Started Yet      |
