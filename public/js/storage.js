@@ -55,7 +55,7 @@ function populateTable() {
             StorageBlockBase += '</div>';
             StorageBlockBase += '<div class="block-content"><div class="pull-r-l pull-t push">';
             StorageBlockBase += '<table class="block-table text-center bg-gray-lighter border-b"><tbody>';
-            StorageBlockBase += '<tr><td class="border-r" style="width: 50%;"><div class="h2 font-w700" rel="' + index + '" id="free">FREE</div><div class="h5 text-muted text-uppercase push-5-t" rel="' + index + '" style="text-transform: none;">Available</div></td>';
+            StorageBlockBase += '<tr><td class="border-r" style="width: 50%;"><div class="h2 font-w700" rel="' + index + '" id="free">FREE</div><div class="h5 text-muted text-uppercase push-5-t" rel="' + index + '" id="diskstatus" style="text-transform: none;">Available</div></td>';
             StorageBlockBase += '<td><div class="push-10 push-10-t"><div class="btn-group-vertical" data-toggle="buttons">';
             StorageBlockBase += '<button class="btn btn-success" type="button" onclick="ConnectUSB(' + index + ')><i class="fa fa-link"></i> Connect</button>';
             StorageBlockBase += '<button class="btn btn-default" type="button" onclick="DisConnectUSB(' + index + ')><i class="fa fa-expand"></i> Disconnect</button>';
@@ -75,34 +75,28 @@ function populateTable() {
         });
         //console.log(data);
         //console.log(data[0]);
-        $.each(data.df, function(index){
-            //console.log('---------- Data DF ----------');
-            //console.log(this);
+        
+        //console.log('df length: '+data.df.length);
 
-            var LogicalName_Number = LogicalName+'1';
-            //tmpIndex = '1';
-
-            if ( this.filesystem === LogicalName_Number ) {
-                //console.log('Logical Name Number: '+LogicalName_Number);
-                //console.log('FileSystem: '+this.filesystem);
-                //console.log('Avaialble Space: '+this.available);
-                //console.log('Temp Index Number: '+tmpIndex);
-                console.log(index);
-                console.log('span[rel="' + tmpIndex + '"]');
-                $('span[rel="' + tmpIndex + '"]').eq(1).html( this.filesystem ); //Parition
-                $('span[rel="' + tmpIndex + '"]').eq(2).html( this.mount ); //Mount Point
-                $('span[rel="' + tmpIndex + '"]').eq(3).html( this.size ); //Total Size
-                $('span[rel="' + tmpIndex + '"]').eq(4).html( this.available ); //Available Space
-                $('span[rel="' + tmpIndex + '"]').eq(5).html( this.used ); //Used Space
-                //$( "#" + tmpIndex + "partition" ).html( this.filesystem );
-                //$( "#" + tmpIndex + "mount" ).html( this.mount );
-                //$( "#" + tmpIndex + "total" ).html( this.size );
-                //$( "#" + tmpIndex + "totalsize" ).html( this.size );
-                //$( "#" + tmpIndex + "free" ).html( this.available );
-                //$( "#" + tmpIndex + "avail" ).html( this.available );
-                //$( "#" + tmpIndex + "used" ).html( this.used );
+        for (i = 0; i < $('span[id="logicname"]').length; i++) {
+            //$('span[id="logicname"]').eq(i).html();
+            //console.log('Value of i: '+i)
+            for (j = 0; j < data.df.length; j++) {
+                if ( data.df[j].filesystem === $('span[id="logicname"]').eq(i).html()+'1' ) {
+                    //console.log('Logical Name: '+data.df[j].filesystem);
+                    $('span[rel="' + i + '"]').eq(1).html( data.df[j].filesystem ); //Parition
+                    $('span[rel="' + i + '"]').eq(2).html( data.df[j].mount ); //Mount Point
+                    $('span[rel="' + i + '"]').eq(3).html( data.df[j].size ); //Total Size
+                    $('span[rel="' + i + '"]').eq(4).html( data.df[j].available ); //Available Space
+                    $('span[rel="' + i + '"]').eq(5).html( data.df[j].used ); //Used Space
+                    $('div[rel="' + i + '"]').eq(0).html( data.df[j].available ); //Available Bold
+                    $('div[rel="' + i + '"]').eq(1).html( '/'+data.df[j].size ); //Total Size
+                    if ( data.df[j].available === '' ) {
+                        $('div[id="diskstatus"]').eq(i).html('Not Mount');
+                    }
+                }
             }
-        });
+        }
     });
 };
 
@@ -116,7 +110,7 @@ function EraseAndConnect(index_value) {
 
     console.log(index_value);
     //var usb_storage_logic_name = $('td[rel="' + index_value + '"]').eq(0).text();
-    var usb_storage_logic_name = $('#' + index_value + 'logicname').text();
+    var usb_storage_logic_name = $('span[id="logicname"]').eq(index_value).html();
     console.log(usb_storage_logic_name);
 
     swal({
@@ -136,7 +130,7 @@ function EraseAndConnect(index_value) {
             console.log('Deleted successfully!');
 
             var StorageSettings = {
-                'USBLogicName': $('#' + index_value + 'logicname').text()
+                'USBLogicName': $('span[id="logicname"]').eq(index_value).html()
             }
 
             console.log(StorageSettings);
