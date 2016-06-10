@@ -63,6 +63,18 @@ router.post('/eraseconnect', function(req, res) {
 });
 
 /* POST to Disconnect select USB Device. */
+router.post('/connect', function(req, res) {
+	console.log('======= req.body =======');
+	console.log(req.body);
+	console.log(req.body.USBLogicName);
+
+	SuperMesh.RunCmd('ls -lh private/system_scripts/');
+
+	res.end('{"msg": "success","result": "result"}');
+	
+});
+
+/* POST to Disconnect select USB Device. */
 router.post('/disconnect', function(req, res) {
 	console.log('======= req.body =======');
 	console.log(req.body);

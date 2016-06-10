@@ -2,21 +2,21 @@
 $(document).ready(function() {
 
     // Populate the user table on initial page load
-    populateTable();
+    populateUSBInfo();
 
     // Restart AP Service button click
-    $('#RefreshUSBStorage').on('click', populateTable);
+    $('#RefreshUSBStorage').on('click', populateUSBInfo);
 
 });
 
 //window.setInterval(function(){ 
-    //populateTable();
+    //populateUSBInfo();
 //}, 15000);
 
 // Functions =============================================================
 
 // Fill table with data
-function populateTable() {
+function populateUSBInfo() {
 
     // Empty content string
     var tableContent = '';
@@ -149,8 +149,8 @@ function EraseAndConnect(index_value) {
                         console.log('Success');
                         swal("Success", "Storage Settings Saved.", "success");
 
-                        // Populate IP Info
-                        //populateIPInfo();
+                        // Populate USB Storage Info
+                        populateUSBInfo();
                     }
                     else {
                         // If something goes wrong, alert the error message that our service returned
@@ -206,7 +206,45 @@ function ConnectUSB(index_value) {
     var usb_storage_logic_name = $('span[id="logicname"]').eq(index_value).html();
     console.log(usb_storage_logic_name);
 
-    swal("Success", "Successfully connected " + usb_storage_logic_name + ".", "success");
+    var StorageSettings = {
+        'USBLogicName': $('span[id="logicname"]').eq(index_value).html()
+    }
+
+    console.log(StorageSettings);
+
+    // Use AJAX to post the object to our adduser service
+    $.ajax({
+        type: 'POST',
+        data: StorageSettings,
+        url: '/admin/storage/connect',
+        dataType: 'html',
+        success: function(data, textStatus, jqXHR) {
+            var StorageData = JSON.parse(data);
+            console.log(StorageData);
+
+            if (StorageData.msg === 'success') {
+                console.log('Success');
+                swal("Success", "Successfully connected " + usb_storage_logic_name + ".", "success");
+
+                // Populate USB Storage Info
+                populateUSBInfo();
+            }
+            else {
+                // If something goes wrong, alert the error message that our service returned
+                swal("Oops...", "Something went wrong!", "error");
+            }
+        },
+        error: function(xhr, textStatus, error) {
+            console.log('failure');
+            console.log(xhr.statusText);
+            console.log(textStatus);
+            console.log(error);
+            swal("Oops...", "Something went wrong!", "error");
+            
+        }
+    });
+
+    //swal("Success", "Successfully connected " + usb_storage_logic_name + ".", "success");
     //event.preventDefault();
 };
 
@@ -229,36 +267,36 @@ function DisConnectUSB(index_value) {
     console.log(StorageSettings);
 
     // Use AJAX to post the object to our adduser service
-            $.ajax({
-                type: 'POST',
-                data: StorageSettings,
-                url: '/admin/storage/disconnect',
-                dataType: 'html',
-                success: function(data, textStatus, jqXHR) {
-                    var StorageData = JSON.parse(data);
-                    console.log(StorageData);
+    $.ajax({
+        type: 'POST',
+        data: StorageSettings,
+        url: '/admin/storage/disconnect',
+        dataType: 'html',
+        success: function(data, textStatus, jqXHR) {
+            var StorageData = JSON.parse(data);
+            console.log(StorageData);
 
-                    if (StorageData.msg === 'success') {
-                        console.log('Success');
-                        swal("Success", "Successfully disconnected " + usb_storage_logic_name + ".", "success");
+            if (StorageData.msg === 'success') {
+                console.log('Success');
+                swal("Success", "Successfully disconnected " + usb_storage_logic_name + ".", "success");
 
-                        // Populate IP Info
-                        //populateIPInfo();
-                    }
-                    else {
-                        // If something goes wrong, alert the error message that our service returned
-                        swal("Oops...", "Something went wrong!", "error");
-                    }
-                },
-                error: function(xhr, textStatus, error) {
-                    console.log('failure');
-                    console.log(xhr.statusText);
-                    console.log(textStatus);
-                    console.log(error);
-                    swal("Oops...", "Something went wrong!", "error");
-                    
-                }
-            });
+                // Populate USB Storage Info
+                populateUSBInfo();
+            }
+            else {
+                // If something goes wrong, alert the error message that our service returned
+                swal("Oops...", "Something went wrong!", "error");
+            }
+        },
+        error: function(xhr, textStatus, error) {
+            console.log('failure');
+            console.log(xhr.statusText);
+            console.log(textStatus);
+            console.log(error);
+            swal("Oops...", "Something went wrong!", "error");
+            
+        }
+    });
 
     //swal("Success", "Successfully disconnected " + usb_storage_logic_name + ".", "success");
     //event.preventDefault();
