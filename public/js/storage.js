@@ -24,6 +24,8 @@ function populateTable() {
 
     // jQuery AJAX call for JSON
     $.getJSON( '/admin/storage/usbstorageinfo', function( data ) {
+        var tmpIndex = '';
+        var LogicalName = '';
 
         $.each(data.usbinfo, function(index){
             //console.log('---------- Data USB INFO ----------');
@@ -43,8 +45,8 @@ function populateTable() {
             $('#usbstoragelist tbody').html(tableContent);
             //console.log(tableContent);*/
 
-            var LogicalName = this.logical_name;
-            var tmpIndex = index;
+            LogicalName = this.logical_name;
+            tmpIndex = index;
 
             StorageBlockBase += '<div class="col-lg-4">';
             StorageBlockBase += '<div class="block block-bordered">';
@@ -53,7 +55,7 @@ function populateTable() {
             StorageBlockBase += '</div>';
             StorageBlockBase += '<div class="block-content"><div class="pull-r-l pull-t push">';
             StorageBlockBase += '<table class="block-table text-center bg-gray-lighter border-b"><tbody>';
-            StorageBlockBase += '<tr><td class="border-r" style="width: 50%;"><div class="h2 font-w700" id="' + index + 'free">FREE</div><div class="h5 text-muted text-uppercase push-5-t" style="text-transform: none;">Available</div></td>';
+            StorageBlockBase += '<tr><td class="border-r" style="width: 50%;"><div class="h2 font-w700" rel="' + index + '" id="free">FREE</div><div class="h5 text-muted text-uppercase push-5-t" rel="' + index + '" style="text-transform: none;">Available</div></td>';
             StorageBlockBase += '<td><div class="push-10 push-10-t"><div class="btn-group-vertical" data-toggle="buttons">';
             StorageBlockBase += '<button class="btn btn-success" type="button" onclick="ConnectUSB(' + index + ')><i class="fa fa-link"></i> Connect</button>';
             StorageBlockBase += '<button class="btn btn-default" type="button" onclick="DisConnectUSB(' + index + ')><i class="fa fa-expand"></i> Disconnect</button>';
@@ -61,45 +63,46 @@ function populateTable() {
             StorageBlockBase += '</div></div></td>';
             StorageBlockBase += '</tr></tbody></table></div>';
             StorageBlockBase += '<table class="table table-borderless table-striped table-condensed">';
-            StorageBlockBase += '<tbody><tr><td><strong>Logical Name:</strong></td><td><span id="' + index + 'logicname">' + this.logical_name + '</span></td></tr>';
-            StorageBlockBase += '<tr><td><strong>Partition:</strong></td><td><span id="' + index + 'partition">/dev/sda1</span></td></tr>';
-            StorageBlockBase += '<tr><td><strong>Mount Point:</strong></td><td><span id="' + index + 'mount">/dev/sda1</span></td></tr>';
-            StorageBlockBase += '<tr><td><strong>Total Size:</strong></td><td><span id="' + index + 'totalsize"></span></td></tr>';
-            StorageBlockBase += '<tr><td><strong>Available:</strong></td><td><span id="' + index + 'avail"></span></td></tr>';
-            StorageBlockBase += '<tr><td><strong>Used:</strong></td><td><span id="' + index + 'used"></span></td></tr></tbody></table>';
+            StorageBlockBase += '<tbody><tr><td><strong>Logical Name:</strong></td><td><span rel="' + index + '" data-rel="' + index + '" id="logicname">' + this.logical_name + '</span></td></tr>';
+            StorageBlockBase += '<tr><td><strong>Partition:</strong></td><td><span rel="' + index + '" id="partition"></span></td></tr>';
+            StorageBlockBase += '<tr><td><strong>Mount Point:</strong></td><td><span rel="' + index + '" id="mount"></span></td></tr>';
+            StorageBlockBase += '<tr><td><strong>Total Size:</strong></td><td><span rel="' + index + '" id="totalsize"></span></td></tr>';
+            StorageBlockBase += '<tr><td><strong>Available:</strong></td><td><span rel="' + index + '" id="avail"></span></td></tr>';
+            StorageBlockBase += '<tr><td><strong>Used:</strong></td><td><span rel="' + index + '" id="used"></span></td></tr></tbody></table>';
             StorageBlockBase += '</div></div></div>';
 
             $('#storage-blocks').html(StorageBlockBase);
-
-            $.each(data.df, function(index){
-                //console.log('---------- Data DF ----------');
-                //console.log(this);
-
-                var LogicalName_Number = LogicalName+'1';
-
-                if ( this.filesystem === LogicalName_Number ) {
-                    console.log(LogicalName_Number);
-                    console.log(this.filesystem);
-                    console.log(this.available );
-                    $( "#" + tmpIndex + "partition" ).html( this.filesystem );
-                    $( "#" + tmpIndex + "mount" ).html( this.mount );
-                    $( "#" + tmpIndex + "total" ).html( this.size );
-                    $( "#" + tmpIndex + "totalsize" ).html( this.size );
-                    $( "#" + tmpIndex + "free" ).html( this.available );
-                    $( "#" + tmpIndex + "avail" ).html( this.available );
-                    $( "#" + tmpIndex + "used" ).html( this.used );
-                }
-                if ( LogicalName_Number == '' ) {
-                    console.log('File System Blank: ' + this.size);
-                    $( "#" + tmpIndex + "free" ).html( 'not' );
-                    $( "#" + tmpIndex + "total" ).html( 'Connected' );
-                }
-            });
-
         });
         //console.log(data);
         //console.log(data[0]);
+        $.each(data.df, function(index){
+            //console.log('---------- Data DF ----------');
+            //console.log(this);
 
+            var LogicalName_Number = LogicalName+'1';
+            //tmpIndex = '1';
+
+            if ( this.filesystem === LogicalName_Number ) {
+                //console.log('Logical Name Number: '+LogicalName_Number);
+                //console.log('FileSystem: '+this.filesystem);
+                //console.log('Avaialble Space: '+this.available);
+                //console.log('Temp Index Number: '+tmpIndex);
+                console.log(index);
+                console.log('span[rel="' + tmpIndex + '"]');
+                $('span[rel="' + tmpIndex + '"]').eq(1).html( this.filesystem ); //Parition
+                $('span[rel="' + tmpIndex + '"]').eq(2).html( this.mount ); //Mount Point
+                $('span[rel="' + tmpIndex + '"]').eq(3).html( this.size ); //Total Size
+                $('span[rel="' + tmpIndex + '"]').eq(4).html( this.available ); //Available Space
+                $('span[rel="' + tmpIndex + '"]').eq(5).html( this.used ); //Used Space
+                //$( "#" + tmpIndex + "partition" ).html( this.filesystem );
+                //$( "#" + tmpIndex + "mount" ).html( this.mount );
+                //$( "#" + tmpIndex + "total" ).html( this.size );
+                //$( "#" + tmpIndex + "totalsize" ).html( this.size );
+                //$( "#" + tmpIndex + "free" ).html( this.available );
+                //$( "#" + tmpIndex + "avail" ).html( this.available );
+                //$( "#" + tmpIndex + "used" ).html( this.used );
+            }
+        });
     });
 };
 
