@@ -29,7 +29,7 @@ And Decentralized blockchain and applications like:
 | __TOR Proxy__        | :white_check_mark:       | Done          |
 | __External Storage (USB) Management__         | :white_check_mark: | Done      |
 | __DNSChain__         | :clock3: | In Progress      |
-| __Namecoin Support__ | :clock3: | In Progress      |
+| __Namecoin Service Support__ | :clock3: | In Progress      |
 | __I2P Gateway__      | :white_circle: | Not Started Yet      |
 | __I2P Proxy__        | :white_circle: | Not Started Yet      |
 | __cjdns__            | :white_circle: | Not Started Yet      |
@@ -90,14 +90,34 @@ There will be other mediums of contact as well in future including IRC Channels,
 Please feel free to contact me on twitter @satindergrewal
 
 
+### Prerequisite
+```shell
+# Firt need to make sure external Storage is ready.
+# Install this package and when done, plug in a USB storage device to your IoT device
+sudo apt-get install usbmount
+
+# Now plug in your USB device, and make sure it's accessible at /media/usb0.
+# You can check if this string /media/usb0 shows in this commands output
+df -h
+
+# If you see /media/usb0 in previous command's output, you are good.
+# Otherwise you have to make sure the partition on your USB storage device is either FAT32 or ext3 or ext4 type filesystem.
+```
+
 
 ### Install using installer script
 You can install using this command on fresh installation of Raspbian Jesse Lite
 
-`curl -L https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.3/install.sh | bash -`
+
+```shell
+# Now you are good to run this command
+curl -L https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.3/install.sh | bash -
+```
 
 Or just use these commands to download the installer shell script and then execute to start installation:
 ```shell
+
+
 curl -O https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.3/install.sh
 chmod +x install.sh
 ./install.sh
@@ -235,6 +255,10 @@ sudo systemctl enable tor
 sudo systemctl restart tor
 ```
 
+#### Setting up Namecoin Service & restarting service
+```shell
+sudo /opt/SuperMesh/private/3rdparty/NamecoinCoreARM/install-nmc.sh
+```
 
 #### Remove any unwanted files which generated during install
 ```shell
