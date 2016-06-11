@@ -101,6 +101,10 @@ sleep 15; sudo systemctl daemon-reload
 sudo systemctl enable tor
 sudo systemctl restart tor
 
+#### Setting up Namecoin Service & restarting service
+sudo /opt/SuperMesh/private/3rdparty/NamecoinCoreARM/install-nmc.sh
+
+
 #### Remove any unwanted files which generated during install
 sudo rm /etc/network/interfaces.cf-before-edit
 sudo rm /etc/dhcp/dhcpd.conf.cf-before-edit
