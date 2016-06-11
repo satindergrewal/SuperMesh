@@ -92,7 +92,7 @@ Please feel free to contact me on twitter @satindergrewal
 
 ### Prerequisite
 ```shell
-# Firt need to make sure external Storage is ready.
+# Firt need to make sure external storage is ready.
 # Install this package and when done, plug in a USB storage device to your IoT device
 sudo apt-get install usbmount
 
