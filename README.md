@@ -44,6 +44,8 @@ And Decentralized blockchain and applications like:
 ## Requirements
  - [Raspbian Jessie Lite](https://www.raspberrypi.org/downloads/raspbian/)
  - [Ubuntu 15.04 Robotics Edition: XU3/XU4 (ROS+OpenCV+PCL)](http://forum.odroid.com/viewtopic.php?f=95&t=16149)
+ - 8 GB+ microSD or eMMC
+ - 128 GB+ or bigger USB Storage drive
 
 If Raspberry Pi 3 Model B
  - 1 USB WiFi Adapter
