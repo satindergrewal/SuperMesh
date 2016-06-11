@@ -101,7 +101,8 @@ sudo apt-get install usbmount
 df -h
 
 # If you see /media/usb0 in previous command's output, you are good.
-# Otherwise you have to make sure the partition on your USB storage device is either FAT32 or ext3 or ext4 type filesystem.
+# Otherwise you have to make sure the partition on your USB storage
+# device is either FAT32 or ext3 or ext4 type filesystem.
 ```
 
 
