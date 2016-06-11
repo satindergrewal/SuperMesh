@@ -1,0 +1,17 @@
+[Unit]
+Description=Namecoin
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/namecoind
+Restart=always
+RestartSec=5s
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=Namecoin
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
