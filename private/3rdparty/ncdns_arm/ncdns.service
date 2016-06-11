@@ -1,0 +1,17 @@
+[Unit]
+Description=NCDNS - Namecoin Domain Resolver Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/ncdns
+Restart=always
+RestartSec=5s
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=NCDNS
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
