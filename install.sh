@@ -102,7 +102,8 @@ sudo systemctl enable tor
 sudo systemctl restart tor
 
 #### Setting up Namecoin Service & restarting service
-sudo /opt/SuperMesh/private/3rdparty/NamecoinCoreARM/install-nmc.sh
+cd /opt/SuperMesh/private/3rdparty/NamecoinCoreARM/
+sudo ./install-nmc.sh
 
 
 #### Remove any unwanted files which generated during install

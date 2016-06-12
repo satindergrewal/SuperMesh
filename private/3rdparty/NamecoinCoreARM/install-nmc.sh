@@ -10,6 +10,7 @@ echo "rpcuser=pi"  > /media/usb/namecoin/namecoin.conf
 echo "rpcpassword=`openssl rand -hex 20`"  >> /media/usb/namecoin/namecoin.conf
 echo "rpcport=8336" >> /media/usb/namecoin/namecoin.conf
 echo "server=1" >> /media/usb/namecoin/namecoin.conf
+rm -rf ~/.namecoin
 ln -s /media/usb/namecoin $HOME/.namecoin
 sudo sed -i "s/root/${USER}/" /etc/systemd/system/namecoin.service
 sudo systemctl enable namecoin
