@@ -26,6 +26,7 @@ var tor = require('./routes/tor');
 
 //Applications
 var telepathy = require('./routes/telepathy');
+var namecoin = require('./routes/namecoin');
 
 var app = express();
 
@@ -55,6 +56,7 @@ app.use('/admin/dnsserver', dnsserver);
 app.use('/admin/storage', storage);
 app.use('/admin/tor', tor);
 app.use('/admin/telepathy', telepathy);
+app.use('/admin/namecoin', namecoin);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
