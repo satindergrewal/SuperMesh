@@ -19,17 +19,19 @@ function populateFields() {
         //console.log('---------firewall Settings-----------');
         console.log(data);
 
-        //Set TOR Gateway settings
-        if ( data.EnableTorGateway === '' ) {
-            $( "#enable_tor_gateway" ).prop( "checked", true );
+        //Set Namecoin Service settings
+        /*if ( data.EnableTorGateway === '' ) {
+            $( "#rpc_user" ).prop( "checked", true );
         } else if ( data.EnableTorGateway === '# ' ) {
             $( "#enable_tor_gateway" ).prop( "checked", false );
-        }
+        }*/
+        $( "#rpc_user" ).html( data.rpcuser );
+        $( "#rpc_pass" ).html( data.rpcpass );
     });
 };
 
 
-// Update WPA Settings
+// Update Namecoin Settings
 function UpdateNMCSettings() {
 
     /*App.loader('show');
