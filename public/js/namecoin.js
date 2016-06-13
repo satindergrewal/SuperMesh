@@ -51,10 +51,10 @@ function UpdateNMCSettings() {
         url: '/admin/namecoin/update',
         dataType: 'html',
         success: function(data, textStatus, jqXHR) {
-            var TorData = JSON.parse(data);
-            console.log(TorData);
+            var NMCData = JSON.parse(data);
+            console.log(NMCData);
 
-            if (TorData.msg === 'success') {
+            if (NMCData.msg === 'success') {
                 console.log('Success');
                 swal("Success", "Tor Settings Saved.", "success");
 
@@ -78,5 +78,18 @@ function UpdateNMCSettings() {
 };
 
 function RestartNMCService() {
-    console.log('restarting...')
+    console.log('==> Restarting Namecoin Service...');
+    $.getJSON( '/admin/namecoin/restartnmc', function( data ) {
+        console.log(data);
+        if (data.msg === 'success') {
+            console.log('Success');
+            swal("Success", "Namecoin Service Restarted.", "success");
+
+            populateFields();
+        }
+        else {
+            // If something goes wrong, alert the error message that our service returned
+            swal("Oops...", "Something went wrong!", "error");
+        }
+    });
 }

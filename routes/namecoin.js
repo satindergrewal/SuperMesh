@@ -104,18 +104,26 @@ router.post('/update', function(req, res) {
 });
 
 
-// Enable NMC
+// Enable Namecoin Service
 router.get('/enablenmc', function(req, res) {
 	// Enable Namecoin service to start at boot time, then start Namecoin service
-	SuperMesh.RunCmd('sudo systemctl enable namecoin; sudo systemctl start namecoin');
+	SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl enable namecoin; sudo systemctl start namecoin');
 
 	res.end('{"msg": "success","result": "result"}');
 });
 
-// Disable NMC
+// Disable Namecoin Service
 router.get('/disablenmc', function(req, res) {
 	// Disable Namecoin service to start at boot time, then stop Namecoin service
-	SuperMesh.RunCmd('sudo systemctl disable namecoin; sudo systemctl stop namecoin');
+	SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl disable namecoin; sudo systemctl stop namecoin');
+
+	res.end('{"msg": "success","result": "result"}');
+});
+
+// Restart Namecoin Service
+router.get('/restartnmc', function(req, res) {
+	// Restart Namecoin service
+	SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl restart namecoin');
 
 	res.end('{"msg": "success","result": "result"}');
 });
