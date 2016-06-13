@@ -99,12 +99,7 @@ router.post('/update', function(req, res) {
 			console.log('writing to ' + DHCPDFile);
 
 			//Execute promissed spanw child process
-			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/dhcpd_conf.cf');
-			SuperMesh.RunCmd('sudo rm /etc/dhcp/dhcpd.conf.cf-before-edit');
-			SuperMesh.RunCmd('sudo rm /etc/default/isc-dhcp-server.cf-before-edit');
-			SuperMesh.RunCmd('sudo systemctl daemon-reload');
-			SuperMesh.RunCmd('sudo systemctl restart isc-dhcp-server');
-			SuperMesh.RunCmd('sudo systemctl restart hostapd');
+			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/dhcpd_conf.cf; sudo rm /etc/dhcp/dhcpd.conf.cf-before-edit; sudo rm /etc/default/isc-dhcp-server.cf-before-edit; sudo systemctl daemon-reload; sudo systemctl restart isc-dhcp-server; sudo systemctl restart hostapd');
 		});
 	
 	res.end('{"msg": "success","result": "result"}');
@@ -114,9 +109,7 @@ router.post('/update', function(req, res) {
 // Restart DHCP Service.
 router.get('/restartdhcpd', function(req, res, next) {
 	//Execute promissed spanw child process
-	SuperMesh.RunCmd('sudo systemctl daemon-reload');
-	SuperMesh.RunCmd('sudo systemctl restart isc-dhcp-server');
-	SuperMesh.RunCmd('sudo systemctl restart hostapd');
+	SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl restart isc-dhcp-server; sudo systemctl restart hostapd');
 	res.send('{"msg": "success","result": "result"}');
 });
 

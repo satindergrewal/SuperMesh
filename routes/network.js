@@ -163,14 +163,7 @@ router.post('/update', function(req, res) {
 			//console.log('writing to ' + interfacesFile)
 
 			//Execute promissed spanw child process
-			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/edit_network_config.cf');
-			SuperMesh.RunCmd('sudo rm /etc/network/interfaces.cf-before-edit');
-			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/supermeshhosts.cf');
-			SuperMesh.RunCmd('sudo rm /etc/supermeshhosts.cf-before-edit');
-			SuperMesh.RunCmd('sudo systemctl daemon-reload');
-			SuperMesh.RunCmd('sudo systemctl restart networking');
-			SuperMesh.RunCmd('sudo systemctl restart isc-dhcp-server');
-			SuperMesh.RunCmd('sudo systemctl restart hostapd');
+			SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/edit_network_config.cf; sudo rm /etc/network/interfaces.cf-before-edit; sudo cf-agent -K private/system_scripts/supermeshhosts.cf; sudo rm /etc/supermeshhosts.cf-before-edit; sudo systemctl daemon-reload; sudo systemctl restart networking; sudo systemctl restart isc-dhcp-server; sudo systemctl restart hostapd');
 		});
 	res.end('{"msg": "success","result": "result"}');
 });
@@ -178,9 +171,7 @@ router.post('/update', function(req, res) {
 
 // POST to Update Access Point Settings.
 router.get('/restartnetwork', function(req, res, next) {
-	SuperMesh.RunCmd('sudo systemctl daemon-reload');
-	SuperMesh.RunCmd('sudo systemctl restart networking');
-	SuperMesh.RunCmd('sudo systemctl restart hostapd');
+	SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl restart networking; sudo systemctl restart hostapd');
 	res.send('{"msg": "success","result": "result"}');
 });
 

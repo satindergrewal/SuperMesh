@@ -25,8 +25,8 @@ function populateFields() {
         } else if ( data.EnableTorGateway === '# ' ) {
             $( "#enable_tor_gateway" ).prop( "checked", false );
         }*/
-        $( "#rpc_user" ).html( data.rpcuser );
-        $( "#rpc_pass" ).html( data.rpcpass );
+        $( "#rpc_user" ).val( data[0].rpcuser );
+        $( "#rpc_pass" ).val( data[0].rpcpass );
     });
 };
 
@@ -76,3 +76,7 @@ function UpdateNMCSettings() {
     });
     
 };
+
+function RestartNMCService() {
+    console.log('restarting...')
+}
