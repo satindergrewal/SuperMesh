@@ -14,15 +14,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/getsettings', function(req, res, next) {
-	var NMCFile = '/opt/SuperMeshData/namecoin.data'
-	var NMCfsRead = fs.readFileSync(NMCFile, 'utf8').toString();
-	var settingsdata = JSON.parse(NMCfsRead);
+	var nmcconf = require("./nmcconf.js");
 
-	console.log('===>> NMC Settings DATA recieved >>');
-	console.log('=========== JSON Stringify ===========');
-	console.log(JSON.stringify(settingsdata, null, 2));
-
-	res.send(settingsdata);
+	nmcconf.status(function(err, nmcsettings) {
+		console.log(nmcsettings);
+		res.send(nmcsettings);
+	});
 });
 
 
