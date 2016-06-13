@@ -6,7 +6,7 @@ var sys = require('sys');
 
 // SuperMesh app functions
 var SuperMesh = require("../private/js/app_functions.js");
-var ifstate = require("../private/js/ifstate.js");
+var nmcconf = require("../private/js/nmcconf.js");
 
 /* GET hostapd settings. */
 router.get('/', function(req, res, next) {
@@ -14,8 +14,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/getsettings', function(req, res, next) {
-	var nmcconf = require("./nmcconf.js");
-
 	nmcconf.status(function(err, nmcsettings) {
 		console.log(nmcsettings);
 		res.send(nmcsettings);
