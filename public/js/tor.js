@@ -6,6 +6,7 @@ $(document).ready(function() {
     
     // Update IPtabels Settings button click
     $('#BtnUpdateTorSettings').on('click', UpdateTorSettings);
+    $('#BtnRestartTorService').on('click', RestartTorService);
 
 });
 
@@ -73,3 +74,20 @@ function UpdateTorSettings() {
     });
     
 };
+
+function RestartTorService() {
+    console.log('==> Restarting Tor Service...');
+    $.getJSON( '/admin/tor/restarttor', function( data ) {
+        console.log(data);
+        if (data.msg === 'success') {
+            console.log('Success');
+            swal("Success", "Tor Service Restarted.", "success");
+
+            populateFields();
+        }
+        else {
+            // If something goes wrong, alert the error message that our service returned
+            swal("Oops...", "Something went wrong!", "error");
+        }
+    });
+}

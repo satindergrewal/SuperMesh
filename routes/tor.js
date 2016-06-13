@@ -374,4 +374,12 @@ router.get('/disabletor', function(req, res) {
 	res.end('{"msg": "success","result": "result"}');
 });
 
+// Restart Tor Service
+router.get('/restarttor', function(req, res) {
+	// Restart Tor service
+	SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl restart tor');
+
+	res.end('{"msg": "success","result": "result"}');
+});
+
 module.exports = router;
