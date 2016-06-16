@@ -16,6 +16,10 @@ router.get('/', function(req, res, next) {
 router.get('/getsettings', function(req, res, next) {
 	nmcconf.status(function(err, nmcsettings) {
 		console.log(nmcsettings);
+		var NMCGetSettings_file = fs.readFileSync('/opt/SuperMeshData/namecoin.data', 'utf8').toString();
+		var settings_getData = JSON.parse(NMCGetSettings_file);
+		console.log(settings_getData.enable_namecoin_service);
+		tempdata = nmcsettings.push(settings_getData);
 		res.send(nmcsettings);
 	});
 });
@@ -30,9 +34,19 @@ router.post('/update', function(req, res) {
 		var NMC_File = '/opt/SuperMeshData/namecoin.data'
 		var NMC_Data = ''
 
-		var NMCfs_Read = fs.readFileSync(NMC_File, 'utf8').toString();
-		var settings_data = JSON.parse(NMCfs_Read);
+		//var NMCfs_Read = fs.readFileSync(NMC_File, 'utf8').toString();
+		//var settings_data = JSON.parse(NMCfs_Read);
+		//console.log('--- FS Read Data ---')
+		//console.log(JSON.stringify(settings_data));
 		//console.log(JSON.stringify(settings_data.EnableTorGateway, null, 2));
+
+		/*fs.readFile(NMC_File, 'utf8', function (err,data) {
+		if (err) {
+			return console.log(err);
+		}
+		console.log('--- FS Read Data ---')
+		console.log(JSON.stringify(data, null, 2));
+		});*/
 
 		//console.log('======= req.body =======');
 		//console.log(req.body);
@@ -62,7 +76,7 @@ router.post('/update', function(req, res) {
 		//console.log('>>>>>> Runing 3rd')
 		//console.log("result:", res);
 		//Execute promissed spanw child process
-		SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/torrc.cf; sudo rm /etc/tor/torrc.cf-before-edit');
+		SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/namecoin_conf.cf; sudo systemctl restart namecoin; sudo rm /media/usb0/namecoin/namecoin.conf.cf-before-edit;');
 	}
 
 	var UpdateSteps = [ UpdateNMCSettings, SetupNMCService ];
@@ -78,24 +92,35 @@ router.post('/update', function(req, res) {
 	UpdateProcess(UpdateSteps);
 
 	if ( req.body.enable_Namecoin_service === 'true' ) {
-		// Enable TOR Proxy and Gateway
-		// TOR Service Rules
-		// Add these rules to allow TOR Transparent Proxy
-		//SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i eth1 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
-		//SuperMesh.RunCmd('sudo iptables -t nat -A PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
-
-		// Add these rules turn SuperMesh device to act as TOR Gateway
-		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040; sudo iptables -t nat -D PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040; sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040; sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040; sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"; sudo systemctl enable tor; sudo systemctl restart tor');
+		//console.log('-- enable disable nmc service is true --');
+		//console.log(req.body.enable_Namecoin_service);
+		// Enable Namecoin Service
+		
+		var NMCtrue_read = fs.readFileSync('/opt/SuperMeshData/namecoin.data', 'utf8').toString();
+		var settingstrue_data = JSON.parse(NMCtrue_read);
+		if ( settingstrue_data.enable_namecoin_service === 'true' ) {
+			console.log('==> No action done. Namecoin is already Enabled.');
+		} else {
+			console.log('==> Enabling Namecoin to start at system boot, and starting Namecoin Service...')
+			SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl enable namecoin; sudo systemctl start namecoin');
+		}
+		//console.log('--- FS Read Data ---')
+		//console.log(JSON.stringify(settingstrue_data));
+		//console.log(JSON.stringify(settingstrue_data.enable_namecoin_service, null, 2));
 
 	} else if ( req.body.enable_Namecoin_service === 'false' ) {
-		// Enable TOR Proxy and Gateway
-		// TOR Service Rules
-		// Add these rules to allow TOR Transparent Proxy
-		//SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
-		//SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050');
-
-		// Add these rules turn SuperMesh device to act as TOR Gateway
-		SuperMesh.RunCmd('sudo iptables -t nat -D PREROUTING -i eth1 -p tcp --syn -j REDIRECT --to-ports 9040; sudo iptables -t nat -D PREROUTING -i wlan0 -p tcp --syn -j REDIRECT --to-ports 9040; sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"; sudo systemctl disable tor; sudo systemctl restart tor');
+		//console.log('-- enable disable nmc service is false --');
+		//console.log(req.body.enable_Namecoin_service);
+		// Disable Namecoin Service
+		var NMCfalse_read = fs.readFileSync('/opt/SuperMeshData/namecoin.data', 'utf8').toString();
+		var settingsfalse_data = JSON.parse(NMCfalse_read);
+		if ( settingsfalse_data.enable_namecoin_service === 'false' ) {
+			console.log('==> No action done. Namecoin is already Disabled.');
+			SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl stop namecoin');
+		} else {
+			console.log('==> Disabling Namecoin to start at system boot, and stopting Namecoin Service...')
+			SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl disable namecoin; sudo systemctl stop namecoin');
+		}
 				
 	}
 

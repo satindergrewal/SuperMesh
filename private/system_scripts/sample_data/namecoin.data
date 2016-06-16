@@ -1,5 +1,5 @@
 {
 	"namecoin_rpcuser": "",
-	"namecoin_rpcpassword": ""
+	"namecoin_rpcpassword": "",
 	"enable_namecoin_service": true
 }

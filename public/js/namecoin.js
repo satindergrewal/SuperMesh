@@ -17,14 +17,14 @@ function populateFields() {
     // jQuery AJAX call for JSON
     $.getJSON( '/admin/namecoin/getsettings', function( data ) {
         //console.log('---------firewall Settings-----------');
-        console.log(data);
+        //console.log(data);
 
         //Set Namecoin Service settings
-        /*if ( data.EnableTorGateway === '' ) {
-            $( "#rpc_user" ).prop( "checked", true );
-        } else if ( data.EnableTorGateway === '# ' ) {
-            $( "#enable_tor_gateway" ).prop( "checked", false );
-        }*/
+        if ( data[1].enable_namecoin_service === "true" ) {
+            $( "#enable_Namecoin_service" ).prop( "checked", true );
+        } else if ( data[1].enable_namecoin_service === "false" ) {
+            $( "#enable_Namecoin_service" ).prop( "checked", false );
+        }
         $( "#rpc_user" ).val( data[0].rpcuser );
         $( "#rpc_pass" ).val( data[0].rpcpass );
     });
@@ -39,24 +39,26 @@ function UpdateNMCSettings() {
         App.loader('hide');
     }, 3000);*/
 
-    var TorSettings = {
-            'enable_tor_gateway': $('#enable_tor_gateway').is(':checked')
+    var NMCSettings = {
+            'enable_Namecoin_service': $('#enable_Namecoin_service').is(':checked'),
+            'rpc_user': $('#rpc_user').val(),
+            'rpc_pass': $('#rpc_pass').val()
         }
 
 
     // Use AJAX to post the object to our adduser service
     $.ajax({
         type: 'POST',
-        data: TorSettings,
+        data: NMCSettings,
         url: '/admin/namecoin/update',
         dataType: 'html',
         success: function(data, textStatus, jqXHR) {
             var NMCData = JSON.parse(data);
-            console.log(NMCData);
+            //console.log(NMCData);
 
             if (NMCData.msg === 'success') {
                 console.log('Success');
-                swal("Success", "Tor Settings Saved.", "success");
+                swal("Success", "Namecoin Settings Saved.", "success");
 
                 populateFields();
             }
@@ -80,9 +82,9 @@ function UpdateNMCSettings() {
 function RestartNMCService() {
     console.log('==> Restarting Namecoin Service...');
     $.getJSON( '/admin/namecoin/restartnmc', function( data ) {
-        console.log(data);
+        //console.log(data);
         if (data.msg === 'success') {
-            console.log('Success');
+            //console.log('Success');
             swal("Success", "Namecoin Service Restarted.", "success");
 
             populateFields();
