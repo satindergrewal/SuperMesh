@@ -80,7 +80,7 @@ sudo ln -s /usr/sbin/hostapd_original /usr/sbin/hostapd
 sudo chmod +x /usr/sbin/hostapd*
 
 # Setting up hostapd
-node /opt/SuperMesh/private/js/install_helper.js
+node /opt/SuperMesh/private/js/install_helper_hostapd.js
 
 # Setting up Access Point settings & restarting service
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/hostapd_conf.cf

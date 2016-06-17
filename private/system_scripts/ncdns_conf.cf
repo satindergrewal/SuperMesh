@@ -1,0 +1,21 @@
+  body common control
+{
+    bundlesequence => { ncdns_conf_config };
+}
+
+body edit_defaults ncdns_conf_config
+{
+  empty_file_before_editing => "true";
+  edit_backup => "false";
+  max_file_size => "9999999999";
+}
+
+bundle agent ncdns_conf_config
+{
+  files:
+      "/etc/ncdns/ncdns.conf"
+      create => "true",
+      edit_template => "/opt/SuperMesh/private/template/ncdns_conf.mustache",
+      template_method => "mustache",
+      template_data => readjson("/opt/SuperMeshData/namecoin.data", 9999999999);
+}
