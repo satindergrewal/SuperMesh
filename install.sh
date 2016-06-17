@@ -105,9 +105,11 @@ sudo systemctl restart tor
 cd /opt/SuperMesh/private/3rdparty/NamecoinCoreARM/
 sudo ./install-nmc.sh
 
-#### Setting up Namecoin Service & restarting service
+#### Setting up ncdns (.bit domain resolver) Service & restarting service
 cd /opt/SuperMesh/private/3rdparty/ncdns_arm/
-sudo cf-agent -K private/system_scripts/ncdns_conf.cf
+sudo node /opt/SuperMesh/private/js/install_helper_ncdns.js
+sudo mkdir -p /etc/ncdns
+sudo cf-agent -K /opt/SuperMesh/private/system_scripts/ncdns_conf.cf
 sudo ./install-ncdns.sh
 
 #### Remove any unwanted files which generated during install
@@ -118,7 +120,7 @@ sudo rm /etc/default/isc-dhcp-server.cf-before-edit
 sudo rm /etc/default/hostapd.cf-before-edit
 sudo rm /etc/sysctl.conf.cf-before-edit
 sudo rm /etc/powerdns/recursor.conf.cf-before-edit 
-sudo rm /etc/ncdns/ncdns.conf..cf-before-edit
+sudo rm /etc/ncdns/ncdns.conf.cf-before-edit
 
 #### Reboot the system
 sudo reboot
