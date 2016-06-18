@@ -262,7 +262,7 @@ sudo systemctl restart tor
 #### Setting up Namecoin Service & restarting service
 ```shell
 cd /opt/SuperMesh/private/3rdparty/NamecoinCoreARM/
-sudo ./install-nmc.sh
+./install-nmc.sh
 ```
 
 #### Setting up ncdns (.bit domain resolver) Service & restarting service
@@ -271,7 +271,7 @@ cd /opt/SuperMesh/private/3rdparty/ncdns_arm/
 sudo node /opt/SuperMesh/private/js/install_helper_ncdns.js
 sudo mkdir -p /etc/ncdns
 sudo cf-agent -K /opt/SuperMesh/private/system_scripts/ncdns_conf.cf
-sudo ./install-ncdns.sh
+./install-ncdns.sh
 ```
 
 
