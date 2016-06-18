@@ -10,3 +10,4 @@ sudo chown -R "${USER}":"${USER}" /etc/ncdns
 sudo sed -i "s/root/${USER}/" /etc/systemd/system/ncdns.service
 sudo systemctl enable ncdns
 sudo systemctl start ncdns
+sudo systemctl restart pdns-recursor
