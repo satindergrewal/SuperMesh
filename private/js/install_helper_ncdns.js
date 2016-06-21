@@ -17,12 +17,12 @@ nmcconf.status(function(err, nmcsettings) {
 	}
 
 	// Write update changes to JSON file interfaces.data
-	/*fs.writeFile(NMC_File, JSON.stringify(NMC_Data, null, 2), function (err) {
+	fs.writeFile(NMC_File, JSON.stringify(NMC_Data, null, 2), function (err) {
 		if (err) return console.log(err)
 			//console.log('======= Setting values from Admin Panel =======')
 			//console.log('writing to ' + NMC_File)
 			//console.log(JSON.stringify(NMC_Data, null, 2))
-		});*/
+		});
 
 	/*var NMCGetSettings_file = fs.readFileSync('/opt/SuperMeshData/namecoin.data', 'utf8').toString();
 	var settings_getData = JSON.parse(NMCGetSettings_file);
