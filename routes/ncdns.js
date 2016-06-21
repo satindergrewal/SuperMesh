@@ -25,7 +25,7 @@ router.get('/getsettings', function(req, res, next) {
 });
 
 
-/* POST to Update Namecoin Settings. */
+/* POST to Update NCDNS Settings. */
 router.post('/update', function(req, res) {
 	var Promise = require('bluebird');
 
@@ -76,7 +76,7 @@ router.post('/update', function(req, res) {
 		//console.log('>>>>>> Runing 3rd')
 		//console.log("result:", res);
 		//Execute promissed spanw child process
-		SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/namecoin_conf.cf; sudo systemctl restart namecoin; sudo rm /media/usb0/namecoin/namecoin.conf.cf-before-edit;');
+		SuperMesh.RunCmd('sudo cf-agent -K private/system_scripts/namecoin_conf.cf; sudo systemctl restart ncdns; sudo rm /media/usb0/namecoin/namecoin.conf.cf-before-edit;');
 	}
 
 	var UpdateSteps = [ UpdateNMCSettings, SetupNMCService ];
@@ -94,15 +94,15 @@ router.post('/update', function(req, res) {
 	if ( req.body.enable_Namecoin_service === 'true' ) {
 		//console.log('-- enable disable nmc service is true --');
 		//console.log(req.body.enable_Namecoin_service);
-		// Enable Namecoin Service
+		// Enable NCDNS Service
 		
 		var NMCtrue_read = fs.readFileSync('/opt/SuperMeshData/namecoin.data', 'utf8').toString();
 		var settingstrue_data = JSON.parse(NMCtrue_read);
-		if ( settingstrue_data.enable_namecoin_service === 'true' ) {
-			console.log('==> No action done. Namecoin is already Enabled.');
+		if ( settingstrue_data.enable_ncdns_service === 'true' ) {
+			console.log('==> No action done. NCDNS is already Enabled.');
 		} else {
-			console.log('==> Enabling Namecoin to start at system boot, and starting Namecoin Service...')
-			SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl enable namecoin; sudo systemctl start namecoin');
+			console.log('==> Enabling NCDNS to start at system boot, and starting NCDNS Service...')
+			SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl enable ncdns; sudo systemctl start ncdns');
 		}
 		//console.log('--- FS Read Data ---')
 		//console.log(JSON.stringify(settingstrue_data));
@@ -111,15 +111,15 @@ router.post('/update', function(req, res) {
 	} else if ( req.body.enable_Namecoin_service === 'false' ) {
 		//console.log('-- enable disable nmc service is false --');
 		//console.log(req.body.enable_Namecoin_service);
-		// Disable Namecoin Service
+		// Disable NCDNS Service
 		var NMCfalse_read = fs.readFileSync('/opt/SuperMeshData/namecoin.data', 'utf8').toString();
 		var settingsfalse_data = JSON.parse(NMCfalse_read);
 		if ( settingsfalse_data.enable_namecoin_service === 'false' ) {
-			console.log('==> No action done. Namecoin is already Disabled.');
-			SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl stop namecoin');
+			console.log('==> No action done. NCDNS is already Disabled.');
+			SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl stop ncdns');
 		} else {
-			console.log('==> Disabling Namecoin to start at system boot, and stopting Namecoin Service...')
-			SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl disable namecoin; sudo systemctl stop namecoin');
+			console.log('==> Disabling NCDNS to start at system boot, and stopting NCDNS Service...')
+			SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl disable ncdns; sudo systemctl stop ncdns');
 		}
 				
 	}
@@ -129,26 +129,26 @@ router.post('/update', function(req, res) {
 });
 
 
-// Enable Namecoin Service
-router.get('/enablenmc', function(req, res) {
-	// Enable Namecoin service to start at boot time, then start Namecoin service
-	SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl enable namecoin; sudo systemctl start namecoin');
+// Enable NCDNS Service
+router.get('/enablencdns', function(req, res) {
+	// Enable NCDNS service to start at boot time, then start NCDNS service
+	SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl enable ncdns; sudo systemctl start ncdns');
 
 	res.end('{"msg": "success","result": "result"}');
 });
 
-// Disable Namecoin Service
-router.get('/disablenmc', function(req, res) {
-	// Disable Namecoin service to start at boot time, then stop Namecoin service
-	SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl disable namecoin; sudo systemctl stop namecoin');
+// Disable NCDNS Service
+router.get('/disablencdns', function(req, res) {
+	// Disable NCDNS service to start at boot time, then stop NCDNS service
+	SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl disable ncdns; sudo systemctl stop ncdns');
 
 	res.end('{"msg": "success","result": "result"}');
 });
 
-// Restart Namecoin Service
-router.get('/restartnmc', function(req, res) {
-	// Restart Namecoin service
-	SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl restart namecoin');
+// Restart NCDNS Service
+router.get('/restartncdns', function(req, res) {
+	// Restart NCDNS service
+	SuperMesh.RunCmd('sudo systemctl daemon-reload; sudo systemctl restart ncdns');
 
 	res.end('{"msg": "success","result": "result"}');
 });
