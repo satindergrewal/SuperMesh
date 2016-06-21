@@ -23,6 +23,7 @@ var storage = require('./routes/storage');
 
 //Third party services
 var tor = require('./routes/tor');
+var ncdns = require('./routes/ncdns');
 
 //Applications
 var telepathy = require('./routes/telepathy');
@@ -57,6 +58,7 @@ app.use('/admin/storage', storage);
 app.use('/admin/tor', tor);
 app.use('/admin/telepathy', telepathy);
 app.use('/admin/namecoin', namecoin);
+app.use('/admin/ncdns', ncdns);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
