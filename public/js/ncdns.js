@@ -5,8 +5,8 @@ $(document).ready(function() {
     populateFields();
     
     // Update IPtabels Settings button click
-    $('#BtnUpdateNMCSettings').on('click', UpdateNMCSettings);
-    $('#BtnRestartNMCService').on('click', RestartNMCService);
+    $('#BtnUpdateNCDNSSettings').on('click', UpdateNCDNSSettings);
+    $('#BtnRestartNCDNSService').on('click', RestartNCDNSService);
 
 });
 
@@ -15,50 +15,39 @@ $(document).ready(function() {
 // Fill table with data
 function populateFields() {
     // jQuery AJAX call for JSON
-    $.getJSON( '/admin/namecoin/getsettings', function( data ) {
+    $.getJSON( '/admin/ncdns/getsettings', function( data ) {
         //console.log('---------firewall Settings-----------');
         //console.log(data);
 
-        //Set Namecoin Service settings
-        if ( data[1].enable_namecoin_service === "true" ) {
-            $( "#enable_Namecoin_service" ).prop( "checked", true );
-        } else if ( data[1].enable_namecoin_service === "false" ) {
-            $( "#enable_Namecoin_service" ).prop( "checked", false );
+        //Set NCDNS Service settings
+        /*if ( data[1].enable_ncdns_service === "true" ) {
+            $( "#enable_ncdns_service" ).prop( "checked", true );
+        } else if ( data[1].enable_ncdns_service === "false" ) {
+            $( "#enable_ncdns_service" ).prop( "checked", false );
         }
         $( "#rpc_user" ).val( data[0].rpcuser );
-        $( "#rpc_pass" ).val( data[0].rpcpass );
+        $( "#rpc_pass" ).val( data[0].rpcpass );*/
     });
 };
 
 
-// Update Namecoin Settings
-function UpdateNMCSettings() {
-
-    /*App.loader('show');
-    setTimeout(function () {
-        App.loader('hide');
-    }, 3000);*/
-
-    var NMCSettings = {
-            'enable_Namecoin_service': $('#enable_Namecoin_service').is(':checked'),
-            'rpc_user': $('#rpc_user').val(),
-            'rpc_pass': $('#rpc_pass').val()
-        }
+// Update NCDNS Settings
+function UpdateNCDNSSettings() {
 
 
     // Use AJAX to post the object to our adduser service
     $.ajax({
         type: 'POST',
-        data: NMCSettings,
-        url: '/admin/namecoin/update',
+        //data: NMCSettings,
+        url: '/admin/ncdns/update',
         dataType: 'html',
         success: function(data, textStatus, jqXHR) {
-            var NMCData = JSON.parse(data);
-            //console.log(NMCData);
+            var NCDNSData = JSON.parse(data);
+            //console.log(NCDNSData);
 
-            if (NMCData.msg === 'success') {
+            if (NCDNSData.msg === 'success') {
                 console.log('Success');
-                swal("Success", "Namecoin Settings Saved.", "success");
+                swal("Success", "NCDNS Settings Saved.", "success");
 
                 populateFields();
             }
@@ -79,13 +68,13 @@ function UpdateNMCSettings() {
     
 };
 
-function RestartNMCService() {
-    console.log('==> Restarting Namecoin Service...');
-    $.getJSON( '/admin/namecoin/restartnmc', function( data ) {
+function RestartNCDNSService() {
+    console.log('==> Restarting NCDNS Service...');
+    $.getJSON( '/admin/ncdns/restartncdns', function( data ) {
         //console.log(data);
         if (data.msg === 'success') {
             //console.log('Success');
-            swal("Success", "Namecoin Service Restarted.", "success");
+            swal("Success", "NCDNS Service Restarted.", "success");
 
             populateFields();
         }
