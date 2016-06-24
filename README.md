@@ -292,7 +292,7 @@ sudo rm /etc/ncdns/ncdns.conf.cf-before-edit
 sudo reboot
 ```
 
-### Do you like what my work? Then please donate here:
+### Do you like my work? Then please donate here:
 
 BTC: 1ETx3ir4T7UQ5vaiYVhSsu6K3vkqYrD8Ps
 
