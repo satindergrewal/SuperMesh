@@ -292,7 +292,8 @@ sudo rm /etc/ncdns/ncdns.conf.cf-before-edit
 sudo reboot
 ```
 
-### Do you like my work? Then please donate here:
+### Your support is critical to this project's success
+If you like my work, you can support me with some donation.
 
 BTC: 1ETx3ir4T7UQ5vaiYVhSsu6K3vkqYrD8Ps
 
@@ -307,3 +308,5 @@ Namecoin: N7kXnXJJgBMmfZHxQCmJzJk8USAxCpfScR
 Ethereum: 0x7ba193bC2bb9d5653BD27ef358fBAA0d885C8e56
 
 If you want to donate to some other cryptocurrency, you can contact me on twitter @satindergrewal
+
+### Thanks for your support.
