@@ -307,6 +307,6 @@ Namecoin: N7kXnXJJgBMmfZHxQCmJzJk8USAxCpfScR
 
 Ethereum: 0x7ba193bC2bb9d5653BD27ef358fBAA0d885C8e56
 
-If you want to donate to some other cryptocurrency, you can contact me on twitter @satindergrewal
+If you want to donate in some other cryptocurrency, you can contact me on twitter @satindergrewal
 
 ### Thanks for your support.
