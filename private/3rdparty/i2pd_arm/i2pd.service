@@ -1,0 +1,17 @@
+[Unit]
+Description=Invisible Internet Project Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/i2pd
+Restart=always
+RestartSec=5s
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=I2PD
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
