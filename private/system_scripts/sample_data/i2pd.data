@@ -1,4 +1,6 @@
 {
+  "i2pd_httpproxy": "true",
+  "i2pd_socksproxy": "true",
   "i2pd_sam": "false",
   "i2pd_bob": "false",
   "i2pd_i2cp": "false",

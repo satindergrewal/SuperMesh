@@ -45,6 +45,8 @@ sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 4447 -j REDIRECT --to-
 # I2P Web Console
 sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 7070 -j REDIRECT --to-ports 7070; sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 7070 -j REDIRECT --to-ports 7070
 
+# I2P IRC
+sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 6668 -j REDIRECT --to-ports 6668; sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 6668 -j REDIRECT --to-ports 6668
 
 #Save updated iptables rules to ipv4 file
 sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"

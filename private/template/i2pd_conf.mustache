@@ -80,7 +80,7 @@ port = 7070
 
 [httpproxy]
 ## Uncomment and set to 'false' to disable HTTP Proxy
-# enabled = true
+# enabled = {{i2pd_httpproxy}}
 ## Address and port service will listen on
 address = 0.0.0.0
 port = 4444
@@ -89,7 +89,7 @@ port = 4444
 
 [socksproxy]
 ## Uncomment and set to 'false' to disable SOCKS Proxy
- enabled = false
+ enabled = {{i2pd_socksproxy}}
 ## Address and port service will listen on
  address = 0.0.0.0
  port = 4447
