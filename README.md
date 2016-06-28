@@ -31,7 +31,6 @@ And Decentralized blockchain and applications like:
 | __ncdns__         | :white_check_mark: | Done      |
 | __DNSChain__         | :clock3: | On Hold      |
 | __Namecoin Service Support__ | :white_check_mark: | Done      |
-| __I2P Gateway__      | :clock3: | In Progress      |
 | __I2P Proxy__        | :clock3: | In Progress      |
 | __cjdns__            | :white_circle: | Not Started Yet      |
 | __IPFS__             | :white_circle: | Not Started Yet      |
