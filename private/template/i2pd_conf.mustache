@@ -80,7 +80,7 @@ port = 7070
 
 [httpproxy]
 ## Uncomment and set to 'false' to disable HTTP Proxy
- enabled = true
+# enabled = true
 ## Address and port service will listen on
 address = 0.0.0.0
 port = 4444
@@ -91,8 +91,8 @@ port = 4444
 ## Uncomment and set to 'false' to disable SOCKS Proxy
  enabled = false
 ## Address and port service will listen on
-address = 0.0.0.0
-port = 4447
+ address = 0.0.0.0
+ port = 4447
 ## Optional keys file for proxy local destination
 # keys = socks-proxy-keys.dat
 
@@ -103,28 +103,28 @@ port = 4447
 
 [sam]
 ## Uncomment and set to 'true' to enable SAM Bridge
- enabled = false
+ enabled = {{i2pd_sam}}
 ## Address and port service will listen on
  address = 0.0.0.0
  port = 7656
 
 [bob]
 ## Uncomment and set to 'true' to enable BOB command channel
- enabled = false
+ enabled = {{i2pd_bob}}
 ## Address and port service will listen on
  address = 0.0.0.0
  port = 2827
 
 [i2cp]
 ## Uncomment and set to 'true' to enable I2CP protocol
- enabled = false
+ enabled = {{i2pd_i2cp}}
 ## Address and port service will listen on
  address = 0.0.0.0
  port = 7654
 
 [i2pcontrol]
 ## Uncomment and set to 'true' to enable I2PControl protocol
- enabled = false
+ enabled = {{i2pd_i2pcontrol}}
 ## Address and port service will listen on
  address = 0.0.0.0
  port = 7650

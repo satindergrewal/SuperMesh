@@ -35,5 +35,16 @@ sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 3000 -j REDIRECT --to-
 
 sudo iptables -t nat -A PREROUTING -i eth1 -p udp --dport 9050 -j REDIRECT --to-ports 9050; sudo iptables -t nat -A PREROUTING -i wlan0 -p udp --dport 9050 -j REDIRECT --to-ports 9050
 
+## I2P Ports
+# I2P HTTP Proxy
+sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 4444 -j REDIRECT --to-ports 4444; sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 4444 -j REDIRECT --to-ports 4444
+
+# I2P Socks Proxy
+sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 4447 -j REDIRECT --to-ports 4447; sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 4447 -j REDIRECT --to-ports 4447
+
+# I2P Web Console
+sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 7070 -j REDIRECT --to-ports 7070; sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 7070 -j REDIRECT --to-ports 7070
+
+
 #Save updated iptables rules to ipv4 file
 sudo sh -c "iptables-save > /etc/network/iptables.ipv4.nat"

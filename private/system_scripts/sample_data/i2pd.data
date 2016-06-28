@@ -1,0 +1,6 @@
+{
+  "i2pd_sam": "false",
+  "i2pd_bob": "false",
+  "i2pd_i2cp": "false",
+  "i2pd_i2pcontrol": "false"
+}

@@ -1,0 +1,21 @@
+  body common control
+{
+    bundlesequence => { i2pd_conf_config };
+}
+
+body edit_defaults i2pd_conf_config
+{
+  empty_file_before_editing => "true";
+  edit_backup => "false";
+  max_file_size => "9999999999";
+}
+
+bundle agent i2pd_conf_config
+{
+  files:
+      "/media/usb/i2pd/i2pd.conf"
+      create => "true",
+      edit_template => "/opt/SuperMesh/private/template/i2pd_conf.mustache",
+      template_method => "mustache",
+      template_data => readjson("/opt/SuperMeshData/i2pd.data", 9999999999);
+}
