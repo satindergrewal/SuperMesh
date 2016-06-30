@@ -1,3 +1,5 @@
+**NOTE:** SuperMesh alpha-0.0.3 is currenty in development under branch [alpha-0.0.3](https://github.com/satindergrewal/SuperMesh/tree/alpha-0.0.3)
+
 #### What is SuperMesh?
 SuperMesh brings many Decentralized technologies with ease to your home.
 
@@ -19,8 +21,6 @@ And Decentralized blockchain and applications like:
 - and many more!
 
 ![supermesh laptop view](https://raw.githubusercontent.com/satindergrewal/SuperMesh/alpha-0.0.1e/supermesh_images/laptop.jpg)
-
-**NOTE:** SuperMesh alpha-0.0.3 is currenty in development under branch `alpha-0.0.3`
 
 #### What new features are coming to SuperMesh alpha-0.0.3
 
