@@ -111,6 +111,11 @@ df -h
 # If you see /media/usb0 in previous command's output, you are good.
 # Otherwise you have to make sure the partition on your USB storage
 # device is either FAT32 or ext3 or ext4 type filesystem.
+
+# In some systems sudo and curl might need to be installed too
+# In that case you will have to be logged in as user root on your system before running these commands
+apt-get install sudo curl
+
 ```
 
 
