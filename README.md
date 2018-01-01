@@ -41,6 +41,9 @@ And Decentralized blockchain and applications like:
  - [Raspberry Pi 3 Model B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/)
  - [Odroid-XU4](http://www.hardkernel.com/main/products/prdt_info.php?g_code=G143452239825)
 
+## Old images of supported OS for supported IoT Devices
+ - [Raspbian Jesse Lite](http://downloads.raspberrypi.org/raspbian_lite/images/)
+
 ## Requirements
  - [Raspbian Jessie Lite](https://www.raspberrypi.org/downloads/raspbian/)
  - [Ubuntu 15.04 Robotics Edition: XU3/XU4 (ROS+OpenCV+PCL)](http://forum.odroid.com/viewtopic.php?f=95&t=16149)
@@ -149,11 +152,14 @@ sudo apt-get install cfengine3
 ```
 
 #### Installing dependencies
-`sudo apt-get -y install git nodejs npm lshw wireless-tools tor usbmount`
+```shell
+# Install node.js first
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
 
-
-#### Make node binary symlink
-`sudo ln -s /usr/bin/nodejs /usr/bin/node`
+# And then other basic dependencies
+sudo apt-get -y install git lshw wireless-tools tor usbmount
+```
 
 
 #### Clone SuperMesh's test build to system
