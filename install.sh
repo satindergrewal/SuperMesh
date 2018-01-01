@@ -1,3 +1,8 @@
+
+# In some systems sudo and curl might need to be installed too
+# In that case you will have to be logged in as user root on your system before running these commands
+apt-get install sudo curl
+
 #### Importing cfengine repo gpg key
 sudo wget http://cfengineers.net/repo/autobuilder.gpg -O /etc/apt/trusted.gpg.d/cfengineers-repo.gpg
 
@@ -11,11 +16,16 @@ sudo apt-get update
 sudo apt-get -y install cfengine3
 
 #### Installing dependencies
-sudo apt-get -y install git nodejs npm lshw wireless-tools tor usbmount
+# Install node.js first
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# And then other basic dependencies
+sudo apt-get -y install git lshw wireless-tools tor usbmount
 
 
 #### Make node binary symlink
-sudo ln -s /usr/bin/nodejs /usr/bin/node
+#sudo ln -s /usr/bin/nodejs /usr/bin/node
 
 
 #### Clone SuperMesh's test build to system
