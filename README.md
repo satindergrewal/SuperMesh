@@ -1,3 +1,6 @@
+
+==> WARNING: This is still in alpha stages, and very experimental. Use at your own risk. <==
+
 #### What is SuperMesh?
 SuperMesh brings many Decentralized technologies with ease to your home.
 
